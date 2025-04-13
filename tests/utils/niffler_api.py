@@ -6,15 +6,14 @@ from tests.pages.urls import Urls
 
 class NifflerAPI:
     
-    class Endpoints:
-        TOKEN_URL = f"{os.getenv('AUTH_URL')}/oauth2/token"
-        CURRENCIES_URL = f"{os.getenv('GATEWAY_URL')}/api/currencies"
-        USERS_URL = f"{os.getenv('GATEWAY_URL')}/api/users"
-        STAT_URL = f"{os.getenv('GATEWAY_URL')}/api/v2/stat"
-        SPENDS_URL = f"{os.getenv('GATEWAY_URL')}/api/v2/spends"
-        ALL_SPENDS_URL = f"{SPENDS_URL}/all"
-        ADD_SPENDS_URL = f"{os.getenv('GATEWAY_URL')}/api/spends/add"
-        DELETE_SPENDS_URL = f"{os.getenv('GATEWAY_URL')}/api/spends/remove"
+    TOKEN_URL = f"{os.getenv('AUTH_URL')}/oauth2/token"
+    CURRENCIES_URL = f"{os.getenv('GATEWAY_URL')}/api/currencies"
+    USERS_URL = f"{os.getenv('GATEWAY_URL')}/api/users"
+    STAT_URL = f"{os.getenv('GATEWAY_URL')}/api/v2/stat"
+    SPENDS_URL = f"{os.getenv('GATEWAY_URL')}/api/v2/spends"
+    ALL_SPENDS_URL = f"{SPENDS_URL}/all"
+    ADD_SPENDS_URL = f"{os.getenv('GATEWAY_URL')}/api/spends/add"
+    DELETE_SPENDS_URL = f"{os.getenv('GATEWAY_URL')}/api/spends/remove"
         
     def __init__(self):
         self.session = requests.Session()
@@ -48,7 +47,7 @@ class NifflerAPI:
     
     def add_spending(self, data: dict):
         try:
-            res = self.session.post(url=self.Endpoints.ADD_SPENDS_URL, json=data, headers=self.headers)
+            res = self.session.post(url=self.ADD_SPENDS_URL, json=data, headers=self.headers)
             if res.status_code == HTTPStatus.CREATED:
                 data.update({"id": res.json()["id"]})
                 logging.info(f"Трата добавлена. ID: {data['id']}")
@@ -60,7 +59,7 @@ class NifflerAPI:
     
     def get_all_spendings(self) -> list[dict]:
         try:
-            res = self.session.get(url=self.Endpoints.ALL_SPENDS_URL, headers=self.headers)
+            res = self.session.get(url=self.ALL_SPENDS_URL, headers=self.headers)
             if res.status_code == HTTPStatus.OK:
                 return res.json()["content"]
             else:
@@ -81,7 +80,7 @@ class NifflerAPI:
             params = {
                 "ids": ",".join(ids) if len(ids) > 1 else ids[0]
             }
-            res = self.session.delete(url=self.Endpoints.DELETE_SPENDS_URL, params=params, headers=self.headers)
+            res = self.session.delete(url=self.DELETE_SPENDS_URL, params=params, headers=self.headers)
             if res.status_code == HTTPStatus.OK:
                 logging.info(f"Все траты удалены")
             else:

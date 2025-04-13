@@ -12,7 +12,7 @@ from tests.pages.main_page import MainPage
 from tests.utils.niffler_api import NifflerAPI
 from tests.utils.errors import ValidationErrors
 
-@pytest.fixture(scope="module", autouse=True)
+@pytest.fixture(scope="module")
 def spendings_data():
     faker = Faker()
     spendings = []
@@ -39,27 +39,32 @@ def spendings_data():
 def spendings(niffler_api: NifflerAPI):
     return niffler_api.get_all_spendings()
     
-@pytest.mark.usefixtures("browser", "niffler_api")
+@pytest.mark.usefixtures("login_page", "main_page", "niffler_api", "config")
 @pytest.mark.main_page
 class TestMainPage:
     
-    @pytest.fixture(scope="class", autouse=True)
-    def setup(self, browser: webdriver.Chrome, niffler_api: NifflerAPI, spendings_data: list[dict]):
-        username = os.getenv("NIFFLER_QA_USERNAME")
-        password = os.getenv("NIFFLER_QA_PASSWORD")
-        page = LoginPage(browser, url=Urls.LOGIN_URL)
-        page.log_in(username, password)
+    @pytest.fixture(scope="module", autouse=True)
+    def setup(
+        self, 
+        login_page: LoginPage, 
+        main_page: MainPage, 
+        niffler_api: NifflerAPI, 
+        config: dict[str, str], 
+        spendings_data: list[dict]
+    ):
+        username = config["username"]
+        password = config["password"]
+        login_page.log_in(username, password)
         
-        mainpage = MainPage(browser, url=Urls.FRONTEND_URL)
-        mainpage.should_be_mainpage()
-    
-        token = browser.execute_script("return window.localStorage.getItem('access_token')")
+        main_page.should_be_mainpage()
+        token = main_page.get_access_token()
+        
         niffler_api.set_token(token)
         niffler_api.clear_all_spendings()
         for data in spendings_data:
             niffler_api.add_spending(data)
             
-        yield browser
+        yield
         
         niffler_api.clear_all_spendings()
     
@@ -71,94 +76,85 @@ class TestMainPage:
             {"amount": "200", "currency": "RUB", "category": "Уникальное", "description": "Уникальные тапочки"},
             {"amount": "235", "currency": "KZT", "category": "Путешествия", "description": "Билеты на самолёт"}
         ])
-        def test_add_new_spending(self, browser: webdriver.Chrome, data: dict[str]):
-            mainpage = MainPage(browser, url=Urls.FRONTEND_URL)
-            mainpage.open()
-            mainpage.should_be_mainpage()
-            mainpage.add_new_spending(data)
-            mainpage.should_be_new_spending_in_table(data)
+        def test_add_new_spending(self, main_page: MainPage, data: dict[str]):
+            main_page.open()
+            main_page.should_be_mainpage()
+            main_page.add_new_spending(data)
+            main_page.should_be_new_spending_in_table(data)
             
         @pytest.mark.parametrize("repeat", [0, 1])
-        def test_delete_single_spending(self, browser: webdriver.Chrome, spendings: list[dict], repeat: int):
-            mainpage = MainPage(browser, url=Urls.FRONTEND_URL)
-            mainpage.open()
-            mainpage.should_be_mainpage()
+        def test_delete_single_spending(self, main_page: MainPage, spendings: list[dict], repeat: int):
+            main_page.open()
+            main_page.should_be_mainpage()
             index = random.randint(0, len(spendings) - 1)
             logging.info(f"Удаляем расход {spendings[index]}")
-            mainpage.remove_spendings(indexes=[index])
+            main_page.remove_spendings(indexes=[index])
             time.sleep(1) # плохая практика, но без этого иногда ловится StaleElementReferenceException
-            mainpage.should_not_be_deleted_spendings(spendings, indexes=[index])
+            main_page.should_not_be_deleted_spendings(spendings, indexes=[index])
             
         @pytest.mark.parametrize("repeat", [0, 1])
-        def test_delete_multiple_spendings(self, browser: webdriver.Chrome, spendings: list[dict], repeat: int):
-            mainpage = MainPage(browser, url=Urls.FRONTEND_URL)
-            mainpage.open()
-            mainpage.should_be_mainpage()
+        def test_delete_multiple_spendings(self, main_page: MainPage, spendings: list[dict], repeat: int):
+            main_page.open()
+            main_page.should_be_mainpage()
             indexes = random.sample(range(0, len(spendings) - 1), 2)
             logging.info(f"Удаляем расходы {spendings[indexes[0]]}\nи\n{spendings[indexes[1]]}")
-            mainpage.remove_spendings(indexes)
+            main_page.remove_spendings(indexes)
             time.sleep(1) # плохая практика, но без этого иногда ловится StaleElementReferenceException
-            mainpage.should_not_be_deleted_spendings(spendings, indexes)
+            main_page.should_not_be_deleted_spendings(spendings, indexes)
             
-        def test_spending_amount_validation(self, browser: webdriver.Chrome):
-            mainpage = MainPage(browser, url=Urls.FRONTEND_URL)
-            mainpage.open()
-            mainpage.should_be_mainpage()
+        def test_spending_amount_validation(self, main_page: MainPage):
+            main_page.open()
+            main_page.should_be_mainpage()
             amount_data = {"amount": "", "currency": "RUB", "category": "Продукты", "description": "Молоко"}
-            mainpage.add_new_spending(amount_data)
+            main_page.add_new_spending(amount_data)
             errors = {
                 "amount": [ValidationErrors.LOW_AMOUNT]
             }
-            mainpage.should_be_errors_in_validation(errors=errors)
+            main_page.should_be_errors_in_validation(errors=errors)
             
-        def test_spending_category_validation(self, browser: webdriver.Chrome):
-            mainpage = MainPage(browser, url=Urls.FRONTEND_URL)
-            mainpage.open()
-            mainpage.should_be_mainpage()
+        def test_spending_category_validation(self, main_page: MainPage):
+            main_page.open()
+            main_page.should_be_mainpage()
             category_data = {"amount": "100", "currency": "RUB", "category": "", "description": "Что-то"}
-            mainpage.add_new_spending(category_data)
+            main_page.add_new_spending(category_data)
             errors = {
                 "category": [ValidationErrors.NO_CATEGORY]
             }
-            mainpage.should_be_errors_in_validation(errors=errors)
+            main_page.should_be_errors_in_validation(errors=errors)
             
-        def test_spending_mixed_validation(self, browser: webdriver.Chrome):
-            mainpage = MainPage(browser, url=Urls.FRONTEND_URL)
-            mainpage.open()
-            mainpage.should_be_mainpage()
+        def test_spending_mixed_validation(self, main_page: MainPage):
+            main_page.open()
+            main_page.should_be_mainpage()
             mixed_data = {"amount": "", "currency": "KZT", "category": "", "description": "Аренда отеля"}
-            mainpage.add_new_spending(data=mixed_data)
+            main_page.add_new_spending(data=mixed_data)
             errors = {
                 "amount": [ValidationErrors.LOW_AMOUNT],
                 "category": [ValidationErrors.NO_CATEGORY]
             }
-            mainpage.should_be_errors_in_validation(errors=errors)
+            main_page.should_be_errors_in_validation(errors=errors)
                 
         @pytest.mark.parametrize("repeat", [0, 1])
-        def test_spendings_search_category(self, browser: webdriver.Chrome, spendings: list[dict], repeat: int):
-            mainpage = MainPage(browser, url=Urls.FRONTEND_URL)
-            mainpage.open()
-            mainpage.should_be_mainpage()
+        def test_spendings_search_category(self, main_page: MainPage, spendings: list[dict], repeat: int):
+            main_page.open()
+            main_page.should_be_mainpage()
             query = random.choice(spendings)["category"]["name"]
             valid_spendings = [s for s in spendings if s["category"]["name"] == query]
-            mainpage.make_search(query)
-            mainpage.should_be_exact_search_results(query, valid_spendings=valid_spendings)
+            main_page.make_search(query)
+            main_page.should_be_exact_search_results(query, valid_spendings=valid_spendings)
             
         @pytest.mark.parametrize("repeat", [0, 1])
-        def test_spendings_search_description(self, browser: webdriver.Chrome, spendings: list[dict], repeat: int):
-            mainpage = MainPage(browser, url=Urls.FRONTEND_URL)
-            mainpage.open()
-            mainpage.should_be_mainpage()
+        def test_spendings_search_description(self, main_page: MainPage, spendings: list[dict], repeat: int):
+            main_page.open()
+            main_page.should_be_mainpage()
             query = random.choice(spendings)["description"]
             valid_spendings = [s for s in spendings if s["description"] == query]
-            mainpage.make_search(query)
-            mainpage.should_be_exact_search_results(query, valid_spendings=valid_spendings)
+            main_page.make_search(query)
+            main_page.should_be_exact_search_results(query, valid_spendings=valid_spendings)
         
         @pytest.mark.parametrize("query", ["Noneeeeeeee", "123", "Несуществ"])
-        def test_nonexistent_spendings_search(self, browser: webdriver.Chrome, query: str):
-            mainpage = MainPage(browser, url=Urls.FRONTEND_URL)
-            mainpage.open()
-            mainpage.should_be_mainpage()
-            mainpage.make_search(query)
-            mainpage.should_be_no_search_results()
+        def test_nonexistent_spendings_search(self, main_page: MainPage, query: str):
+            main_page.open()
+            main_page.should_be_mainpage()
+            main_page.make_search(query)
+            main_page.should_be_no_search_results()
         
