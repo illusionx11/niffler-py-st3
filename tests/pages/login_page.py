@@ -1,8 +1,6 @@
-from selenium.webdriver import Chrome, Firefox, Safari, Edge, ChromiumEdge, Ie
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-from tests.pages.urls import Urls
 from tests.utils.errors import ValidationErrors
 from .base_page import BasePage
 
@@ -28,23 +26,14 @@ class LoginPage(BasePage):
         
     def should_be_login_page(self):
         self.should_be_login_heading()
-        self.should_be_login_form()
-        self.should_be_login_button()
-        self.should_be_login_url()
-        
-    def should_be_login_url(self):
-        assert "login" in self.browser.current_url
+        self.should_be_element(LoginPage.LOGIN_FORM)
+        self.should_be_element(LoginPage.SUBMIT_BTN)
+        self.should_be_url("login")
     
     def should_be_login_heading(self):
         header = self.browser.find_element(*LoginPage.LOGIN_HEADER)
         assert header.is_displayed()
         assert header.text.lower() == "log in"
-    
-    def should_be_login_form(self):
-        assert self.is_element_present(*LoginPage.LOGIN_FORM)
-    
-    def should_be_login_button(self):
-        assert self.is_element_present(*LoginPage.SUBMIT_BTN)
 
     def should_be_errors_in_validation(self, errors: dict[str, list[ValidationErrors]]):
         if "login" in errors and len(errors["login"]) > 0:
