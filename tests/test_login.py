@@ -1,6 +1,7 @@
 import pytest
 import os
 from tests.conftest import TestData
+from tests.models.config import Envs
 from tests.pages.login_page import LoginPage
 from tests.pages.main_page import MainPage
 from tests.utils.errors import ValidationErrors
@@ -22,9 +23,9 @@ class TestRegistration:
         }
         login_page.should_be_errors_in_validation(errors=errors)
         
-    def test_successful_login(self, login_page: LoginPage, main_page: MainPage, config: dict[str, str]):
-        username = config["username"]
-        password = config["password"]
+    def test_successful_login(self, login_page: LoginPage, main_page: MainPage, envs: Envs):
+        username = envs.test_username
+        password = envs.test_password
         login_page.log_in(username, password)
         
         main_page.should_be_mainpage()

@@ -1,8 +1,8 @@
-from selenium.webdriver import Chrome, Firefox, Safari, Edge, ChromiumEdge, Ie
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from tests.models.spend import Spend
 from tests.utils.errors import ValidationErrors
 from .base_page import BasePage
 

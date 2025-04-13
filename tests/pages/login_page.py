@@ -1,3 +1,4 @@
+import logging
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
@@ -20,7 +21,9 @@ class LoginPage(BasePage):
     def log_in(self, username: str, password: str):
         self.open()
         self.should_be_login_page()
+        logging.info(f"Logging in as {username}")
         self.browser.find_element(*LoginPage.USERNAME_INPUT).send_keys(username)
+        logging.info(f"Password: {password}")
         self.browser.find_element(*LoginPage.PASSWORD_INPUT).send_keys(password)
         self.browser.find_element(*LoginPage.SUBMIT_BTN).click()
         

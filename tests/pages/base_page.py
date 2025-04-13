@@ -46,6 +46,6 @@ class BasePage:
 
         return True
     
-    def get_access_token(self):
+    def get_access_token(self) -> str:
         return self.browser.execute_script("return window.localStorage.getItem('access_token')")
             

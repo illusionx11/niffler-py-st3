@@ -1,15 +1,24 @@
 import pytest
 import logging
 import time
+from tests.models.spend import Category
 from tests.utils.niffler_api import NifflerAPI
 from tests.pages.profile_page import ProfilePage
 from tests.utils.errors import ValidationErrors
 from tests.conftest import TestData
 
+@pytest.fixture(scope="function")
+def archived_categories(niffler_api: NifflerAPI):
+    archived_categories = ["ArchivedCategory1", "ArchivedCategory2", "ArchivedCategory3"]
+    for category_name in archived_categories:
+        category_data = niffler_api.add_category(category_name)
+        category_data.archived = True
+        niffler_api.update_category(category_data)
+    return archived_categories
+
 @pytest.mark.usefixtures(
     "profile_page",
-    "create_qa_user",
-    "initialize",
+    "cleanup",
     "all_categories"
 )
 @pytest.mark.profile
@@ -107,8 +116,7 @@ class TestProfilePage:
         time.sleep(0.3) # плохая практика, но без этого иногда ловится StaleElementReferenceException
         profile_page.should_be_errors_in_validation(errors=errors)
     
-    def test_show_archived_categories(self, profile_page: ProfilePage, all_categories: list[dict]):
-        archived_categories = [c["name"] for c in all_categories if c["archived"] == True]
+    def test_show_archived_categories(self, profile_page: ProfilePage, archived_categories: list):
         profile_page.open()
         profile_page.should_be_profile_page()
         profile_page.show_archived_categories()

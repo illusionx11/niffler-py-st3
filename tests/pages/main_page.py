@@ -2,6 +2,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from tests.models.spend import Spend, SpendAdd
 from tests.utils.errors import ValidationErrors
 from .base_page import BasePage
 
@@ -40,22 +41,29 @@ class MainPage(BasePage):
         self.should_be_element(MainPage.STATS_DIV)
         self.should_be_url("main")
         
-    def add_new_spending(self, data: dict):
+    def add_new_spending(self, data: SpendAdd):
         self.browser.find_element(*MainPage.ADD_SPENDING_BTN).click()
         amount_input = self.browser.find_element(*MainPage.AMOUNT_INPUT)
         self.clear_input(amount_input)
-        amount_input.send_keys(data["amount"])
+        if data.amount:
+            amount_input.send_keys(data.amount)
         self.browser.find_element(*MainPage.CURRENCY_SELECT).click()
         all_currencies = self.browser.find_elements(*MainPage.ALL_CURRENCIES)
         for currency in all_currencies:
-            if currency.get_attribute("data-value") == data["currency"]:
+            if currency.get_attribute("data-value") == data.currency:
                 currency.click()
                 break
-        self.browser.find_element(*MainPage.CATEGORY_INPUT).send_keys(data["category"])
-        self.browser.find_element(*MainPage.DESCRIPTION_INPUT).send_keys(data["description"])
+        category_input = self.browser.find_element(*MainPage.CATEGORY_INPUT)
+        if data.category:
+            self.clear_input(category_input)
+            category_input.send_keys(data.category.name)
+        description_input = self.browser.find_element(*MainPage.DESCRIPTION_INPUT)
+        if data.description:
+            self.clear_input(description_input)
+            description_input.send_keys(data.description)
         self.browser.find_element(*MainPage.SAVE_BTN).click()
         
-    def should_be_new_spending_in_table(self, data: dict):
+    def should_be_new_spending_in_table(self, data: SpendAdd):
         
         is_spending_added = False
         table_rows = WebDriverWait(self.browser, 10).until(EC.presence_of_all_elements_located(MainPage.SPENDINGS_TABLE_ROWS))
@@ -64,9 +72,10 @@ class MainPage(BasePage):
             category = row_data[0].text
             amount, currency = row_data[1].text.split(" ")
             description = row_data[2].text
-            if data["category"] == category and data["amount"] == amount \
-            and self.CURRENCIES_MAPS[data["currency"]] == currency \
-            and data["description"] == description:
+            data_amount = data.amount if not data.amount.is_integer() else int(data.amount)
+            if data.category.name == category and str(data_amount) == amount \
+            and self.CURRENCIES_MAPS[data.currency] == currency \
+            and data.description == description:
                 is_spending_added = True
                 
         assert is_spending_added is True, f"Новый расход {data} не добавлен на странице {self.browser.current_url}"
@@ -85,7 +94,7 @@ class MainPage(BasePage):
         assert delete_confirm_btn.is_enabled()
         delete_confirm_btn.click()
         
-    def should_not_be_deleted_spendings(self, spendings: list[dict], indexes: list[int]):
+    def should_not_be_deleted_spendings(self, spendings: list[Spend], indexes: list[int]):
         new_table_rows = WebDriverWait(self.browser, 10).until(EC.presence_of_all_elements_located(MainPage.SPENDINGS_TABLE_ROWS))
         for row in new_table_rows:
             is_spendings_deleted = True
@@ -94,9 +103,9 @@ class MainPage(BasePage):
             amount, currency = row_data[1].text.split(" ")
             description = row_data[2].text
             for i in indexes:
-                if spendings[i]["category"]["name"] == category and spendings[i]["amount"] == float(amount) \
-                and self.CURRENCIES_MAPS[spendings[i]["currency"]] == currency \
-                and spendings[i]["description"] == description:
+                if spendings[i].category.name == category and spendings[i].amount == float(amount) \
+                and self.CURRENCIES_MAPS[spendings[i].currency] == currency \
+                and spendings[i].description == description:
                     is_spendings_deleted = False
                     break
             
@@ -123,7 +132,7 @@ class MainPage(BasePage):
         search_input.send_keys(query)
         search_input.send_keys(Keys.RETURN)
         
-    def should_be_exact_search_results(self, query: str, valid_spendings: list[dict]):
+    def should_be_exact_search_results(self, query: str, valid_spendings: list[Spend]):
 
         table_rows = WebDriverWait(self.browser, 10).until(EC.presence_of_all_elements_located(MainPage.SPENDINGS_TABLE_ROWS))
         assert len(table_rows) == len(valid_spendings)
@@ -134,9 +143,9 @@ class MainPage(BasePage):
             amount, currency = row_data[1].text.split(" ")
             description = row_data[2].text
             for spending in valid_spendings:
-                if spending["category"]["name"] == category and spending["amount"] == float(amount) \
-                and self.CURRENCIES_MAPS[spending["currency"]] == currency \
-                and spending["description"] == description:
+                if spending.category.name == category and spending.amount == float(amount) \
+                and self.CURRENCIES_MAPS[spending.currency] == currency \
+                and spending.description == description:
                     is_spending_present = True
                     break
             
