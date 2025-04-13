@@ -3,8 +3,7 @@ from faker import Faker
 import random
 import string
 import time
-from selenium import webdriver
-from tests.pages.urls import Urls
+from tests.conftest import TestData
 from tests.pages.register_page import RegisterPage
 from tests.utils.errors import ValidationErrors
 
@@ -16,7 +15,7 @@ faker = Faker()
 @pytest.mark.registration
 class TestRegistration:
     
-    @pytest.mark.parametrize("username", ["a", LONG_USERNAME])
+    @TestData.username(["a", LONG_USERNAME])
     def test_incorrect_username(self, register_page: RegisterPage, username: str):
         register_page.open()
         register_page.should_be_register_page()
@@ -25,10 +24,10 @@ class TestRegistration:
         errors = {
             "username": [ValidationErrors.USERNAME_LENGTH]
         }
-        time.sleep(1) # плохая практика, но без этого иногда ловится StaleElementReferenceException
+        time.sleep(0.3) # плохая практика, но без этого иногда ловится StaleElementReferenceException
         register_page.should_be_errors_in_validation(errors=errors)
         
-    @pytest.mark.parametrize("password", ["a", LONG_PASSWORD])
+    @TestData.password(["a", LONG_PASSWORD])
     def test_incorrect_password(self, register_page: RegisterPage, password: str):
         register_page.open()
         register_page.should_be_register_page()
@@ -38,11 +37,11 @@ class TestRegistration:
             "password": [ValidationErrors.PASSWORD_LENGTH],
             "password_repeat": [ValidationErrors.PASSWORD_LENGTH]
         }
-        time.sleep(1) # плохая практика, но без этого иногда ловится StaleElementReferenceException
+        time.sleep(0.3) # плохая практика, но без этого иногда ловится StaleElementReferenceException
         register_page.should_be_errors_in_validation(errors=errors)
     
-    @pytest.mark.parametrize("repeat", [0, 1])
-    def test_wrong_passwords(self, register_page: RegisterPage, repeat: int):
+    @pytest.mark.repeat(2)
+    def test_wrong_passwords(self, register_page: RegisterPage):
         register_page.open()
         register_page.should_be_register_page()
         username = faker.first_name()
@@ -57,22 +56,22 @@ class TestRegistration:
             "password": [ValidationErrors.DIFFERENT_PASSWORDS],
             "password_repeat": [],
         }
-        time.sleep(1) # плохая практика, но без этого иногда ловится StaleElementReferenceException
+        time.sleep(0.3) # плохая практика, но без этого иногда ловится StaleElementReferenceException
         register_page.should_be_errors_in_validation(errors=errors)
     
-    @pytest.mark.parametrize("data", [
+    @TestData.register_data([
         {"username": "a", "password": "ababab", "password_repeat": "bababa"},
         {"username": "newuser", "password": "ababab", "password_repeat": "b"},
         {"username": "newuser", "password": LONG_PASSWORD, "password_repeat": "bababa"},
         {"username": "a", "password": "a", "password_repeat": LONG_PASSWORD},
         {"username": LONG_USERNAME, "password": "a", "password_repeat": "a"}
     ])
-    def test_mixed_errors(self, register_page: RegisterPage, data: dict[str]):
+    def test_mixed_errors(self, register_page: RegisterPage, register_data: dict[str]):
         register_page.open()
         register_page.should_be_register_page()
-        username = data["username"]
-        password = data["password"]
-        password_repeat = data["password_repeat"]
+        username = register_data["username"]
+        password = register_data["password"]
+        password_repeat = register_data["password_repeat"]
         errors = {
             "username": [],
             "password": [],
@@ -87,7 +86,7 @@ class TestRegistration:
         if password != password_repeat:
             errors["password"].append(ValidationErrors.DIFFERENT_PASSWORDS)
         register_page.register_user(username, password, password_repeat)
-        time.sleep(1) # плохая практика, но без этого иногда ловится StaleElementReferenceException
+        time.sleep(0.3) # плохая практика, но без этого иногда ловится StaleElementReferenceException
         register_page.should_be_errors_in_validation(errors=errors)
         
     def test_correct_registration(self, register_page: RegisterPage):
@@ -96,6 +95,6 @@ class TestRegistration:
         username = faker.first_name() + str(random.randint(100, 1000))
         password = faker.password(length=8)
         register_page.register_user(username, password)
-        time.sleep(1) # плохая практика, но без этого иногда ловится StaleElementReferenceException
+        time.sleep(0.3) # плохая практика, но без этого иногда ловится StaleElementReferenceException
         register_page.should_be_successful_registration()
         

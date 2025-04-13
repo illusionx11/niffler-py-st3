@@ -1,4 +1,3 @@
-from selenium.webdriver import Chrome, Firefox, Safari, Edge, ChromiumEdge, Ie
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
@@ -23,24 +22,15 @@ class RegisterPage(BasePage):
         
     def should_be_register_page(self):
         self.should_be_register_heading()
-        self.should_be_register_form()
-        self.should_be_register_button()
-        self.should_be_register_url()
-        
-    def should_be_register_url(self):
-        assert "register" in self.browser.current_url
+        self.should_be_element(RegisterPage.REGISTER_FORM)
+        self.should_be_element(RegisterPage.PASSWORD_REPEAT_INPUT)
+        self.should_be_element(RegisterPage.SUBMIT_BTN)
+        self.should_be_url("register")
         
     def should_be_register_heading(self):
         header = self.browser.find_element(*RegisterPage.REGISTER_HEADER)
         assert header.is_displayed()
         assert header.text.lower() == "sign up"
-        
-    def should_be_register_form(self):
-        assert self.is_element_present(*RegisterPage.REGISTER_FORM)
-        assert self.is_element_present(*RegisterPage.PASSWORD_REPEAT_INPUT)
-        
-    def should_be_register_button(self):
-        assert self.is_element_present(*RegisterPage.SUBMIT_BTN)
         
     def register_user(self, username: str, password: str, password_repeat: str | None = None):
         username_input = self.browser.find_element(*RegisterPage.USERNAME_INPUT)

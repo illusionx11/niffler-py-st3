@@ -1,9 +1,7 @@
-from selenium.webdriver import Chrome, Firefox, Safari, Edge, ChromiumEdge, Ie
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from tests.pages.urls import Urls
 from tests.utils.errors import ValidationErrors
 from .base_page import BasePage
 
@@ -38,24 +36,14 @@ class MainPage(BasePage):
     SEARCH_BTN = (By.CSS_SELECTOR, "button#input-submit")
         
     def should_be_mainpage(self):
-        self.should_be_spendings_div()
-        self.should_be_stats_div()
-        self.should_be_mainpage_url()
-    
-    def should_be_mainpage_url(self):
-        assert "main" in self.browser.current_url
-    
-    def should_be_spendings_div(self):
-        assert self.is_element_present(*MainPage.SPENDINGS_DIV)
-        
-    def should_be_stats_div(self):
-        assert self.is_element_present(*MainPage.STATS_DIV)
+        self.should_be_element(MainPage.SPENDINGS_DIV)
+        self.should_be_element(MainPage.STATS_DIV)
+        self.should_be_url("main")
         
     def add_new_spending(self, data: dict):
         self.browser.find_element(*MainPage.ADD_SPENDING_BTN).click()
         amount_input = self.browser.find_element(*MainPage.AMOUNT_INPUT)
-        amount_input.send_keys(Keys.CONTROL + "a")
-        amount_input.send_keys(Keys.BACKSPACE)
+        self.clear_input(amount_input)
         amount_input.send_keys(data["amount"])
         self.browser.find_element(*MainPage.CURRENCY_SELECT).click()
         all_currencies = self.browser.find_elements(*MainPage.ALL_CURRENCIES)
@@ -131,8 +119,7 @@ class MainPage(BasePage):
     
     def make_search(self, query: str):
         search_input = self.browser.find_element(*MainPage.SEARCH_INPUT)
-        search_input.send_keys(Keys.CONTROL + "a")
-        search_input.send_keys(Keys.BACKSPACE)
+        self.clear_input(search_input)
         search_input.send_keys(query)
         search_input.send_keys(Keys.RETURN)
         
