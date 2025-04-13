@@ -9,7 +9,7 @@ from tests.pages.login_page import LoginPage
 from tests.pages.main_page import MainPage
 from tests.utils.errors import ValidationErrors
 
-@pytest.mark.usefixtures("browser")
+@pytest.mark.usefixtures("login_page", "main_page")
 @pytest.mark.login
 class TestRegistration:
     
@@ -17,23 +17,20 @@ class TestRegistration:
         {"username": "a", "password": "a"},
         {"username": "wrongUserNonExistent!!", "password": "wrongPass"}
     ])
-    def test_bad_credentials(self, browser: webdriver.Chrome, data: dict[str, str]):
-        page = LoginPage(browser, url=Urls.LOGIN_URL)
+    def test_bad_credentials(self, login_page: LoginPage, data: dict[str, str]):
         username = data["username"]
         password = data["password"]
-        page.log_in(username, password)
+        login_page.log_in(username, password)
         errors = {
             "login": [ValidationErrors.LOGIN_BAD_CREDENTIALS]
         }
-        page.should_be_errors_in_validation(errors=errors)
+        login_page.should_be_errors_in_validation(errors=errors)
         
-    def test_successful_login(self, browser: webdriver.Chrome):
-        page = LoginPage(browser, url=Urls.LOGIN_URL)
+    def test_successful_login(self, login_page: LoginPage, main_page: MainPage):
         username = os.getenv("NIFFLER_QA_USERNAME")
         password = os.getenv("NIFFLER_QA_PASSWORD")
-        page.log_in(username, password)
+        login_page.log_in(username, password)
         
-        mainpage = MainPage(browser, url=Urls.FRONTEND_URL)
-        mainpage.should_be_mainpage()
+        main_page.should_be_mainpage()
         
     
