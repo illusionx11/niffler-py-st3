@@ -3,10 +3,14 @@ import random
 import logging
 import time
 import random
-from tests.models.spend import SpendGet, SpendAdd, CategoryAdd
+from tests.models.spend import Spend, SpendGet, SpendAdd, CategoryAdd
 from tests.conftest import TestData
 from tests.pages.main_page import MainPage
 from tests.utils.errors import ValidationErrors
+from tests.databases.spends_db import SpendsDb
+from tests.models.config import Envs
+from tests.utils.niffler_api import NifflerAPI
+from datetime import datetime
     
 @pytest.mark.usefixtures(
     "main_page", 
@@ -140,3 +144,73 @@ class TestSpendings:
         main_page.should_be_mainpage()
         main_page.make_search(query)
         main_page.should_be_no_search_results()
+
+@pytest.mark.usefixtures(
+    "cleanup",
+    "niffler_api",
+    "envs",
+    "spends_db"
+)
+@pytest.mark.spendings
+@pytest.mark.spendings_db
+class TestSpendingsDatabase:
+    
+    @TestData.spending_data([
+        SpendAdd(
+            amount=1000.26,
+            category=CategoryAdd(name="Уникальное"),
+            currency="RUB",
+            description="Уникальные шляпы",
+            spendDate="2024-06-07T00:00:00.000Z",
+        )
+    ])
+    def test_added_spending_in_database(
+        self, 
+        niffler_api: NifflerAPI, 
+        spending_data: SpendAdd, 
+        envs: Envs,
+        spends_db: SpendsDb
+    ):
+        added_spending_data = niffler_api.add_spending(data=spending_data)
+        logging.info(f"Добавлен расход {added_spending_data}")
+        all_spendings = spends_db.get_user_spendings(username=envs.test_username)
+        spending = next(
+            (
+                s for s in all_spendings if s.amount == spending_data.amount \
+                and s.category.name == spending_data.category.name \
+                and s.currency == spending_data.currency \
+                and s.description == spending_data.description \
+                and s.spend_date == datetime.fromisoformat(spending_data.spendDate.replace("Z", "+00:00")).date()
+            ),
+            None
+        )
+        assert spending is not None
+        
+    @TestData.spending_data([
+        SpendAdd(
+            amount=162.23,
+            category=CategoryAdd(name="Уникальное"),
+            currency="RUB",
+            description="Уникальные кружки",
+            spendDate="2024-06-07T00:00:00.000Z",
+        )
+    ])
+    def test_deleted_spending_not_in_database(
+        self,
+        niffler_api: NifflerAPI,
+        spending_data: SpendAdd,
+        envs: Envs,
+        spends_db: SpendsDb
+    ):
+        added_spending_data = niffler_api.add_spending(data=spending_data)
+        logging.info(f"Добавлен расход {added_spending_data}")
+        niffler_api.clear_spendings(ids=[added_spending_data.id])
+        logging.info(f"Удален расход с id {added_spending_data.id}")
+        all_spendings = spends_db.get_user_spendings(username=envs.test_username)
+        spending = next(
+            (
+                s for s in all_spendings if s.id == added_spending_data.id
+            ),
+            None
+        )
+        assert spending is None

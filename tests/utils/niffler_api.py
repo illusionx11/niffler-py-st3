@@ -93,7 +93,7 @@ class NifflerAPI:
             logging.error(f"Ошибка при получении всех трат: {str(e)}", exc_info=True)
             assert False
         
-    def clear_all_spendings(self, ids: list[str] | None = None):
+    def clear_spendings(self, ids: list[str] | None = None):
         try:
             if ids is None:
                 all_spendings = self.get_all_spendings()

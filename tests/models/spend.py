@@ -1,4 +1,4 @@
-from sqlmodel import SQLModel, Field
+from sqlmodel import SQLModel, Field, Relationship
 from datetime import datetime
 from pydantic import BaseModel
 from typing import Optional, List
@@ -8,6 +8,7 @@ class Category(SQLModel, table=True):
     name: str
     username: str
     archived: bool
+    spends: List["Spend"] = Relationship(back_populates="category")
 
 class CategoryAdd(BaseModel):
     id: Optional[str] = None
@@ -27,6 +28,7 @@ class Spend(SQLModel, table=True):
     username: str
     description: str
     category_id: str = Field(foreign_key="category.id")
+    category: Category = Relationship(back_populates="spends")
     spend_date: datetime # json приходит с ключом spendDate, в БД название spend_date
     currency: str
     
@@ -42,9 +44,9 @@ class SpendAdd(BaseModel):
 class SpendGet(BaseModel):
     id: str
     amount: float
-    username: str
     description: str
     category: CategoryGet
     spendDate: datetime # json приходит с ключом spendDate, в БД название spend_date
     currency: str
+    username: str
     

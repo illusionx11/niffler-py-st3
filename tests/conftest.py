@@ -152,11 +152,11 @@ def spendings_list(niffler_api: NifflerAPI) -> list[SpendGet]:
 
 @pytest.fixture(scope="class")
 def cleanup(niffler_api: NifflerAPI, envs: Envs, spends_db: SpendsDb):
-    niffler_api.clear_all_spendings()
+    niffler_api.clear_spendings()
     spends_db.delete_user_categories(username=envs.test_username)
     logging.info("Cleanup before tests ended")
     yield
-    niffler_api.clear_all_spendings()
+    niffler_api.clear_spendings()
     spends_db.delete_user_categories(username=envs.test_username)
     logging.info("Cleanup after teardown ended")
 

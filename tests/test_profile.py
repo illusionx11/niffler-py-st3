@@ -6,6 +6,9 @@ from tests.utils.niffler_api import NifflerAPI
 from tests.pages.profile_page import ProfilePage
 from tests.utils.errors import ValidationErrors
 from tests.conftest import TestData
+from tests.models.config import Envs
+from tests.utils.niffler_api import NifflerAPI
+from tests.databases.spends_db import SpendsDb
 
 @pytest.fixture(scope="function")
 def archived_categories(niffler_api: NifflerAPI):
@@ -22,7 +25,8 @@ def archived_categories(niffler_api: NifflerAPI):
     "all_categories"
 )
 @pytest.mark.profile
-class TestProfilePage:
+@pytest.mark.categories
+class TestProfileCategories:
 
     @TestData.direct_category(["NewCategory1", "NewCategory2", "NewCategory3"])
     def test_add_new_category(self, profile_page: ProfilePage, direct_category: str):
@@ -96,6 +100,20 @@ class TestProfilePage:
         time.sleep(0.3) # плохая практика, но без этого иногда ловится StaleElementReferenceException
         profile_page.should_be_errors_in_validation(errors=errors)
         
+    def test_show_archived_categories(self, profile_page: ProfilePage, archived_categories: list):
+        profile_page.open()
+        profile_page.should_be_profile_page()
+        profile_page.show_archived_categories()
+        time.sleep(0.3) # плохая практика, но без этого иногда ловится StaleElementReferenceException
+        profile_page.should_be_archived_categories(archived_categories)
+
+@pytest.mark.usefixtures(
+    "profile_page",
+)
+@pytest.mark.profile
+@pytest.mark.profile_data
+class TestProfileData:
+    
     @TestData.profile_name(["Testname", "Имя", "Andrew"])
     def test_set_new_profile_name(self, profile_page: ProfilePage, profile_name: str):
         profile_page.open()
@@ -115,11 +133,52 @@ class TestProfilePage:
         }
         time.sleep(0.3) # плохая практика, но без этого иногда ловится StaleElementReferenceException
         profile_page.should_be_errors_in_validation(errors=errors)
-    
-    def test_show_archived_categories(self, profile_page: ProfilePage, archived_categories: list):
-        profile_page.open()
-        profile_page.should_be_profile_page()
-        profile_page.show_archived_categories()
-        time.sleep(0.3) # плохая практика, но без этого иногда ловится StaleElementReferenceException
-        profile_page.should_be_archived_categories(archived_categories)
         
+@pytest.mark.usefixtures(
+    "cleanup",
+    "niffler_api",
+    "spends_db",
+    "envs"
+)
+@pytest.mark.profile
+@pytest.mark.categories_db
+class TestCategoriesDatabase:
+
+    @TestData.direct_category(["UniqueCategory1"])
+    def test_added_category_in_database(
+        self,
+        niffler_api: NifflerAPI,
+        envs: Envs,
+        spends_db: SpendsDb,
+        direct_category: str
+    ):
+        niffler_api.add_category(direct_category)
+        all_categories = spends_db.get_user_categories(username=envs.test_username)
+        category = next((c for c in all_categories if c.name == direct_category), None)
+        assert category is not None
+        
+    @TestData.direct_category(["UniqueCategory2"])
+    def test_updated_category_in_database(
+        self,
+        niffler_api: NifflerAPI,
+        envs: Envs,
+        spends_db: SpendsDb,
+        direct_category: str
+    ):
+        added_category_data = niffler_api.add_category(direct_category)
+        new_category_name = "UniqueUpdatedCategory2"
+        added_category_data.name = new_category_name
+        new_category_archived = True
+        added_category_data.archived = new_category_archived
+        niffler_api.update_category(category_data=added_category_data)
+        all_categories = spends_db.get_user_categories(username=envs.test_username)
+        # c.id это UUID-объект
+        category = next(
+            (
+                c for c in all_categories if str(c.id) == added_category_data.id \
+                and c.name == new_category_name \
+                and c.archived == new_category_archived
+            ), 
+            None
+        )
+        assert category is not None
