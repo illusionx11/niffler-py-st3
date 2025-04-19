@@ -1,3 +1,4 @@
+import logging
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
@@ -20,23 +21,25 @@ class LoginPage(BasePage):
     def log_in(self, username: str, password: str):
         self.open()
         self.should_be_login_page()
-        self.browser.find_element(*LoginPage.USERNAME_INPUT).send_keys(username)
-        self.browser.find_element(*LoginPage.PASSWORD_INPUT).send_keys(password)
-        self.browser.find_element(*LoginPage.SUBMIT_BTN).click()
+        logging.info(f"Logging in as {username}")
+        self.browser.find_element(*self.USERNAME_INPUT).send_keys(username)
+        logging.info(f"Password: {password}")
+        self.browser.find_element(*self.PASSWORD_INPUT).send_keys(password)
+        self.browser.find_element(*self.SUBMIT_BTN).click()
         
     def should_be_login_page(self):
         self.should_be_login_heading()
-        self.should_be_element(LoginPage.LOGIN_FORM)
-        self.should_be_element(LoginPage.SUBMIT_BTN)
+        self.should_be_element(self.LOGIN_FORM)
+        self.should_be_element(self.SUBMIT_BTN)
         self.should_be_url("login")
     
     def should_be_login_heading(self):
-        header = self.browser.find_element(*LoginPage.LOGIN_HEADER)
+        header = self.browser.find_element(*self.LOGIN_HEADER)
         assert header.is_displayed()
         assert header.text.lower() == "log in"
 
     def should_be_errors_in_validation(self, errors: dict[str, list[ValidationErrors]]):
         if "login" in errors and len(errors["login"]) > 0:
-            login_error = WebDriverWait(self.browser, 10).until(EC.presence_of_element_located(LoginPage.LOGIN_FORM_ERROR))
+            login_error = WebDriverWait(self.browser, 10).until(EC.presence_of_element_located(self.LOGIN_FORM_ERROR))
             for error_text in errors["login"]:
                 assert error_text in login_error.text

@@ -2,81 +2,102 @@ import os
 import requests
 import logging
 from http import HTTPStatus
+from tests.models.config import Envs
+from tests.models.spend import Category, SpendGet, SpendAdd
 from tests.utils.generate_random_hex import generate_random_hex
 
 class NifflerAPI:
-    
-    TOKEN_URL = f"{os.getenv('AUTH_URL')}/oauth2/token"
-    CURRENCIES_URL = f"{os.getenv('GATEWAY_URL')}/api/currencies"
-    USERS_URL = f"{os.getenv('GATEWAY_URL')}/api/users"
-    STAT_URL = f"{os.getenv('GATEWAY_URL')}/api/v2/stat"
-    SPENDS_URL = f"{os.getenv('GATEWAY_URL')}/api/v2/spends"
-    ALL_SPENDS_URL = f"{SPENDS_URL}/all"
-    ADD_SPENDS_URL = f"{os.getenv('GATEWAY_URL')}/api/spends/add"
-    DELETE_SPENDS_URL = f"{os.getenv('GATEWAY_URL')}/api/spends/remove"
-    ADD_CATEGORY_URL = f"{os.getenv('GATEWAY_URL')}/api/categories/add"
-    UPDATE_CATEGORY_URL = f"{os.getenv('GATEWAY_URL')}/api/categories/update"
-    GET_CATEGORIES_URL = f"{os.getenv('GATEWAY_URL')}/api/categories/all"
-    CURRENT_USER_URL = f"{os.getenv('GATEWAY_URL')}/api/users/current"
-    UPDATE_USER_URL = f"{os.getenv('GATEWAY_URL')}/api/users/update"
-        
-    def __init__(self, token: str, config: dict[str, str]):
+           
+    def __init__(self, envs: Envs):
         self.session = requests.Session()
         self.session.headers.update({
             "Content-Type": "application/json",
-            "Accept": "application/json",
-            "Authorization": f"Bearer {token}"
+            "Accept": "application/json"
         })
-        self.config = config
+        self.envs = envs
+        self.generate_endpoints()
+        logging.info(f"Niffler API initialized.")
         
-    def register(self, username: str, password: str):
+    def generate_endpoints(self):
+        self.token_endpoint = f"{self.envs.auth_url}/oauth2/token"
+        self.currencies_endpoint = f"{self.envs.gateway_url}/api/currencies"
+        self.users_endpoint = f"{self.envs.gateway_url}/api/users"
+        self.stat_endpoint = f"{self.envs.gateway_url}/api/v2/stat"
+        self.spends_endpoint = f"{self.envs.gateway_url}/api/v2/spends"
+        self.all_spends_endpoint = f"{self.spends_endpoint}/all"
+        self.add_spends_endpoint = f"{self.envs.gateway_url}/api/spends/add"
+        self.delete_spends_endpoint = f"{self.envs.gateway_url}/api/spends/remove"
+        self.add_category_endpoint = f"{self.envs.gateway_url}/api/categories/add"
+        self.update_category_endpoint = f"{self.envs.gateway_url}/api/categories/update"
+        self.get_categories_endpoint = f"{self.envs.gateway_url}/api/categories/all"
+        self.current_user_endpoint = f"{self.envs.gateway_url}/api/users/current"
+        self.update_user_endpoint = f"{self.envs.gateway_url}/api/users/update"
+        
+    def register(self, username: str | None = None, password: str | None = None):
         try:
-            _response = self.session.get(url=self.config["register_url"])
+            _response = self.session.get(url=f"{self.envs.auth_url}/register")
             _csrf_token = _response.cookies["XSRF-TOKEN"]
+            username = username if username else self.envs.test_username
+            password = password if password else self.envs.test_password
+            headers = {
+                "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+                "accept-language": "en-US,en;q=0.9",
+                "cache-control": "max-age=0",
+                "content-type": "application/x-www-form-urlencoded",
+                "upgrade-insecure-requests": "1"
+            }
             data = {
+                "_csrf": _csrf_token,
                 "username": username,
                 "password": password,
-                "passwordSubmit": password,
-                "_csrf": _csrf_token,
+                "passwordSubmit": password
             }
-            res = self.session.post(url=self.config["register_url"], data=data)
+            res = self.session.post(url=f"{self.envs.auth_url}/register", headers=headers, data=data, allow_redirects=True)
             if res.status_code == HTTPStatus.CREATED:
                 logging.info(f"Создан пользователь {username}")
-            else:
+            elif res.status_code == 400:
                 logging.info(f"Пользователь {username} уже существует")
+            else:
+                raise Exception(f"Код {res.status_code} | Text {res.text}")
         
         except Exception as e:
             logging.error(f"Ошибка при регистрации пользователя {username}: {str(e)}", exc_info=True)
             assert False
     
-    def add_spending(self, data: dict):
+    def add_spending(self, data: SpendAdd) -> SpendGet:
         try:
-            res = self.session.post(url=self.ADD_SPENDS_URL, json=data)
+            if not data.username:
+                data.username = self.envs.test_username
+            res = self.session.post(url=self.add_spends_endpoint, json=data.model_dump())
             if res.status_code == HTTPStatus.CREATED:
-                data.update({"id": res.json()["id"]})
-                logging.info(f"Трата добавлена. ID: {data['id']}")
+                result = SpendGet.model_validate(res.json())
+                logging.info(f"Трата добавлена. ID: {result.id}")
+                return result
             else:
                 raise Exception(f"Код {res.status_code} | Text {res.text}")
         except Exception as e:
             logging.error(f"Ошибка при добавлении траты: {str(e)}", exc_info=True)
             assert False
     
-    def get_all_spendings(self) -> list[dict]:
+    def get_all_spendings(self) -> list[SpendGet]:
         try:
-            res = self.session.get(url=self.ALL_SPENDS_URL)
+            res = self.session.get(url=self.all_spends_endpoint, params={"size": 1000})
             if res.status_code == HTTPStatus.OK:
-                return res.json()["content"]
+                user_items = [item for item in res.json()["content"]]
+                if len(user_items) == 0:
+                    return []
+                return [SpendGet.model_validate(item) for item in user_items]
             else:
                 raise Exception(f"Код {res.status_code} | Text {res.text}")
         except Exception as e:
             logging.error(f"Ошибка при получении всех трат: {str(e)}", exc_info=True)
             assert False
         
-    def clear_all_spendings(self, ids: list[str] | None = None):
+    def clear_spendings(self, ids: list[str] | None = None):
         try:
             if ids is None:
                 all_spendings = self.get_all_spendings()
-                ids = [r["id"] for r in all_spendings] if len(all_spendings) > 0 else []
+                ids = [r.id for r in all_spendings] if len(all_spendings) > 0 else []
             if len(ids) == 0:
                 logging.info(f"Таблица трат пустая, удаление не требуется")
                 return
@@ -84,7 +105,8 @@ class NifflerAPI:
             params = {
                 "ids": ",".join(ids) if len(ids) > 1 else ids[0]
             }
-            res = self.session.delete(url=self.DELETE_SPENDS_URL, params=params)
+            logging.info(f"Удаление трат: {ids}")
+            res = self.session.delete(url=self.delete_spends_endpoint, params=params)
             if res.status_code == HTTPStatus.OK:
                 logging.info(f"Все траты удалены")
             else:
@@ -94,13 +116,13 @@ class NifflerAPI:
             logging.error(f"Ошибка при удалении всех трат: {str(e)}", exc_info=True)
             assert False
             
-    def add_category(self, category_name: str):
+    def add_category(self, category_name: str) -> Category:
         try:
             data = {"name": category_name}
-            res = self.session.post(url=self.ADD_CATEGORY_URL, json=data)
+            res = self.session.post(url=self.add_category_endpoint, json=data)
             if res.status_code == HTTPStatus.OK:
                 logging.info(f"Категория {category_name} добавлена")
-                return res.json()
+                return Category.model_validate(res.json())
             elif res.status_code == HTTPStatus.CONFLICT:
                 logging.info(f"Категория {category_name} уже существует")
                 return self.get_category_by_name(category_name)
@@ -110,33 +132,35 @@ class NifflerAPI:
             logging.error(f"Ошибка при добавлении категории: {str(e)}", exc_info=True)
             assert False
             
-    def get_all_categories(self, exclude_archived: bool = False):
+    def get_all_categories(self, exclude_archived: bool = False) -> list[Category]:
         try:
             params = {
                 "excludeArchived": exclude_archived
             }
-            res = self.session.get(url=self.GET_CATEGORIES_URL, params=params)
+            res = self.session.get(url=self.get_categories_endpoint, params=params)
             if res.status_code == HTTPStatus.OK:
-                return res.json()
+                return [Category.model_validate(item) for item in res.json()]
             else:
                 raise Exception(f"Код {res.status_code} | Text {res.text}")
         except Exception as e:
             logging.error(f"Ошибка при получении всех категорий: {str(e)}", exc_info=True)
             assert False
             
-    def get_category_by_name(self, name: str):
+    def get_category_by_name(self, name: str) -> Category:
         try:
             all_categories = self.get_all_categories()
-            return next((c for c in all_categories if c["name"] == name), None)
+            result = next((c for c in all_categories if c["name"] == name), None)
+            return Category.model_validate(result) if result else result
+
         except Exception as e:
             logging.error(f"Ошибка при получении категории по имени: {str(e)}", exc_info=True)
             assert False
     
-    def update_category(self, category_data: dict):
+    def update_category(self, category_data: Category):
         try:
-            res = self.session.patch(url=self.UPDATE_CATEGORY_URL, json=category_data)
+            res = self.session.patch(url=self.update_category_endpoint, json=category_data.model_dump())
             if res.status_code == HTTPStatus.OK:
-                logging.info(f"Категория {category_data['name']} обновлена")
+                logging.info(f"Категория {category_data.name} обновлена")
             else:
                 raise Exception(f"Код {res.status_code} | Text {res.text}")
         except Exception as e:
@@ -145,7 +169,7 @@ class NifflerAPI:
     
     def get_current_user(self):
         try:
-            res = self.session.get(url=self.CURRENT_USER_URL)
+            res = self.session.get(url=self.current_user_endpoint)
             if res.status_code == HTTPStatus.OK:
                 return res.json()
             else:
@@ -163,7 +187,7 @@ class NifflerAPI:
             "username": current_user["username"]
         }
         try:
-            res = self.session.patch(url=self.UPDATE_USER_URL, json=data)
+            res = self.session.patch(url=self.update_user_endpoint, json=data)
             if res.status_code == HTTPStatus.OK:
                 logging.info(f"Имя профиля изменено на {name}")
             else:
@@ -171,11 +195,3 @@ class NifflerAPI:
         except Exception as e:
             logging.error(f"Ошибка при обновлении профиля: {str(e)}", exc_info=True)
             assert False
-        
-    def cleanup(self):
-        all_categories = self.get_all_categories()
-        for category_data in all_categories:
-            if not category_data["name"].startswith("0033"):
-                category_data["name"] = generate_random_hex()
-            category_data["archived"] = True
-            self.update_category(category_data)
