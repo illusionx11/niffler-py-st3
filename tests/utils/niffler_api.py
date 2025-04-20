@@ -1,10 +1,12 @@
 import os
 import requests
+from requests import Response
+from requests_toolbelt.utils.dump import dump_response
+import allure
 import logging
 from http import HTTPStatus
 from tests.models.config import Envs
 from tests.models.spend import Category, SpendGet, SpendAdd
-from tests.utils.generate_random_hex import generate_random_hex
 
 class NifflerAPI:
            
@@ -16,9 +18,17 @@ class NifflerAPI:
         })
         self.envs = envs
         self.generate_endpoints()
+        self.session.hooks["response"].append(self.attach_response)
         logging.info(f"Niffler API initialized.")
-        
+    
+    @staticmethod
+    def attach_response(response: Response, *args, **kwargs):
+        attachment_name = response.request.method + " " + response.request.url
+        allure.attach(dump_response(response), attachment_name, attachment_type=allure.attachment_type.TEXT)
+    
+    @allure.step("API Генерация Endpoint-ов")
     def generate_endpoints(self):
+        
         self.token_endpoint = f"{self.envs.auth_url}/oauth2/token"
         self.currencies_endpoint = f"{self.envs.gateway_url}/api/currencies"
         self.users_endpoint = f"{self.envs.gateway_url}/api/users"
@@ -32,7 +42,8 @@ class NifflerAPI:
         self.get_categories_endpoint = f"{self.envs.gateway_url}/api/categories/all"
         self.current_user_endpoint = f"{self.envs.gateway_url}/api/users/current"
         self.update_user_endpoint = f"{self.envs.gateway_url}/api/users/update"
-        
+    
+    @allure.step("API Регистрация пользователя")
     def register(self, username: str | None = None, password: str | None = None):
         try:
             _response = self.session.get(url=f"{self.envs.auth_url}/register")
@@ -64,6 +75,7 @@ class NifflerAPI:
             logging.error(f"Ошибка при регистрации пользователя {username}: {str(e)}", exc_info=True)
             assert False
     
+    @allure.step("API Добавление траты")
     def add_spending(self, data: SpendAdd) -> SpendGet:
         try:
             if not data.username:
@@ -79,6 +91,7 @@ class NifflerAPI:
             logging.error(f"Ошибка при добавлении траты: {str(e)}", exc_info=True)
             assert False
     
+    @allure.step("API Получение списка трат")
     def get_all_spendings(self) -> list[SpendGet]:
         try:
             res = self.session.get(url=self.all_spends_endpoint, params={"size": 1000})
@@ -92,7 +105,8 @@ class NifflerAPI:
         except Exception as e:
             logging.error(f"Ошибка при получении всех трат: {str(e)}", exc_info=True)
             assert False
-        
+    
+    @allure.step("API Удаление трат")
     def clear_spendings(self, ids: list[str] | None = None):
         try:
             if ids is None:
@@ -115,7 +129,8 @@ class NifflerAPI:
         except Exception as e:
             logging.error(f"Ошибка при удалении всех трат: {str(e)}", exc_info=True)
             assert False
-            
+    
+    @allure.step("API Добавление категории")    
     def add_category(self, category_name: str) -> Category:
         try:
             data = {"name": category_name}
@@ -131,7 +146,8 @@ class NifflerAPI:
         except Exception as e:
             logging.error(f"Ошибка при добавлении категории: {str(e)}", exc_info=True)
             assert False
-            
+    
+    @allure.step("API Получение списка категорий")   
     def get_all_categories(self, exclude_archived: bool = False) -> list[Category]:
         try:
             params = {
@@ -143,9 +159,10 @@ class NifflerAPI:
             else:
                 raise Exception(f"Код {res.status_code} | Text {res.text}")
         except Exception as e:
-            logging.error(f"Ошибка при получении всех категорий: {str(e)}", exc_info=True)
+            logging.error(f"Ошибка при получении категорий: {str(e)}", exc_info=True)
             assert False
-            
+    
+    @allure.step("API Получение категории по имени")  
     def get_category_by_name(self, name: str) -> Category:
         try:
             all_categories = self.get_all_categories()
@@ -156,6 +173,7 @@ class NifflerAPI:
             logging.error(f"Ошибка при получении категории по имени: {str(e)}", exc_info=True)
             assert False
     
+    @allure.step("API Обновление категории")
     def update_category(self, category_data: Category):
         try:
             res = self.session.patch(url=self.update_category_endpoint, json=category_data.model_dump())
@@ -167,6 +185,7 @@ class NifflerAPI:
             logging.error(f"Ошибка при обновлении категории: {str(e)}", exc_info=True)
             assert False
     
+    @allure.step("API Получение текущего пользователя")
     def get_current_user(self):
         try:
             res = self.session.get(url=self.current_user_endpoint)
@@ -178,6 +197,7 @@ class NifflerAPI:
             logging.error(f"Ошибка при получении текущего пользователя: {str(e)}", exc_info=True)
             assert False
     
+    @allure.step("API Обновление имени профиля")
     def update_profile_name(self, name: str):
         current_user = self.get_current_user()
         data = {

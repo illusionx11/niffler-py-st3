@@ -1,19 +1,24 @@
 import pytest
-import os
+import allure
 from tests.conftest import TestData
 from tests.models.config import Envs
 from tests.pages.login_page import LoginPage
 from tests.pages.main_page import MainPage
 from tests.utils.errors import ValidationErrors
+from tests.allure_data import Epic, Feature, Story
+
+pytestmark = [pytest.mark.allure_label(label_type="epic", value=Epic.app_name)]
 
 @pytest.mark.usefixtures("login_page", "main_page")
 @pytest.mark.login
-class TestRegistration:
+@allure.feature(Feature.login)
+class TestLogin:
     
     @TestData.login_data([
         {"username": "a", "password": "a"},
         {"username": "wrongUserNonExistent!!", "password": "wrongPass"}
     ])
+    @allure.story(Story.errors)
     def test_bad_credentials(self, login_page: LoginPage, login_data: dict[str, str]):
         username = login_data["username"]
         password = login_data["password"]
@@ -22,7 +27,8 @@ class TestRegistration:
             "login": [ValidationErrors.LOGIN_BAD_CREDENTIALS]
         }
         login_page.should_be_errors_in_validation(errors=errors)
-        
+    
+    @allure.story(Story.auth_user)
     def test_successful_login(self, login_page: LoginPage, main_page: MainPage, envs: Envs):
         username = envs.test_username
         password = envs.test_password

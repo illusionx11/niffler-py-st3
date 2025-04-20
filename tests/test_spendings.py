@@ -3,6 +3,8 @@ import random
 import logging
 import time
 import random
+import allure
+from tests.allure_data import Epic, Feature, Story
 from tests.models.spend import Spend, SpendGet, SpendAdd, CategoryAdd
 from tests.conftest import TestData
 from tests.pages.main_page import MainPage
@@ -11,7 +13,9 @@ from tests.databases.spends_db import SpendsDb
 from tests.models.config import Envs
 from tests.utils.niffler_api import NifflerAPI
 from datetime import datetime
-    
+
+pytestmark = [pytest.mark.allure_label(label_type="epic", value=Epic.app_name)]
+
 @pytest.mark.usefixtures(
     "main_page", 
     "cleanup",
@@ -19,6 +23,7 @@ from datetime import datetime
     "spendings_list"
 )
 @pytest.mark.spendings
+@allure.feature(Feature.spendings)
 class TestSpendings:
     
     @TestData.spending_data([
@@ -44,33 +49,40 @@ class TestSpendings:
             spendDate="2024-06-01T00:00:00.000Z"
         )
     ])
+    @allure.story(Story.add_spending)
     def test_add_new_spending(self, main_page: MainPage, spending_data: SpendAdd):
+        
         main_page.open()
         main_page.should_be_mainpage()
         main_page.add_new_spending(spending_data)
         time.sleep(0.3) # плохая практика, но без этого иногда ловится StaleElementReferenceException
         main_page.should_be_new_spending_in_table(spending_data)
-        
+    
+    @allure.story(Story.delete_spending)
     @pytest.mark.repeat(2)
     def test_delete_single_spending(self, main_page: MainPage, spendings_list: list[SpendGet]):
         main_page.open()
         main_page.should_be_mainpage()
-        index = random.randint(0, len(spendings_list) - 1)
+        max_index = len(spendings_list) - 1 if len(spendings_list) <= 10 else 9
+        index = random.randint(0, max_index)
         logging.info(f"Удаляем расход {spendings_list[index]}")
         main_page.remove_spendings(indexes=[index])
         time.sleep(0.3) # плохая практика, но без этого иногда ловится StaleElementReferenceException
         main_page.should_not_be_deleted_spendings(spendings_list, indexes=[index])
-        
+    
+    @allure.story(Story.delete_spending)
     @pytest.mark.repeat(2)
     def test_delete_multiple_spendings(self, main_page: MainPage, spendings_list: list[SpendGet]):
         main_page.open()
         main_page.should_be_mainpage()
-        indexes = random.sample(range(0, len(spendings_list) - 1), 2)
+        max_index = len(spendings_list) - 1 if len(spendings_list) <= 10 else 9
+        indexes = random.sample(range(0, max_index), 2)
         logging.info(f"Удаляем расходы {spendings_list[indexes[0]]}\nи\n{spendings_list[indexes[1]]}")
         main_page.remove_spendings(indexes)
         time.sleep(0.3) # плохая практика, но без этого иногда ловится StaleElementReferenceException
         main_page.should_not_be_deleted_spendings(spendings_list, indexes)
-        
+    
+    @allure.story(Story.errors)
     def test_spending_amount_validation(self, main_page: MainPage):
         main_page.open()
         main_page.should_be_mainpage()
@@ -86,7 +98,8 @@ class TestSpendings:
             "amount": [ValidationErrors.LOW_AMOUNT]
         }
         main_page.should_be_errors_in_validation(errors=errors)
-        
+    
+    @allure.story(Story.errors)
     def test_spending_category_validation(self, main_page: MainPage):
         main_page.open()
         main_page.should_be_mainpage()
@@ -102,7 +115,8 @@ class TestSpendings:
             "category": [ValidationErrors.NO_CATEGORY]
         }
         main_page.should_be_errors_in_validation(errors=errors)
-        
+    
+    @allure.story(Story.errors)
     def test_spending_mixed_validation(self, main_page: MainPage):
         main_page.open()
         main_page.should_be_mainpage()
@@ -119,16 +133,19 @@ class TestSpendings:
             "category": [ValidationErrors.NO_CATEGORY]
         }
         main_page.should_be_errors_in_validation(errors=errors)
-            
+    
+    @allure.story(Story.search_spending)
     @pytest.mark.repeat(2)
     def test_spendings_search_category(self, main_page: MainPage, spendings_list: list[SpendGet]):
+        
         main_page.open()
         main_page.should_be_mainpage()
         query = random.choice(spendings_list).category.name
         valid_spendings = [s for s in spendings_list if s.category.name == query]
         main_page.make_search(query)
         main_page.should_be_exact_search_results(query, valid_spendings=valid_spendings)
-        
+    
+    @allure.story(Story.search_spending)
     @pytest.mark.repeat(2)
     def test_spendings_search_description(self, main_page: MainPage, spendings_list: list[SpendGet]):
         main_page.open()
@@ -138,6 +155,7 @@ class TestSpendings:
         main_page.make_search(query)
         main_page.should_be_exact_search_results(query, valid_spendings=valid_spendings)
     
+    @allure.story(Story.search_spending)
     @TestData.query(["Noneeeeeeee", "123", "Несуществ"])
     def test_nonexistent_spendings_search(self, main_page: MainPage, query: str):
         main_page.open()
@@ -153,6 +171,7 @@ class TestSpendings:
 )
 @pytest.mark.spendings
 @pytest.mark.spendings_db
+@allure.feature(Feature.spendings)
 class TestSpendingsDatabase:
     
     @TestData.spending_data([
@@ -164,6 +183,7 @@ class TestSpendingsDatabase:
             spendDate="2024-06-07T00:00:00.000Z",
         )
     ])
+    @allure.story(Story.database)
     def test_added_spending_in_database(
         self, 
         niffler_api: NifflerAPI, 
@@ -184,7 +204,8 @@ class TestSpendingsDatabase:
             ),
             None
         )
-        assert spending is not None
+        with allure.step(f"Проверка, что расход есть в базе данных"):
+            assert spending is not None
         
     @TestData.spending_data([
         SpendAdd(
@@ -195,6 +216,7 @@ class TestSpendingsDatabase:
             spendDate="2024-06-07T00:00:00.000Z",
         )
     ])
+    @allure.story(Story.database)
     def test_deleted_spending_not_in_database(
         self,
         niffler_api: NifflerAPI,
@@ -213,4 +235,5 @@ class TestSpendingsDatabase:
             ),
             None
         )
-        assert spending is None
+        with allure.step(f"Проверка, что расхода нет в базе данных"):
+            assert spending is None

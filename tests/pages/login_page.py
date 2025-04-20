@@ -4,6 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from tests.utils.errors import ValidationErrors
 from .base_page import BasePage
+import allure
 
 class LoginPage(BasePage):
     
@@ -17,7 +18,8 @@ class LoginPage(BasePage):
     PASSWORD_VISIBILITY_BTN = (By.CSS_SELECTOR, "button.form__password-button")
     SUBMIT_BTN = (By.CSS_SELECTOR, "button.form__submit")
     REGISTER_BTN = (By.CSS_SELECTOR, "a.form__register")
-        
+    
+    @allure.step("Авторизация в сервис")
     def log_in(self, username: str, password: str):
         self.open()
         self.should_be_login_page()
@@ -26,18 +28,21 @@ class LoginPage(BasePage):
         logging.info(f"Password: {password}")
         self.browser.find_element(*self.PASSWORD_INPUT).send_keys(password)
         self.browser.find_element(*self.SUBMIT_BTN).click()
-        
+    
+    @allure.step("Проверка на валидность страницы авторизации")
     def should_be_login_page(self):
         self.should_be_login_heading()
         self.should_be_element(self.LOGIN_FORM)
         self.should_be_element(self.SUBMIT_BTN)
         self.should_be_url("login")
     
+    @allure.step("Проверка на наличие заголовка авторизации")
     def should_be_login_heading(self):
         header = self.browser.find_element(*self.LOGIN_HEADER)
         assert header.is_displayed()
         assert header.text.lower() == "log in"
 
+    @allure.step("Проверка на наличие ошибок валидации")
     def should_be_errors_in_validation(self, errors: dict[str, list[ValidationErrors]]):
         if "login" in errors and len(errors["login"]) > 0:
             login_error = WebDriverWait(self.browser, 10).until(EC.presence_of_element_located(self.LOGIN_FORM_ERROR))

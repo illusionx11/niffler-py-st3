@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from tests.models.spend import Spend
 from tests.utils.errors import ValidationErrors
 from .base_page import BasePage
+import allure
 
 class ProfilePage(BasePage):
     
@@ -28,34 +29,40 @@ class ProfilePage(BasePage):
     DUPLICATE_CATEGORY_ALERT = (By.CSS_SELECTOR, "div[role='alert']")
     DUPLICATE_CATEGORY_ALERT_ICON = (By.CSS_SELECTOR, "svg[data-testid='ErrorOutlineIcon']")
     DUPLICATE_CATEGORY_ALERT_CLOSE_BTN = (By.CSS_SELECTOR, "button[title='Close']")
-        
+    
+    @allure.step("Проверка на валидность страницы профиля")
     def should_be_profile_page(self):
         self.should_be_element(self.PROFILE_HEADING)
         self.should_be_element(self.CATEGORIES_HEADING)
         self.should_be_element(self.ADD_CATEGORY_INPUT)
         self.should_be_url("profile")
     
+    @allure.step("Добавление новой категории")
     def add_new_category(self, name: str):
         category_input = self.browser.find_element(*self.ADD_CATEGORY_INPUT)
         self.clear_input(category_input)
         category_input.send_keys(name)
         category_input.send_keys(Keys.RETURN)
-        
+    
+    @allure.step("Проверка наличия новой активной категории")
     def should_be_new_active_category(self, name: str):
         all_categories = self.browser.find_elements(*self.ALL_CATEGORY_NAMES)
         active_categories = [c for c in all_categories if c.get_attribute("tabindex") == "0"]
         assert name in [c.text for c in active_categories]
-        
+    
+    @allure.step("Изменение имени профиля")
     def set_new_profile_name(self, name: str):
         name_input = self.browser.find_element(*self.PROFILE_NAME_INPUT)
         self.clear_input(name_input)
         name_input.send_keys(name)
         self.browser.find_element(*self.SUBMIT_PROFILE_DATA_BTN).click()
-        
+    
+    @allure.step("Проверка наличия нового имени профиля") 
     def should_be_new_profile_name(self, name: str):
         name_label = self.browser.find_element(*self.PROFILE_NAME_INPUT)
         assert name == name_label.get_attribute("value")
     
+    @allure.step("Проверка на наличие ошибок валидации")
     def should_be_errors_in_validation(self, errors: dict[str, list[ValidationErrors]]):
         if "profile_name" in errors and len(errors["profile_name"]) > 0:
             profile_name_input = WebDriverWait(self.browser, 10).until(EC.presence_of_element_located(self.PROFILE_NAME_INPUT))
@@ -76,12 +83,14 @@ class ProfilePage(BasePage):
             for error_text in errors["category_length"]:
                 assert error_text in category_error.text
     
+    @allure.step("Проверка на наличие предупреждения о дубликате категории")
     def should_be_duplicate_category_alert_elements(self, alert_text: str):
         self.should_be_element(self.DUPLICATE_CATEGORY_ALERT)
         self.should_be_element(self.DUPLICATE_CATEGORY_ALERT_ICON)
         self.should_be_element(self.DUPLICATE_CATEGORY_ALERT_CLOSE_BTN)
         assert alert_text in self.browser.find_element(*self.DUPLICATE_CATEGORY_ALERT).text
-        
+    
+    @allure.step("Изменение имени категории")
     def change_category_name(self, by: str, old_name: str, new_name: str):
         all_categories = self.browser.find_elements(*self.ALL_CATEGORY_NAMES)
         category = [c for c in all_categories if c.text == old_name][0]
@@ -96,14 +105,17 @@ class ProfilePage(BasePage):
         self.clear_input(edit_category_input)
         edit_category_input.send_keys(new_name)
         edit_category_input.send_keys(Keys.RETURN)
-        
+    
+    @allure.step("Проверка на отсутствие категории")
     def should_be_no_category(self, name: str):
         all_categories = self.browser.find_elements(*self.ALL_CATEGORY_NAMES)
         assert name not in [c.text for c in all_categories]
-        
+    
+    @allure.step("Показ архивных категорий")
     def show_archived_categories(self):
         self.browser.find_element(*self.SHOW_ARCHIVED_BTN).click()
     
+    @allure.step("Проверка наличия архивных категорий")
     def should_be_archived_categories(self, archived_categories: list[str]):
         all_categories = self.browser.find_elements(*self.ALL_CATEGORY_NAMES)
         archived_categories_names = [c.text for c in all_categories if c.get_attribute("tabindex") == "-1"]
