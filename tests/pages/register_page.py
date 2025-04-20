@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from tests.utils.errors import ValidationErrors
 from .base_page import BasePage
+import allure
 
 class RegisterPage(BasePage):
     
@@ -19,19 +20,22 @@ class RegisterPage(BasePage):
     LOGIN_BTN = (By.CSS_SELECTOR, "a.form__link")
     REGISTER_SUCCESS_HEADER = (By.CSS_SELECTOR, "p.form__paragraph_success")
     REGISTER_SUCCESS_LOGIN_BTN = (By.CSS_SELECTOR, "a.form_sign-in")
-        
+    
+    @allure.step("Проверка на валидность страницы регистрации")
     def should_be_register_page(self):
         self.should_be_register_heading()
         self.should_be_element(self.REGISTER_FORM)
         self.should_be_element(self.PASSWORD_REPEAT_INPUT)
         self.should_be_element(self.SUBMIT_BTN)
         self.should_be_url("register")
-        
+    
+    @allure.step("Проверка на наличие корректного заголовка на странице регистрации")
     def should_be_register_heading(self):
         header = self.browser.find_element(*self.REGISTER_HEADER)
         assert header.is_displayed()
         assert header.text.lower() == "sign up"
-        
+    
+    @allure.step("Регистрация нового пользователя")
     def register_user(self, username: str, password: str, password_repeat: str | None = None):
         username_input = self.browser.find_element(*self.USERNAME_INPUT)
         username_input.send_keys(username)
@@ -43,6 +47,7 @@ class RegisterPage(BasePage):
         password_repeat_input.send_keys(password_repeat)
         self.browser.find_element(*self.SUBMIT_BTN).click()
     
+    @allure.step("Проверка на наличие ошибок валидации")
     def should_be_errors_in_validation(self, errors: dict[str, list[ValidationErrors]]):
         if "username" in errors and len(errors["username"]) > 0:
             username_input = WebDriverWait(self.browser, 10).until(EC.presence_of_element_located(self.USERNAME_INPUT))
@@ -64,7 +69,8 @@ class RegisterPage(BasePage):
             password_repeat_error = password_repeat_parent.find_element(By.CSS_SELECTOR, "span.form__error")
             for error_text in errors["password_repeat"]:
                 assert error_text in password_repeat_error.text
-                
+    
+    @allure.step("Проверка на успешную регистрацию")    
     def should_be_successful_registration(self):
         assert self.is_element_present(*self.REGISTER_SUCCESS_HEADER)
         assert self.is_element_present(*self.REGISTER_SUCCESS_LOGIN_BTN)

@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from tests.models.spend import Spend, SpendAdd
 from tests.utils.errors import ValidationErrors
 from .base_page import BasePage
-
+import allure
 
 class MainPage(BasePage):
     
@@ -35,12 +35,14 @@ class MainPage(BasePage):
     DELETE_MODAL_DIV = (By.CSS_SELECTOR, "div[role='dialog']")
     SEARCH_INPUT = (By.CSS_SELECTOR, "input[aria-label='search']")
     SEARCH_BTN = (By.CSS_SELECTOR, "button#input-submit")
-        
+    
+    @allure.step("Проверка на валидность главной страницы")
     def should_be_mainpage(self):
         self.should_be_element(self.SPENDINGS_DIV)
         self.should_be_element(self.STATS_DIV)
         self.should_be_url("main")
-        
+    
+    @allure.step("Добавление новой траты")
     def add_new_spending(self, data: SpendAdd):
         self.browser.find_element(*self.ADD_SPENDING_BTN).click()
         amount_input = self.browser.find_element(*self.AMOUNT_INPUT)
@@ -62,7 +64,8 @@ class MainPage(BasePage):
             self.clear_input(description_input)
             description_input.send_keys(data.description)
         self.browser.find_element(*self.SAVE_BTN).click()
-        
+    
+    @allure.step("Проверка на наличие добавленной траты в таблице")
     def should_be_new_spending_in_table(self, data: SpendAdd):
         
         is_spending_added = False
@@ -80,6 +83,7 @@ class MainPage(BasePage):
                 
         assert is_spending_added is True, f"Новый расход {data} не добавлен на странице {self.browser.current_url}"
     
+    @allure.step("Удаление трат")
     def remove_spendings(self, indexes: list[int]):
         
         table_rows = WebDriverWait(self.browser, 10).until(EC.presence_of_all_elements_located(self.SPENDINGS_TABLE_ROWS))
@@ -93,7 +97,8 @@ class MainPage(BasePage):
         delete_confirm_btn = WebDriverWait(dialog_div, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "div[role='dialog'] button:nth-child(2)")))
         assert delete_confirm_btn.is_enabled()
         delete_confirm_btn.click()
-        
+    
+    @allure.step("Проверка на исчезновение трат из таблицы")
     def should_not_be_deleted_spendings(self, spendings: list[Spend], indexes: list[int]):
         new_table_rows = WebDriverWait(self.browser, 10).until(EC.presence_of_all_elements_located(self.SPENDINGS_TABLE_ROWS))
         for row in new_table_rows:
@@ -110,7 +115,8 @@ class MainPage(BasePage):
                     break
             
             assert is_spendings_deleted, f"Расход {spendings[i]} не удален на странице {self.browser.current_url}"
-        
+    
+    @allure.step("Проверка на наличие ошибок валидации")
     def should_be_errors_in_validation(self, errors: dict[str, list[ValidationErrors]]):
         if "amount" in errors and len(errors["amount"]) > 0:
             amount_input = WebDriverWait(self.browser, 10).until(EC.presence_of_element_located(self.AMOUNT_INPUT))
@@ -126,12 +132,14 @@ class MainPage(BasePage):
             for error_text in errors["category"]:
                 assert error_text in category_error.text
     
+    @allure.step("Поиск по тратам")
     def make_search(self, query: str):
         search_input = self.browser.find_element(*self.SEARCH_INPUT)
         self.clear_input(search_input)
         search_input.send_keys(query)
         search_input.send_keys(Keys.RETURN)
-        
+    
+    @allure.step("Проверка на результаты таблицы трат после поиска")
     def should_be_exact_search_results(self, query: str, valid_spendings: list[Spend]):
 
         table_rows = WebDriverWait(self.browser, 10).until(EC.presence_of_all_elements_located(self.SPENDINGS_TABLE_ROWS))
@@ -150,6 +158,7 @@ class MainPage(BasePage):
                     break
             
             assert is_spending_present is True, f"Расход {spending} не найден после поиска '{query}' на странице {self.browser.current_url}"
-        
+    
+    @allure.step("Проверка на отсутствие результатов поиска трат")
     def should_be_no_search_results(self):
         assert self.is_element_not_present(*self.SPENDINGS_TABLE), "Ожидалось, что поиск не даст результатов, но они есть"
