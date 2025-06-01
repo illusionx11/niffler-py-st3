@@ -5,6 +5,7 @@ from utils.sessions import AuthSession
 from models.oauth import OAuthRequest
 from http import HTTPStatus
 import pkce
+from requests import Response
 
 class OAuthClient:
     """Авторизует по Oauth2.0"""
@@ -34,7 +35,7 @@ class OAuthClient:
         self.token = None
     
     @allure.step("API Регистрация пользователя")
-    def register(self, username: str, password: str):
+    def register(self, username: str, password: str) -> Response:
         try:
             response = self.session.get(url=self.REGISTER_ENDPOINT)
             csrf_token = response.cookies.get("XSRF-TOKEN")
@@ -52,8 +53,12 @@ class OAuthClient:
             )
             if res.status_code == HTTPStatus.CREATED:
                 logging.info(f"Создан пользователь {username}")
+                return res
+        
             elif res.status_code == 400:
                 logging.info(f"Пользователь {username} уже существует")
+                return res
+            
             else:
                 raise Exception(f"Код {res.status_code} | Text {res.text}")
         

@@ -99,7 +99,10 @@ def server_envs() -> ServerEnvs:
         frontend_url=os.getenv("FRONTEND_URL"),
         gateway_url=os.getenv("GATEWAY_URL"),
         auth_url=os.getenv("AUTH_URL"),
-        spends_db_url=os.getenv("SPENDS_DB_URL")
+        spends_db_url=os.getenv("SPENDS_DB_URL"),
+        userdata_db_url=os.getenv("USERDATA_DB_URL"),
+        auth_db_url=os.getenv("AUTH_DB_URL"),
+        kafka_address=os.getenv("KAFKA_ADDRESS", "localhost"),
     )
     allure.attach(envs_instance.model_dump_json(indent=2), name="server_envs.json", attachment_type=allure.attachment_type.JSON)
     return envs_instance

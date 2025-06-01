@@ -7,6 +7,7 @@ class Feature:
     spendings = "Spendings"
     categories = "Categories"
     user_profile = "User profile"
+    kafka = "Kafka"
     
 class Story:
     add_spending = "Add spendings"
