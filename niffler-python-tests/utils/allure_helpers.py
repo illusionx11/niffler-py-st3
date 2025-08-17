@@ -67,3 +67,39 @@ def allure_attach_request(function):
         raise_for_status(response)    
         return response
     return wrapper
+
+def allure_attach_soap_request(function):
+    """Декоратор для логирования SOAP запросов в allure"""
+    def wrapper(*args, **kwargs):
+        # args[0] - self, args[1] - xml_data
+        xml_data = args[1] if len(args) > 1 else kwargs.get('xml_data', '')
+        
+        with allure.step("SOAP Request"):
+            response: Response = function(*args, **kwargs)
+            
+            allure.attach(
+                body=xml_data.encode("utf-8"),
+                name="SOAP Request XML",
+                attachment_type=allure.attachment_type.XML,
+                extension=".xml"
+            )
+            
+            allure.attach(
+                body=response.text.encode("utf-8"), 
+                name=f"SOAP Response {response.status_code}", 
+                attachment_type=allure.attachment_type.XML, 
+                extension=".xml"
+            )
+            
+            allure.attach(
+                body=json.dumps(dict(response.headers), indent=4).encode("utf-8"), 
+                name=f"Response headers {response.status_code}", 
+                attachment_type=allure.attachment_type.JSON, 
+                extension=".json"
+            )
+        
+        # Для проверки некоторых кейсов с ошибкой 500 не выбрасываем исключение
+        if response.status_code != 500:
+            response.raise_for_status()
+        return response
+    return wrapper

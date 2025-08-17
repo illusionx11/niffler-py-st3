@@ -1,0 +1,105 @@
+name: Pytest parallel tests [UI, REST API, SOAP, Kafka, gRPC, Database]
+
+on:
+  pull_request:
+    types: [ opened, reopened, synchronize ]
+
+jobs:
+  python_tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create environment files
+        run: |
+          cat > niffler-python-tests/client.env << EOF
+          TEST_USERNAME=${{ secrets.TEST_USERNAME }}
+          TEST_PASSWORD=${{ secrets.TEST_PASSWORD }}
+          EOF
+          
+          cat > niffler-python-tests/server.env << EOF
+          AUTH_URL=${{ secrets.AUTH_URL }}
+          GATEWAY_URL=${{ secrets.GATEWAY_URL }}
+          USERDATA_URL=${{ secrets.USERDATA_URL }}
+          FRONTEND_URL=${{ secrets.FRONTEND_URL }}
+          SPENDS_DB_URL=${{ secrets.SPENDS_DB_URL }}
+          USERDATA_DB_URL=${{ secrets.USERDATA_DB_URL }}
+          AUTH_DB_URL=${{ secrets.AUTH_DB_URL }}
+          KAFKA_ADDRESS=${{ secrets.KAFKA_ADDRESS }}
+          CURRENCY_SERVICE_HOST=${{ secrets.CURRENCY_SERVICE_HOST }}
+          WIREMOCK_HOST=${{ secrets.WIREMOCK_HOST }}
+          EOF
+
+      - name: Python Install
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+
+      - name: JDK Install
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Build containers
+        run: |
+          bash docker-compose-dev.sh
+
+      - name: Edit hosts
+        run: |
+          echo -e "127.0.0.1\tlocalhost\n127.0.0.1\tfrontend.niffler.dc\n127.0.0.1\tauth.niffler.dc\n127.0.0.1\tgateway.niffler.dc\n127.0.0.1\tuserdata.niffler.dc\n127.0.0.1\tkafka" | sudo tee -a /etc/hosts
+
+      - name: Install python dependencies
+        working-directory: ./niffler-python-tests
+        run: pip install --upgrade -r requirements.txt
+
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Run tests
+        working-directory: ./niffler-python-tests
+        timeout-minutes: 10
+        run: pytest -n 4 --dist=worksteal
+      
+      - name: Upload Logs as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-logs
+          path: niffler-python-tests/logs
+        
+      - name: Load test report history
+        uses: actions/checkout@v3
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: niffler-python-tests/allure-history
+
+      - name: Generate Allure Report
+        if: always()
+        uses: simple-elf/allure-report-action@v1
+        with:
+          allure_results: niffler-python-tests/allure-results
+          allure_history: niffler-python-tests/allure-history
+          allure_report: niffler-python-tests/allure-report
+
+      - name: Upload Allure Report as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: niffler-python-tests/allure-report
+
+      - name: Deploy Allure Report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: niffler-python-tests/allure-history

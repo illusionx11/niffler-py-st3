@@ -3,13 +3,53 @@ from dotenv import load_dotenv, find_dotenv
 import os
 import logging
 import allure
+from pathlib import Path
 from allure_commons.reporter import AllureReporter
 from allure_pytest.listener import AllureListener
 from allure_commons.types import LabelType
 from pytest import Item, FixtureDef, FixtureRequest
 from models.config import ServerEnvs, ClientEnvs
+from faker import Faker
 
-pytest_plugins = ["fixtures.auth_fixtures", "fixtures.client_fixtures", "fixtures.pages_fixtures"]
+pytest_plugins = [
+    "fixtures.auth_fixtures", 
+    "fixtures.client_fixtures",
+    "fixtures.lock_fixtures",
+    "fixtures.user_fixtures",
+    "fixtures.pages_fixtures",
+    "fixtures.profile_fixtures",
+    "fixtures.spendings_fixtures",
+    "fixtures.soap_fixtures"
+]
+
+################# Logging ####################
+
+class UTF8FileHandler(logging.FileHandler):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, encoding="utf-8", **kwargs)
+
+def pytest_configure():
+    
+    folder = Path(__file__).resolve().parent
+    
+    with open(f"{folder}/logs/logs.txt", "w", encoding="utf-8"):
+        pass
+        
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+    
+    logger.handlers.clear()
+    
+    file_handler = UTF8FileHandler(f"{folder}/logs/logs.txt")
+    file_handler.setLevel(logging.INFO)
+
+
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    file_handler.setFormatter(formatter)
+
+    logger.addHandler(file_handler) 
+
+################# Allure ####################
 
 def allure_logger(config) -> AllureReporter:
     listener: AllureListener = config.pluginmanager.get_plugin("allure_listener")
@@ -84,11 +124,16 @@ def pytest_collection_modifyitems(items):
 ################# Arguments ####################
 
 def pytest_addoption(parser):
-    parser.addoption("--headless", action="store", default="false", help="Run tests in headless mode: true/false (default false)")
+    parser.addoption("--headless", action="store_true", default=False, help="Run tests in headless mode (False if not specified)")
+    parser.addoption("--mock", action="store_true", default=False, help="Run GRPC tests with mock data (False if not specified)")
+    
+@pytest.fixture(scope="session")
+def headless(request: FixtureRequest) -> bool:
+    return request.config.getoption("--headless")
 
 @pytest.fixture(scope="session")
-def headless(request: FixtureRequest):
-    return request.config.getoption("--headless")
+def mock(request: FixtureRequest) -> bool:
+    return request.config.getoption("--mock")
 
 ################# ENVS ####################
 
@@ -99,10 +144,13 @@ def server_envs() -> ServerEnvs:
         frontend_url=os.getenv("FRONTEND_URL"),
         gateway_url=os.getenv("GATEWAY_URL"),
         auth_url=os.getenv("AUTH_URL"),
+        userdata_url=os.getenv("USERDATA_URL"),
         spends_db_url=os.getenv("SPENDS_DB_URL"),
         userdata_db_url=os.getenv("USERDATA_DB_URL"),
         auth_db_url=os.getenv("AUTH_DB_URL"),
-        kafka_address=os.getenv("KAFKA_ADDRESS", "localhost"),
+        kafka_address=os.getenv("KAFKA_ADDRESS"),
+        currency_service_host=os.getenv("CURRENCY_SERVICE_HOST"),
+        wiremock_host=os.getenv("WIREMOCK_HOST")
     )
     allure.attach(envs_instance.model_dump_json(indent=2), name="server_envs.json", attachment_type=allure.attachment_type.JSON)
     return envs_instance
@@ -116,3 +164,10 @@ def client_envs() -> ClientEnvs:
     )
     allure.attach(envs_instance.model_dump_json(indent=2), name="client_envs.json", attachment_type=allure.attachment_type.JSON)
     return envs_instance
+
+################# Fake data ####################
+
+@pytest.fixture(scope="session")
+def faker() -> Faker:
+    faker = Faker()
+    return faker

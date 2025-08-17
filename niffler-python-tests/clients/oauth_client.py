@@ -23,20 +23,14 @@ class OAuthClient:
         """Генерируем code_verifier и code_challenge."""
         self.server_envs = server_envs
         self.session = AuthSession(base_url=server_envs.auth_url)
-        
-        # Этот код мы написали самостоятельно и заменили на целевую схему с использованием библиотеки
-        # code_verifier = base64.urlsafe_b64encode(os.urandom(32)).decode("utf-8")
-        # self.code_verifier = re.sub("[^a-zA-Z0-9]+", "", code_verifier)
-        # code_challenge = sha256(self.code_verifier.encode("utf-8")).digest()
-        # code_challenge = base64.urlsafe_b64encode(code_challenge).decode("utf-8")
-        # self.code_challenge = code_challenge.replace("=", "")
-        
         self.code_verifier, self.code_challenge = pkce.generate_pkce_pair()
         self.token = None
     
     @allure.step("API Регистрация пользователя")
     def register(self, username: str, password: str) -> Response:
         try:
+            self.session.cookies.clear()
+            self.session.headers.clear()
             response = self.session.get(url=self.REGISTER_ENDPOINT)
             csrf_token = response.cookies.get("XSRF-TOKEN")
 
@@ -63,8 +57,9 @@ class OAuthClient:
                 raise Exception(f"Код {res.status_code} | Text {res.text}")
         
         except Exception as e:
-            logging.error(f"Ошибка при регистрации пользователя {username}: {str(e)}", exc_info=True)
-            assert False
+            err_text = f"Ошибка при регистрации пользователя {username}: {str(e)}"
+            logging.error(err_text, exc_info=True)
+            assert False, err_text
     
     @allure.step("API Авторизация и получение токена")
     def get_token(self, username: str, password: str) -> str:

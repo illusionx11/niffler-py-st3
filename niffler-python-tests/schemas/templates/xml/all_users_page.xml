@@ -1,0 +1,14 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:nif="niffler-userdata">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <nif:allUsersPageRequest>
+            <nif:username>{{ username }}</nif:username>
+            <nif:pageInfo>
+                <nif:page>{{ page }}</nif:page>
+                <nif:size>{{ size }}</nif:size>
+                {{ sort }}
+            </nif:pageInfo>
+            {{ search_part }}
+        </nif:allUsersPageRequest>
+    </soapenv:Body>
+</soapenv:Envelope>

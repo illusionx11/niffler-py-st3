@@ -24,7 +24,7 @@ class UsersClient:
         })
         
     @allure.step("API Получение текущего пользователя")
-    def get_current_user(self):
+    def get_current_user(self) -> dict:
         try:
             res = self.session.get(url=self.CURRENT_USER_ENDPOINT)
             if res.status_code == HTTPStatus.OK:

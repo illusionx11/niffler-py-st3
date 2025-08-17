@@ -57,7 +57,6 @@ class KafkaClient:
         self.consumer.assign(partitions)
         try:
             message = self.consumer.poll(1.0)
-            logging.debug(f'{message.value()}')
             return message.value()
         except AttributeError:
             pass
@@ -105,3 +104,24 @@ class KafkaClient:
         except Exception as e:
             logging.error(f"Failed to send message: {e}")
             raise
+        
+    def wait_for_user_event(self, topic_partitions, expected_username: str, timeout: int = 10):
+        """Ждать событие для конкретного пользователя"""
+        import time
+        end_time = time.time() + timeout
+
+        self.consumer.assign(topic_partitions)
+        while time.time() < end_time:
+            msg = self.consumer.poll(1.0)
+            if msg is None:
+                continue
+
+            try:
+                decoded = json.loads(msg.value().decode("utf-8"))
+            except Exception:
+                continue
+
+            if decoded.get("username") == expected_username:
+                return decoded
+
+        raise AssertionError(f"Не дождались события в Kafka для {expected_username}")

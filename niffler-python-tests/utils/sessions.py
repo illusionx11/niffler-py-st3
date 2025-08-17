@@ -1,6 +1,6 @@
 from requests import Session, Response
 from urllib.parse import urlparse, parse_qs
-from utils.allure_helpers import allure_attach_request
+from utils.allure_helpers import allure_attach_request, allure_attach_soap_request
 
 class BaseSession(Session):
     """Сессия с прокидыванием base_url и логированием запроса, ответа, хэдеров ответа, хэдеров запроса."""
@@ -41,3 +41,18 @@ class AuthSession(Session):
                 if code:
                     self.code = code
         return response
+
+class SoapSession(Session):
+    """SOAP сессия для отправки raw XML запросов"""
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__()
+        self.base_url = kwargs.pop("base_url", "")
+        self.headers.update({
+            "Content-Type": "text/xml; charset=utf-8"
+        })
+    
+    @allure_attach_soap_request
+    def soap_request(self, xml_data: str) -> Response:
+        """Отправка SOAP запроса с XML данными"""
+        return self.post(self.base_url + "/ws", data=xml_data)

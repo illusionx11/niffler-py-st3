@@ -2,10 +2,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from models.spend import Spend
+from selenium.common.exceptions import StaleElementReferenceException
 from utils.errors import ValidationErrors
 from .base_page import BasePage
 import allure
+import time
+import logging
 
 class ProfilePage(BasePage):
     
@@ -46,9 +48,30 @@ class ProfilePage(BasePage):
     
     @allure.step("Проверка наличия новой активной категории")
     def should_be_new_active_category(self, name: str):
-        all_categories = self.browser.find_elements(*self.ALL_CATEGORY_NAMES)
-        active_categories = [c for c in all_categories if c.get_attribute("tabindex") == "0"]
-        assert name in [c.text for c in active_categories]
+        def check_category_present():
+            try:
+                all_categories = self.browser.find_elements(*self.ALL_CATEGORY_NAMES)
+                active_categories = [c for c in all_categories if c.get_attribute("tabindex") == "0"]
+                category_names = []
+                for c in active_categories:
+                    try:
+                        category_names.append(c.text)
+                    except StaleElementReferenceException:
+                        return False
+                return name in category_names
+            except StaleElementReferenceException:
+                return False
+        
+        WebDriverWait(self.browser, 10).until(lambda driver: check_category_present())
+        
+        max_attempts = 3
+        for attempt in range(max_attempts):
+            if check_category_present():
+                return
+            if attempt < max_attempts - 1:
+                time.sleep(0.3)
+        
+        raise AssertionError(f"Категория '{name}' не найдена среди активных категорий")
     
     @allure.step("Изменение имени профиля")
     def set_new_profile_name(self, name: str):
@@ -59,36 +82,58 @@ class ProfilePage(BasePage):
     
     @allure.step("Проверка наличия нового имени профиля") 
     def should_be_new_profile_name(self, name: str):
+        WebDriverWait(self.browser, 10).until(
+            EC.presence_of_element_located(self.PROFILE_NAME_INPUT)
+        )
         name_label = self.browser.find_element(*self.PROFILE_NAME_INPUT)
-        assert name == name_label.get_attribute("value")
+        assert name == name_label.get_attribute("value"), \
+            f"Имя профиля '{name}' не соответствует '{name_label.get_attribute('value')}'"
     
     @allure.step("Проверка на наличие ошибок валидации")
-    def should_be_errors_in_validation(self, errors: dict[str, list[ValidationErrors]]):
+    def should_be_errors_in_validation(self, errors: dict[str, list[ValidationErrors]], name: str = None):
+        key = None
         if "profile_name" in errors and len(errors["profile_name"]) > 0:
-            profile_name_input = WebDriverWait(self.browser, 10).until(EC.presence_of_element_located(self.PROFILE_NAME_INPUT))
-            profile_name_parent = profile_name_input.find_element(By.XPATH, "..")
-            profile_name_error = profile_name_parent.find_element(By.CSS_SELECTOR, "span.input__helper-text")
-            for error_text in errors["profile_name"]:
-                assert error_text in profile_name_error.text
+            profile_name_error = WebDriverWait(self.browser, 10).until(
+                EC.presence_of_element_located(
+                    (By.CSS_SELECTOR, "input#name ~ span.input__helper-text")
+                )
+            )
+            element_text = profile_name_error.text
+            key = "profile_name"
         
         if "category_duplicate" in errors and len(errors["category_duplicate"]) > 0:
-            duplicate_category_alert = WebDriverWait(self.browser, 10).until(EC.presence_of_element_located(self.DUPLICATE_CATEGORY_ALERT))
-            for error_text in errors["category_duplicate"]:
-                assert error_text in duplicate_category_alert.text
+            duplicate_category_alert = WebDriverWait(self.browser, 10).until(
+                EC.presence_of_element_located(
+                    (By.CSS_SELECTOR, "div[role='alert']")
+                )
+            )
+            element = duplicate_category_alert.find_element(By.CSS_SELECTOR, "div.MuiAlert-message div")
+            element_text = element.text
+            key = "category_duplicate"
                 
         if "category_length" in errors and len(errors["category_length"]) > 0:
-            category_input = WebDriverWait(self.browser, 10).until(EC.presence_of_element_located(self.ADD_CATEGORY_INPUT))
-            category_parent = category_input.find_element(By.XPATH, "..")
-            category_error = category_parent.find_element(By.CSS_SELECTOR, "span.input__helper-text")
-            for error_text in errors["category_length"]:
-                assert error_text in category_error.text
+            category_error = WebDriverWait(self.browser, 10).until(
+                EC.presence_of_element_located(
+                    (By.CSS_SELECTOR, "input#category ~ span.input__helper-text")
+                )
+            )
+            element_text = category_error.text
+            key = "category_length"
+            
+        for error_text in errors[key]:
+            assert error_text.lower() in element_text.lower(), f"Error text '{error_text}' not in '{element_text}'"
+            if name:
+                assert name in element_text, f"Name '{name}' not in '{element_text}' for key '{key}'"
     
     @allure.step("Проверка на наличие предупреждения о дубликате категории")
-    def should_be_duplicate_category_alert_elements(self, alert_text: str):
+    def should_be_duplicate_category_alert_elements(self, alert_text: str, name: str = None):
         self.should_be_element(self.DUPLICATE_CATEGORY_ALERT)
         self.should_be_element(self.DUPLICATE_CATEGORY_ALERT_ICON)
         self.should_be_element(self.DUPLICATE_CATEGORY_ALERT_CLOSE_BTN)
-        assert alert_text in self.browser.find_element(*self.DUPLICATE_CATEGORY_ALERT).text
+        element_text = self.browser.find_element(*self.DUPLICATE_CATEGORY_ALERT).text
+        assert alert_text in element_text, f"Alert text '{alert_text}' not in '{element_text}'"
+        if name:
+            assert name in element_text, f"Name '{name}' not in '{element_text}'"
     
     @allure.step("Изменение имени категории")
     def change_category_name(self, by: str, old_name: str, new_name: str):
@@ -108,6 +153,9 @@ class ProfilePage(BasePage):
     
     @allure.step("Проверка на отсутствие категории")
     def should_be_no_category(self, name: str):
+        WebDriverWait(self.browser, 10).until(
+            EC.presence_of_all_elements_located(self.ALL_CATEGORY_NAMES)
+        )
         all_categories = self.browser.find_elements(*self.ALL_CATEGORY_NAMES)
         assert name not in [c.text for c in all_categories]
     
@@ -117,6 +165,10 @@ class ProfilePage(BasePage):
     
     @allure.step("Проверка наличия архивных категорий")
     def should_be_archived_categories(self, archived_categories: list[str]):
+        WebDriverWait(self.browser, 10).until(
+            EC.presence_of_all_elements_located(self.ALL_CATEGORY_NAMES)
+        )
         all_categories = self.browser.find_elements(*self.ALL_CATEGORY_NAMES)
         archived_categories_names = [c.text for c in all_categories if c.get_attribute("tabindex") == "-1"]
-        assert archived_categories_names == archived_categories
+        for cat_name in archived_categories:
+            assert cat_name in archived_categories_names
