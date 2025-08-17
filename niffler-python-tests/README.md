@@ -5,7 +5,7 @@
 [![Allure](https://img.shields.io/badge/Allure-2.15.0-orange.svg)](https://allure.qatools.io/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> **Комплексная система автоматизированного тестирования для Niffler 2.0**  
+> **Комплексная система автоматизированного тестирования для проекта Niffler**  
 > Покрывает UI, REST API, SOAP, Kafka, gRPC и базы данных
 
 ---
@@ -65,7 +65,7 @@ pytest -n 4 --dist=worksteal
 ```mermaid
 graph TB
     A[Тестовые сценарии] --> B[Тестовые клиенты]
-    B --> C[API Endpoints]
+    B --> C[Клиенты]
     B --> D[Базы данных]
     B --> E[Kafka]
     B --> F[gRPC]
@@ -73,6 +73,13 @@ graph TB
     G[Allure Reports] --> H[Отчеты]
     I[Lock Manager] --> J[Синхронизация]
     K[Fixtures] --> L[Тестовые данные]
+    
+    C --> C1[oauth_client]
+    C --> C2[users_client]
+    C --> C3[spends_client]
+    C --> C4[soap_client]
+    C --> C5[kafka_client]
+    C --> C6[lock_client]
 ```
 
 ### Ключевые особенности
@@ -162,7 +169,7 @@ class TestCurrencyService:
 - Interceptors
 - Метрики
 
-### 🗄️ База данных
+### 🗄️ Тесты для Базы данных
 ```python
 @pytest.mark.database
 class TestCategoriesDB:
