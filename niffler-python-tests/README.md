@@ -28,7 +28,7 @@
 
 ### Предварительные требования
 
-- **Python 3.13+**
+- **Python 3.11+**
 - **Java 21+** (для Allure)
 - **Docker & Docker Compose**
 - **Chrome/Chromium** (для UI тестов)
