@@ -1,9 +1,22 @@
 # 🧪 Niffler Python Tests
 
-[![Python](https://img.shields.io/badge/Python-3.13-blue.svg)](https://www.python.org/)
-[![Pytest](https://img.shields.io/badge/Pytest-8.3.5-green.svg)](https://pytest.org/)
-[![Allure](https://img.shields.io/badge/Allure-2.15.0-orange.svg)](https://allure.qatools.io/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+<div align="center">
+
+<img src="./assets/icons/python.svg" alt="Python" width="32" height="32">
+<img src="./assets/icons/pytest.svg" alt="Pytest" width="32" height="32">
+<img src="./assets/icons/allure.svg" alt="Allure" width="32" height="32">
+<img src="./assets/icons/docker.svg" alt="Docker" width="32" height="32">
+<img src="./assets/icons/selenium.svg" alt="Selenium" width="32" height="32">
+
+<br>
+
+<img src="./assets/icons/postgresql.svg" alt="PostgreSQL" width="32" height="32">
+<img src="./assets/icons/kafka.svg" alt="Kafka" width="32" height="32">
+<img src="./assets/icons/grpc.svg" alt="gRPC" width="32" height="32">
+<img src="./assets/icons/soap.png" alt="SOAP" width="32" height="32">
+<img src="./assets/icons/gh-actions.svg" alt="GitHub Actions" width="32" height="32">
+
+</div>
 
 > **Комплексная система автоматизированного тестирования для проекта Niffler**  
 > Покрывает UI, REST API, SOAP, Kafka, gRPC и базы данных
@@ -517,12 +530,6 @@ grep "test_user_registration" logs/logs.txt
 - [🐳 Docker Compose](https://docs.docker.com/compose/)
 - [🔧 GitHub Actions](https://docs.github.com/en/actions)
 
-### Контакты
-
-- **Issues**: [GitHub Issues](https://github.com/your-repo/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-repo/discussions)
-- **Wiki**: [Project Wiki](https://github.com/your-repo/wiki)
-
 ---
 
 ## 📄 Лицензия
@@ -535,7 +542,7 @@ grep "test_user_registration" logs/logs.txt
 
 **Автор: Заламаев Илья**
 
-[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/zalamaev)
-[![VK](https://img.shields.io/badge/VK-4C75A3?style=for-the-badge&logo=vk&logoColor=white)](https://vk.com/za1amaev)
+<a href="https://t.me/zalamaev"><img src="./assets/icons/telegram.svg" alt="Telegram" width="32" height="32"></a>
+<a href="https://vk.com/za1amaev"><img src="./assets/icons/vk.svg" alt="VK" width="32" height="32"></a>
 
 </div>
