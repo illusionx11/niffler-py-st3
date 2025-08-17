@@ -2,19 +2,19 @@
 
 <div align="center">
 
-<img src="./assets/icons/python.svg" alt="Python" width="32" height="32">
-<img src="./assets/icons/pytest.svg" alt="Pytest" width="32" height="32">
-<img src="./assets/icons/allure.svg" alt="Allure" width="32" height="32">
-<img src="./assets/icons/docker.svg" alt="Docker" width="32" height="32">
-<img src="./assets/icons/selenium.svg" alt="Selenium" width="32" height="32">
+<img src="./assets/icons/python.svg" alt="Python" width="64" height="64" margin="10px">
+<img src="./assets/icons/pytest.svg" alt="Pytest" width="64" height="64" margin="10px">
+<img src="./assets/icons/allure.svg" alt="Allure" width="64" height="64" margin="10px">
+<img src="./assets/icons/docker.svg" alt="Docker" width="64" height="64" margin="10px">
+<img src="./assets/icons/selenium.svg" alt="Selenium" width="64" height="64" margin="10px">
 
 <br>
 
-<img src="./assets/icons/postgresql.svg" alt="PostgreSQL" width="32" height="32">
-<img src="./assets/icons/kafka.svg" alt="Kafka" width="32" height="32">
-<img src="./assets/icons/grpc.svg" alt="gRPC" width="32" height="32">
-<img src="./assets/icons/soap.png" alt="SOAP" width="32" height="32">
-<img src="./assets/icons/gh-actions.svg" alt="GitHub Actions" width="32" height="32">
+<img src="./assets/icons/postgresql.svg" alt="PostgreSQL" width="64" height="64" margin="10px">
+<img src="./assets/icons/kafka.svg" alt="Kafka" width="64" height="64" margin="10px">
+<img src="./assets/icons/grpc.svg" alt="gRPC" width="64" height="64" margin="10px">
+<img src="./assets/icons/soap.png" alt="SOAP" width="64" height="64" margin="10px">
+<img src="./assets/icons/gh-actions.svg" alt="GitHub Actions" width="64" height="64" margin="10px">
 
 </div>
 
@@ -542,7 +542,7 @@ grep "test_user_registration" logs/logs.txt
 
 **Автор: Заламаев Илья**
 
-<a href="https://t.me/zalamaev"><img src="./assets/icons/telegram.svg" alt="Telegram" width="32" height="32"></a>
-<a href="https://vk.com/za1amaev"><img src="./assets/icons/vk.svg" alt="VK" width="32" height="32"></a>
+<a href="https://t.me/zalamaev"><img src="./assets/icons/telegram.svg" alt="Telegram" width="64" height="64" margin="10px"></a>
+<a href="https://vk.com/za1amaev"><img src="./assets/icons/vk.svg" alt="VK" width="64" height="64" margin="10px"></a>
 
 </div>
