@@ -81,7 +81,7 @@ jobs:
         continue-on-error: true
         with:
           ref: gh-pages
-          path: niffler-python-tests/allure-history
+          path: allure-history
           fetch-depth: 1
 
       - name: Generate Allure Report
@@ -89,7 +89,7 @@ jobs:
         uses: simple-elf/allure-report-action@v1
         with:
           allure_results: niffler-python-tests/allure-results
-          allure_history: niffler-python-tests/allure-history
+          allure_history: allure-history
           allure_report: niffler-python-tests/allure-report
 
       - name: Upload Allure Report as artifact
@@ -106,3 +106,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: niffler-python-tests
+          force_orphan: true
