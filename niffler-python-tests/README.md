@@ -78,21 +78,17 @@ pytest -n 4 --dist=worksteal
 ```mermaid
 graph TB
     A[Тестовые сценарии] --> B[Тестовые клиенты]
-    B --> C[Клиенты]
-    B --> D[Базы данных]
-    B --> E[Kafka]
-    B --> F[gRPC]
-    
+    B --> B1[oauth_client]
+    B --> B2[users_client]
+    B --> B3[spends_client]
+    B --> B4[soap_client]
+    B --> B5[kafka_client]
+    B --> B6[lock_client]
+
     G[Allure Reports] --> H[Отчеты]
     I[Lock Manager] --> J[Синхронизация]
     K[Fixtures] --> L[Тестовые данные]
     
-    C --> C1[oauth_client]
-    C --> C2[users_client]
-    C --> C3[spends_client]
-    C --> C4[soap_client]
-    C --> C5[kafka_client]
-    C --> C6[lock_client]
 ```
 
 ### Ключевые особенности
