@@ -3,12 +3,13 @@ class Epic:
     
 class Feature:
     login = "User authorization"
-    register = "User registration"
+    registration = "User registration"
     spendings = "Spendings"
     categories = "Categories"
     user_profile = "User profile"
-    kafka = "Kafka"
-    
+    userdata = "User data management"
+    currencies = "Currencies"
+
 class Story:
     add_spending = "Add spendings"
     get_spending = "Get spendings"
@@ -24,9 +25,10 @@ class Story:
     
     register_user = "Register user"
     auth_user = "Authorize user"
-    
     update_profile = "Update profile"
-
-    database = "Database usage"
-    errors = "Errors validation"
-    api = "API usage"
+    
+    user_management = "User management"
+    friends_management = "Friends management"
+    
+    calculate_rate = "Calculate rate"
+    get_all_currencies = "Get all currencies"

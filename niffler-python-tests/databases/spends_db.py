@@ -1,5 +1,5 @@
 from typing import Sequence
-from sqlalchemy import create_engine, Engine, event
+from sqlalchemy import create_engine, Engine, event, delete
 from sqlmodel import Session, select
 from models.spend import Spend
 from models.category import Category
@@ -25,12 +25,23 @@ class SpendsDb:
     def get_user_spendings(self, username: str) -> Sequence[Spend]:
         with Session(self.engine) as session:
             statement = select(Spend).options(selectinload(Spend.category)).where(Spend.username == username)
-            return session.exec(statement).all()
+            spends = session.exec(statement).all()
+            logging.info(f"Получен список расходов для пользователя {username}")
+            return spends
+    
+    def get_spending_by_id(self, id: str) -> Spend:
+        with Session(self.engine) as session:
+            statement = select(Spend).where(Spend.id == id)
+            spend = session.exec(statement).first()
+            logging.info(f"Получен расход {spend.id} для пользователя {spend.username}")
+            return spend
     
     def get_user_categories(self, username: str) -> Sequence[Category]:
         with Session(self.engine) as session:
             statement = select(Category).where(Category.username == username)
-            return session.exec(statement).all()
+            categories = session.exec(statement).all()
+            logging.info(f"Получен список категорий для пользователя {username}")
+            return categories
     
     def delete_category(self, category_id: str) -> Category:
         with Session(self.engine) as session:
@@ -39,10 +50,35 @@ class SpendsDb:
                 return None
             session.delete(category)
             session.commit()
+            logging.info(f"Удалена категория {category.name}")
+            return category
+        
+    def delete_category_by_name(self, name: str) -> Category:
+        with Session(self.engine) as session:
+            category = session.exec(select(Category).where(Category.name == name)).first()
+            if not category:
+                return None
+            session.delete(category)
+            session.commit()
+            logging.info(f"Удалена категория {category.name}")
             return category
         
     def delete_user_categories(self, username: str):
         user_categories = self.get_user_categories(username)
         for category in user_categories:
-            logging.info(f"Deleting category {category}")
+            logging.info(f"Удаление категории {category.name}")
             self.delete_category(category.id)
+            
+    def delete_all_spendings(self):
+        with Session(self.engine) as session:
+            statement = delete(Spend)
+            session.exec(statement)
+            session.commit()
+            logging.info(f"Удалены все расходы")
+            
+    def delete_all_categories(self):
+        with Session(self.engine) as session:
+            statement = delete(Category)
+            session.exec(statement)
+            session.commit()
+            logging.info(f"Удалены все категории")

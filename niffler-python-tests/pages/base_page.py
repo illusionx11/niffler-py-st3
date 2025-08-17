@@ -1,6 +1,8 @@
 from selenium.webdriver import Chrome, Firefox, Safari, Edge, ChromiumEdge, Ie
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.common.exceptions import (
+    NoSuchElementException, TimeoutException, ElementNotInteractableException
+)
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 import allure
@@ -25,8 +27,14 @@ class BasePage:
 
     @allure.step("Очистить поле input")
     def clear_input(self, element):
-        element.send_keys(Keys.CONTROL + "a")
-        element.send_keys(Keys.BACKSPACE)
+        WebDriverWait(self.browser, 10).until(
+            EC.element_to_be_clickable(element)
+        )
+        try:
+            element.send_keys(Keys.CONTROL + "a")
+            element.send_keys(Keys.BACKSPACE)
+        except ElementNotInteractableException:
+            self.browser.execute_script("arguments[0].value = '';", element)
     
     @allure.step("Проврека на присутствие элемента")
     def should_be_element(self, locator: tuple[str, str]):
@@ -39,6 +47,9 @@ class BasePage:
     @allure.step("Проверка на наличие объекта")
     def is_element_present(self, by, locator: str) -> bool:
         try:
+            WebDriverWait(self.browser, 10).until(
+                EC.presence_of_element_located((by, locator))
+            )
             self.browser.find_element(by, locator)     
         except NoSuchElementException:
             return False

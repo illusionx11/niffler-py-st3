@@ -1,28 +1,28 @@
 import pytest
 from faker import Faker
 import random
-import string
-import time
 import allure
+import time
 from marks import TestData
 from pages.register_page import RegisterPage
 from utils.errors import ValidationErrors
-from allure_data import Epic, Feature, Story
+from utils.allure_data import Epic, Feature, Story
+from models.user import UserData
 
 pytestmark = [pytest.mark.allure_label(label_type="epic", value=Epic.app_name)]
 
-LONG_USERNAME = "".join(random.choices(string.ascii_letters + string.digits, k=51))
-LONG_PASSWORD = "".join(random.choices(string.ascii_letters + string.digits, k=13))
-faker = Faker()
+LONG_USERNAME = "a" * 51
+LONG_PASSWORD = "a" * 13
 
-@pytest.mark.usefixtures("register_page")
+@pytest.mark.usefixtures("register_page", "faker")
 @pytest.mark.registration
-@allure.feature(Feature.register)
+@pytest.mark.ui
+@allure.feature(Feature.registration)
+@allure.story(Story.register_user)
 class TestRegistration:
     
     @TestData.username(["a", LONG_USERNAME])
-    @allure.story(Story.errors)
-    def test_incorrect_username(self, register_page: RegisterPage, username: str):
+    def test_incorrect_username(self, register_page: RegisterPage, username: str, faker: Faker):
         register_page.open()
         register_page.should_be_register_page()
         password = faker.password(length=8)
@@ -30,12 +30,11 @@ class TestRegistration:
         errors = {
             "username": [ValidationErrors.USERNAME_LENGTH]
         }
-        time.sleep(0.3) # плохая практика, но без этого иногда ловится StaleElementReferenceException
+        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         register_page.should_be_errors_in_validation(errors=errors)
     
     @TestData.password(["a", LONG_PASSWORD])
-    @allure.story(Story.errors)
-    def test_incorrect_password(self, register_page: RegisterPage, password: str):
+    def test_incorrect_password(self, register_page: RegisterPage, password: str, faker: Faker):
         register_page.open()
         register_page.should_be_register_page()
         username = faker.first_name()
@@ -44,12 +43,11 @@ class TestRegistration:
             "password": [ValidationErrors.PASSWORD_LENGTH],
             "password_repeat": [ValidationErrors.PASSWORD_LENGTH]
         }
-        time.sleep(0.3) # плохая практика, но без этого иногда ловится StaleElementReferenceException
+        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         register_page.should_be_errors_in_validation(errors=errors)
     
     @pytest.mark.repeat(2)
-    @allure.story(Story.errors)
-    def test_wrong_passwords(self, register_page: RegisterPage):
+    def test_wrong_passwords(self, register_page: RegisterPage, faker: Faker):
         register_page.open()
         register_page.should_be_register_page()
         username = faker.first_name()
@@ -64,7 +62,7 @@ class TestRegistration:
             "password": [ValidationErrors.DIFFERENT_PASSWORDS],
             "password_repeat": [],
         }
-        time.sleep(0.3) # плохая практика, но без этого иногда ловится StaleElementReferenceException
+        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         register_page.should_be_errors_in_validation(errors=errors)
     
     @TestData.register_data([
@@ -74,8 +72,7 @@ class TestRegistration:
         {"username": "a", "password": "a", "password_repeat": LONG_PASSWORD},
         {"username": LONG_USERNAME, "password": "a", "password_repeat": "a"}
     ])
-    @allure.story(Story.errors)
-    def test_mixed_errors(self, register_page: RegisterPage, register_data: dict[str]):
+    def test_registration_mixed_errors(self, register_page: RegisterPage, register_data: dict[str]):
         register_page.open()
         register_page.should_be_register_page()
         username = register_data["username"]
@@ -95,16 +92,14 @@ class TestRegistration:
         if password != password_repeat:
             errors["password"].append(ValidationErrors.DIFFERENT_PASSWORDS)
         register_page.register_user(username, password, password_repeat)
-        time.sleep(0.3) # плохая практика, но без этого иногда ловится StaleElementReferenceException
+        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         register_page.should_be_errors_in_validation(errors=errors)
     
-    @allure.story(Story.register_user) 
-    def test_correct_registration(self, register_page: RegisterPage):
+    @TestData.new_user([UserData(username="NifflerUser", password="PassWordGo0d")])
+    def test_correct_registration(self, register_page: RegisterPage, new_user: UserData):
         register_page.open()
         register_page.should_be_register_page()
-        username = faker.first_name() + str(random.randint(100, 1000))
-        password = faker.password(length=8)
-        register_page.register_user(username, password)
-        time.sleep(0.3) # плохая практика, но без этого иногда ловится StaleElementReferenceException
+        register_page.register_user(new_user.username, new_user.password)
+        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         register_page.should_be_successful_registration()
         

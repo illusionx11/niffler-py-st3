@@ -52,7 +52,7 @@ class SpendsClient:
                 raise Exception(f"Код {res.status_code} | Text {res.text}")
         except Exception as e:
             logging.error(f"Ошибка при добавлении траты: {str(e)}", exc_info=True)
-            assert False
+            assert False, str(e)
     
     @allure.step("API Получение списка трат")
     def get_all_spendings(self) -> list[SpendGet]:
@@ -70,7 +70,7 @@ class SpendsClient:
                 raise Exception(f"Код {res.status_code} | Text {res.text}")
         except Exception as e:
             logging.error(f"Ошибка при получении всех трат: {str(e)}", exc_info=True)
-            assert False
+            assert False, str(e)
     
     @allure.step("API Получение траты по ID")
     def get_spending_by_id(self, id: str) -> SpendGet:
@@ -84,7 +84,7 @@ class SpendsClient:
                 raise Exception(f"Код {res.status_code} | Text {res.text}")
         except Exception as e:
             logging.error(f"Ошибка при получении траты по ID: {str(e)}", exc_info=True)
-            assert False
+            assert False, str(e)
     
     @allure.step("API Редактирование траты")
     def update_spending(self, data: SpendAdd) -> SpendGet:
@@ -99,7 +99,7 @@ class SpendsClient:
                 raise Exception(f"Код {res.status_code} | Text {res.text}")
         except Exception as e:
             logging.error(f"Ошибка при обновлении траты: {str(e)}", exc_info=True)
-            assert False
+            assert False, str(e)
     
     @allure.step("API Удаление трат")
     def clear_spendings(self, ids: list[str] | None = None):
@@ -129,7 +129,7 @@ class SpendsClient:
             
         except Exception as e:
             logging.error(f"Ошибка при удалении всех трат: {str(e)}", exc_info=True)
-            assert False
+            assert False, str(e)
             
     @allure.step("API Добавление категории")    
     def add_category(self, category_name: str) -> Category | dict:
@@ -149,7 +149,7 @@ class SpendsClient:
                 raise Exception(f"Код {res.status_code} | Text {res.text}")
         except Exception as e:
             logging.error(f"Ошибка при добавлении категории: {str(e)}", exc_info=True)
-            assert False
+            assert False, str(e)
     
     @allure.step("API Получение списка категорий")   
     def get_all_categories(self, exclude_archived: bool = False) -> list[Category]:
@@ -167,7 +167,7 @@ class SpendsClient:
                 raise Exception(f"Код {res.status_code} | Text {res.text}")
         except Exception as e:
             logging.error(f"Ошибка при получении категорий: {str(e)}", exc_info=True)
-            assert False
+            assert False, str(e)
     
     @allure.step("API Получение категории по имени")  
     def get_category_by_name(self, name: str) -> Category:
@@ -194,4 +194,4 @@ class SpendsClient:
                 raise Exception(f"Код {res.status_code} | Text {res.text}")
         except Exception as e:
             logging.error(f"Ошибка при обновлении категории: {str(e)}", exc_info=True)
-            assert False
+            assert False, str(e)

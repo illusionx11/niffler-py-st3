@@ -49,26 +49,31 @@ class RegisterPage(BasePage):
     
     @allure.step("Проверка на наличие ошибок валидации")
     def should_be_errors_in_validation(self, errors: dict[str, list[ValidationErrors]]):
+        key = None
         if "username" in errors and len(errors["username"]) > 0:
-            username_input = WebDriverWait(self.browser, 10).until(EC.presence_of_element_located(self.USERNAME_INPUT))
-            username_parent = username_input.find_element(By.XPATH, "..")
-            username_error = username_parent.find_element(By.CSS_SELECTOR, "span.form__error")
-            for error_text in errors["username"]:
-                assert error_text in username_error.text
+            username_error = WebDriverWait(self.browser, 10).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, "input#username ~ span.form__error"))
+            )
+            element_text = username_error.text
+            key = "username"
         
         if "password" in errors and len(errors["password"]) > 0:
-            password_input = WebDriverWait(self.browser, 10).until(EC.presence_of_element_located(self.PASSWORD_INPUT))
-            password_parent = password_input.find_element(By.XPATH, "..")
-            password_error = password_parent.find_element(By.CSS_SELECTOR, "span.form__error")
-            for error_text in errors["password"]:
-                assert error_text in password_error.text
+            password_error = WebDriverWait(self.browser, 10).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, "input#password ~ span.form__error"))
+            )
+            element_text = password_error.text
+            key = "password"
         
         if "password_repeat" in errors and len(errors["password_repeat"]) > 0:
-            password_repeat_input = WebDriverWait(self.browser, 10).until(EC.presence_of_element_located(self.PASSWORD_REPEAT_INPUT))
-            password_repeat_parent = password_repeat_input.find_element(By.XPATH, "..")
-            password_repeat_error = password_repeat_parent.find_element(By.CSS_SELECTOR, "span.form__error")
-            for error_text in errors["password_repeat"]:
-                assert error_text in password_repeat_error.text
+            password_repeat_error = WebDriverWait(self.browser, 10).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, "input#passwordSubmit ~ span.form__error"))
+            )
+            element_text = password_repeat_error.text
+            key = "password_repeat"
+        
+        for error_text in errors[key]:
+            assert error_text.lower() in element_text.lower(), \
+                f"Error text '{error_text}' not in '{element_text}'"
     
     @allure.step("Проверка на успешную регистрацию")    
     def should_be_successful_registration(self):

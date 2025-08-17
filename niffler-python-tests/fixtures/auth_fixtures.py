@@ -7,7 +7,7 @@ from pages.main_page import MainPage
 import allure
 
 @pytest.fixture(scope="session")
-def auth_front_token(client_envs: ClientEnvs, login_page: LoginPage, main_page: MainPage):
+def auth_front_token(client_envs: ClientEnvs, login_page: LoginPage, main_page: MainPage, cleanup):
     username = client_envs.test_username
     password = client_envs.test_password
     login_page.log_in(username, password)
@@ -18,7 +18,7 @@ def auth_front_token(client_envs: ClientEnvs, login_page: LoginPage, main_page: 
     return token
 
 @pytest.fixture(scope="session", autouse=True)
-def auth_api_token(client_envs: ClientEnvs, auth_client: OAuthClient):
+def auth_api_token(client_envs: ClientEnvs, auth_client: OAuthClient, cleanup):
     username = client_envs.test_username
     password = client_envs.test_password
     auth_client.register(username, password)

@@ -12,3 +12,9 @@ class User(SQLModel, table=True):
     account_non_expired: bool
     account_non_locked: bool
     credentials_non_expired: bool
+    
+class Authority(SQLModel, table=True):
+    metadata = MetaData()
+    id: str = Field(default=None, primary_key=True)
+    user_id: str
+    authority: str
