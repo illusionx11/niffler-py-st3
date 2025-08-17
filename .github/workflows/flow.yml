@@ -72,14 +72,22 @@ jobs:
         with:
           name: pytest-logs
           path: niffler-python-tests/logs
+        
+      - name: Load test report history
+        uses: actions/checkout@v3
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: niffler-python-tests/allure-history
 
       - name: Generate Allure Report
         if: always()
         uses: simple-elf/allure-report-action@v1
         with:
           allure_results: niffler-python-tests/allure-results
+          allure_history: niffler-python-tests/allure-history
           allure_report: niffler-python-tests/allure-report
-          allure_version: 2.15.0
 
       - name: Upload Allure Report as artifact
         if: always()
@@ -94,21 +102,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: niffler-python-tests/allure-report
-          force_orphan: true
-
-      - name: Fix permissions and load test report history
-        if: always()
-        run: |
-          sudo chmod -R 777 allure-history 2>/dev/null || true
-          sudo rm -rf allure-history 2>/dev/null || true
-        continue-on-error: true
-
-      - name: Load test report history for next run
-        if: always()
-        uses: actions/checkout@v3
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: allure-history
-          fetch-depth: 1
+          publish_dir: niffler-python-tests/allure-history

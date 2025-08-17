@@ -147,7 +147,12 @@ class TestSpendings:
         main_page.should_be_errors_in_validation(errors=errors)
     
     @allure.story(Story.search_spending)
-    def test_spendings_search_category(self, main_page: MainPage, spendings_list: list[SpendGet]):
+    def test_spendings_search_category(
+        self, 
+        main_page: MainPage, 
+        spendings_list: list[SpendGet], 
+        delete_spendings_lock
+    ):
         main_page.open()
         main_page.should_be_mainpage()
         query = random.choice(spendings_list).category.name
