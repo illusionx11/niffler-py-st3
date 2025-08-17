@@ -121,6 +121,15 @@ def pytest_collection_modifyitems(items):
             if marker.name != "usefixtures":
                 item.add_marker(pytest.mark.__getattr__(marker.name)(*marker.args, **marker.kwargs))
 
+@pytest.hookimpl(hookwrapper=True, tryfirst=True)
+def pytest_runtest_logreport(report):
+    """
+    Удаляет поле titlePath из результатов тестов для совместимости с Allure CLI.
+    """
+    yield
+    if hasattr(report, 'allure_data') and hasattr(report.allure_data, 'titlePath'):
+        delattr(report.allure_data, 'titlePath')
+
 ################# Arguments ####################
 
 def pytest_addoption(parser):
