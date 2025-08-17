@@ -1,0 +1,1275 @@
+{
+  "uid" : "9667446d737ccdd4",
+  "name" : "Add Incorrect Category[Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]",
+  "fullName" : "tests.ui.test_profile.TestProfileCategories#test_add_incorrect_category",
+  "historyId" : "9a1c48c75484a97101bdd4536581dfef",
+  "time" : {
+    "start" : 1755396911139,
+    "stop" : 1755396925661,
+    "duration" : 14522
+  },
+  "status" : "skipped",
+  "statusMessage" : "XFAIL Появляется сайдбар вместо сообщения под input\n\nselenium.common.exceptions.TimeoutException: Message: \nStacktrace:\n#0 0x564c7468305a <unknown>\n#1 0x564c74122a70 <unknown>\n#2 0x564c74174907 <unknown>\n#3 0x564c74174b01 <unknown>\n#4 0x564c741c2d54 <unknown>\n#5 0x564c7419a40d <unknown>\n#6 0x564c741c014f <unknown>\n#7 0x564c7419a1b3 <unknown>\n#8 0x564c7416659b <unknown>\n#9 0x564c74167971 <unknown>\n#10 0x564c7464822b <unknown>\n#11 0x564c7464bf79 <unknown>\n#12 0x564c7462f309 <unknown>\n#13 0x564c7464cb28 <unknown>\n#14 0x564c74613bef <unknown>\n#15 0x564c746700e8 <unknown>\n#16 0x564c746702c6 <unknown>\n#17 0x564c74682036 <unknown>\n#18 0x7f518e49caa4 <unknown>\n#19 0x7f518e529c3c <unknown>",
+  "statusTrace" : "self = <tests.ui.test_profile.TestProfileCategories object at 0x7f5ff87f6f50>\nprofile_page = <pages.profile_page.ProfilePage object at 0x7f5ff828a900>\nnew_category = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'\n\n    @TestData.new_category([\n        \"a\",\n        pytest.param(\"a\"*51, marks=pytest.mark.xfail(\n            reason=\"Появляется сайдбар вместо сообщения под input\"\n        ))\n    ])\n    @allure.story(Story.add_category)\n    def test_add_incorrect_category(self, profile_page: ProfilePage, new_category: str):\n        profile_page.open()\n        profile_page.should_be_profile_page()\n        profile_page.add_new_category(new_category)\n        errors = {\n            \"category_length\": [ValidationErrors.CATEGORY_LENGTH]\n        }\n        time.sleep(0.3) # Чтобы избежать Stale Element Reference\n>       profile_page.should_be_errors_in_validation(errors=errors)\n\ntests/ui/test_profile.py:112: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \npages/profile_page.py:115: in should_be_errors_in_validation\n    category_error = WebDriverWait(self.browser, 10).until(\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <selenium.webdriver.support.wait.WebDriverWait (session=\"8840ea7f93acb7e95f85fce0a5279380\")>\nmethod = <function presence_of_element_located.<locals>._predicate at 0x7f5ff85105e0>\nmessage = ''\n\n    def until(self, method: Callable[[D], Union[Literal[False], T]], message: str = \"\") -> T:\n        \"\"\"Wait until the method returns a value that is not False.\n    \n        Calls the method provided with the driver as an argument until the\n        return value does not evaluate to ``False``.\n    \n        Parameters:\n        -----------\n        method: callable(WebDriver)\n            - A callable object that takes a WebDriver instance as an argument.\n    \n        message: str\n            - Optional message for :exc:`TimeoutException`\n    \n        Return:\n        -------\n        object: T\n            - The result of the last call to `method`\n    \n        Raises:\n        -------\n        TimeoutException\n            - If 'method' does not return a truthy value within the WebDriverWait\n            object's timeout\n    \n        Example:\n        --------\n        >>> from selenium.webdriver.common.by import By\n        >>> from selenium.webdriver.support.ui import WebDriverWait\n        >>> from selenium.webdriver.support import expected_conditions as EC\n    \n        # Wait until an element is visible on the page\n        >>> wait = WebDriverWait(driver, 10)\n        >>> element = wait.until(EC.visibility_of_element_located((By.ID, \"exampleId\")))\n        >>> print(element.text)\n        \"\"\"\n        screen = None\n        stacktrace = None\n    \n        end_time = time.monotonic() + self._timeout\n        while True:\n            try:\n                value = method(self._driver)\n                if value:\n                    return value\n            except self._ignored_exceptions as exc:\n                screen = getattr(exc, \"screen\", None)\n                stacktrace = getattr(exc, \"stacktrace\", None)\n            if time.monotonic() > end_time:\n                break\n            time.sleep(self._poll)\n>       raise TimeoutException(message, screen, stacktrace)\nE       selenium.common.exceptions.TimeoutException: Message: \nE       Stacktrace:\nE       #0 0x564c7468305a <unknown>\nE       #1 0x564c74122a70 <unknown>\nE       #2 0x564c74174907 <unknown>\nE       #3 0x564c74174b01 <unknown>\nE       #4 0x564c741c2d54 <unknown>\nE       #5 0x564c7419a40d <unknown>\nE       #6 0x564c741c014f <unknown>\nE       #7 0x564c7419a1b3 <unknown>\nE       #8 0x564c7416659b <unknown>\nE       #9 0x564c74167971 <unknown>\nE       #10 0x564c7464822b <unknown>\nE       #11 0x564c7464bf79 <unknown>\nE       #12 0x564c7462f309 <unknown>\nE       #13 0x564c7464cb28 <unknown>\nE       #14 0x564c74613bef <unknown>\nE       #15 0x564c746700e8 <unknown>\nE       #16 0x564c746702c6 <unknown>\nE       #17 0x564c74682036 <unknown>\nE       #18 0x7f518e49caa4 <unknown>\nE       #19 0x7f518e529c3c <unknown>\n\n/opt/hostedtoolcache/Python/3.13.6/x64/lib/python3.13/site-packages/selenium/webdriver/support/wait.py:146: TimeoutException",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "[S] Cleanup",
+    "time" : {
+      "start" : 1755396899327,
+      "stop" : 1755396899829,
+      "duration" : 502
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Auth Client",
+    "time" : {
+      "start" : 1755396899267,
+      "stop" : 1755396899267,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Headless",
+    "time" : {
+      "start" : 1755396900880,
+      "stop" : 1755396900880,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Userdata Db",
+    "time" : {
+      "start" : 1755396899327,
+      "stop" : 1755396899327,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Login Page",
+    "time" : {
+      "start" : 1755396907471,
+      "stop" : 1755396907472,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Client Envs",
+    "time" : {
+      "start" : 1755396899263,
+      "stop" : 1755396899264,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "f9ef096ec76b7f88",
+      "name" : "client_envs.json",
+      "source" : "f9ef096ec76b7f88.json",
+      "type" : "application/json",
+      "size" : 66
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Main Page",
+    "time" : {
+      "start" : 1755396907472,
+      "stop" : 1755396907473,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S]  Session Faker",
+    "time" : {
+      "start" : 1755396899160,
+      "stop" : 1755396899263,
+      "duration" : 103
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Lock Manager",
+    "time" : {
+      "start" : 1755396899267,
+      "stop" : 1755396899268,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Spends Db",
+    "time" : {
+      "start" : 1755396899268,
+      "stop" : 1755396899326,
+      "duration" : 58
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Auth Api Token",
+    "time" : {
+      "start" : 1755396899829,
+      "stop" : 1755396900880,
+      "duration" : 1051
+    },
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1755396899830,
+        "stop" : 1755396900090,
+        "duration" : 260
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1755396899853,
+          "stop" : 1755396899873,
+          "duration" : 20
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "2ca94ab4e9570b8",
+          "name" : "Request",
+          "source" : "2ca94ab4e9570b8.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "7ef7d3532aac342b",
+          "name" : "Response text 200",
+          "source" : "7ef7d3532aac342b.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "79f1c51dbc079fdd",
+          "name" : "Response headers 200",
+          "source" : "79f1c51dbc079fdd.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1755396899894,
+          "stop" : 1755396900090,
+          "duration" : 196
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "aa42e8bb3ab07d31",
+          "name" : "Request",
+          "source" : "aa42e8bb3ab07d31.html",
+          "type" : "text/html",
+          "size" : 2184
+        }, {
+          "uid" : "26a8e673b7f33c1d",
+          "name" : "Response text 400",
+          "source" : "26a8e673b7f33c1d.txt",
+          "type" : "text/plain",
+          "size" : 3800
+        }, {
+          "uid" : "987242fc176a41d3",
+          "name" : "Response headers 400",
+          "source" : "987242fc176a41d3.json",
+          "type" : "application/json",
+          "size" : 553
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'niffler_qa'"
+      }, {
+        "name" : "password",
+        "value" : "'password'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Авторизация и получение токена",
+      "time" : {
+        "start" : 1755396900091,
+        "stop" : 1755396900879,
+        "duration" : 788
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /oauth2/authorize",
+        "time" : {
+          "start" : 1755396900105,
+          "stop" : 1755396900223,
+          "duration" : 118
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "ad5718dcb611f675",
+          "name" : "Request",
+          "source" : "ad5718dcb611f675.html",
+          "type" : "text/html",
+          "size" : 1687
+        }, {
+          "uid" : "79f8ff95615a89f0",
+          "name" : "Response text 200",
+          "source" : "79f8ff95615a89f0.txt",
+          "type" : "text/plain",
+          "size" : 2897
+        }, {
+          "uid" : "32b55d6273a332a3",
+          "name" : "Response headers 200",
+          "source" : "32b55d6273a332a3.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /login",
+        "time" : {
+          "start" : 1755396900234,
+          "stop" : 1755396900728,
+          "duration" : 494
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "7f4257edf02aa05",
+          "name" : "Request",
+          "source" : "7f4257edf02aa05.html",
+          "type" : "text/html",
+          "size" : 1867
+        }, {
+          "uid" : "42470c922fd14799",
+          "name" : "Response text 200",
+          "source" : "42470c922fd14799.txt",
+          "type" : "text/plain",
+          "size" : 417
+        }, {
+          "uid" : "1adb0315b220cf3d",
+          "name" : "Response headers 200",
+          "source" : "1adb0315b220cf3d.json",
+          "type" : "application/json",
+          "size" : 287
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /oauth2/token",
+        "time" : {
+          "start" : 1755396900736,
+          "stop" : 1755396900877,
+          "duration" : 141
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "9763011e3b204e58",
+          "name" : "Request",
+          "source" : "9763011e3b204e58.html",
+          "type" : "text/html",
+          "size" : 2846
+        }, {
+          "uid" : "c3ff539f27c951ff",
+          "name" : "Response json 200",
+          "source" : "c3ff539f27c951ff.json",
+          "type" : "application/json",
+          "size" : 1537
+        }, {
+          "uid" : "ab8ce6af7314396f",
+          "name" : "Response headers 200",
+          "source" : "ab8ce6af7314396f.json",
+          "type" : "application/json",
+          "size" : 440
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'niffler_qa'"
+      }, {
+        "name" : "password",
+        "value" : "'password'"
+      } ],
+      "stepsCount" : 3,
+      "attachmentsCount" : 9,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 7,
+    "attachmentsCount" : 15,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Auth Front Token",
+    "time" : {
+      "start" : 1755396907473,
+      "stop" : 1755396911023,
+      "duration" : 3550
+    },
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Авторизация в сервис",
+      "time" : {
+        "start" : 1755396907473,
+        "stop" : 1755396909200,
+        "duration" : 1727
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "Открыть страницу",
+        "time" : {
+          "start" : 1755396907473,
+          "stop" : 1755396908198,
+          "duration" : 725
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : false
+      }, {
+        "name" : "Проверка на валидность страницы авторизации",
+        "time" : {
+          "start" : 1755396908198,
+          "stop" : 1755396908838,
+          "duration" : 640
+        },
+        "status" : "passed",
+        "steps" : [ {
+          "name" : "Проверка на наличие заголовка авторизации",
+          "time" : {
+            "start" : 1755396908198,
+            "stop" : 1755396908731,
+            "duration" : 533
+          },
+          "status" : "passed",
+          "steps" : [ ],
+          "attachments" : [ ],
+          "parameters" : [ ],
+          "stepsCount" : 0,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false,
+          "hasContent" : false
+        }, {
+          "name" : "Проврека на присутствие элемента",
+          "time" : {
+            "start" : 1755396908731,
+            "stop" : 1755396908792,
+            "duration" : 61
+          },
+          "status" : "passed",
+          "steps" : [ {
+            "name" : "Проверка на наличие объекта",
+            "time" : {
+              "start" : 1755396908731,
+              "stop" : 1755396908792,
+              "duration" : 61
+            },
+            "status" : "passed",
+            "steps" : [ ],
+            "attachments" : [ ],
+            "parameters" : [ {
+              "name" : "by",
+              "value" : "'css selector'"
+            }, {
+              "name" : "locator",
+              "value" : "'form[action='/login']'"
+            } ],
+            "stepsCount" : 0,
+            "attachmentsCount" : 0,
+            "shouldDisplayMessage" : false,
+            "hasContent" : true
+          } ],
+          "attachments" : [ ],
+          "parameters" : [ {
+            "name" : "locator",
+            "value" : "('css selector', \"form[action='/login']\")"
+          } ],
+          "stepsCount" : 1,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false,
+          "hasContent" : true
+        }, {
+          "name" : "Проврека на присутствие элемента",
+          "time" : {
+            "start" : 1755396908792,
+            "stop" : 1755396908833,
+            "duration" : 41
+          },
+          "status" : "passed",
+          "steps" : [ {
+            "name" : "Проверка на наличие объекта",
+            "time" : {
+              "start" : 1755396908792,
+              "stop" : 1755396908833,
+              "duration" : 41
+            },
+            "status" : "passed",
+            "steps" : [ ],
+            "attachments" : [ ],
+            "parameters" : [ {
+              "name" : "by",
+              "value" : "'css selector'"
+            }, {
+              "name" : "locator",
+              "value" : "'button.form__submit'"
+            } ],
+            "stepsCount" : 0,
+            "attachmentsCount" : 0,
+            "shouldDisplayMessage" : false,
+            "hasContent" : true
+          } ],
+          "attachments" : [ ],
+          "parameters" : [ {
+            "name" : "locator",
+            "value" : "('css selector', 'button.form__submit')"
+          } ],
+          "stepsCount" : 1,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false,
+          "hasContent" : true
+        }, {
+          "name" : "Проверка на наличие строки в URL",
+          "time" : {
+            "start" : 1755396908833,
+            "stop" : 1755396908838,
+            "duration" : 5
+          },
+          "status" : "passed",
+          "steps" : [ ],
+          "attachments" : [ ],
+          "parameters" : [ {
+            "name" : "arg",
+            "value" : "'login'"
+          } ],
+          "stepsCount" : 0,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false,
+          "hasContent" : true
+        } ],
+        "attachments" : [ ],
+        "parameters" : [ ],
+        "stepsCount" : 6,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'niffler_qa'"
+      }, {
+        "name" : "password",
+        "value" : "'password'"
+      } ],
+      "stepsCount" : 8,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Проверка на валидность главной страницы",
+      "time" : {
+        "start" : 1755396909200,
+        "stop" : 1755396911001,
+        "duration" : 1801
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "Проврека на присутствие элемента",
+        "time" : {
+          "start" : 1755396909200,
+          "stop" : 1755396910870,
+          "duration" : 1670
+        },
+        "status" : "passed",
+        "steps" : [ {
+          "name" : "Проверка на наличие объекта",
+          "time" : {
+            "start" : 1755396909200,
+            "stop" : 1755396910870,
+            "duration" : 1670
+          },
+          "status" : "passed",
+          "steps" : [ ],
+          "attachments" : [ ],
+          "parameters" : [ {
+            "name" : "by",
+            "value" : "'css selector'"
+          }, {
+            "name" : "locator",
+            "value" : "'div#spendings'"
+          } ],
+          "stepsCount" : 0,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false,
+          "hasContent" : true
+        } ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "locator",
+          "value" : "('css selector', 'div#spendings')"
+        } ],
+        "stepsCount" : 1,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Проврека на присутствие элемента",
+        "time" : {
+          "start" : 1755396910870,
+          "stop" : 1755396910986,
+          "duration" : 116
+        },
+        "status" : "passed",
+        "steps" : [ {
+          "name" : "Проверка на наличие объекта",
+          "time" : {
+            "start" : 1755396910870,
+            "stop" : 1755396910986,
+            "duration" : 116
+          },
+          "status" : "passed",
+          "steps" : [ ],
+          "attachments" : [ ],
+          "parameters" : [ {
+            "name" : "by",
+            "value" : "'css selector'"
+          }, {
+            "name" : "locator",
+            "value" : "'div#stat'"
+          } ],
+          "stepsCount" : 0,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false,
+          "hasContent" : true
+        } ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "locator",
+          "value" : "('css selector', 'div#stat')"
+        } ],
+        "stepsCount" : 1,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Проверка на наличие строки в URL",
+        "time" : {
+          "start" : 1755396910986,
+          "stop" : 1755396911001,
+          "duration" : 15
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "arg",
+          "value" : "'main'"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 5,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Получение access token через браузер",
+      "time" : {
+        "start" : 1755396911002,
+        "stop" : 1755396911023,
+        "duration" : 21
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    } ],
+    "attachments" : [ {
+      "uid" : "7dda3b0a0bafc00b",
+      "name" : "front_token.txt",
+      "source" : "7dda3b0a0bafc00b.txt",
+      "type" : "text/plain",
+      "size" : 672
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 16,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Server Envs",
+    "time" : {
+      "start" : 1755396899264,
+      "stop" : 1755396899267,
+      "duration" : 3
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "516f825a036635a3",
+      "name" : "server_envs.json",
+      "source" : "516f825a036635a3.json",
+      "type" : "application/json",
+      "size" : 582
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Profile Page",
+    "time" : {
+      "start" : 1755396911023,
+      "stop" : 1755396911030,
+      "duration" : 7
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Spends Client",
+    "time" : {
+      "start" : 1755396911035,
+      "stop" : 1755396911036,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[F] New Category",
+    "time" : {
+      "start" : 1755396911137,
+      "stop" : 1755396911137,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[F] All Categories",
+    "time" : {
+      "start" : 1755396911036,
+      "stop" : 1755396911137,
+      "duration" : 101
+    },
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "API Получение списка категорий",
+      "time" : {
+        "start" : 1755396911036,
+        "stop" : 1755396911137,
+        "duration" : 101
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /api/categories/all",
+        "time" : {
+          "start" : 1755396911053,
+          "stop" : 1755396911116,
+          "duration" : 63
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "7bf3104e0db7ed0e",
+          "name" : "Request",
+          "source" : "7bf3104e0db7ed0e.html",
+          "type" : "text/html",
+          "size" : 3645
+        }, {
+          "uid" : "c7e0660930a1f2cd",
+          "name" : "Response json 200",
+          "source" : "c7e0660930a1f2cd.json",
+          "type" : "application/json",
+          "size" : 970
+        }, {
+          "uid" : "5c405349af47079d",
+          "name" : "Response headers 200",
+          "source" : "5c405349af47079d.json",
+          "type" : "application/json",
+          "size" : 490
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "exclude_archived",
+        "value" : "False"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 2,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Auth Db",
+    "time" : {
+      "start" : 1755396899327,
+      "stop" : 1755396899327,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Browser",
+    "time" : {
+      "start" : 1755396900880,
+      "stop" : 1755396907470,
+      "duration" : 6590
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "testStage" : {
+    "status" : "skipped",
+    "statusMessage" : "XFAIL Появляется сайдбар вместо сообщения под input\n\nselenium.common.exceptions.TimeoutException: Message: \nStacktrace:\n#0 0x564c7468305a <unknown>\n#1 0x564c74122a70 <unknown>\n#2 0x564c74174907 <unknown>\n#3 0x564c74174b01 <unknown>\n#4 0x564c741c2d54 <unknown>\n#5 0x564c7419a40d <unknown>\n#6 0x564c741c014f <unknown>\n#7 0x564c7419a1b3 <unknown>\n#8 0x564c7416659b <unknown>\n#9 0x564c74167971 <unknown>\n#10 0x564c7464822b <unknown>\n#11 0x564c7464bf79 <unknown>\n#12 0x564c7462f309 <unknown>\n#13 0x564c7464cb28 <unknown>\n#14 0x564c74613bef <unknown>\n#15 0x564c746700e8 <unknown>\n#16 0x564c746702c6 <unknown>\n#17 0x564c74682036 <unknown>\n#18 0x7f518e49caa4 <unknown>\n#19 0x7f518e529c3c <unknown>",
+    "statusTrace" : "self = <tests.ui.test_profile.TestProfileCategories object at 0x7f5ff87f6f50>\nprofile_page = <pages.profile_page.ProfilePage object at 0x7f5ff828a900>\nnew_category = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'\n\n    @TestData.new_category([\n        \"a\",\n        pytest.param(\"a\"*51, marks=pytest.mark.xfail(\n            reason=\"Появляется сайдбар вместо сообщения под input\"\n        ))\n    ])\n    @allure.story(Story.add_category)\n    def test_add_incorrect_category(self, profile_page: ProfilePage, new_category: str):\n        profile_page.open()\n        profile_page.should_be_profile_page()\n        profile_page.add_new_category(new_category)\n        errors = {\n            \"category_length\": [ValidationErrors.CATEGORY_LENGTH]\n        }\n        time.sleep(0.3) # Чтобы избежать Stale Element Reference\n>       profile_page.should_be_errors_in_validation(errors=errors)\n\ntests/ui/test_profile.py:112: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \npages/profile_page.py:115: in should_be_errors_in_validation\n    category_error = WebDriverWait(self.browser, 10).until(\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <selenium.webdriver.support.wait.WebDriverWait (session=\"8840ea7f93acb7e95f85fce0a5279380\")>\nmethod = <function presence_of_element_located.<locals>._predicate at 0x7f5ff85105e0>\nmessage = ''\n\n    def until(self, method: Callable[[D], Union[Literal[False], T]], message: str = \"\") -> T:\n        \"\"\"Wait until the method returns a value that is not False.\n    \n        Calls the method provided with the driver as an argument until the\n        return value does not evaluate to ``False``.\n    \n        Parameters:\n        -----------\n        method: callable(WebDriver)\n            - A callable object that takes a WebDriver instance as an argument.\n    \n        message: str\n            - Optional message for :exc:`TimeoutException`\n    \n        Return:\n        -------\n        object: T\n            - The result of the last call to `method`\n    \n        Raises:\n        -------\n        TimeoutException\n            - If 'method' does not return a truthy value within the WebDriverWait\n            object's timeout\n    \n        Example:\n        --------\n        >>> from selenium.webdriver.common.by import By\n        >>> from selenium.webdriver.support.ui import WebDriverWait\n        >>> from selenium.webdriver.support import expected_conditions as EC\n    \n        # Wait until an element is visible on the page\n        >>> wait = WebDriverWait(driver, 10)\n        >>> element = wait.until(EC.visibility_of_element_located((By.ID, \"exampleId\")))\n        >>> print(element.text)\n        \"\"\"\n        screen = None\n        stacktrace = None\n    \n        end_time = time.monotonic() + self._timeout\n        while True:\n            try:\n                value = method(self._driver)\n                if value:\n                    return value\n            except self._ignored_exceptions as exc:\n                screen = getattr(exc, \"screen\", None)\n                stacktrace = getattr(exc, \"stacktrace\", None)\n            if time.monotonic() > end_time:\n                break\n            time.sleep(self._poll)\n>       raise TimeoutException(message, screen, stacktrace)\nE       selenium.common.exceptions.TimeoutException: Message: \nE       Stacktrace:\nE       #0 0x564c7468305a <unknown>\nE       #1 0x564c74122a70 <unknown>\nE       #2 0x564c74174907 <unknown>\nE       #3 0x564c74174b01 <unknown>\nE       #4 0x564c741c2d54 <unknown>\nE       #5 0x564c7419a40d <unknown>\nE       #6 0x564c741c014f <unknown>\nE       #7 0x564c7419a1b3 <unknown>\nE       #8 0x564c7416659b <unknown>\nE       #9 0x564c74167971 <unknown>\nE       #10 0x564c7464822b <unknown>\nE       #11 0x564c7464bf79 <unknown>\nE       #12 0x564c7462f309 <unknown>\nE       #13 0x564c7464cb28 <unknown>\nE       #14 0x564c74613bef <unknown>\nE       #15 0x564c746700e8 <unknown>\nE       #16 0x564c746702c6 <unknown>\nE       #17 0x564c74682036 <unknown>\nE       #18 0x7f518e49caa4 <unknown>\nE       #19 0x7f518e529c3c <unknown>\n\n/opt/hostedtoolcache/Python/3.13.6/x64/lib/python3.13/site-packages/selenium/webdriver/support/wait.py:146: TimeoutException",
+    "steps" : [ {
+      "name" : "Открыть страницу",
+      "time" : {
+        "start" : 1755396911140,
+        "stop" : 1755396911293,
+        "duration" : 153
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Проверка на валидность страницы профиля",
+      "time" : {
+        "start" : 1755396911293,
+        "stop" : 1755396911828,
+        "duration" : 535
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "Проврека на присутствие элемента",
+        "time" : {
+          "start" : 1755396911293,
+          "stop" : 1755396911769,
+          "duration" : 476
+        },
+        "status" : "passed",
+        "steps" : [ {
+          "name" : "Проверка на наличие объекта",
+          "time" : {
+            "start" : 1755396911294,
+            "stop" : 1755396911769,
+            "duration" : 475
+          },
+          "status" : "passed",
+          "steps" : [ ],
+          "attachments" : [ ],
+          "parameters" : [ {
+            "name" : "by",
+            "value" : "'xpath'"
+          }, {
+            "name" : "locator",
+            "value" : "'//h2[contains(text(), 'Profile')]'"
+          } ],
+          "stepsCount" : 0,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false,
+          "hasContent" : true
+        } ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "locator",
+          "value" : "('xpath', \"//h2[contains(text(), 'Profile')]\")"
+        } ],
+        "stepsCount" : 1,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Проврека на присутствие элемента",
+        "time" : {
+          "start" : 1755396911770,
+          "stop" : 1755396911804,
+          "duration" : 34
+        },
+        "status" : "passed",
+        "steps" : [ {
+          "name" : "Проверка на наличие объекта",
+          "time" : {
+            "start" : 1755396911770,
+            "stop" : 1755396911804,
+            "duration" : 34
+          },
+          "status" : "passed",
+          "steps" : [ ],
+          "attachments" : [ ],
+          "parameters" : [ {
+            "name" : "by",
+            "value" : "'xpath'"
+          }, {
+            "name" : "locator",
+            "value" : "'//h2[contains(text(), 'Categories')]'"
+          } ],
+          "stepsCount" : 0,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false,
+          "hasContent" : true
+        } ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "locator",
+          "value" : "('xpath', \"//h2[contains(text(), 'Categories')]\")"
+        } ],
+        "stepsCount" : 1,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Проврека на присутствие элемента",
+        "time" : {
+          "start" : 1755396911805,
+          "stop" : 1755396911824,
+          "duration" : 19
+        },
+        "status" : "passed",
+        "steps" : [ {
+          "name" : "Проверка на наличие объекта",
+          "time" : {
+            "start" : 1755396911805,
+            "stop" : 1755396911824,
+            "duration" : 19
+          },
+          "status" : "passed",
+          "steps" : [ ],
+          "attachments" : [ ],
+          "parameters" : [ {
+            "name" : "by",
+            "value" : "'css selector'"
+          }, {
+            "name" : "locator",
+            "value" : "'input[placeholder='Add new category']'"
+          } ],
+          "stepsCount" : 0,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false,
+          "hasContent" : true
+        } ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "locator",
+          "value" : "('css selector', \"input[placeholder='Add new category']\")"
+        } ],
+        "stepsCount" : 1,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Проверка на наличие строки в URL",
+        "time" : {
+          "start" : 1755396911825,
+          "stop" : 1755396911828,
+          "duration" : 3
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "arg",
+          "value" : "'profile'"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 7,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Добавление новой категории",
+      "time" : {
+        "start" : 1755396911828,
+        "stop" : 1755396912166,
+        "duration" : 338
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "Очистить поле input",
+        "time" : {
+          "start" : 1755396911835,
+          "stop" : 1755396911967,
+          "duration" : 132
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "element",
+          "value" : "<selenium.webdriver.remote.webelement.WebElement (session=\"8840ea7f93acb7e95f85fce0a5279380\", element=\"f.B50C1E1014C8F4658DD2E22BB6644AD7.d.AC46F4832180F13BE984AFEDBE990A77.e.58\")>"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "name",
+        "value" : "'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Проверка на наличие ошибок валидации",
+      "time" : {
+        "start" : 1755396912466,
+        "stop" : 1755396925659,
+        "duration" : 13193
+      },
+      "status" : "broken",
+      "statusMessage" : "selenium.common.exceptions.TimeoutException: Message: \nStacktrace:\n#0 0x564c7468305a <unknown>\n#1 0x564c74122a70 <unknown>\n#2 0x564c74174907 <unknown>\n#3 0x564c74174b01 <unknown>\n#4 0x564c741c2d54 <unknown>\n#5 0x564c7419a40d <unknown>\n#6 0x564c741c014f <unknown>\n#7 0x564c7419a1b3 <unknown>\n#8 0x564c7416659b <unknown>\n#9 0x564c74167971 <unknown>\n#10 0x564c7464822b <unknown>\n#11 0x564c7464bf79 <unknown>\n#12 0x564c7462f309 <unknown>\n#13 0x564c7464cb28 <unknown>\n#14 0x564c74613bef <unknown>\n#15 0x564c746700e8 <unknown>\n#16 0x564c746702c6 <unknown>\n#17 0x564c74682036 <unknown>\n#18 0x7f518e49caa4 <unknown>\n#19 0x7f518e529c3c <unknown>\n\n",
+      "statusTrace" : "  File \"/opt/hostedtoolcache/Python/3.13.6/x64/lib/python3.13/site-packages/allure_commons/_allure.py\", line 202, in impl\n    return func(*a, **kw)\n  File \"/home/runner/work/niffler-py-st3/niffler-py-st3/niffler-python-tests/pages/profile_page.py\", line 115, in should_be_errors_in_validation\n    category_error = WebDriverWait(self.browser, 10).until(\n        EC.presence_of_element_located(\n            (By.CSS_SELECTOR, \"input#category ~ span.input__helper-text\")\n        )\n    )\n  File \"/opt/hostedtoolcache/Python/3.13.6/x64/lib/python3.13/site-packages/selenium/webdriver/support/wait.py\", line 146, in until\n    raise TimeoutException(message, screen, stacktrace)\n",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "errors",
+        "value" : "{'category_length': ['is from 2 to 50 symbols']}"
+      }, {
+        "name" : "name",
+        "value" : "None"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "f00fc24a6ca3ee68",
+      "name" : "log",
+      "source" : "f00fc24a6ca3ee68.txt",
+      "type" : "text/plain",
+      "size" : 1272
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 12,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ {
+    "name" : "cleanup::0",
+    "time" : {
+      "start" : 1755396970724,
+      "stop" : 1755396970724,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "auth_client::0",
+    "time" : {
+      "start" : 1755396970725,
+      "stop" : 1755396970726,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "auth_api_token::0",
+    "time" : {
+      "start" : 1755396970723,
+      "stop" : 1755396970723,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "spends_client::0",
+    "time" : {
+      "start" : 1755396970610,
+      "stop" : 1755396970610,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "new_category::0",
+    "time" : {
+      "start" : 1755396925771,
+      "stop" : 1755396925791,
+      "duration" : 20
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "3a1ece4118089dd1",
+      "name" : "select niffler-spend",
+      "source" : "3a1ece4118089dd1.txt",
+      "type" : "text/plain",
+      "size" : 27
+    }, {
+      "uid" : "a58e0a724148f56f",
+      "name" : "select niffler-spend",
+      "source" : "a58e0a724148f56f.txt",
+      "type" : "text/plain",
+      "size" : 23
+    }, {
+      "uid" : "4b54d62dde932c7a",
+      "name" : "show niffler-spend",
+      "source" : "4b54d62dde932c7a.txt",
+      "type" : "text/plain",
+      "size" : 32
+    }, {
+      "uid" : "863af641b0e49afe",
+      "name" : "SELECT niffler-spend",
+      "source" : "863af641b0e49afe.txt",
+      "type" : "text/plain",
+      "size" : 161
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 4,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "browser::0",
+    "time" : {
+      "start" : 1755396970612,
+      "stop" : 1755396970722,
+      "duration" : 110
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "story",
+    "value" : "Add categories"
+  }, {
+    "name" : "feature",
+    "value" : "Categories"
+  }, {
+    "name" : "tag",
+    "value" : "@pytest.mark.xfail(reason='Появляется сайдбар вместо сообщения под input')"
+  }, {
+    "name" : "tag",
+    "value" : "categories"
+  }, {
+    "name" : "tag",
+    "value" : "profile"
+  }, {
+    "name" : "tag",
+    "value" : "ui"
+  }, {
+    "name" : "host",
+    "value" : "pkrvmubgrv54qmi"
+  }, {
+    "name" : "thread",
+    "value" : "6967-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.ui.test_profile"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "new_category",
+    "value" : "'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ "@pytest.mark.xfail(reason='Появляется сайдбар вместо сообщения под input')", "ui", "profile", "categories" ]
+  },
+  "source" : "9667446d737ccdd4.json",
+  "parameterValues" : [ "'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'" ]
+}

@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+    <script src="https://yastatic.net/jquery/2.2.3/jquery.min.js" crossorigin="anonymous"></script>
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://yastatic.net/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/bash.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/json.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/xml.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <pre><code>POST to http://gateway.niffler.dc:8090/api/spends/add</code></pre>
+</div>
+
+
+    <h4>Body</h4>
+    <div>
+        <pre><code>b'{"id": null, "amount": 162.23, "description": "\\u0423\\u043d\\u0438\\u043a\\u0430\\u043b\\u044c\\u043d\\u044b\\u0435 \\u043a\\u0440\\u0443\\u0436\\u043a\\u0438", "category": {"id": null, "name": "\\u0423\\u043d\\u0438\\u043a\\u0430\\u043b\\u044c\\u043d\\u043e\\u0435", "username": null, "archived": false}, "spendDate": "2015-10-13T22:05:31.000+00:00", "currency": "RUB", "username": "niffler_qa"}'</code></pre>
+    </div>
+
+
+
+
+    <h4>Headers</h4>
+    <div>
+    
+        <div>
+            <pre><code><b>User-Agent</b>: python-requests/2.32.3</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept-Encoding</b>: gzip, deflate</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Connection</b>: keep-alive</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Type</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Authorization</b>: Bearer eyJraWQiOiI0Y2JkZTE1Ny00NjU0LTRjZDAtYmNmYS1hYWJjNzZjZGRjNmMiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJuaWZmbGVyX3FhIiwiYXVkIjoiY2xpZW50IiwibmJmIjoxNzU1Mzk2OTAwLCJzY29wZSI6WyJvcGVuaWQiXSwiaXNzIjoiaHR0cDovL2F1dGgubmlmZmxlci5kYzo5MDAwIiwiZXhwIjoxNzU1NDAwNTAwLCJpYXQiOjE3NTUzOTY5MDAsImp0aSI6IjFmNTRlMDdkLTFjYjgtNGI3Zi1hMDc1LTE3NmRkMjIxNDBmZiJ9.Oy_aOLph4RP5JR4s7UsvKN3K918HQLNG5RHd0nk_iw0BefWgzT-sCwraKYfQZ-rLUJFkt5uVQVEI5wO36-eAVpTraq169t5Zbv7ew2hsDXWEXB0e9nkV5lXZm4oFiZwstcbNZt0u4smkpaOY8pjGPjifgd5MQha6bFZUOWsfHhdZjDSELmp1-V3Kn0AsegMTnn0EbT_X5kbrPtkzBqyibsUTWB_qW6lTpMhGqQAWaqXkGheq2Bkhiz9-cTse3HJ0lWxuRnpksmaMGJHjJTsXc2PnSuipVyNZzUCQ81pdUbLtX2nvmXX59etyAh9lmQipqVKEE-zUHxY5nROndQOW9g</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Length</b>: 372</code></pre>
+        </div>
+    
+    </div>
+
+
+
+
+
+
+    <h4>Curl</h4>
+    <div>
+        <pre><code>curl -X POST -H 'Accept: application/json' -H 'Accept-Encoding: gzip, deflate' -H 'Authorization: Bearer eyJraWQiOiI0Y2JkZTE1Ny00NjU0LTRjZDAtYmNmYS1hYWJjNzZjZGRjNmMiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJuaWZmbGVyX3FhIiwiYXVkIjoiY2xpZW50IiwibmJmIjoxNzU1Mzk2OTAwLCJzY29wZSI6WyJvcGVuaWQiXSwiaXNzIjoiaHR0cDovL2F1dGgubmlmZmxlci5kYzo5MDAwIiwiZXhwIjoxNzU1NDAwNTAwLCJpYXQiOjE3NTUzOTY5MDAsImp0aSI6IjFmNTRlMDdkLTFjYjgtNGI3Zi1hMDc1LTE3NmRkMjIxNDBmZiJ9.Oy_aOLph4RP5JR4s7UsvKN3K918HQLNG5RHd0nk_iw0BefWgzT-sCwraKYfQZ-rLUJFkt5uVQVEI5wO36-eAVpTraq169t5Zbv7ew2hsDXWEXB0e9nkV5lXZm4oFiZwstcbNZt0u4smkpaOY8pjGPjifgd5MQha6bFZUOWsfHhdZjDSELmp1-V3Kn0AsegMTnn0EbT_X5kbrPtkzBqyibsUTWB_qW6lTpMhGqQAWaqXkGheq2Bkhiz9-cTse3HJ0lWxuRnpksmaMGJHjJTsXc2PnSuipVyNZzUCQ81pdUbLtX2nvmXX59etyAh9lmQipqVKEE-zUHxY5nROndQOW9g' -H 'Connection: keep-alive' -H 'Content-Length: 372' -H 'Content-Type: application/json' -H 'User-Agent: python-requests/2.32.3' -d '{"id": null, "amount": 162.23, "description": "\u0423\u043d\u0438\u043a\u0430\u043b\u044c\u043d\u044b\u0435 \u043a\u0440\u0443\u0436\u043a\u0438", "category": {"id": null, "name": "\u0423\u043d\u0438\u043a\u0430\u043b\u044c\u043d\u043e\u0435", "username": null, "archived": false}, "spendDate": "2015-10-13T22:05:31.000+00:00", "currency": "RUB", "username": "niffler_qa"}' http://gateway.niffler.dc:8090/api/spends/add</code></pre>
+    </div>
+
+</body>
+</html>
