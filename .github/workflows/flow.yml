@@ -66,12 +66,6 @@ jobs:
         working-directory: ./niffler-python-tests
         timeout-minutes: 10
         run: pytest -n 4 --dist=worksteal
-
-      - name: Clean Allure results
-        working-directory: ./niffler-python-tests
-        run: |
-          find allure-results -name "*-result.json" -exec sed -i 's/"titlePath":[^,}]*[,}]/,/g' {} \;
-          find allure-results -name "*-result.json" -exec sed -i 's/,"titlePath":[^,}]*//g' {} \;
       
       - name: Upload Logs as artifact
         uses: actions/upload-artifact@v4
