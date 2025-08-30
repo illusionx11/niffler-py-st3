@@ -3,7 +3,6 @@ import random
 import logging
 import random
 import allure
-import time
 from utils.allure_data import Epic, Feature, Story
 from models.spend import SpendGet, SpendAdd
 from models.category import CategoryAdd
@@ -54,7 +53,6 @@ class TestSpendings:
         main_page.open()
         main_page.should_be_mainpage()
         main_page.add_new_spending(spending_data)
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         main_page.should_be_new_spending_in_table(spending_data)
     
     @allure.story(Story.delete_spending)
@@ -71,7 +69,6 @@ class TestSpendings:
         index = random.randint(0, max_index)
         logging.info(f"Удаляем расход {spendings_list[index]}")
         main_page.remove_spendings(indexes=[index])
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         main_page.should_not_be_deleted_spendings(spendings_list, indexes=[index])
     
     @allure.story(Story.delete_spending)
@@ -87,8 +84,7 @@ class TestSpendings:
         max_index = len(spendings_list) - 1 if len(spendings_list) <= 10 else 9
         indexes = random.sample(range(0, max_index), 2)
         logging.info(f"Удаляем расходы:\n{spendings_list[indexes[0]]}\nи\n{spendings_list[indexes[1]]}")
-        main_page.remove_spendings(indexes)
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
+        main_page.remove_spendings(indexes) 
         main_page.should_not_be_deleted_spendings(spendings_list, indexes)
     
     @allure.story(Story.add_spending)
@@ -106,7 +102,6 @@ class TestSpendings:
         errors = {
             "amount": [ValidationErrors.LOW_AMOUNT]
         }
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         main_page.should_be_errors_in_validation(errors=errors)
     
     @allure.story(Story.add_spending)
@@ -124,7 +119,6 @@ class TestSpendings:
         errors = {
             "category": [ValidationErrors.NO_CATEGORY]
         }
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         main_page.should_be_errors_in_validation(errors=errors)
     
     @allure.story(Story.add_spending)
@@ -143,7 +137,6 @@ class TestSpendings:
             "amount": [ValidationErrors.LOW_AMOUNT],
             "category": [ValidationErrors.NO_CATEGORY]
         }
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         main_page.should_be_errors_in_validation(errors=errors)
     
     @allure.story(Story.search_spending)
@@ -158,7 +151,6 @@ class TestSpendings:
         query = random.choice(spendings_list).category.name
         valid_spendings = [s for s in spendings_list if s.category.name == query]
         main_page.make_search(query)
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         main_page.should_be_exact_search_results(query, valid_spendings=valid_spendings)
     
     @allure.story(Story.search_spending)
@@ -168,7 +160,6 @@ class TestSpendings:
         query = random.choice(spendings_list).description
         valid_spendings = [s for s in spendings_list if s.description == query]
         main_page.make_search(query)
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         main_page.should_be_exact_search_results(query, valid_spendings=valid_spendings)
     
     @allure.story(Story.search_spending)
@@ -177,5 +168,4 @@ class TestSpendings:
         main_page.open()
         main_page.should_be_mainpage()
         main_page.make_search(query)
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         main_page.should_be_no_search_results()

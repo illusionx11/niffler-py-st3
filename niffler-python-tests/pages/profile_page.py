@@ -1,13 +1,9 @@
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import StaleElementReferenceException
 from utils.errors import ValidationErrors
-from .base_page import BasePage
+from pages.base_page import BasePage
 import allure
 import time
-import logging
 
 class ProfilePage(BasePage):
     
@@ -49,20 +45,13 @@ class ProfilePage(BasePage):
     @allure.step("Проверка наличия новой активной категории")
     def should_be_new_active_category(self, name: str):
         def check_category_present():
-            try:
-                all_categories = self.browser.find_elements(*self.ALL_CATEGORY_NAMES)
-                active_categories = [c for c in all_categories if c.get_attribute("tabindex") == "0"]
-                category_names = []
-                for c in active_categories:
-                    try:
-                        category_names.append(c.text)
-                    except StaleElementReferenceException:
-                        return False
-                return name in category_names
-            except StaleElementReferenceException:
-                return False
-        
-        WebDriverWait(self.browser, 10).until(lambda driver: check_category_present())
+            active_categories = self.get_all_elements_presence_with_attributes_safe(
+                self.ALL_CATEGORY_NAMES, "tabindex", "0"
+            )
+            category_names = []
+            for c in active_categories:
+                category_names.append(c.text)
+            return name in category_names
         
         max_attempts = 3
         for attempt in range(max_attempts):
@@ -75,47 +64,38 @@ class ProfilePage(BasePage):
     
     @allure.step("Изменение имени профиля")
     def set_new_profile_name(self, name: str):
-        name_input = self.browser.find_element(*self.PROFILE_NAME_INPUT)
+        name_input = self.get_element_presence_safe(self.PROFILE_NAME_INPUT)
         self.clear_input(name_input)
         name_input.send_keys(name)
         self.browser.find_element(*self.SUBMIT_PROFILE_DATA_BTN).click()
     
     @allure.step("Проверка наличия нового имени профиля") 
     def should_be_new_profile_name(self, name: str):
-        WebDriverWait(self.browser, 10).until(
-            EC.presence_of_element_located(self.PROFILE_NAME_INPUT)
-        )
-        name_label = self.browser.find_element(*self.PROFILE_NAME_INPUT)
-        assert name == name_label.get_attribute("value"), \
-            f"Имя профиля '{name}' не соответствует '{name_label.get_attribute('value')}'"
+        name_input = self.get_element_presence_safe(self.PROFILE_NAME_INPUT)
+        assert name == name_input.get_attribute("value"), \
+            f"Имя профиля '{name}' не соответствует '{name_input.get_attribute('value')}'"
     
     @allure.step("Проверка на наличие ошибок валидации")
     def should_be_errors_in_validation(self, errors: dict[str, list[ValidationErrors]], name: str = None):
         key = None
         if "profile_name" in errors and len(errors["profile_name"]) > 0:
-            profile_name_error = WebDriverWait(self.browser, 10).until(
-                EC.presence_of_element_located(
-                    (By.CSS_SELECTOR, "input#name ~ span.input__helper-text")
-                )
+            profile_name_error = self.get_element_presence_safe(
+                (By.CSS_SELECTOR, "input#name ~ span.input__helper-text")
             )
             element_text = profile_name_error.text
             key = "profile_name"
         
         if "category_duplicate" in errors and len(errors["category_duplicate"]) > 0:
-            duplicate_category_alert = WebDriverWait(self.browser, 10).until(
-                EC.presence_of_element_located(
-                    (By.CSS_SELECTOR, "div[role='alert']")
-                )
+            duplicate_category_alert = self.get_element_presence_safe(
+                (By.CSS_SELECTOR, "div[role='alert']")
             )
             element = duplicate_category_alert.find_element(By.CSS_SELECTOR, "div.MuiAlert-message div")
             element_text = element.text
             key = "category_duplicate"
                 
         if "category_length" in errors and len(errors["category_length"]) > 0:
-            category_error = WebDriverWait(self.browser, 10).until(
-                EC.presence_of_element_located(
-                    (By.CSS_SELECTOR, "input#category ~ span.input__helper-text")
-                )
+            category_error = self.get_element_presence_safe(
+                (By.CSS_SELECTOR, "input#category ~ span.input__helper-text")
             )
             element_text = category_error.text
             key = "category_length"
@@ -127,10 +107,9 @@ class ProfilePage(BasePage):
     
     @allure.step("Проверка на наличие предупреждения о дубликате категории")
     def should_be_duplicate_category_alert_elements(self, alert_text: str, name: str = None):
-        self.should_be_element(self.DUPLICATE_CATEGORY_ALERT)
         self.should_be_element(self.DUPLICATE_CATEGORY_ALERT_ICON)
         self.should_be_element(self.DUPLICATE_CATEGORY_ALERT_CLOSE_BTN)
-        element_text = self.browser.find_element(*self.DUPLICATE_CATEGORY_ALERT).text
+        element_text = self.get_element_presence_safe(self.DUPLICATE_CATEGORY_ALERT).text
         assert alert_text in element_text, f"Alert text '{alert_text}' not in '{element_text}'"
         if name:
             assert name in element_text, f"Name '{name}' not in '{element_text}'"
@@ -153,11 +132,8 @@ class ProfilePage(BasePage):
     
     @allure.step("Проверка на отсутствие категории")
     def should_be_no_category(self, name: str):
-        WebDriverWait(self.browser, 10).until(
-            EC.presence_of_all_elements_located(self.ALL_CATEGORY_NAMES)
-        )
-        all_categories = self.browser.find_elements(*self.ALL_CATEGORY_NAMES)
-        assert name not in [c.text for c in all_categories]
+        all_categories_names = self.get_all_elements_presence_with_text_safe(self.ALL_CATEGORY_NAMES)
+        assert name not in all_categories_names
     
     @allure.step("Показ архивных категорий")
     def show_archived_categories(self):
@@ -165,10 +141,7 @@ class ProfilePage(BasePage):
     
     @allure.step("Проверка наличия архивных категорий")
     def should_be_archived_categories(self, archived_categories: list[str]):
-        WebDriverWait(self.browser, 10).until(
-            EC.presence_of_all_elements_located(self.ALL_CATEGORY_NAMES)
-        )
-        all_categories = self.browser.find_elements(*self.ALL_CATEGORY_NAMES)
+        all_categories = self.get_all_elements_presence_safe(self.ALL_CATEGORY_NAMES)
         archived_categories_names = [c.text for c in all_categories if c.get_attribute("tabindex") == "-1"]
         for cat_name in archived_categories:
             assert cat_name in archived_categories_names

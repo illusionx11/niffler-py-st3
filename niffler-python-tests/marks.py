@@ -2,9 +2,9 @@ import pytest
 
 class TestData:   
     # Login tests
-    login_data = lambda x: pytest.mark.parametrize("login_data", x, ids=lambda param: param["username"])
+    login_data = lambda x: pytest.mark.parametrize("login_data", x, ids=lambda param: param.username)
     # Registration tests
-    register_data = lambda x: pytest.mark.parametrize("register_data", x, ids=lambda param: f"{param['username']} {param['password']} {param['password_repeat']}")
+    register_data = lambda x: pytest.mark.parametrize("register_data", x, ids=lambda param: f"{param.username} {param.password} {param.password_repeat}")
     username = lambda x: pytest.mark.parametrize("username", x)
     password = lambda x: pytest.mark.parametrize("password", x)
     # Spendings tests

@@ -6,8 +6,6 @@ from databases.auth_db import AuthDb
 from databases.userdata_db import UserdataDb
 from models.config import ClientEnvs
 from clients.lock_client import LockManager
-from utils.user_creator import SoapUserCreator
-from models.user import UserData
 
 @pytest.fixture(scope="session")
 def lock_manager() -> LockManager:

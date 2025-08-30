@@ -1,12 +1,9 @@
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from models.spend import Spend, SpendAdd
 from utils.errors import ValidationErrors
-from .base_page import BasePage
+from pages.base_page import BasePage
 import allure
-import time
 
 class MainPage(BasePage):
     
@@ -33,6 +30,7 @@ class MainPage(BasePage):
     SPENDINGS_TABLE_ROWS = (By.CSS_SELECTOR, "table tbody tr")
     SPENDING_CHECKBOX = (By.CSS_SELECTOR, "input[type='checkbox']")
     DELETE_SPENDING_BTN = (By.CSS_SELECTOR, "button#delete")
+    DELETE_SPENDING_CONFIRM_BTN = (By.XPATH, "/html/body/div[2]/div[3]/div/div[2]/button[2]")
     DELETE_MODAL_DIV = (By.CSS_SELECTOR, "div[role='dialog']")
     SEARCH_INPUT = (By.CSS_SELECTOR, "input[aria-label='search']")
     SEARCH_BTN = (By.CSS_SELECTOR, "button#input-submit")
@@ -56,9 +54,7 @@ class MainPage(BasePage):
             if currency.get_attribute("data-value") == data.currency:
                 currency.click()
                 break
-        category_input = WebDriverWait(self.browser, 10).until(
-            EC.element_to_be_clickable(self.CATEGORY_INPUT)
-        )
+        category_input = self.get_element_clickable_safe(self.CATEGORY_INPUT)
         if data.category:
             self.clear_input(category_input)
             category_input.send_keys(data.category.name)
@@ -84,35 +80,26 @@ class MainPage(BasePage):
                     return True
             return False
         
-        table_rows = WebDriverWait(self.browser, 10).until(EC.presence_of_all_elements_located(self.SPENDINGS_TABLE_ROWS))
-        for _ in range(3):
-            table_rows = self.browser.find_elements(*self.SPENDINGS_TABLE_ROWS)
-            is_spending_added = check_spending_added(table_rows)
-            if is_spending_added:
-                break
-            time.sleep(0.3) # Заглушка для StaleElementReferenceException
-        
+        table_rows = self.get_all_elements_presence_safe(self.SPENDINGS_TABLE_ROWS)
+        is_spending_added = check_spending_added(table_rows)
         assert is_spending_added, f"Новый расход {data} не добавлен на странице {self.browser.current_url}"
     
     @allure.step("Удаление трат")
     def remove_spendings(self, indexes: list[int]):
         
-        table_rows = WebDriverWait(self.browser, 10).until(EC.presence_of_all_elements_located(self.SPENDINGS_TABLE_ROWS))
+        table_rows = self.get_all_elements_presence_safe(self.SPENDINGS_TABLE_ROWS)
         for index in indexes:
             row_to_delete = table_rows[index]
             row_to_delete.find_element(*self.SPENDING_CHECKBOX).click()
-        delete_btn = WebDriverWait(self.browser, 10).until(EC.element_to_be_clickable(self.DELETE_SPENDING_BTN))
-        assert delete_btn.is_enabled()
-        delete_btn.click()
-        dialog_div = self.browser.find_element(*self.DELETE_MODAL_DIV)
-        delete_confirm_btn = WebDriverWait(dialog_div, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "div[role='dialog'] button:nth-child(2)")))
-        assert delete_confirm_btn.is_enabled()
-        delete_confirm_btn.click()
+        self.get_element_clickable_safe(self.DELETE_SPENDING_BTN).click()
+        self.get_element_presence_safe(self.DELETE_MODAL_DIV)
+        self.get_element_clickable_safe(self.DELETE_SPENDING_CONFIRM_BTN).click()
     
     @allure.step("Проверка на исчезновение трат из таблицы")
     def should_not_be_deleted_spendings(self, spendings: list[Spend], indexes: list[int]):
         
         def check_spendings_deleted(new_table_rows: list) -> bool:
+            self.get_all_elements_presence_safe((By.CSS_SELECTOR, "td"))
             for row in new_table_rows:
                 row_data = row.find_elements(By.CSS_SELECTOR, "td")[1:] # пропускаем первый столбец с чекбоксом
                 category = row_data[0].text
@@ -125,33 +112,23 @@ class MainPage(BasePage):
                         return False
             return True
         
-        new_table_rows = WebDriverWait(self.browser, 10).until(EC.presence_of_all_elements_located(self.SPENDINGS_TABLE_ROWS))
-        for _ in range(3):
-            new_table_rows = self.browser.find_elements(*self.SPENDINGS_TABLE_ROWS)
-            is_spendings_deleted = check_spendings_deleted(new_table_rows)
-            if is_spendings_deleted:
-                break
-            time.sleep(0.3) # Заглушка для StaleElementReferenceException
-        
+        new_table_rows = self.get_all_elements_presence_safe(self.SPENDINGS_TABLE_ROWS)
+        is_spendings_deleted = check_spendings_deleted(new_table_rows)
         assert is_spendings_deleted, f"Расходы не удалены на странице {self.browser.current_url}"
     
     @allure.step("Проверка на наличие ошибок валидации")
     def should_be_errors_in_validation(self, errors: dict[str, list[ValidationErrors]]):
         key = None
         if "amount" in errors and len(errors["amount"]) > 0:
-            amount_error = WebDriverWait(self.browser, 10).until(
-                EC.presence_of_element_located(
-                    (By.CSS_SELECTOR, "input#amount ~ span.input__helper-text")
-                )
+            amount_error = self.get_element_presence_safe(
+                (By.CSS_SELECTOR, "input#amount ~ span.input__helper-text")
             )
             element_text = amount_error.text
             key = "amount"
         
         if "category" in errors and len(errors["category"]) > 0:
-            category_error = WebDriverWait(self.browser, 10).until(
-                EC.presence_of_element_located(
-                    (By.CSS_SELECTOR, "input#category ~ span.input__helper-text")
-                )
+            category_error = self.get_element_presence_safe(
+                (By.CSS_SELECTOR, "input#category ~ span.input__helper-text")
             )
             element_text = category_error.text
             key = "category"
@@ -162,7 +139,7 @@ class MainPage(BasePage):
     
     @allure.step("Поиск по тратам")
     def make_search(self, query: str):
-        search_input = self.browser.find_element(*self.SEARCH_INPUT)
+        search_input = self.get_element_presence_safe(self.SEARCH_INPUT)
         self.clear_input(search_input)
         search_input.send_keys(query)
         search_input.send_keys(Keys.RETURN)
@@ -170,7 +147,7 @@ class MainPage(BasePage):
     @allure.step("Проверка на результаты таблицы трат после поиска")
     def should_be_exact_search_results(self, query: str, valid_spendings: list[Spend]):
 
-        table_rows = WebDriverWait(self.browser, 10).until(EC.presence_of_all_elements_located(self.SPENDINGS_TABLE_ROWS))
+        table_rows = self.get_all_elements_presence_safe(self.SPENDINGS_TABLE_ROWS)
         assert len(table_rows) == len(valid_spendings), f"Количество расходов в таблице {len(table_rows)} не равно количеству расходов в списке {len(valid_spendings)}"
         for row in table_rows:
             is_spending_present = False

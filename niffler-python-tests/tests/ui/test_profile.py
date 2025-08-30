@@ -27,7 +27,6 @@ class TestProfileCategories:
         profile_page.open()
         profile_page.should_be_profile_page()
         profile_page.add_new_category(new_category)
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         profile_page.should_be_new_active_category(new_category)
     
     @TestData.category(["DuplicateCategory"])
@@ -41,11 +40,10 @@ class TestProfileCategories:
         errors = {
             "category_duplicate": [ValidationErrors.CATEGORY_DUPLICATE]
         }
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         profile_page.should_be_errors_in_validation(errors=errors, name=category)
     
     @TestData.archived_category(["DuplicateArchivedCategory"])
-    @pytest.mark.xdist_group("03_archived_category")
+    @pytest.mark.xdist_group("02_category")
     @allure.story(Story.add_category)
     def test_add_duplicate_archived_category(self, profile_page: ProfilePage, archived_category: str):
         profile_page.open()
@@ -54,7 +52,6 @@ class TestProfileCategories:
         errors = {
             "category_duplicate": [ValidationErrors.CATEGORY_DUPLICATE]
         }
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         profile_page.should_be_errors_in_validation(errors=errors, name=archived_category)
     
     @TestData.category(["DuplicateCategoryNifflerUnique"])
@@ -64,7 +61,6 @@ class TestProfileCategories:
         profile_page.open()
         profile_page.should_be_profile_page()
         profile_page.add_new_category(category)
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         profile_page.should_be_duplicate_category_alert_elements(
             alert_text=ValidationErrors.CATEGORY_DUPLICATE,
             name=category
@@ -78,7 +74,6 @@ class TestProfileCategories:
         profile_page.open()
         profile_page.should_be_profile_page()
         profile_page.change_category_name(by="icon", old_name=category, new_name=new_name)
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         profile_page.should_be_no_category(category)
         profile_page.should_be_new_active_category(new_name)
         
@@ -90,7 +85,6 @@ class TestProfileCategories:
         profile_page.open()
         profile_page.should_be_profile_page()
         profile_page.change_category_name(by="click", old_name=category, new_name=new_name)
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         profile_page.should_be_no_category(category)
         profile_page.should_be_new_active_category(new_name)
     
@@ -108,16 +102,14 @@ class TestProfileCategories:
         errors = {
             "category_length": [ValidationErrors.CATEGORY_LENGTH]
         }
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         profile_page.should_be_errors_in_validation(errors=errors)
     
     @allure.story(Story.display_category)
-    @pytest.mark.xdist_group("03_archived_category")
+    @pytest.mark.xdist_group("02_category")
     def test_show_archived_categories(self, profile_page: ProfilePage, new_archived_categories: list):
         profile_page.open()
         profile_page.should_be_profile_page()
         profile_page.show_archived_categories()
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         profile_page.should_be_archived_categories(new_archived_categories)
 
 @pytest.mark.usefixtures(
@@ -136,7 +128,6 @@ class TestProfileData:
         profile_page.should_be_profile_page()
         profile_page.set_new_profile_name(profile_name)
         profile_page.open()
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         profile_page.should_be_new_profile_name(profile_name)
         
     @TestData.profile_name(["a"*51])
@@ -147,5 +138,4 @@ class TestProfileData:
         errors = {
             "profile_name": [ValidationErrors.PROFILE_NAME_LENGTH]
         }
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         profile_page.should_be_errors_in_validation(errors=errors)

@@ -1,12 +1,14 @@
 from selenium.webdriver import Chrome, Firefox, Safari, Edge, ChromiumEdge, Ie
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import (
-    NoSuchElementException, TimeoutException, ElementNotInteractableException
+    NoSuchElementException, TimeoutException, 
+    ElementNotInteractableException, StaleElementReferenceException
 )
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 import allure
 import logging
+import time
 
 class BasePage:
     def __init__(
@@ -38,22 +40,12 @@ class BasePage:
     
     @allure.step("Проврека на присутствие элемента")
     def should_be_element(self, locator: tuple[str, str]):
-        assert self.is_element_present(*locator)
+        self.get_element_presence_safe(locator)
+        assert True
     
     @allure.step("Проверка на наличие строки в URL")
     def should_be_url(self, arg: str):
         assert arg in self.browser.current_url
-    
-    @allure.step("Проверка на наличие объекта")
-    def is_element_present(self, by, locator: str) -> bool:
-        try:
-            WebDriverWait(self.browser, 10).until(
-                EC.presence_of_element_located((by, locator))
-            )
-            self.browser.find_element(by, locator)     
-        except NoSuchElementException:
-            return False
-        return True   
     
     @allure.step("Проверка на отсутствие объекта")
     def is_element_not_present(self, by, locator: str, timeout: int = 4) -> bool:
@@ -76,3 +68,83 @@ class BasePage:
     @allure.step("Получение access token через браузер")
     def get_access_token(self):
         return self.browser.execute_script("return localStorage.getItem('access_token');")
+    
+    @allure.step("Получение Web элемента")
+    def get_element_presence_safe(self, locator: tuple[str, str], timeout: int = 10):
+        for i in range(10):
+            try:
+                element = WebDriverWait(self.browser, timeout).until(
+                    EC.presence_of_element_located(locator)
+                )
+                return element
+            except StaleElementReferenceException:
+                if i == 9:
+                    raise
+                time.sleep(0.1)
+            except NoSuchElementException:
+                raise
+    
+    @allure.step("Получение выбранных Web элементов")
+    def get_all_elements_presence_safe(self, locator: tuple[str, str], timeout: int = 10):
+        for i in range(10):
+            try:
+                elements = WebDriverWait(self.browser, timeout).until(
+                    EC.presence_of_all_elements_located(locator)
+                )
+                return elements
+            except StaleElementReferenceException:
+                if i == 9:
+                    raise
+                time.sleep(0.1)
+            except NoSuchElementException:
+                raise
+            
+    @allure.step("Получение кликабельного Web элемента")
+    def get_element_clickable_safe(self, locator: tuple[str, str], timeout: int = 10):
+        for i in range(10):
+            try:
+                element = WebDriverWait(self.browser, timeout).until(
+                    EC.element_to_be_clickable(locator)
+                )
+                return element
+            except StaleElementReferenceException:
+                if i == 9:
+                    raise
+                time.sleep(0.1)
+            except NoSuchElementException:
+                raise
+    
+    @allure.step("Получение выбранных Web элементов с атрибутами")
+    def get_all_elements_presence_with_attributes_safe(
+        self, locator: tuple[str, str], attribute: str, value: str, timeout: int = 10
+    ):
+        for i in range(10):
+            try:
+                elements = WebDriverWait(self.browser, timeout).until(
+                    EC.presence_of_all_elements_located(locator)
+                )
+                elements = [e for e in elements if e.get_attribute(attribute) == value]
+                return elements
+            except StaleElementReferenceException:
+                if i == 9:
+                    raise
+                time.sleep(0.1)
+            except NoSuchElementException:
+                raise
+            
+    @allure.step("Получение выбранных Web элементов с текстом")
+    def get_all_elements_presence_with_text_safe(self, locator: tuple[str, str], timeout: int = 10):
+        for i in range(10):
+            try:
+                result = [
+                    e.text for e in WebDriverWait(self.browser, timeout).until(
+                        EC.presence_of_all_elements_located(locator)
+                    )
+                ]
+                return result
+            except StaleElementReferenceException:
+                if i == 9:
+                    raise
+                time.sleep(0.1)
+            except NoSuchElementException:
+                raise
