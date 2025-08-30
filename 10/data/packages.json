@@ -1,0 +1,1685 @@
+{
+  "uid" : "83edc06c07f9ae9e47eb6dd1b683e4e2",
+  "children" : [ {
+    "name" : "tests",
+    "children" : [ {
+      "name" : "database",
+      "children" : [ {
+        "name" : "test_categories_db",
+        "children" : [ {
+          "name" : "Added Category In Database[Uniquedatabasecategory1]",
+          "uid" : "9d7cd1780dbdcc7e",
+          "parentUid" : "ee5f5e5f486556ecee9f38390193e83a",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580101746,
+            "stop" : 1756580102399,
+            "duration" : 653
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'UniqueDatabaseCategory1'" ]
+        }, {
+          "name" : "Updated Category In Database[Uniquedatabasecategory2]",
+          "uid" : "c9f243dd16271b8f",
+          "parentUid" : "ee5f5e5f486556ecee9f38390193e83a",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580102427,
+            "stop" : 1756580102541,
+            "duration" : 114
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'UniqueDatabaseCategory2'" ]
+        } ],
+        "uid" : "ee5f5e5f486556ecee9f38390193e83a"
+      }, {
+        "name" : "test_spendings_db",
+        "children" : [ {
+          "name" : "Added Spending In Database[1000.26 Rub Id=None Name='\\U0423\\U043D\\U0438\\U043A\\U0430\\U043B\\U044C\\U043D\\U043E\\U0435' Username=None Archived=False \\U0423\\U043D\\U0438\\U043A\\U0430\\U043B\\U044C\\U043D\\U044B\\U0435 \\U0448\\U043B\\U044F\\U043F\\U044B]",
+          "uid" : "f65ced23275cdd80",
+          "parentUid" : "de5711d37df0c6f4f40db4fe5b43da1c",
+          "status" : "skipped",
+          "time" : {
+            "start" : 1756580102548,
+            "stop" : 1756580102693,
+            "duration" : 145
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "SpendAdd(id=None, amount=1000.26, description='Уникальные шляпы', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2009-10-13T22:05:31.000+00:00', currency='RUB', username=None)" ]
+        }, {
+          "name" : "Deleted Spending Not In Database[162.23 Rub Id=None Name='\\U0423\\U043D\\U0438\\U043A\\U0430\\U043B\\U044C\\U043D\\U043E\\U0435' Username=None Archived=False \\U0423\\U043D\\U0438\\U043A\\U0430\\U043B\\U044C\\U043D\\U044B\\U0435 \\U043A\\U0440\\U0443\\U0436\\U043A\\U0438]",
+          "uid" : "15ab53be07419956",
+          "parentUid" : "de5711d37df0c6f4f40db4fe5b43da1c",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580102772,
+            "stop" : 1756580102894,
+            "duration" : 122
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "SpendAdd(id=None, amount=162.23, description='Уникальные кружки', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2015-10-13T22:05:31.000+00:00', currency='RUB', username=None)" ]
+        } ],
+        "uid" : "de5711d37df0c6f4f40db4fe5b43da1c"
+      } ],
+      "uid" : "3e44a5ff2d2d0690093cb99e11951998"
+    }, {
+      "name" : "rest_api",
+      "children" : [ {
+        "name" : "test_categories_api",
+        "children" : [ {
+          "name" : "Update Category Name And Archived[Uniquecategory5]",
+          "uid" : "97cebda241e483af",
+          "parentUid" : "dded52be2f5d35f78683d77109c89e20",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580102408,
+            "stop" : 1756580102535,
+            "duration" : 127
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'UniqueCategory5'" ]
+        }, {
+          "name" : "Get Active Categories",
+          "uid" : "227cf4b3b91d3a71",
+          "parentUid" : "dded52be2f5d35f78683d77109c89e20",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580102839,
+            "stop" : 1756580102875,
+            "duration" : 36
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        }, {
+          "name" : "Get All Categories",
+          "uid" : "4aad8f28049b05b3",
+          "parentUid" : "dded52be2f5d35f78683d77109c89e20",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580102912,
+            "stop" : 1756580102939,
+            "duration" : 27
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        }, {
+          "name" : "Add New Category[Uniquecategory1]",
+          "uid" : "e4debf5d9d715346",
+          "parentUid" : "dded52be2f5d35f78683d77109c89e20",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580104991,
+            "stop" : 1756580105029,
+            "duration" : 38
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'UniqueCategory1'" ]
+        }, {
+          "name" : "Add Existing Category[Uniquecategory2]",
+          "uid" : "ef948ddf52dbf42f",
+          "parentUid" : "dded52be2f5d35f78683d77109c89e20",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580105100,
+            "stop" : 1756580105168,
+            "duration" : 68
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'UniqueCategory2'" ]
+        }, {
+          "name" : "Add Existing Archived Category[Uniquearchivedcategory1]",
+          "uid" : "229adc56daf8e7a",
+          "parentUid" : "dded52be2f5d35f78683d77109c89e20",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580105298,
+            "stop" : 1756580105355,
+            "duration" : 57
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'UniqueArchivedCategory1'" ]
+        }, {
+          "name" : "Update Category Name[Uniquecategory3]",
+          "uid" : "f8effd4eac0dcdd1",
+          "parentUid" : "dded52be2f5d35f78683d77109c89e20",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580105441,
+            "stop" : 1756580105518,
+            "duration" : 77
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'UniqueCategory3'" ]
+        }, {
+          "name" : "Update Category Archived[Uniquecategory4]",
+          "uid" : "b489fda52df1be38",
+          "parentUid" : "dded52be2f5d35f78683d77109c89e20",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580105616,
+            "stop" : 1756580105679,
+            "duration" : 63
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'UniqueCategory4'" ]
+        } ],
+        "uid" : "dded52be2f5d35f78683d77109c89e20"
+      }, {
+        "name" : "test_spendings_api",
+        "children" : [ {
+          "name" : "Add New Spend[1500.25 Eur Id=None Name='\\U0423\\U043D\\U0438\\U043A\\U0430\\U043B\\U044C\\U043D\\U043E\\U0435' Username=None Archived=False \\U0423\\U043D\\U0438\\U043A\\U0430\\U043B\\U044C\\U043D\\U0430\\U044F \\U0432\\U0435\\U0449\\U044C1]",
+          "uid" : "3dd9ef2e209c5dd9",
+          "parentUid" : "a0fc33e4bbca2118a7baac982444fd75",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103661,
+            "stop" : 1756580103695,
+            "duration" : 34
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "SpendAdd(id=None, amount=1500.25, description='Уникальная вещь1', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2024-01-15T10:30:00.000Z', currency='EUR', username=None)" ]
+        }, {
+          "name" : "Add New Spend[2750.5 Rub Id=None Name='\\U0423\\U043D\\U0438\\U043A\\U0430\\U043B\\U044C\\U043D\\U043E\\U0435' Username=None Archived=False \\U0423\\U043D\\U0438\\U043A\\U0430\\U043B\\U044C\\U043D\\U0430\\U044F \\U0432\\U0435\\U0449\\U044C2]",
+          "uid" : "ae75862c400b2d9",
+          "parentUid" : "a0fc33e4bbca2118a7baac982444fd75",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103740,
+            "stop" : 1756580103771,
+            "duration" : 31
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "SpendAdd(id=None, amount=2750.5, description='Уникальная вещь2', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2024-02-20T14:45:00.000Z', currency='RUB', username=None)" ]
+        }, {
+          "name" : "Add New Spend[3200.75 Rub Id=None Name='\\U0423\\U043D\\U0438\\U043A\\U0430\\U043B\\U044C\\U043D\\U043E\\U0435' Username=None Archived=False \\U0423\\U043D\\U0438\\U043A\\U0430\\U043B\\U044C\\U043D\\U0430\\U044F \\U0432\\U0435\\U0449\\U044C3]",
+          "uid" : "9f6cbeb01432f126",
+          "parentUid" : "a0fc33e4bbca2118a7baac982444fd75",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103809,
+            "stop" : 1756580103834,
+            "duration" : 25
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "SpendAdd(id=None, amount=3200.75, description='Уникальная вещь3', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2024-03-10T09:15:00.000Z', currency='RUB', username=None)" ]
+        }, {
+          "name" : "Get Spend By Id[1-2]",
+          "uid" : "1010185329f10bb",
+          "parentUid" : "a0fc33e4bbca2118a7baac982444fd75",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103870,
+            "stop" : 1756580103916,
+            "duration" : 46
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "0" ]
+        }, {
+          "name" : "Get Spend By Id[2-2]",
+          "uid" : "b87d1ade480cfb9f",
+          "parentUid" : "a0fc33e4bbca2118a7baac982444fd75",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103956,
+            "stop" : 1756580103980,
+            "duration" : 24
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "1" ]
+        }, {
+          "name" : "Get Spend After Add[4500.99 Usd Id=None Name='\\U0423\\U043D\\U0438\\U043A\\U0430\\U043B\\U044C\\U043D\\U043E\\U0435' Username=None Archived=False \\U0423\\U043D\\U0438\\U043A\\U0430\\U043B\\U044C\\U043D\\U0430\\U044F \\U0432\\U0435\\U0449\\U044C4]",
+          "uid" : "ebda6f7676e6b4cc",
+          "parentUid" : "a0fc33e4bbca2118a7baac982444fd75",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580104019,
+            "stop" : 1756580104071,
+            "duration" : 52
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "SpendAdd(id=None, amount=4500.99, description='Уникальная вещь4', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2024-04-25T16:20:00.000Z', currency='USD', username=None)" ]
+        }, {
+          "name" : "Update Spending Amount",
+          "uid" : "8508d02f664fa74c",
+          "parentUid" : "a0fc33e4bbca2118a7baac982444fd75",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580104110,
+            "stop" : 1756580104146,
+            "duration" : 36
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        }, {
+          "name" : "Update Spending Currency[1-2]",
+          "uid" : "c48047e26508d759",
+          "parentUid" : "a0fc33e4bbca2118a7baac982444fd75",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580104180,
+            "stop" : 1756580104209,
+            "duration" : 29
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "0" ]
+        }, {
+          "name" : "Update Spending Currency[2-2]",
+          "uid" : "dddb702b66970725",
+          "parentUid" : "a0fc33e4bbca2118a7baac982444fd75",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580104245,
+            "stop" : 1756580104294,
+            "duration" : 49
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "1" ]
+        }, {
+          "name" : "Update Spending Description[1-2]",
+          "uid" : "2bb962fae345759a",
+          "parentUid" : "a0fc33e4bbca2118a7baac982444fd75",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580104336,
+            "stop" : 1756580104364,
+            "duration" : 28
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "0" ]
+        }, {
+          "name" : "Update Spending Description[2-2]",
+          "uid" : "7a44adf420881d",
+          "parentUid" : "a0fc33e4bbca2118a7baac982444fd75",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580104423,
+            "stop" : 1756580104455,
+            "duration" : 32
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "1" ]
+        }, {
+          "name" : "Update Spending Category[1-2]",
+          "uid" : "b0af4b3c7900d0d3",
+          "parentUid" : "a0fc33e4bbca2118a7baac982444fd75",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580104483,
+            "stop" : 1756580104510,
+            "duration" : 27
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "0" ]
+        }, {
+          "name" : "Update Spending Category[2-2]",
+          "uid" : "d8469817d331698",
+          "parentUid" : "a0fc33e4bbca2118a7baac982444fd75",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580104574,
+            "stop" : 1756580104622,
+            "duration" : 48
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "1" ]
+        }, {
+          "name" : "Update Spending Date[1-2]",
+          "uid" : "188026e62f89801c",
+          "parentUid" : "a0fc33e4bbca2118a7baac982444fd75",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580104654,
+            "stop" : 1756580104708,
+            "duration" : 54
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "0" ]
+        }, {
+          "name" : "Update Spending Date[2-2]",
+          "uid" : "c97fa256fb5634f",
+          "parentUid" : "a0fc33e4bbca2118a7baac982444fd75",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580104752,
+            "stop" : 1756580104782,
+            "duration" : 30
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "1" ]
+        }, {
+          "name" : "Update Spending Multiple Fields",
+          "uid" : "b73bb97e5ecc30fc",
+          "parentUid" : "a0fc33e4bbca2118a7baac982444fd75",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580104829,
+            "stop" : 1756580104876,
+            "duration" : 47
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        }, {
+          "name" : "Get Spending After Update",
+          "uid" : "f4ebbb71cf1dcc9e",
+          "parentUid" : "a0fc33e4bbca2118a7baac982444fd75",
+          "status" : "skipped",
+          "time" : {
+            "start" : 1756580104959,
+            "stop" : 1756580105064,
+            "duration" : 105
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        }, {
+          "name" : "Delete Single Spending",
+          "uid" : "4ae7252697a9047f",
+          "parentUid" : "a0fc33e4bbca2118a7baac982444fd75",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580105222,
+            "stop" : 1756580105309,
+            "duration" : 87
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        }, {
+          "name" : "Delete Multiple Spendings Api",
+          "uid" : "8d1aa7488804137",
+          "parentUid" : "a0fc33e4bbca2118a7baac982444fd75",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580105385,
+            "stop" : 1756580105490,
+            "duration" : 105
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        } ],
+        "uid" : "a0fc33e4bbca2118a7baac982444fd75"
+      } ],
+      "uid" : "12b6305cc2a1842c222c46d87ecb119b"
+    }, {
+      "name" : "grpc",
+      "children" : [ {
+        "name" : "test_calculate_rate",
+        "children" : [ {
+          "name" : "Calculate Rate",
+          "uid" : "6482b5945480418b",
+          "parentUid" : "b1ec99f89d0e13538c806ced90d2131e",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580102906,
+            "stop" : 1756580103061,
+            "duration" : 155
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        }, {
+          "name" : "Currency Conversion[2-1-100.0-6666.67]",
+          "uid" : "5368c6c4fc4dc194",
+          "parentUid" : "b1ec99f89d0e13538c806ced90d2131e",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103066,
+            "stop" : 1756580103079,
+            "duration" : 13
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "100.0", "1", "6666.67", "2" ]
+        }, {
+          "name" : "Currency Conversion[1-2-100.0-1.5]",
+          "uid" : "2e34e5408eefb4f5",
+          "parentUid" : "b1ec99f89d0e13538c806ced90d2131e",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103084,
+            "stop" : 1756580103097,
+            "duration" : 13
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "100.0", "2", "1.5", "1" ]
+        }, {
+          "name" : "Currency Conversion[2-2-100.0-100.0]",
+          "uid" : "dab5f4478f450946",
+          "parentUid" : "b1ec99f89d0e13538c806ced90d2131e",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103103,
+            "stop" : 1756580103117,
+            "duration" : 14
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "100.0", "2", "100.0", "2" ]
+        }, {
+          "name" : "Calculate Rate  Without Desired Currency[3-100.0]",
+          "uid" : "6cc3f52daa02e3e2",
+          "parentUid" : "b1ec99f89d0e13538c806ced90d2131e",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103122,
+            "stop" : 1756580103137,
+            "duration" : 15
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "100.0", "3" ]
+        }, {
+          "name" : "Calculate Rate  Without Desired Currency[1-200.0]",
+          "uid" : "b6b601626a0212a5",
+          "parentUid" : "b1ec99f89d0e13538c806ced90d2131e",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103143,
+            "stop" : 1756580103156,
+            "duration" : 13
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "200.0", "1" ]
+        }, {
+          "name" : "Calculate Rate  Without Desired Currency[2-345.0]",
+          "uid" : "ab18ff75ac3b103b",
+          "parentUid" : "b1ec99f89d0e13538c806ced90d2131e",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103161,
+            "stop" : 1756580103175,
+            "duration" : 14
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "345.0", "2" ]
+        }, {
+          "name" : "Calculate Rate  Without Spend Currency[3-100.0]",
+          "uid" : "7e8fac30e2afc80",
+          "parentUid" : "b1ec99f89d0e13538c806ced90d2131e",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103179,
+            "stop" : 1756580103188,
+            "duration" : 9
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "100.0", "3" ]
+        }, {
+          "name" : "Calculate Rate  Without Spend Currency[1-200.0]",
+          "uid" : "45f56a7ee22bb836",
+          "parentUid" : "b1ec99f89d0e13538c806ced90d2131e",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103192,
+            "stop" : 1756580103202,
+            "duration" : 10
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "200.0", "1" ]
+        }, {
+          "name" : "Calculate Rate  Without Spend Currency[2-345.0]",
+          "uid" : "4d24c4b96269a6c0",
+          "parentUid" : "b1ec99f89d0e13538c806ced90d2131e",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103205,
+            "stop" : 1756580103212,
+            "duration" : 7
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "345.0", "2" ]
+        }, {
+          "name" : "Calculate Rate  Without Amount[3-1]",
+          "uid" : "d10926764fb18765",
+          "parentUid" : "b1ec99f89d0e13538c806ced90d2131e",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103216,
+            "stop" : 1756580103223,
+            "duration" : 7
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "1", "3" ]
+        }, {
+          "name" : "Calculate Rate  Without Amount[1-2]",
+          "uid" : "c15920585804bd58",
+          "parentUid" : "b1ec99f89d0e13538c806ced90d2131e",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103227,
+            "stop" : 1756580103234,
+            "duration" : 7
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "2", "1" ]
+        }, {
+          "name" : "Calculate Rate  Without Amount[2-3]",
+          "uid" : "4abbc8ca91d20937",
+          "parentUid" : "b1ec99f89d0e13538c806ced90d2131e",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103238,
+            "stop" : 1756580103249,
+            "duration" : 11
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "3", "2" ]
+        }, {
+          "name" : "Calculate Rate  With Zero Amount[3-1]",
+          "uid" : "6d70eb29c41192c7",
+          "parentUid" : "b1ec99f89d0e13538c806ced90d2131e",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103253,
+            "stop" : 1756580103258,
+            "duration" : 5
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "1", "3" ]
+        }, {
+          "name" : "Calculate Rate  With Zero Amount[1-2]",
+          "uid" : "3f3a85bb7d2146b",
+          "parentUid" : "b1ec99f89d0e13538c806ced90d2131e",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103261,
+            "stop" : 1756580103269,
+            "duration" : 8
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "2", "1" ]
+        }, {
+          "name" : "Calculate Rate  With Zero Amount[2-3]",
+          "uid" : "74905c4a9ec38a60",
+          "parentUid" : "b1ec99f89d0e13538c806ced90d2131e",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103272,
+            "stop" : 1756580103277,
+            "duration" : 5
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "3", "2" ]
+        }, {
+          "name" : "Calculate Rate  With Negative Amount[-100.0]",
+          "uid" : "ce768125b73060e2",
+          "parentUid" : "b1ec99f89d0e13538c806ced90d2131e",
+          "status" : "skipped",
+          "time" : {
+            "start" : 1756580103281,
+            "stop" : 1756580103295,
+            "duration" : 14
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "-100.0" ]
+        }, {
+          "name" : "Calculate Rate  With Negative Amount[-200.0]",
+          "uid" : "18065ba56bb091dc",
+          "parentUid" : "b1ec99f89d0e13538c806ced90d2131e",
+          "status" : "skipped",
+          "time" : {
+            "start" : 1756580103314,
+            "stop" : 1756580103328,
+            "duration" : 14
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "-200.0" ]
+        }, {
+          "name" : "Calculate Rate  With Negative Amount[-345.0]",
+          "uid" : "b4c83a13f4194f3b",
+          "parentUid" : "b1ec99f89d0e13538c806ced90d2131e",
+          "status" : "skipped",
+          "time" : {
+            "start" : 1756580103342,
+            "stop" : 1756580103350,
+            "duration" : 8
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "-345.0" ]
+        } ],
+        "uid" : "b1ec99f89d0e13538c806ced90d2131e"
+      }, {
+        "name" : "test_get_all_currencies",
+        "children" : [ {
+          "name" : "Get All Currencies",
+          "uid" : "8a07391376a005bc",
+          "parentUid" : "b0a2d905e05229413547f893ef79aaaa",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580103366,
+            "stop" : 1756580103379,
+            "duration" : 13
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        } ],
+        "uid" : "b0a2d905e05229413547f893ef79aaaa"
+      } ],
+      "uid" : "b4bf7d9fd2feff3dd3956ed725c123e5"
+    }, {
+      "name" : "kafka.test_kafka",
+      "children" : [ {
+        "name" : "Message Should Be Produced To Kafka After Successful Registration[Nifflerkafkauser]",
+        "uid" : "a8e9eda78d4a62d",
+        "parentUid" : "921c14ea9d28ce09b22acf8b72c23622",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580103401,
+          "stop" : 1756580103667,
+          "duration" : 266
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "UserData(username='NifflerKafkaUser', password='PassWordGo0d', password_repeat=None)" ]
+      }, {
+        "name" : "Userdata Db Should Process Messages From Kafka Producer[Nifflerkafkauser]",
+        "uid" : "a6ccb860813abc92",
+        "parentUid" : "921c14ea9d28ce09b22acf8b72c23622",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580103690,
+          "stop" : 1756580104918,
+          "duration" : 1228
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "UserData(username='NifflerKafkaUser', password='PassWordGo0d', password_repeat=None)" ]
+      } ],
+      "uid" : "kafka.test_kafka"
+    }, {
+      "name" : "soap.test_userdata_soap",
+      "children" : [ {
+        "name" : "Get All Users Page Out Of Range[Page 1000, Size 1]",
+        "uid" : "c585d95a8cfd1403",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580108378,
+          "stop" : 1756580108446,
+          "duration" : 68
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=1000, size=1, sort=None)" ]
+      }, {
+        "name" : "Get User Info With Existing Username",
+        "uid" : "92c35085b92fa936",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580111481,
+          "stop" : 1756580111503,
+          "duration" : 22
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "Get Friends Page Invalid Parameters[Page -1, Size -1]",
+        "uid" : "e13d2972dc89218b",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580111759,
+          "stop" : 1756580111783,
+          "duration" : 24
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=-1, size=-1, sort=None)" ]
+      }, {
+        "name" : "Get All Users Page Invalid Parameters[Page -1, Size 1]",
+        "uid" : "5763fbbe17f72941",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580114938,
+          "stop" : 1756580114948,
+          "duration" : 10
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=-1, size=1, sort=None)" ]
+      }, {
+        "name" : "Get User That Doesnt Exist",
+        "uid" : "6d85c7bfe4acece4",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580117655,
+          "stop" : 1756580117679,
+          "duration" : 24
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "Send Friend Invitation",
+        "uid" : "ba62d69c3dbd74f0",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580117976,
+          "stop" : 1756580117996,
+          "duration" : 20
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "Get All Users Page Invalid Parameters[Page 1, Size -1]",
+        "uid" : "6cedf76d115a0f41",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580120387,
+          "stop" : 1756580120396,
+          "duration" : 9
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=1, size=-1, sort=None)" ]
+      }, {
+        "name" : "Get All Users",
+        "uid" : "168fa74216f6645f",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580122934,
+          "stop" : 1756580122970,
+          "duration" : 36
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "Accept Friend Invitation",
+        "uid" : "8eeb9701ad62fbab",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580123082,
+          "stop" : 1756580123107,
+          "duration" : 25
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "Get All Users Page Invalid Parameters[Page 1, Size 0]",
+        "uid" : "88ff84f16a4d3d8f",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580125183,
+          "stop" : 1756580125189,
+          "duration" : 6
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=1, size=0, sort=None)" ]
+      }, {
+        "name" : "Get All Users Pagination[Page 1, Size 3]",
+        "uid" : "1349716581753cd1",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580127987,
+          "stop" : 1756580128030,
+          "duration" : 43
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=1, size=3, sort=None)" ]
+      }, {
+        "name" : "Decline Friend Invitation",
+        "uid" : "977b00d0c539887f",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580128355,
+          "stop" : 1756580128404,
+          "duration" : 49
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "Get All Users Page Invalid Parameters[Page -1, Size -1]",
+        "uid" : "f42eb0e762230459",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580131036,
+          "stop" : 1756580131045,
+          "duration" : 9
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=-1, size=-1, sort=None)" ]
+      }, {
+        "name" : "Get All Users Pagination[Page 2, Size 4]",
+        "uid" : "cfe4872803bbde00",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580134592,
+          "stop" : 1756580134632,
+          "duration" : 40
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=2, size=4, sort=None)" ]
+      }, {
+        "name" : "Remove Friend",
+        "uid" : "55b68515a37ebe91",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580134815,
+          "stop" : 1756580134868,
+          "duration" : 53
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "Update User Currency And Full Name",
+        "uid" : "93705c041cbc9082",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "skipped",
+        "time" : {
+          "start" : 1756580137885,
+          "stop" : 1756580137950,
+          "duration" : 65
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "Get All Users Pagination[Page 1, Size 6]",
+        "uid" : "bbf9a0c8608cb0aa",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580141095,
+          "stop" : 1756580141118,
+          "duration" : 23
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=1, size=6, sort=None)" ]
+      }, {
+        "name" : "Get Friends",
+        "uid" : "849eb674425fb0b0",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580145247,
+          "stop" : 1756580145272,
+          "duration" : 25
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "Get All Users Pagination[Page 4, Size 2]",
+        "uid" : "740ba12b8d866411",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580147262,
+          "stop" : 1756580147271,
+          "duration" : 9
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=4, size=2, sort=None)" ]
+      }, {
+        "name" : "Get Friends Page[Page 1, Size 5]",
+        "uid" : "a346e7c7ba5a6a49",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580151370,
+          "stop" : 1756580151386,
+          "duration" : 16
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=1, size=5, sort=None)" ]
+      }, {
+        "name" : "Get All Users Page Out Of Range[Page 4, Size 100]",
+        "uid" : "c3da9dc08f169abe",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580153287,
+          "stop" : 1756580153306,
+          "duration" : 19
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=4, size=100, sort=None)" ]
+      }, {
+        "name" : "Get Friends Page[Page 2, Size 3]",
+        "uid" : "e39bd82f07d383ec",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580157114,
+          "stop" : 1756580157121,
+          "duration" : 7
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=2, size=3, sort=None)" ]
+      }, {
+        "name" : "Get All Users Page Out Of Range[Page 100, Size 100]",
+        "uid" : "5aad052755a9b71d",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580159066,
+          "stop" : 1756580159076,
+          "duration" : 10
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=100, size=100, sort=None)" ]
+      }, {
+        "name" : "Get Friends Page[Page 4, Size 2]",
+        "uid" : "3681afaf5a65ba5",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580162707,
+          "stop" : 1756580162715,
+          "duration" : 8
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=4, size=2, sort=None)" ]
+      }, {
+        "name" : "Get Friends Page Out Of Range[Page 1000, Size 1]",
+        "uid" : "c63c6ef953a6bb27",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580164230,
+          "stop" : 1756580164243,
+          "duration" : 13
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=1000, size=1, sort=None)" ]
+      }, {
+        "name" : "Get Friends Page Invalid Parameters[Page 1, Size -1]",
+        "uid" : "d9339bc4649c79fd",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580165871,
+          "stop" : 1756580165878,
+          "duration" : 7
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=1, size=-1, sort=None)" ]
+      }, {
+        "name" : "Get Friends Page Out Of Range[Page 4, Size 100]",
+        "uid" : "26f1c166c72abe3e",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580167338,
+          "stop" : 1756580167354,
+          "duration" : 16
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=4, size=100, sort=None)" ]
+      }, {
+        "name" : "Get Friends Page Invalid Parameters[Page -1, Size 1]",
+        "uid" : "22506423536a6c",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580168793,
+          "stop" : 1756580168800,
+          "duration" : 7
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=-1, size=1, sort=None)" ]
+      }, {
+        "name" : "Get Friends Page Invalid Parameters[Page 1, Size 0]",
+        "uid" : "8a68be17fefcdb52",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580170227,
+          "stop" : 1756580170232,
+          "duration" : 5
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=1, size=0, sort=None)" ]
+      }, {
+        "name" : "Get Friends Page Out Of Range[Page 100, Size 100]",
+        "uid" : "8d7cc27505541f36",
+        "parentUid" : "2d51eeabd556bdabbc8cd3c81e60fe22",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580171365,
+          "stop" : 1756580171371,
+          "duration" : 6
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "PageInfo(page=100, size=100, sort=None)" ]
+      } ],
+      "uid" : "soap.test_userdata_soap"
+    }, {
+      "name" : "ui",
+      "children" : [ {
+        "name" : "test_profile",
+        "children" : [ {
+          "name" : "Add Incorrect Category[Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]",
+          "uid" : "82c9060eccd898ee",
+          "parentUid" : "468bfac2cffcbd268b2ebee219752fb1",
+          "status" : "skipped",
+          "time" : {
+            "start" : 1756580113955,
+            "stop" : 1756580127848,
+            "duration" : 13893
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'" ]
+        }, {
+          "name" : "Show Archived Categories",
+          "uid" : "407c393ef656a556",
+          "parentUid" : "468bfac2cffcbd268b2ebee219752fb1",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580128149,
+            "stop" : 1756580128682,
+            "duration" : 533
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        }, {
+          "name" : "Set New Profile Name[Testname]",
+          "uid" : "e252b4e910efb732",
+          "parentUid" : "468bfac2cffcbd268b2ebee219752fb1",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580128720,
+            "stop" : 1756580129574,
+            "duration" : 854
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'Testname'" ]
+        }, {
+          "name" : "Set New Profile Name[\\U0418\\U043C\\U044F]",
+          "uid" : "3e02d98c40885630",
+          "parentUid" : "468bfac2cffcbd268b2ebee219752fb1",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580129581,
+            "stop" : 1756580130402,
+            "duration" : 821
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'Имя'" ]
+        }, {
+          "name" : "Set New Profile Name[Andrew]",
+          "uid" : "56faf62680d9496e",
+          "parentUid" : "468bfac2cffcbd268b2ebee219752fb1",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580130409,
+            "stop" : 1756580131432,
+            "duration" : 1023
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'Andrew'" ]
+        }, {
+          "name" : "Profile Name Validation[Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]",
+          "uid" : "4b89892fada11017",
+          "parentUid" : "468bfac2cffcbd268b2ebee219752fb1",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580131437,
+            "stop" : 1756580132390,
+            "duration" : 953
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'" ]
+        }, {
+          "name" : "Add New Category[Newcategory1]",
+          "uid" : "5b16be7e3908ac94",
+          "parentUid" : "468bfac2cffcbd268b2ebee219752fb1",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580142903,
+            "stop" : 1756580143907,
+            "duration" : 1004
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'NewCategory1'" ]
+        }, {
+          "name" : "Add Duplicate Category[Duplicatecategory]",
+          "uid" : "9d16a1245bb5b85d",
+          "parentUid" : "468bfac2cffcbd268b2ebee219752fb1",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580144034,
+            "stop" : 1756580144741,
+            "duration" : 707
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'DuplicateCategory'" ]
+        }, {
+          "name" : "Add Duplicate Archived Category[Duplicatearchivedcategory]",
+          "uid" : "fe12a763c85d5989",
+          "parentUid" : "468bfac2cffcbd268b2ebee219752fb1",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580144860,
+            "stop" : 1756580145638,
+            "duration" : 778
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'DuplicateArchivedCategory'" ]
+        }, {
+          "name" : "Duplicate Category Alert Elements[Duplicatecategorynifflerunique]",
+          "uid" : "8f9846b9f1983eee",
+          "parentUid" : "468bfac2cffcbd268b2ebee219752fb1",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580145806,
+            "stop" : 1756580146499,
+            "duration" : 693
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'DuplicateCategoryNifflerUnique'" ]
+        }, {
+          "name" : "Change Category Name With Icon[Changemynamewithicon]",
+          "uid" : "199f94720c7d001e",
+          "parentUid" : "468bfac2cffcbd268b2ebee219752fb1",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580146604,
+            "stop" : 1756580147822,
+            "duration" : 1218
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'ChangeMyNameWithIcon'" ]
+        }, {
+          "name" : "Change Category Name With Click[Changemynamewithclick]",
+          "uid" : "3b07fce386ed6e4e",
+          "parentUid" : "468bfac2cffcbd268b2ebee219752fb1",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580147912,
+            "stop" : 1756580149213,
+            "duration" : 1301
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'ChangeMyNameWithClick'" ]
+        }, {
+          "name" : "Add Incorrect Category[A]",
+          "uid" : "fc07ac09fccca9d",
+          "parentUid" : "468bfac2cffcbd268b2ebee219752fb1",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580149257,
+            "stop" : 1756580149753,
+            "duration" : 496
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'a'" ]
+        } ],
+        "uid" : "468bfac2cffcbd268b2ebee219752fb1"
+      }, {
+        "name" : "test_registration",
+        "children" : [ {
+          "name" : "Incorrect Username[A]",
+          "uid" : "b31cc2c91b2ccf7d",
+          "parentUid" : "930c43d2bfbb98261d317526e219f966",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580132410,
+            "stop" : 1756580133641,
+            "duration" : 1231
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'a'" ]
+        }, {
+          "name" : "Incorrect Username[Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]",
+          "uid" : "4f6c8d81283ba922",
+          "parentUid" : "930c43d2bfbb98261d317526e219f966",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580133648,
+            "stop" : 1756580134537,
+            "duration" : 889
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'" ]
+        }, {
+          "name" : "Incorrect Password[A]",
+          "uid" : "73ae12fcb221237",
+          "parentUid" : "930c43d2bfbb98261d317526e219f966",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580134544,
+            "stop" : 1756580135482,
+            "duration" : 938
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'a'" ]
+        }, {
+          "name" : "Incorrect Password[Aaaaaaaaaaaaa]",
+          "uid" : "4c801d40ee024db3",
+          "parentUid" : "930c43d2bfbb98261d317526e219f966",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580135518,
+            "stop" : 1756580136574,
+            "duration" : 1056
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'aaaaaaaaaaaaa'" ]
+        }, {
+          "name" : "Wrong Passwords[1-2]",
+          "uid" : "32312cf0bd902991",
+          "parentUid" : "930c43d2bfbb98261d317526e219f966",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580136589,
+            "stop" : 1756580137548,
+            "duration" : 959
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "0" ]
+        }, {
+          "name" : "Wrong Passwords[2-2]",
+          "uid" : "a277b9fedd086b7f",
+          "parentUid" : "930c43d2bfbb98261d317526e219f966",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580137561,
+            "stop" : 1756580138723,
+            "duration" : 1162
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "1" ]
+        }, {
+          "name" : "Registration Mixed Errors[A Ababab Bababa]",
+          "uid" : "1009857c8333fee7",
+          "parentUid" : "930c43d2bfbb98261d317526e219f966",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580138733,
+            "stop" : 1756580139753,
+            "duration" : 1020
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "UserData(username='a', password='ababab', password_repeat='bababa')" ]
+        }, {
+          "name" : "Registration Mixed Errors[Newuser Ababab B]",
+          "uid" : "f8fafc2eb7b7d49a",
+          "parentUid" : "930c43d2bfbb98261d317526e219f966",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580139762,
+            "stop" : 1756580140684,
+            "duration" : 922
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "UserData(username='newuser', password='ababab', password_repeat='b')" ]
+        }, {
+          "name" : "Registration Mixed Errors[Newuser Aaaaaaaaaaaaa Bababa]",
+          "uid" : "f783e0d4d688509c",
+          "parentUid" : "930c43d2bfbb98261d317526e219f966",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580140698,
+            "stop" : 1756580141660,
+            "duration" : 962
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "UserData(username='newuser', password='aaaaaaaaaaaaa', password_repeat='bababa')" ]
+        }, {
+          "name" : "Registration Mixed Errors[A A Aaaaaaaaaaaaa]",
+          "uid" : "e498cf61471dc231",
+          "parentUid" : "930c43d2bfbb98261d317526e219f966",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580141667,
+            "stop" : 1756580142498,
+            "duration" : 831
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "UserData(username='a', password='a', password_repeat='aaaaaaaaaaaaa')" ]
+        }, {
+          "name" : "Registration Mixed Errors[Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa A A]",
+          "uid" : "8424094b01c3fe00",
+          "parentUid" : "930c43d2bfbb98261d317526e219f966",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580142529,
+            "stop" : 1756580144060,
+            "duration" : 1531
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "UserData(username='aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', password='a', password_repeat='a')" ]
+        }, {
+          "name" : "Correct Registration[Niffleruser]",
+          "uid" : "67270e4d61e1ff41",
+          "parentUid" : "930c43d2bfbb98261d317526e219f966",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580144080,
+            "stop" : 1756580145327,
+            "duration" : 1247
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "UserData(username='NifflerUser', password='PassWordGo0d', password_repeat=None)" ]
+        } ],
+        "uid" : "930c43d2bfbb98261d317526e219f966"
+      }, {
+        "name" : "test_login",
+        "children" : [ {
+          "name" : "Bad Credentials[A]",
+          "uid" : "a3a2730f975db01",
+          "parentUid" : "c9b05b6fbde093b99cfd15c0f1c0410d",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580135920,
+            "stop" : 1756580137321,
+            "duration" : 1401
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "UserData(username='a', password='a', password_repeat=None)" ]
+        }, {
+          "name" : "Bad Credentials[Wrongusernonexistent!!]",
+          "uid" : "71571ae465ce245c",
+          "parentUid" : "c9b05b6fbde093b99cfd15c0f1c0410d",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580137336,
+            "stop" : 1756580138492,
+            "duration" : 1156
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "UserData(username='wrongUserNonExistent!!', password='wrongPass', password_repeat=None)" ]
+        }, {
+          "name" : "Successful Login",
+          "uid" : "80e6014983798e76",
+          "parentUid" : "c9b05b6fbde093b99cfd15c0f1c0410d",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580138523,
+            "stop" : 1756580140841,
+            "duration" : 2318
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        } ],
+        "uid" : "c9b05b6fbde093b99cfd15c0f1c0410d"
+      }, {
+        "name" : "test_spendings",
+        "children" : [ {
+          "name" : "Add New Spending[100.5 Usd Id=None Name='\\U0423\\U043D\\U0438\\U043A\\U0430\\U043B\\U044C\\U043D\\U043E\\U0435' Username=None Archived=False \\U0423\\U043D\\U0438\\U043A\\U0430\\U043B\\U044C\\U043D\\U044B\\U0435 \\U0431\\U043E\\U0442\\U0438\\U043D\\U043A\\U0438]",
+          "uid" : "ffba1d0bf48d3e6b",
+          "parentUid" : "090a10f2513a91420681323e2009d219",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580145442,
+            "stop" : 1756580148420,
+            "duration" : 2978
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "SpendAdd(id=None, amount=100.5, description='Уникальные ботинки', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2014-01-10T16:44:53.000Z', currency='USD', username=None)" ]
+        }, {
+          "name" : "Add New Spending[200.0 Rub Id=None Name='\\U0423\\U043D\\U0438\\U043A\\U0430\\U043B\\U044C\\U043D\\U043E\\U0435' Username=None Archived=False \\U0423\\U043D\\U0438\\U043A\\U0430\\U043B\\U044C\\U043D\\U044B\\U0435 \\U0442\\U0430\\U043F\\U043E\\U0447\\U043A\\U0438]",
+          "uid" : "6d9f8065198301c6",
+          "parentUid" : "090a10f2513a91420681323e2009d219",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580148475,
+            "stop" : 1756580151348,
+            "duration" : 2873
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "SpendAdd(id=None, amount=200.0, description='Уникальные тапочки', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2003-07-20T14:46:03.000Z', currency='RUB', username=None)" ]
+        }, {
+          "name" : "Spending Mixed Validation",
+          "uid" : "336d0016573628ca",
+          "parentUid" : "090a10f2513a91420681323e2009d219",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580149872,
+            "stop" : 1756580152412,
+            "duration" : 2540
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        }, {
+          "name" : "Add New Spending[235.35 Kzt Id=None Name='\\U041F\\U0443\\U0442\\U0435\\U0448\\U0435\\U0441\\U0442\\U0432\\U0438\\U044F' Username=None Archived=False \\U0411\\U0438\\U043B\\U0435\\U0442\\U044B \\U043D\\U0430 \\U0441\\U0430\\U043C\\U043E\\U043B\\U0451\\U0442]",
+          "uid" : "293fd18e375460bc",
+          "parentUid" : "090a10f2513a91420681323e2009d219",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580151401,
+            "stop" : 1756580154097,
+            "duration" : 2696
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "SpendAdd(id=None, amount=235.35, description='Билеты на самолёт', category=CategoryAdd(id=None, name='Путешествия', username=None, archived=False), spendDate='2025-03-29T19:00:59.000Z', currency='KZT', username=None)" ]
+        }, {
+          "name" : "Spendings Search Category",
+          "uid" : "4aa8d4c78c767a72",
+          "parentUid" : "090a10f2513a91420681323e2009d219",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580152445,
+            "stop" : 1756580153613,
+            "duration" : 1168
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        }, {
+          "name" : "Spendings Search Description",
+          "uid" : "f6d508a3a8d9ff4a",
+          "parentUid" : "090a10f2513a91420681323e2009d219",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580153666,
+            "stop" : 1756580154675,
+            "duration" : 1009
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        }, {
+          "name" : "Delete Single Spending Ui",
+          "uid" : "6dfc2678ff7ac985",
+          "parentUid" : "090a10f2513a91420681323e2009d219",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580154158,
+            "stop" : 1756580155944,
+            "duration" : 1786
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        }, {
+          "name" : "Nonexistent Spendings Search[Noneeeeeeee]",
+          "uid" : "87049e0ce331dc5f",
+          "parentUid" : "090a10f2513a91420681323e2009d219",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580154713,
+            "stop" : 1756580159668,
+            "duration" : 4955
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'Noneeeeeeee'" ]
+        }, {
+          "name" : "Delete Multiple Spendings Ui",
+          "uid" : "a054c62333cdcfb6",
+          "parentUid" : "090a10f2513a91420681323e2009d219",
+          "status" : "broken",
+          "time" : {
+            "start" : 1756580155977,
+            "stop" : 1756580157495,
+            "duration" : 1518
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        }, {
+          "name" : "Spending Amount Validation",
+          "uid" : "f78cdc7f0f9ea22b",
+          "parentUid" : "090a10f2513a91420681323e2009d219",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580157605,
+            "stop" : 1756580159520,
+            "duration" : 1915
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        }, {
+          "name" : "Spending Category Validation",
+          "uid" : "713f2aa8c267a55c",
+          "parentUid" : "090a10f2513a91420681323e2009d219",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580159566,
+            "stop" : 1756580161570,
+            "duration" : 2004
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        }, {
+          "name" : "Nonexistent Spendings Search[123]",
+          "uid" : "dbada25769a02601",
+          "parentUid" : "090a10f2513a91420681323e2009d219",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580159721,
+            "stop" : 1756580164865,
+            "duration" : 5144
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'123'" ]
+        }, {
+          "name" : "Nonexistent Spendings Search[\\U041D\\U0435\\U0441\\U0443\\U0449\\U0435\\U0441\\U0442\\U0432]",
+          "uid" : "430815a36d1defce",
+          "parentUid" : "090a10f2513a91420681323e2009d219",
+          "status" : "passed",
+          "time" : {
+            "start" : 1756580164903,
+            "stop" : 1756580169656,
+            "duration" : 4753
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ "'Несуществ'" ]
+        } ],
+        "uid" : "090a10f2513a91420681323e2009d219"
+      } ],
+      "uid" : "8227d5479134d921158679dcf7016e1e"
+    } ],
+    "uid" : "bf49149a3821e34f7608bb6885d52868"
+  } ],
+  "name" : "packages"
+}
