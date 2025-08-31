@@ -100,6 +100,7 @@ class MainPage(BasePage):
     def should_not_be_deleted_spendings(self, spendings: list[Spend], indexes: list[int]):
         page_spendings = []
         deleted_spendings = [spendings[i] for i in indexes]
+        self.wait_for_animations_finish((By.CSS_SELECTOR, "body"))
         new_table_rows = self.get_all_elements_presence_safe(self.SPENDINGS_TABLE_ROWS)
         for row in new_table_rows:
             page_spendings.append(self.get_row_cells_text(row))

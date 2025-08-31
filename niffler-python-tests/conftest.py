@@ -89,22 +89,39 @@ def pytest_runtest_makereport(item, call):
                 if not (label.name == LabelType.TAG and "pytest.mark.usefixtures" in label.value)
             ]
         
+def _capture_screenshot_on_failure(item: Item, error_type: str = "FAILED"):
+    """Вспомогательная функция для создания скриншотов при ошибках"""
+    if "browser" in item.fixturenames:
+        try:
+            browser = item._request.getfixturevalue("browser")
+            screenshot = browser.get_screenshot_as_png()
+            allure.attach(
+                screenshot,
+                name=f"Screenshot_{error_type}_{item.name}",
+                attachment_type=allure.attachment_type.PNG
+            )
+            logging.info(f"Screenshot captured for {error_type} test: {item.name}")
+        except Exception as e:
+            logging.warning(f"Could not capture screenshot for {item.name}: {e}")
+
+@pytest.hookimpl(hookwrapper=True, tryfirst=True)
+def pytest_runtest_call(item: Item):
+    """Хук для обработки исключений во время выполнения тестов"""
+    outcome = yield
+    
+    # Проверяем наличие исключений (включая StaleElementReferenceException)
+    if outcome.excinfo is not None:
+        exception_type = outcome.excinfo[0].__name__
+        logging.warning(f"Exception in test {item.name}: {exception_type}")
+        _capture_screenshot_on_failure(item, f"EXCEPTION_{exception_type}")
+
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
 def pytest_runtest_teardown(item: Item):
     yield
     
+    # Скриншот для упавших тестов (основная обработка)
     if hasattr(item, "rep_call") and item.rep_call.failed:
-        if "browser" in item.fixturenames:
-            try:
-                browser = item._request.getfixturevalue("browser")
-                screenshot = browser.get_screenshot_as_png()
-                allure.attach(
-                    screenshot,
-                    name=f"Screenshot_FAILED_{item.name}",
-                    attachment_type=allure.attachment_type.PNG
-                )
-            except Exception as e:
-                logging.warning(f"Could not capture screenshot for {item.name}: {e}")
+        _capture_screenshot_on_failure(item, "FAILED")
     
     reporter = allure_logger(item.config)
     if reporter:
