@@ -6,10 +6,11 @@ from uuid import UUID
 
 class UserName(BaseModel):
     username: str
-    
+
 class UserData(BaseModel):
     username: str
     password: str
+    password_repeat: Optional[str] = None
     
 class User(SQLModel, table=True):
     id: UUID = Field(default=None, primary_key=True)

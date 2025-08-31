@@ -1,8 +1,6 @@
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from utils.errors import ValidationErrors
-from .base_page import BasePage
+from pages.base_page import BasePage
 import allure
 
 class RegisterPage(BasePage):
@@ -51,22 +49,22 @@ class RegisterPage(BasePage):
     def should_be_errors_in_validation(self, errors: dict[str, list[ValidationErrors]]):
         key = None
         if "username" in errors and len(errors["username"]) > 0:
-            username_error = WebDriverWait(self.browser, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "input#username ~ span.form__error"))
+            username_error = self.get_element_presence_safe(
+                (By.CSS_SELECTOR, "input#username ~ span.form__error")
             )
             element_text = username_error.text
             key = "username"
         
         if "password" in errors and len(errors["password"]) > 0:
-            password_error = WebDriverWait(self.browser, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "input#password ~ span.form__error"))
+            password_error = self.get_element_presence_safe(
+                (By.CSS_SELECTOR, "input#password ~ span.form__error")
             )
             element_text = password_error.text
             key = "password"
         
         if "password_repeat" in errors and len(errors["password_repeat"]) > 0:
-            password_repeat_error = WebDriverWait(self.browser, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, "input#passwordSubmit ~ span.form__error"))
+            password_repeat_error = self.get_element_presence_safe(
+                (By.CSS_SELECTOR, "input#passwordSubmit ~ span.form__error")
             )
             element_text = password_repeat_error.text
             key = "password_repeat"
@@ -77,5 +75,5 @@ class RegisterPage(BasePage):
     
     @allure.step("Проверка на успешную регистрацию")    
     def should_be_successful_registration(self):
-        assert self.is_element_present(*self.REGISTER_SUCCESS_HEADER)
-        assert self.is_element_present(*self.REGISTER_SUCCESS_LOGIN_BTN)
+        self.should_be_element(self.REGISTER_SUCCESS_HEADER)
+        self.should_be_element(self.REGISTER_SUCCESS_LOGIN_BTN)

@@ -7,7 +7,7 @@ from marks import TestData
 pytestmark = [pytest.mark.allure_label(label_type="epic", value=Epic.app_name)]
             
 @pytest.mark.usefixtures(
-    "auth_api_token",
+    "token_data",
     "spends_client",
     "all_categories"
 )
@@ -41,7 +41,7 @@ class TestCategoriesAPI:
             assert category_data["type"] == "niffler-spend: Bad request "
             
     @TestData.archived_category(["UniqueArchivedCategory1"])
-    @pytest.mark.xdist_group("03_archived_category")
+    @pytest.mark.xdist_group("02_category")
     @allure.story(Story.add_category)
     def test_add_existing_archived_category(self, spends_client: SpendsClient, archived_category: str):
         category_data = spends_client.add_category(archived_category)
@@ -93,7 +93,7 @@ class TestCategoriesAPI:
             assert updated_category_data.username == category_data.username
             
     @allure.story(Story.get_category)
-    @pytest.mark.xdist_group("04_get_category")
+    @pytest.mark.xdist_group("02_category")
     def test_get_active_categories(self, spends_client: SpendsClient, mixed_categories: dict[str, list[str]]):
         active_categories = spends_client.get_all_categories(exclude_archived=True)
         with allure.step("Проверка, что активные категории получены"):
@@ -101,7 +101,7 @@ class TestCategoriesAPI:
                 assert category_id in [cat.id for cat in active_categories]
     
     @allure.story(Story.get_category)
-    @pytest.mark.xdist_group("04_get_category")
+    @pytest.mark.xdist_group("02_category")
     def test_get_all_categories(self, spends_client: SpendsClient, mixed_categories: dict[str, list[str]]):
         all_categories = spends_client.get_all_categories()
         with allure.step("Проверка, что все категории получены"):

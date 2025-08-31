@@ -7,17 +7,9 @@ from utils.generate_datetime import generate_random_datetime
 from utils.mock_data import MockData
 from clients.spends_client import SpendsClient
 from models.config import ClientEnvs
-from clients.lock_client import LockManager
+import uuid
 
 ################# For spending tests ####################
-
-@pytest.fixture(scope="function")
-def spendings_lock(lock_manager: LockManager):
-    try:
-        lock_manager.acquire_lock(lock_filename="spendings.lock")
-        yield
-    finally:
-        lock_manager.release_lock()
 
 @pytest.fixture(scope="session")
 def spendings_data(client_envs: ClientEnvs, faker: Faker):
@@ -31,7 +23,7 @@ def spendings_data(client_envs: ClientEnvs, faker: Faker):
                 break
         category_name = random.choice(MockData.CATEGORIES)
         currency = random.choice(MockData.CURRENCIES)
-        description = faker.sentence(nb_words=2, variable_nb_words=True)
+        description = faker.sentence(nb_words=2, variable_nb_words=True) + "_" + str(uuid.uuid4())
         spend_date = generate_random_datetime()
         data = SpendAdd(
             amount=amount,
@@ -60,7 +52,3 @@ def add_spendings(spends_client: SpendsClient, spendings_data: list[SpendAdd]):
             continue
         spends_client.add_spending(data)
     yield
-    
-@pytest.fixture(scope="function")
-def spendings_list(spends_client: SpendsClient) -> list[SpendGet]:
-    return spends_client.get_all_spendings()

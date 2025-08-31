@@ -23,3 +23,4 @@ class Currency:
     USD = "USD"
     KZT = "KZT"
     ALL = [RUB, EUR, USD, KZT]
+    

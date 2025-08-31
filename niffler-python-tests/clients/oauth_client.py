@@ -6,6 +6,7 @@ from models.oauth import OAuthRequest
 from http import HTTPStatus
 import pkce
 from requests import Response
+from models.auth_user import TokenData
 
 class OAuthClient:
     """Авторизует по Oauth2.0"""
@@ -25,6 +26,7 @@ class OAuthClient:
         self.session = AuthSession(base_url=server_envs.auth_url)
         self.code_verifier, self.code_challenge = pkce.generate_pkce_pair()
         self.token = None
+        self.id_token = None
     
     @allure.step("API Регистрация пользователя")
     def register(self, username: str, password: str) -> Response:
@@ -62,7 +64,7 @@ class OAuthClient:
             assert False, err_text
     
     @allure.step("API Авторизация и получение токена")
-    def get_token(self, username: str, password: str) -> str:
+    def get_token(self, username: str, password: str) -> TokenData:
         """Возвращает access token для авторизации пользователя с username и password.
         
         1. Получаем jsessionid и xsrf-токен куку в сессию.
@@ -99,5 +101,22 @@ class OAuthClient:
             }
         )
         self.token = token_response.json().get("access_token", None)
+        self.id_token = token_response.json().get("id_token", None)
+        cookie_list = []
+        for cookie in self.session.cookies:
+            cookie_list.append({
+                "name": cookie.name,
+                "value": cookie.value,
+                "path": cookie.path,
+                "domain": cookie.domain,
+                "secure": cookie.secure
+            })
+        
         logging.info("Получен access token")
-        return self.token
+        return TokenData(
+            access_token=self.token,
+            code_verifier=self.code_verifier,
+            code_challenge=self.code_challenge,
+            id_token=self.id_token,
+            cookies=cookie_list
+        )

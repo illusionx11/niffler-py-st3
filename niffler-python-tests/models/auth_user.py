@@ -1,6 +1,7 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from sqlmodel import SQLModel, Field
-from typing import Optional
+from typing import Optional, Any
+import requests
 from sqlalchemy import MetaData
     
 class User(SQLModel, table=True):
@@ -18,3 +19,12 @@ class Authority(SQLModel, table=True):
     id: str = Field(default=None, primary_key=True)
     user_id: str
     authority: str
+    
+class TokenData(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+    
+    access_token: str
+    code_verifier: str
+    code_challenge: str
+    id_token: str
+    cookies: list[dict[str, Any]]

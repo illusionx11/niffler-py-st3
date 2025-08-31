@@ -9,7 +9,7 @@ from marks import TestData
 pytestmark = [pytest.mark.allure_label(label_type="epic", value=Epic.app_name)]
 
 @pytest.mark.usefixtures(
-    "auth_api_token",
+    "token_data",
     "spends_client",
     "spends_db",
     "client_envs"

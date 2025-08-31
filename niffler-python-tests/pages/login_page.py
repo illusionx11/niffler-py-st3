@@ -1,9 +1,7 @@
 import logging
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from utils.errors import ValidationErrors
-from .base_page import BasePage
+from pages.base_page import BasePage
 import allure
 
 class LoginPage(BasePage):
@@ -21,7 +19,7 @@ class LoginPage(BasePage):
     
     @allure.step("Авторизация в сервис")
     def log_in(self, username: str, password: str):
-        self.open()
+        self.open(set_localstorage=False)
         self.should_be_login_page()
         logging.info(f"Logging in as {username}")
         self.browser.find_element(*self.USERNAME_INPUT).send_keys(username)
@@ -38,13 +36,13 @@ class LoginPage(BasePage):
     
     @allure.step("Проверка на наличие заголовка авторизации")
     def should_be_login_heading(self):
-        header = self.browser.find_element(*self.LOGIN_HEADER)
+        header = self.get_element_presence_safe(self.LOGIN_HEADER)
         assert header.is_displayed()
         assert header.text.lower() == "log in"
 
     @allure.step("Проверка на наличие ошибок валидации")
     def should_be_errors_in_validation(self, errors: dict[str, list[ValidationErrors]]):
         if "login" in errors and len(errors["login"]) > 0:
-            login_error = WebDriverWait(self.browser, 10).until(EC.presence_of_element_located(self.LOGIN_FORM_ERROR))
+            login_error = self.get_element_presence_safe(self.LOGIN_FORM_ERROR)
             for error_text in errors["login"]:
                 assert error_text in login_error.text

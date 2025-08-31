@@ -6,8 +6,10 @@ from databases.auth_db import AuthDb
 from databases.userdata_db import UserdataDb
 from models.config import ClientEnvs
 from clients.lock_client import LockManager
-from utils.user_creator import SoapUserCreator
-from models.user import UserData
+from clients.oauth_client import OAuthClient
+from models.auth_user import TokenData
+from models.spend import SpendGet
+from clients.spends_client import SpendsClient
 
 @pytest.fixture(scope="session")
 def lock_manager() -> LockManager:
@@ -44,6 +46,50 @@ def cleanup(
         name="cleanup"
     ):
         yield users
+        
+@pytest.fixture(scope="session", autouse=True)
+def token_data(
+    client_envs: ClientEnvs, auth_client: OAuthClient, cleanup, lock_manager: LockManager
+):
+    
+    def get_token_data():
+        username = client_envs.test_username
+        password = client_envs.test_password
+        auth_client.register(username, password)
+        token_data = auth_client.get_token(username, password)
+        return token_data.model_dump()
+    
+    for token_data in lock_manager.acquire_lock(
+        lock_file_path="token_data.lock",
+        lock_data_path="token_data.json",
+        lock_count_path="token_data.count",
+        name="token_data",
+        create_func=get_token_data
+    ):
+        yield TokenData(
+            access_token=token_data["access_token"],
+            code_verifier=token_data["code_verifier"],
+            code_challenge=token_data["code_challenge"],
+            id_token=token_data["id_token"],
+            cookies=token_data["cookies"]
+        )
+
+@pytest.fixture
+def spendings_list(
+    spends_client: SpendsClient, lock_manager: LockManager
+):
+    # Без блокировки иногда падает ui тест для удаления трат, потому что выбирает не тот индекс
+    def get_spendings():
+        return [s.model_dump() for s in spends_client.get_all_spendings()]
+    
+    for spendings_list in lock_manager.acquire_lock(
+        lock_file_path="spendings_list.lock",
+        lock_data_path="spendings_list.json",
+        lock_count_path="spendings_list.count",
+        name="spendings_list",
+        create_func=get_spendings
+    ):
+        yield [SpendGet.model_validate(s) for s in spendings_list]
 
 @pytest.fixture(scope="function")
 def delete_spendings_lock(lock_manager: LockManager):

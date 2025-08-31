@@ -1,8 +1,6 @@
 import pytest
 from faker import Faker
-import random
 import allure
-import time
 from marks import TestData
 from pages.register_page import RegisterPage
 from utils.errors import ValidationErrors
@@ -23,19 +21,18 @@ class TestRegistration:
     
     @TestData.username(["a", LONG_USERNAME])
     def test_incorrect_username(self, register_page: RegisterPage, username: str, faker: Faker):
-        register_page.open()
+        register_page.open(set_localstorage=False)
         register_page.should_be_register_page()
         password = faker.password(length=8)
         register_page.register_user(username, password)
         errors = {
             "username": [ValidationErrors.USERNAME_LENGTH]
         }
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         register_page.should_be_errors_in_validation(errors=errors)
     
     @TestData.password(["a", LONG_PASSWORD])
     def test_incorrect_password(self, register_page: RegisterPage, password: str, faker: Faker):
-        register_page.open()
+        register_page.open(set_localstorage=False)
         register_page.should_be_register_page()
         username = faker.first_name()
         register_page.register_user(username, password)
@@ -43,12 +40,11 @@ class TestRegistration:
             "password": [ValidationErrors.PASSWORD_LENGTH],
             "password_repeat": [ValidationErrors.PASSWORD_LENGTH]
         }
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         register_page.should_be_errors_in_validation(errors=errors)
     
     @pytest.mark.repeat(2)
     def test_wrong_passwords(self, register_page: RegisterPage, faker: Faker):
-        register_page.open()
+        register_page.open(set_localstorage=False)
         register_page.should_be_register_page()
         username = faker.first_name()
         password = faker.password(length=8)
@@ -62,22 +58,21 @@ class TestRegistration:
             "password": [ValidationErrors.DIFFERENT_PASSWORDS],
             "password_repeat": [],
         }
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         register_page.should_be_errors_in_validation(errors=errors)
     
     @TestData.register_data([
-        {"username": "a", "password": "ababab", "password_repeat": "bababa"},
-        {"username": "newuser", "password": "ababab", "password_repeat": "b"},
-        {"username": "newuser", "password": LONG_PASSWORD, "password_repeat": "bababa"},
-        {"username": "a", "password": "a", "password_repeat": LONG_PASSWORD},
-        {"username": LONG_USERNAME, "password": "a", "password_repeat": "a"}
+        UserData(username="a", password="ababab", password_repeat="bababa"),
+        UserData(username="newuser", password="ababab", password_repeat="b"),
+        UserData(username="newuser", password=LONG_PASSWORD, password_repeat="bababa"),
+        UserData(username="a", password="a", password_repeat=LONG_PASSWORD),
+        UserData(username=LONG_USERNAME, password="a", password_repeat="a")
     ])
-    def test_registration_mixed_errors(self, register_page: RegisterPage, register_data: dict[str]):
-        register_page.open()
+    def test_registration_mixed_errors(self, register_page: RegisterPage, register_data: UserData):
+        register_page.open(set_localstorage=False)
         register_page.should_be_register_page()
-        username = register_data["username"]
-        password = register_data["password"]
-        password_repeat = register_data["password_repeat"]
+        username = register_data.username
+        password = register_data.password
+        password_repeat = register_data.password_repeat
         errors = {
             "username": [],
             "password": [],
@@ -92,14 +87,12 @@ class TestRegistration:
         if password != password_repeat:
             errors["password"].append(ValidationErrors.DIFFERENT_PASSWORDS)
         register_page.register_user(username, password, password_repeat)
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         register_page.should_be_errors_in_validation(errors=errors)
     
     @TestData.new_user([UserData(username="NifflerUser", password="PassWordGo0d")])
     def test_correct_registration(self, register_page: RegisterPage, new_user: UserData):
-        register_page.open()
+        register_page.open(set_localstorage=False)
         register_page.should_be_register_page()
         register_page.register_user(new_user.username, new_user.password)
-        time.sleep(0.3) # Чтобы избежать Stale Element Reference
         register_page.should_be_successful_registration()
         

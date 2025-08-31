@@ -136,7 +136,6 @@ class TestCalculateRate:
                 )
             )
         except grpc.RpcError as e:
-            print(f"CODE: {e.code()}")
             if mock:
                 with allure.step("Проверка ошибки mock-сервера"):
                     assert e.code() == grpc.StatusCode.NOT_FOUND
