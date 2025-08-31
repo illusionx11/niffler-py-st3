@@ -1,0 +1,1141 @@
+{
+  "uid" : "e8e4b6da15fb1409",
+  "name" : "test_delete_single_spending_ui",
+  "fullName" : "tests.ui.test_spendings.TestSpendings#test_delete_single_spending_ui",
+  "historyId" : "84795b9ff7dd9940484b958189666c0c",
+  "time" : {
+    "start" : 1756636086016,
+    "stop" : 1756636088337,
+    "duration" : 2321
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: Расход id='1a80986c-6ecb-4515-8b0d-c3b82ef71da0' amount=9999.99 description='Multiple fields updated' category=CategoryGet(id='ac0b0500-72c2-4e3c-962d-e2fb04e61d5e', name='Развлечения', username='niffler_qa', archived=False) spendDate='2024-06-14T21:00:00.000+00:00' currency='KZT' username='niffler_qa' найден на странице",
+  "statusTrace" : "self = <tests.ui.test_spendings.TestSpendings object at 0x7ff913f80ad0>\nmain_page = <pages.main_page.MainPage object at 0x7ff913d6d6a0>\nspendings_list = [SpendGet(id='b048b51b-4019-42f8-a91f-cc37e48ec3c5', amount=235.35, description='Билеты на самолёт', category=Category...='niffler_qa', archived=False), spendDate='2024-04-24T21:00:00.000+00:00', currency='KZT', username='niffler_qa'), ...]\ndelete_spendings_lock = None\n\n    @allure.story(Story.delete_spending)\n    @pytest.mark.xdist_group(\"05_spendings\")\n    def test_delete_single_spending_ui(\n        self,\n        main_page: MainPage,\n        spendings_list: list[SpendGet],\n        delete_spendings_lock\n    ):\n        main_page.open(add_domain=True)\n        main_page.should_be_mainpage()\n        max_index = len(spendings_list) - 1 if len(spendings_list) <= 10 else 9\n        index = random.randint(0, max_index)\n        logging.info(f\"Удаляем расход {spendings_list[index]}\")\n        main_page.remove_spendings(indexes=[index])\n>       main_page.should_not_be_deleted_spendings(spendings_list, indexes=[index])\n\ntests/ui/test_spendings.py:156: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <pages.main_page.MainPage object at 0x7ff913d6d6a0>\nspendings = [SpendGet(id='b048b51b-4019-42f8-a91f-cc37e48ec3c5', amount=235.35, description='Билеты на самолёт', category=Category...='niffler_qa', archived=False), spendDate='2024-04-24T21:00:00.000+00:00', currency='KZT', username='niffler_qa'), ...]\nindexes = [4]\n\n    @allure.step(\"Проверка на исчезновение трат из таблицы\")\n    def should_not_be_deleted_spendings(self, spendings: list[Spend], indexes: list[int]):\n        page_spendings = []\n        deleted_spendings = [spendings[i] for i in indexes]\n        self.wait_for_animations_finish((By.CSS_SELECTOR, \"body\"))\n        new_table_rows = self.get_all_elements_presence_safe(self.SPENDINGS_TABLE_ROWS)\n        for row in new_table_rows:\n            page_spendings.append(self.get_row_cells_text(row))\n        for spending_data in page_spendings:\n            category, amount, currency, description, date = spending_data\n            existing_spending = next(\n                (\n                    s for s in deleted_spendings\n                    if s.category.name == category and s.amount == float(amount) \\\n                    and self.CURRENCIES_MAPS[s.currency] == currency \\\n                    and s.description == description\n                ),\n                None\n            )\n            if existing_spending:\n>               assert False, f\"Расход {existing_spending} найден на странице\"\nE               AssertionError: Расход id='1a80986c-6ecb-4515-8b0d-c3b82ef71da0' amount=9999.99 description='Multiple fields updated' category=CategoryGet(id='ac0b0500-72c2-4e3c-962d-e2fb04e61d5e', name='Развлечения', username='niffler_qa', archived=False) spendDate='2024-06-14T21:00:00.000+00:00' currency='KZT' username='niffler_qa' найден на странице\n\npages/main_page.py:119: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "[S]  Session Faker",
+    "time" : {
+      "start" : 1756636020476,
+      "stop" : 1756636020581,
+      "duration" : 105
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[F] Delete Spendings Lock",
+    "time" : {
+      "start" : 1756636086015,
+      "stop" : 1756636086015,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Token Data",
+    "time" : {
+      "start" : 1756636021149,
+      "stop" : 1756636022150,
+      "duration" : 1001
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Spends Client",
+    "time" : {
+      "start" : 1756636028752,
+      "stop" : 1756636028752,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Browser",
+    "time" : {
+      "start" : 1756636022151,
+      "stop" : 1756636028752,
+      "duration" : 6601
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Lock Manager",
+    "time" : {
+      "start" : 1756636020581,
+      "stop" : 1756636020581,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Auth Client",
+    "time" : {
+      "start" : 1756636021149,
+      "stop" : 1756636021149,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Faker",
+    "time" : {
+      "start" : 1756636053230,
+      "stop" : 1756636053232,
+      "duration" : 2
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Cleanup",
+    "time" : {
+      "start" : 1756636020648,
+      "stop" : 1756636021149,
+      "duration" : 501
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[F] Spendings List",
+    "time" : {
+      "start" : 1756636085990,
+      "stop" : 1756636086015,
+      "duration" : 25
+    },
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "API Получение списка трат",
+      "time" : {
+        "start" : 1756636085990,
+        "stop" : 1756636086015,
+        "duration" : 25
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /api/v2/spends/all",
+        "time" : {
+          "start" : 1756636085996,
+          "stop" : 1756636086014,
+          "duration" : 18
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "f6471fca9134545a",
+          "name" : "Request",
+          "source" : "f6471fca9134545a.html",
+          "type" : "text/html",
+          "size" : 3619
+        }, {
+          "uid" : "3db6dbcff0b7d0a4",
+          "name" : "Response json 200",
+          "source" : "3db6dbcff0b7d0a4.json",
+          "type" : "application/json",
+          "size" : 8232
+        }, {
+          "uid" : "4d53dfe07bf2fe4f",
+          "name" : "Response headers 200",
+          "source" : "4d53dfe07bf2fe4f.json",
+          "type" : "application/json",
+          "size" : 490
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 2,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Spends Db",
+    "time" : {
+      "start" : 1756636020584,
+      "stop" : 1756636020646,
+      "duration" : 62
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Headless",
+    "time" : {
+      "start" : 1756636022150,
+      "stop" : 1756636022151,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[F] Main Page",
+    "time" : {
+      "start" : 1756636085989,
+      "stop" : 1756636085990,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Auth Db",
+    "time" : {
+      "start" : 1756636020646,
+      "stop" : 1756636020647,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[C] Add Spendings",
+    "time" : {
+      "start" : 1756636067152,
+      "stop" : 1756636067211,
+      "duration" : 59
+    },
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "API Получение списка трат",
+      "time" : {
+        "start" : 1756636067152,
+        "stop" : 1756636067210,
+        "duration" : 58
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /api/v2/spends/all",
+        "time" : {
+          "start" : 1756636067162,
+          "stop" : 1756636067210,
+          "duration" : 48
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "8646f00e3498db41",
+          "name" : "Request",
+          "source" : "8646f00e3498db41.html",
+          "type" : "text/html",
+          "size" : 3619
+        }, {
+          "uid" : "510f35e107da8766",
+          "name" : "Response json 200",
+          "source" : "510f35e107da8766.json",
+          "type" : "application/json",
+          "size" : 6331
+        }, {
+          "uid" : "58797eb9041547e8",
+          "name" : "Response headers 200",
+          "source" : "58797eb9041547e8.json",
+          "type" : "application/json",
+          "size" : 490
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 2,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Spendings Data",
+    "time" : {
+      "start" : 1756636067147,
+      "stop" : 1756636067149,
+      "duration" : 2
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Client Envs",
+    "time" : {
+      "start" : 1756636020647,
+      "stop" : 1756636020648,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "4f10eae8d5ebefaf",
+      "name" : "client_envs.json",
+      "source" : "4f10eae8d5ebefaf.json",
+      "type" : "application/json",
+      "size" : 66
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Server Envs",
+    "time" : {
+      "start" : 1756636020582,
+      "stop" : 1756636020584,
+      "duration" : 2
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "fd4c4425c8f386c4",
+      "name" : "server_envs.json",
+      "source" : "fd4c4425c8f386c4.json",
+      "type" : "application/json",
+      "size" : 582
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Userdata Db",
+    "time" : {
+      "start" : 1756636020647,
+      "stop" : 1756636020647,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: Расход id='1a80986c-6ecb-4515-8b0d-c3b82ef71da0' amount=9999.99 description='Multiple fields updated' category=CategoryGet(id='ac0b0500-72c2-4e3c-962d-e2fb04e61d5e', name='Развлечения', username='niffler_qa', archived=False) spendDate='2024-06-14T21:00:00.000+00:00' currency='KZT' username='niffler_qa' найден на странице",
+    "statusTrace" : "self = <tests.ui.test_spendings.TestSpendings object at 0x7ff913f80ad0>\nmain_page = <pages.main_page.MainPage object at 0x7ff913d6d6a0>\nspendings_list = [SpendGet(id='b048b51b-4019-42f8-a91f-cc37e48ec3c5', amount=235.35, description='Билеты на самолёт', category=Category...='niffler_qa', archived=False), spendDate='2024-04-24T21:00:00.000+00:00', currency='KZT', username='niffler_qa'), ...]\ndelete_spendings_lock = None\n\n    @allure.story(Story.delete_spending)\n    @pytest.mark.xdist_group(\"05_spendings\")\n    def test_delete_single_spending_ui(\n        self,\n        main_page: MainPage,\n        spendings_list: list[SpendGet],\n        delete_spendings_lock\n    ):\n        main_page.open(add_domain=True)\n        main_page.should_be_mainpage()\n        max_index = len(spendings_list) - 1 if len(spendings_list) <= 10 else 9\n        index = random.randint(0, max_index)\n        logging.info(f\"Удаляем расход {spendings_list[index]}\")\n        main_page.remove_spendings(indexes=[index])\n>       main_page.should_not_be_deleted_spendings(spendings_list, indexes=[index])\n\ntests/ui/test_spendings.py:156: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <pages.main_page.MainPage object at 0x7ff913d6d6a0>\nspendings = [SpendGet(id='b048b51b-4019-42f8-a91f-cc37e48ec3c5', amount=235.35, description='Билеты на самолёт', category=Category...='niffler_qa', archived=False), spendDate='2024-04-24T21:00:00.000+00:00', currency='KZT', username='niffler_qa'), ...]\nindexes = [4]\n\n    @allure.step(\"Проверка на исчезновение трат из таблицы\")\n    def should_not_be_deleted_spendings(self, spendings: list[Spend], indexes: list[int]):\n        page_spendings = []\n        deleted_spendings = [spendings[i] for i in indexes]\n        self.wait_for_animations_finish((By.CSS_SELECTOR, \"body\"))\n        new_table_rows = self.get_all_elements_presence_safe(self.SPENDINGS_TABLE_ROWS)\n        for row in new_table_rows:\n            page_spendings.append(self.get_row_cells_text(row))\n        for spending_data in page_spendings:\n            category, amount, currency, description, date = spending_data\n            existing_spending = next(\n                (\n                    s for s in deleted_spendings\n                    if s.category.name == category and s.amount == float(amount) \\\n                    and self.CURRENCIES_MAPS[s.currency] == currency \\\n                    and s.description == description\n                ),\n                None\n            )\n            if existing_spending:\n>               assert False, f\"Расход {existing_spending} найден на странице\"\nE               AssertionError: Расход id='1a80986c-6ecb-4515-8b0d-c3b82ef71da0' amount=9999.99 description='Multiple fields updated' category=CategoryGet(id='ac0b0500-72c2-4e3c-962d-e2fb04e61d5e', name='Развлечения', username='niffler_qa', archived=False) spendDate='2024-06-14T21:00:00.000+00:00' currency='KZT' username='niffler_qa' найден на странице\n\npages/main_page.py:119: AssertionError",
+    "steps" : [ {
+      "name" : "Открыть страницу",
+      "time" : {
+        "start" : 1756636086016,
+        "stop" : 1756636086884,
+        "duration" : 868
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "set_localstorage",
+        "value" : "True"
+      }, {
+        "name" : "add_domain",
+        "value" : "True"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Проверка на валидность главной страницы",
+      "time" : {
+        "start" : 1756636086884,
+        "stop" : 1756636086957,
+        "duration" : 73
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "Проврека на присутствие элемента",
+        "time" : {
+          "start" : 1756636086884,
+          "stop" : 1756636086942,
+          "duration" : 58
+        },
+        "status" : "passed",
+        "steps" : [ {
+          "name" : "Получение Web элемента",
+          "time" : {
+            "start" : 1756636086884,
+            "stop" : 1756636086942,
+            "duration" : 58
+          },
+          "status" : "passed",
+          "steps" : [ ],
+          "attachments" : [ ],
+          "parameters" : [ {
+            "name" : "locator",
+            "value" : "('css selector', 'div#spendings')"
+          }, {
+            "name" : "timeout",
+            "value" : "10"
+          } ],
+          "stepsCount" : 0,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false,
+          "hasContent" : true
+        } ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "locator",
+          "value" : "('css selector', 'div#spendings')"
+        } ],
+        "stepsCount" : 1,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Проврека на присутствие элемента",
+        "time" : {
+          "start" : 1756636086943,
+          "stop" : 1756636086953,
+          "duration" : 10
+        },
+        "status" : "passed",
+        "steps" : [ {
+          "name" : "Получение Web элемента",
+          "time" : {
+            "start" : 1756636086943,
+            "stop" : 1756636086953,
+            "duration" : 10
+          },
+          "status" : "passed",
+          "steps" : [ ],
+          "attachments" : [ ],
+          "parameters" : [ {
+            "name" : "locator",
+            "value" : "('css selector', 'div#stat')"
+          }, {
+            "name" : "timeout",
+            "value" : "10"
+          } ],
+          "stepsCount" : 0,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false,
+          "hasContent" : true
+        } ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "locator",
+          "value" : "('css selector', 'div#stat')"
+        } ],
+        "stepsCount" : 1,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Проверка на наличие строки в URL",
+        "time" : {
+          "start" : 1756636086954,
+          "stop" : 1756636086957,
+          "duration" : 3
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "arg",
+          "value" : "'main'"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 5,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Удаление трат",
+      "time" : {
+        "start" : 1756636086958,
+        "stop" : 1756636087603,
+        "duration" : 645
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "Получение выбранных Web элементов",
+        "time" : {
+          "start" : 1756636086958,
+          "stop" : 1756636086969,
+          "duration" : 11
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "locator",
+          "value" : "('css selector', 'table tbody tr')"
+        }, {
+          "name" : "timeout",
+          "value" : "10"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Получение кликабельного Web элемента",
+        "time" : {
+          "start" : 1756636087144,
+          "stop" : 1756636087270,
+          "duration" : 126
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "locator",
+          "value" : "('css selector', 'button#delete')"
+        }, {
+          "name" : "timeout",
+          "value" : "10"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Получение Web элемента",
+        "time" : {
+          "start" : 1756636087429,
+          "stop" : 1756636087470,
+          "duration" : 41
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "locator",
+          "value" : "('css selector', \"div[role='dialog']\")"
+        }, {
+          "name" : "timeout",
+          "value" : "10"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Получение кликабельного Web элемента",
+        "time" : {
+          "start" : 1756636087470,
+          "stop" : 1756636087506,
+          "duration" : 36
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "locator",
+          "value" : "('xpath', '/html/body/div[2]/div[3]/div/div[2]/button[2]')"
+        }, {
+          "name" : "timeout",
+          "value" : "10"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Ожидание завершения анимации",
+        "time" : {
+          "start" : 1756636087506,
+          "stop" : 1756636087518,
+          "duration" : 12
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "element",
+          "value" : "<selenium.webdriver.remote.webelement.WebElement (session=\"14cb0fc7896d2c5655c692424be46c80\", element=\"f.44AB1389ADD5E1D6F65947804280692E.d.9A85F554FDE1C59B2076FE16CB2A760C.e.1689\")>"
+        }, {
+          "name" : "timeout",
+          "value" : "10"
+        }, {
+          "name" : "include_subtree",
+          "value" : "True"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "indexes",
+        "value" : "[4]"
+      } ],
+      "stepsCount" : 5,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Проверка на исчезновение трат из таблицы",
+      "time" : {
+        "start" : 1756636087604,
+        "stop" : 1756636088331,
+        "duration" : 727
+      },
+      "status" : "failed",
+      "statusMessage" : "AssertionError: Расход id='1a80986c-6ecb-4515-8b0d-c3b82ef71da0' amount=9999.99 description='Multiple fields updated' category=CategoryGet(id='ac0b0500-72c2-4e3c-962d-e2fb04e61d5e', name='Развлечения', username='niffler_qa', archived=False) spendDate='2024-06-14T21:00:00.000+00:00' currency='KZT' username='niffler_qa' найден на странице\n",
+      "statusTrace" : "  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/allure_commons/_allure.py\", line 202, in impl\n    return func(*a, **kw)\n  File \"/home/runner/work/niffler-py-st3/niffler-py-st3/niffler-python-tests/pages/main_page.py\", line 119, in should_not_be_deleted_spendings\n    assert False, f\"Расход {existing_spending} найден на странице\"\n           ^^^^^\n",
+      "steps" : [ {
+        "name" : "Ожидание завершения анимации",
+        "time" : {
+          "start" : 1756636087604,
+          "stop" : 1756636087613,
+          "duration" : 9
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "element",
+          "value" : "('css selector', 'body')"
+        }, {
+          "name" : "timeout",
+          "value" : "10"
+        }, {
+          "name" : "include_subtree",
+          "value" : "True"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Получение выбранных Web элементов",
+        "time" : {
+          "start" : 1756636087616,
+          "stop" : 1756636087654,
+          "duration" : 38
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "locator",
+          "value" : "('css selector', 'table tbody tr')"
+        }, {
+          "name" : "timeout",
+          "value" : "10"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Получение текста из ячейки таблицы",
+        "time" : {
+          "start" : 1756636087654,
+          "stop" : 1756636087800,
+          "duration" : 146
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "row",
+          "value" : "<selenium.webdriver.remote.webelement.WebElement (session=\"14cb0fc7896d2c5655c692424be46c80\", element=\"f.44AB1389ADD5E1D6F65947804280692E.d.9A85F554FDE1C59B2076FE16CB2A760C.e.1678\")>"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Получение текста из ячейки таблицы",
+        "time" : {
+          "start" : 1756636087800,
+          "stop" : 1756636087858,
+          "duration" : 58
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "row",
+          "value" : "<selenium.webdriver.remote.webelement.WebElement (session=\"14cb0fc7896d2c5655c692424be46c80\", element=\"f.44AB1389ADD5E1D6F65947804280692E.d.9A85F554FDE1C59B2076FE16CB2A760C.e.1679\")>"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Получение текста из ячейки таблицы",
+        "time" : {
+          "start" : 1756636087858,
+          "stop" : 1756636087917,
+          "duration" : 59
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "row",
+          "value" : "<selenium.webdriver.remote.webelement.WebElement (session=\"14cb0fc7896d2c5655c692424be46c80\", element=\"f.44AB1389ADD5E1D6F65947804280692E.d.9A85F554FDE1C59B2076FE16CB2A760C.e.1680\")>"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Получение текста из ячейки таблицы",
+        "time" : {
+          "start" : 1756636087917,
+          "stop" : 1756636087983,
+          "duration" : 66
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "row",
+          "value" : "<selenium.webdriver.remote.webelement.WebElement (session=\"14cb0fc7896d2c5655c692424be46c80\", element=\"f.44AB1389ADD5E1D6F65947804280692E.d.9A85F554FDE1C59B2076FE16CB2A760C.e.1681\")>"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Получение текста из ячейки таблицы",
+        "time" : {
+          "start" : 1756636087983,
+          "stop" : 1756636088025,
+          "duration" : 42
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "row",
+          "value" : "<selenium.webdriver.remote.webelement.WebElement (session=\"14cb0fc7896d2c5655c692424be46c80\", element=\"f.44AB1389ADD5E1D6F65947804280692E.d.9A85F554FDE1C59B2076FE16CB2A760C.e.1682\")>"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Получение текста из ячейки таблицы",
+        "time" : {
+          "start" : 1756636088025,
+          "stop" : 1756636088067,
+          "duration" : 42
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "row",
+          "value" : "<selenium.webdriver.remote.webelement.WebElement (session=\"14cb0fc7896d2c5655c692424be46c80\", element=\"f.44AB1389ADD5E1D6F65947804280692E.d.9A85F554FDE1C59B2076FE16CB2A760C.e.1683\")>"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Получение текста из ячейки таблицы",
+        "time" : {
+          "start" : 1756636088068,
+          "stop" : 1756636088113,
+          "duration" : 45
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "row",
+          "value" : "<selenium.webdriver.remote.webelement.WebElement (session=\"14cb0fc7896d2c5655c692424be46c80\", element=\"f.44AB1389ADD5E1D6F65947804280692E.d.9A85F554FDE1C59B2076FE16CB2A760C.e.1684\")>"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Получение текста из ячейки таблицы",
+        "time" : {
+          "start" : 1756636088113,
+          "stop" : 1756636088203,
+          "duration" : 90
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "row",
+          "value" : "<selenium.webdriver.remote.webelement.WebElement (session=\"14cb0fc7896d2c5655c692424be46c80\", element=\"f.44AB1389ADD5E1D6F65947804280692E.d.9A85F554FDE1C59B2076FE16CB2A760C.e.1685\")>"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Получение текста из ячейки таблицы",
+        "time" : {
+          "start" : 1756636088203,
+          "stop" : 1756636088278,
+          "duration" : 75
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "row",
+          "value" : "<selenium.webdriver.remote.webelement.WebElement (session=\"14cb0fc7896d2c5655c692424be46c80\", element=\"f.44AB1389ADD5E1D6F65947804280692E.d.9A85F554FDE1C59B2076FE16CB2A760C.e.1686\")>"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Получение текста из ячейки таблицы",
+        "time" : {
+          "start" : 1756636088278,
+          "stop" : 1756636088331,
+          "duration" : 53
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "row",
+          "value" : "<selenium.webdriver.remote.webelement.WebElement (session=\"14cb0fc7896d2c5655c692424be46c80\", element=\"f.44AB1389ADD5E1D6F65947804280692E.d.9A85F554FDE1C59B2076FE16CB2A760C.e.1687\")>"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "spendings",
+        "value" : "[SpendGet(id='b048b51b-4019-42f8-a91f-cc37e48ec3c5', amount=235.35, description='Билеты на самолёт', category=CategoryGet(id='30a9ef24-202c-42ad-b213-7a516c3b1c71', name='Путешествия', username='niffler_qa', archived=False), spendDate='2025-08-30T21:00:00.000+00:00', currency='KZT', username='niffler_qa'), SpendGet(id='f464d503-8999-45d7-bf39-23c30421cb0c', amount=200.0, description='Уникальные тапочки', category=CategoryGet(id='00a1b48c-01d0-4e39-9254-ace672d33d1c', name='Уникальное', username='niffler_qa', archived=False), spendDate='2025-08-30T21:00:00.000+00:00', currency='RUB', username='niffler_qa'), SpendGet(id='d117a630-f8fc-4e67-b2ff-bbec2b350151', amount=100.5, description='Уникальные ботинки', category=CategoryGet(id='00a1b48c-01d0-4e39-9254-ace672d33d1c', name='Уникальное', username='niffler_qa', archived=False), spendDate='2025-08-30T21:00:00.000+00:00', currency='USD', username='niffler_qa'), SpendGet(id='56f885f9-5ca7-42e9-97fa-2ac73023201a', amount=5632.16, description='Уникальная вещь1', category=CategoryGet(id='00a1b48c-01d0-4e39-9254-ace672d33d1c', name='Уникальное', username='niffler_qa', archived=False), spendDate='2024-12-31T21:00:00.000+00:00', currency='EUR', username='niffler_qa'), SpendGet(id='1a80986c-6ecb-4515-8b0d-c3b82ef71da0', amount=9999.99, description='Multiple fields updated', category=CategoryGet(id='ac0b0500-72c2-4e3c-962d-e2fb04e61d5e', name='Развлечения', username='niffler_qa', archived=False), spendDate='2024-06-14T21:00:00.000+00:00', currency='KZT', username='niffler_qa'), SpendGet(id='41fefeff-d4d5-4ce1-9ff4-e50ae39b3f60', amount=4500.99, description='Уникальная вещь4', category=CategoryGet(id='00a1b48c-01d0-4e39-9254-ace672d33d1c', name='Уникальное', username='niffler_qa', archived=False), spendDate='2024-04-24T21:00:00.000+00:00', currency='KZT', username='niffler_qa'), SpendGet(id='23a5de85-0564-4859-9f0f-151eabf9c05e', amount=481.0, description='Trip._0ddf25d2-85e1-44a0-bdd5-b89b199c8f97', category=CategoryGet(id='ac0b0500-72c2-4e3c-962d-e2fb04e61d5e', name='Развлечения', username='niffler_qa', archived=False), spendDate='2024-03-30T21:00:00.000+00:00', currency='EUR', username='niffler_qa'), SpendGet(id='e4f8cc66-01ac-4912-9581-83f23fd4a31b', amount=2750.5, description='Уникальная вещь2', category=CategoryGet(id='00a1b48c-01d0-4e39-9254-ace672d33d1c', name='Уникальное', username='niffler_qa', archived=False), spendDate='2024-02-19T21:00:00.000+00:00', currency='RUB', username='niffler_qa'), SpendGet(id='3007c274-4201-487c-9dc7-ee7e29ee5871', amount=345.0, description='Updated test description', category=CategoryGet(id='87a1b845-f5cc-4e45-a3f1-0a227691904b', name='Спорт', username='niffler_qa', archived=False), spendDate='2021-05-18T21:00:00.000+00:00', currency='USD', username='niffler_qa'), SpendGet(id='20abc01e-2f9c-49bf-8522-41d72ed5e17b', amount=753.0, description='Another room._c7682eb7-1f4b-46dc-8bdb-836bdc37df46', category=CategoryGet(id='c796e1cc-157b-4993-a93e-f1f77b028d0a', name='Продукты', username='niffler_qa', archived=False), spendDate='2013-03-22T20:00:00.000+00:00', currency='KZT', username='niffler_qa'), SpendGet(id='b16786fe-52f2-42cc-b7d0-d435269f9dc9', amount=1000.26, description='Updated test description', category=CategoryGet(id='00a1b48c-01d0-4e39-9254-ace672d33d1c', name='Уникальное', username='niffler_qa', archived=False), spendDate='2009-10-13T20:00:00.000+00:00', currency='RUB', username='niffler_qa'), SpendGet(id='b9e042a0-18df-4229-8616-aaa83f53fa4c', amount=499.0, description='Young off._5d7ff300-8086-4d0b-bce1-82839f80fe69', category=CategoryGet(id='c796e1cc-157b-4993-a93e-f1f77b028d0a', name='Продукты', username='niffler_qa', archived=False), spendDate='2006-12-17T21:00:00.000+00:00', currency='USD', username='niffler_qa'), SpendGet(id='c21398c5-6d05-4509-b1aa-9fac182fe0c6', amount=7268.48, description='Sell._c5af2170-486d-4860-aa37-9a494cd88abb', category=CategoryGet(id='c796e1cc-157b-4993-a93e-f1f77b028d0a', name='Продукты', username='niffler_qa', archived=False), spendDate='2005-09-19T20:00:00.000+00:00', currency='RUB', username='niffler_qa')]"
+      }, {
+        "name" : "indexes",
+        "value" : "[4]"
+      } ],
+      "stepsCount" : 12,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "aef0c90ea7681d26",
+      "name" : "Screenshot_EXCEPTION_AssertionError_test_delete_single_spending_ui",
+      "source" : "aef0c90ea7681d26.png",
+      "type" : "image/png",
+      "size" : 133911
+    }, {
+      "uid" : "1121e17566bb13f5",
+      "name" : "Screenshot_FAILED_test_delete_single_spending_ui",
+      "source" : "1121e17566bb13f5.png",
+      "type" : "image/png",
+      "size" : 133911
+    }, {
+      "uid" : "130d7adbf42cfe7c",
+      "name" : "log",
+      "source" : "130d7adbf42cfe7c.txt",
+      "type" : "text/plain",
+      "size" : 1605
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 26,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ {
+    "name" : "delete_spendings_lock::0",
+    "time" : {
+      "start" : 1756636088537,
+      "stop" : 1756636088538,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token_data::0",
+    "time" : {
+      "start" : 1756636091867,
+      "stop" : 1756636091876,
+      "duration" : 9
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "spends_client::0",
+    "time" : {
+      "start" : 1756636091746,
+      "stop" : 1756636091746,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "browser::0",
+    "time" : {
+      "start" : 1756636091746,
+      "stop" : 1756636091866,
+      "duration" : 120
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "auth_client::0",
+    "time" : {
+      "start" : 1756636091878,
+      "stop" : 1756636091878,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "cleanup::0",
+    "time" : {
+      "start" : 1756636091879,
+      "stop" : 1756636091879,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "add_spendings::0",
+    "time" : {
+      "start" : 1756636091744,
+      "stop" : 1756636091744,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "story",
+    "value" : "Delete spendings"
+  }, {
+    "name" : "feature",
+    "value" : "Spendings"
+  }, {
+    "name" : "tag",
+    "value" : "xdist_group('05_spendings')"
+  }, {
+    "name" : "tag",
+    "value" : "ui"
+  }, {
+    "name" : "tag",
+    "value" : "spendings"
+  }, {
+    "name" : "host",
+    "value" : "pkrvmccyg1gnepe"
+  }, {
+    "name" : "thread",
+    "value" : "7095-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.ui.test_spendings"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 1,
+        "broken" : 1,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 4
+      },
+      "items" : [ {
+        "uid" : "8f6014c6fac6002a",
+        "reportUrl" : "https://illusionx11.github.io/niffler-py-st3/11/#testresult/8f6014c6fac6002a",
+        "status" : "broken",
+        "statusDetails" : "selenium.common.exceptions.StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame\n  (Session info: chrome=139.0.7258.138); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception\nStacktrace:\n#0 0x56333760b02a <unknown>\n#1 0x5633370aaa70 <unknown>\n#2 0x5633370b16bf <unknown>\n#3 0x5633370b3f58 <unknown>\n#4 0x5633370b3fe3 <unknown>\n#5 0x5633370fc335 <unknown>\n#6 0x5633370fcb01 <unknown>\n#7 0x5633370f0a03 <unknown>\n#8 0x56333712240d <unknown>\n#9 0x5633370f049a <unknown>\n#10 0x5633371225ae <unknown>\n#11 0x56333714814f <unknown>\n#12 0x5633371221b3 <unknown>\n#13 0x5633370ee59b <unknown>\n#14 0x5633370ef971 <unknown>\n#15 0x5633375d01fb <unknown>\n#16 0x5633375d3f49 <unknown>\n#17 0x5633375b72d9 <unknown>\n#18 0x5633375d4af8 <unknown>\n#19 0x56333759bbbf <unknown>\n#20 0x5633375f80b8 <unknown>\n#21 0x5633375f8296 <unknown>\n#22 0x56333760a006 <unknown>\n#23 0x7f42db29caa4 <unknown>\n#24 0x7f42db329c3c <unknown>",
+        "time" : {
+          "start" : 1756634883364,
+          "stop" : 1756634888859,
+          "duration" : 5495
+        }
+      }, {
+        "uid" : "6dfc2678ff7ac985",
+        "reportUrl" : "https://illusionx11.github.io/niffler-py-st3/10/#testresult/6dfc2678ff7ac985",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580154158,
+          "stop" : 1756580155944,
+          "duration" : 1786
+        }
+      }, {
+        "uid" : "12e38e9697152bbe",
+        "reportUrl" : "https://illusionx11.github.io/niffler-py-st3/9/#testresult/12e38e9697152bbe",
+        "status" : "passed",
+        "time" : {
+          "start" : 1755396954185,
+          "stop" : 1755396956328,
+          "duration" : 2143
+        }
+      } ]
+    },
+    "tags" : [ "spendings", "ui", "xdist_group('05_spendings')" ]
+  },
+  "source" : "e8e4b6da15fb1409.json",
+  "parameterValues" : [ ]
+}

@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+    <script src="https://yastatic.net/jquery/2.2.3/jquery.min.js" crossorigin="anonymous"></script>
+
+    <link href="https://yastatic.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://yastatic.net/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <link type="text/css" href="https://yandex.st/highlightjs/8.0/styles/github.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/bash.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/json.min.js"></script>
+    <script type="text/javascript" src="https://yandex.st/highlightjs/8.0/languages/xml.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <pre><code>PATCH to http://gateway.niffler.dc:8090/api/spends/edit</code></pre>
+</div>
+
+
+    <h4>Body</h4>
+    <div>
+        <pre><code>b'{"id": "b16786fe-52f2-42cc-b7d0-d435269f9dc9", "amount": 1000.26, "description": "Updated test description", "category": {"id": null, "name": "\\u0423\\u043d\\u0438\\u043a\\u0430\\u043b\\u044c\\u043d\\u043e\\u0435", "username": null, "archived": false}, "spendDate": "2009-10-13T20:00:00.000+00:00", "currency": "RUB", "username": null}'</code></pre>
+    </div>
+
+
+
+
+    <h4>Headers</h4>
+    <div>
+    
+        <div>
+            <pre><code><b>User-Agent</b>: python-requests/2.32.3</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept-Encoding</b>: gzip, deflate</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Accept</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Connection</b>: keep-alive</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Type</b>: application/json</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Authorization</b>: Bearer eyJraWQiOiI2YzNkOGNjMi03Y2Q4LTQ1ZDMtOWQ2YS04M2MxNzY2OTlhZDkiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJuaWZmbGVyX3FhIiwiYXVkIjoiY2xpZW50IiwibmJmIjoxNzU2NjM2MDIxLCJzY29wZSI6WyJvcGVuaWQiXSwiaXNzIjoiaHR0cDovL2F1dGgubmlmZmxlci5kYzo5MDAwIiwiZXhwIjoxNzU2NjM5NjIxLCJpYXQiOjE3NTY2MzYwMjEsImp0aSI6IjhmZTBiYTkyLTI1NDUtNDM0ZS04ODAzLWJjNWU1YWJmN2ZlNCJ9.LNVFowazkoBDt4W_OQjpzUFYBduFxVhTtAbduM9j0CiYdk4CVmlW2syuP-fO-3wrGPOSHKcCzUDLNRMf3mFNkE13ZAREj2-ZSe-b3tMTToUUOTh7akVTv0vh0X9uFtiAPVXjxP-utZuIsvFc1wIQLTjvQ_wmLkUJ9_ia9W4rJ9zdIpdiZZfQGsKcBOPpAez72okS7SGHs1KwCr1nyIuS9fo_Nt4_UJUDsaQ6TElw6yAZGct72B8gG5uJCIxOKHJNUIgGIV7YxrmFt7OMaYgOffzJNGpHyucQDC7LkukZhheO96WWUdkVQ1sE50hSX-kvW85ScN5XPwPrz3m2g6lXwA</code></pre>
+        </div>
+    
+        <div>
+            <pre><code><b>Content-Length</b>: 326</code></pre>
+        </div>
+    
+    </div>
+
+
+
+
+
+
+    <h4>Curl</h4>
+    <div>
+        <pre><code>curl -X PATCH -H 'Accept: application/json' -H 'Accept-Encoding: gzip, deflate' -H 'Authorization: Bearer eyJraWQiOiI2YzNkOGNjMi03Y2Q4LTQ1ZDMtOWQ2YS04M2MxNzY2OTlhZDkiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJuaWZmbGVyX3FhIiwiYXVkIjoiY2xpZW50IiwibmJmIjoxNzU2NjM2MDIxLCJzY29wZSI6WyJvcGVuaWQiXSwiaXNzIjoiaHR0cDovL2F1dGgubmlmZmxlci5kYzo5MDAwIiwiZXhwIjoxNzU2NjM5NjIxLCJpYXQiOjE3NTY2MzYwMjEsImp0aSI6IjhmZTBiYTkyLTI1NDUtNDM0ZS04ODAzLWJjNWU1YWJmN2ZlNCJ9.LNVFowazkoBDt4W_OQjpzUFYBduFxVhTtAbduM9j0CiYdk4CVmlW2syuP-fO-3wrGPOSHKcCzUDLNRMf3mFNkE13ZAREj2-ZSe-b3tMTToUUOTh7akVTv0vh0X9uFtiAPVXjxP-utZuIsvFc1wIQLTjvQ_wmLkUJ9_ia9W4rJ9zdIpdiZZfQGsKcBOPpAez72okS7SGHs1KwCr1nyIuS9fo_Nt4_UJUDsaQ6TElw6yAZGct72B8gG5uJCIxOKHJNUIgGIV7YxrmFt7OMaYgOffzJNGpHyucQDC7LkukZhheO96WWUdkVQ1sE50hSX-kvW85ScN5XPwPrz3m2g6lXwA' -H 'Connection: keep-alive' -H 'Content-Length: 326' -H 'Content-Type: application/json' -H 'User-Agent: python-requests/2.32.3' -d '{"id": "b16786fe-52f2-42cc-b7d0-d435269f9dc9", "amount": 1000.26, "description": "Updated test description", "category": {"id": null, "name": "\u0423\u043d\u0438\u043a\u0430\u043b\u044c\u043d\u043e\u0435", "username": null, "archived": false}, "spendDate": "2009-10-13T20:00:00.000+00:00", "currency": "RUB", "username": null}' http://gateway.niffler.dc:8090/api/spends/edit</code></pre>
+    </div>
+
+</body>
+</html>

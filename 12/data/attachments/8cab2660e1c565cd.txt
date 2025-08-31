@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Register to Niffler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link href="styles/styles.css" rel="stylesheet"
+          type="text/css"/>
+</head>
+<body>
+<main class="content">
+    <div class="content__wrapper">
+        <div class="main__hero"></div>
+        <section class="main__form">
+            <div class="logo-section">
+                <img class="logo-section__logo" src="images/coin.svg" width="36" alt="Niffler logo"/>
+                <p class="logo-section__text">
+                    Niffler
+                </p>
+            </div>
+            <div class="form-section">
+                
+                <div class="form">
+                    <p class="form__paragraph form__paragraph_success">Congratulations! You've registered!</p>
+                    <a class="form_sign-in" href="http://frontend.niffler.dc/main">Sign in</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<script>
+    const passwordButton = document.getElementById("passwordBtn");
+    const passwordInput = document.getElementById("password");
+
+    const passwordSubmitButton = document.getElementById("passwordSubmitBtn");
+    const passwordSubmitInput = document.getElementById("passwordSubmit");
+
+    const togglePasswordInputType = (inputType) => {
+        return inputType === "password" ? "text" : "password";
+    }
+
+    const togglePasswordButtonClass = (passwordBtn) => {
+        passwordBtn.classList.toggle("form__password-button_active");
+    }
+
+    const handlePasswordButtonClick = () => {
+        passwordInput.setAttribute("type", togglePasswordInputType(passwordInput.getAttribute("type")));
+        togglePasswordButtonClass(passwordButton);
+    }
+
+    const handleSubmitPasswordButtonClick = () => {
+        passwordSubmitInput.setAttribute("type", togglePasswordInputType(passwordSubmitInput.getAttribute("type")));
+        togglePasswordButtonClass(passwordSubmitButton);
+    }
+
+    passwordButton.addEventListener("click", handlePasswordButtonClick);
+    passwordSubmitButton.addEventListener("click", handleSubmitPasswordButtonClick);
+
+</script>
+</body>
+</html>
