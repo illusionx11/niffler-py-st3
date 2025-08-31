@@ -6,6 +6,8 @@ from databases.auth_db import AuthDb
 from databases.userdata_db import UserdataDb
 from models.config import ClientEnvs
 from clients.lock_client import LockManager
+from clients.oauth_client import OAuthClient
+from models.auth_user import TokenData
 
 @pytest.fixture(scope="session")
 def lock_manager() -> LockManager:
@@ -42,6 +44,33 @@ def cleanup(
         name="cleanup"
     ):
         yield users
+        
+@pytest.fixture(scope="session", autouse=True)
+def token_data(
+    client_envs: ClientEnvs, auth_client: OAuthClient, cleanup, lock_manager: LockManager
+):
+    
+    def get_token_data():
+        username = client_envs.test_username
+        password = client_envs.test_password
+        auth_client.register(username, password)
+        token_data = auth_client.get_token(username, password)
+        return token_data.model_dump()
+    
+    for token_data in lock_manager.acquire_lock(
+        lock_file_path="token_data.lock",
+        lock_data_path="token_data.json",
+        lock_count_path="token_data.count",
+        name="token_data",
+        create_func=get_token_data
+    ):
+        yield TokenData(
+            access_token=token_data["access_token"],
+            code_verifier=token_data["code_verifier"],
+            code_challenge=token_data["code_challenge"],
+            id_token=token_data["id_token"],
+            cookies=token_data["cookies"]
+        )
 
 @pytest.fixture(scope="function")
 def delete_spendings_lock(lock_manager: LockManager):

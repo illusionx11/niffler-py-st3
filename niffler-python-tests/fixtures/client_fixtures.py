@@ -13,6 +13,7 @@ from grpc import insecure_channel
 from internal.grpc.interceptors.logging import LoggingInterceptor
 from internal.grpc.interceptors.allure import AllureInterceptor
 from internal.pb.niffler_currency_pb2_pbreflect import NifflerCurrencyServiceClient
+from models.auth_user import TokenData
 
 INTERCEPTORS = [
     LoggingInterceptor(),
@@ -26,13 +27,13 @@ def auth_client(server_envs: ServerEnvs):
     auth_client.session.close()
 
 @pytest.fixture(scope="session")
-def spends_client(server_envs: ServerEnvs, client_envs: ClientEnvs, auth_api_token: str):
-    spends_client: SpendsClient = SpendsClient(server_envs=server_envs, client_envs=client_envs, token=auth_api_token)
+def spends_client(server_envs: ServerEnvs, client_envs: ClientEnvs, token_data: TokenData):
+    spends_client: SpendsClient = SpendsClient(server_envs=server_envs, client_envs=client_envs, token=token_data.access_token)
     yield spends_client
     
 @pytest.fixture(scope="session")
-def users_client(server_envs: ServerEnvs, auth_api_token: str):
-    users_client: UsersClient = UsersClient(server_envs=server_envs, token=auth_api_token)
+def users_client(server_envs: ServerEnvs, token_data: TokenData):
+    users_client: UsersClient = UsersClient(server_envs=server_envs, token=token_data.access_token)
     yield users_client
     users_client.session.close()
 

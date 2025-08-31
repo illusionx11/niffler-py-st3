@@ -109,7 +109,7 @@ class ProfilePage(BasePage):
     def should_be_duplicate_category_alert_elements(self, alert_text: str, name: str = None):
         self.should_be_element(self.DUPLICATE_CATEGORY_ALERT_ICON)
         self.should_be_element(self.DUPLICATE_CATEGORY_ALERT_CLOSE_BTN)
-        element_text = self.get_element_presence_safe(self.DUPLICATE_CATEGORY_ALERT).text
+        element_text = self.get_element_presence_with_text_safe(self.DUPLICATE_CATEGORY_ALERT)
         assert alert_text in element_text, f"Alert text '{alert_text}' not in '{element_text}'"
         if name:
             assert name in element_text, f"Name '{name}' not in '{element_text}'"

@@ -8,6 +8,7 @@ from pages.profile_page import ProfilePage
 from selenium import webdriver
 from pytest import FixtureRequest
 from selenium.webdriver.chrome.options import Options as ChromeOptions
+from models.auth_user import TokenData
 
 @pytest.fixture(scope="session")
 def browser(request: FixtureRequest, headless: bool):
@@ -17,29 +18,36 @@ def browser(request: FixtureRequest, headless: bool):
     options.add_argument("--window-size=1920,1080")
     browser = webdriver.Chrome(options=options)
     yield browser
-    try:
-        if request.node.rep_setup.failed or request.node.rep_call.failed:
-            allure.attach(
-                browser.get_screenshot_as_png(),
-                name=request.node.name,
-                attachment_type=allure.attachment_type.PNG
-            )
-    except AttributeError:
-        pass
     browser.close()
     
-@pytest.fixture(scope="session")
-def login_page(browser: webdriver.Chrome, server_envs: ServerEnvs):
-    return LoginPage(browser, url=f"{server_envs.auth_url}/login")
+@pytest.fixture
+def login_page(
+    browser: webdriver.Chrome, server_envs: ServerEnvs, token_data: TokenData
+):
+    return LoginPage(
+        browser, url=f"{server_envs.auth_url}/login", token_data=token_data
+    )
 
-@pytest.fixture(scope="session")
-def register_page(browser: webdriver.Chrome, server_envs: ServerEnvs):
-    return RegisterPage(browser, url=f"{server_envs.auth_url}/register")
+@pytest.fixture
+def register_page(
+    browser: webdriver.Chrome, server_envs: ServerEnvs, token_data: TokenData
+):
+    return RegisterPage(
+        browser, url=f"{server_envs.auth_url}/register", token_data=token_data
+    )
 
-@pytest.fixture(scope="session")
-def main_page(browser: webdriver.Chrome, server_envs: ServerEnvs):
-    return MainPage(browser, url=f"{server_envs.frontend_url}/main")
+@pytest.fixture
+def main_page(
+    browser: webdriver.Chrome, server_envs: ServerEnvs, token_data: TokenData
+):
+    return MainPage(
+        browser, url=f"{server_envs.frontend_url}/main", token_data=token_data
+    )
 
-@pytest.fixture(scope="session")
-def profile_page(browser: webdriver.Chrome, server_envs: ServerEnvs):
-    return ProfilePage(browser, url=f"{server_envs.frontend_url}/profile")
+@pytest.fixture
+def profile_page(
+    browser: webdriver.Chrome, server_envs: ServerEnvs, token_data: TokenData
+):
+    return ProfilePage(
+        browser, url=f"{server_envs.frontend_url}/profile", token_data=token_data
+    )

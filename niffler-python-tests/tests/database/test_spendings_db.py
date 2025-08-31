@@ -13,7 +13,7 @@ from datetime import datetime
 pytestmark = [pytest.mark.allure_label(label_type="epic", value=Epic.app_name)]
 
 @pytest.mark.usefixtures(
-    "auth_api_token",
+    "token_data",
     "spends_client",
     "client_envs",
     "spends_db"

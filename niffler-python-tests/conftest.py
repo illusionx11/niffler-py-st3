@@ -92,6 +92,20 @@ def pytest_runtest_makereport(item, call):
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
 def pytest_runtest_teardown(item: Item):
     yield
+    
+    if hasattr(item, "rep_call") and item.rep_call.failed:
+        if "browser" in item.fixturenames:
+            try:
+                browser = item._request.getfixturevalue("browser")
+                screenshot = browser.get_screenshot_as_png()
+                allure.attach(
+                    screenshot,
+                    name=f"Screenshot_FAILED_{item.name}",
+                    attachment_type=allure.attachment_type.PNG
+                )
+            except Exception as e:
+                logging.warning(f"Could not capture screenshot for {item.name}: {e}")
+    
     reporter = allure_logger(item.config)
     if reporter:
         try:

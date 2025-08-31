@@ -5,12 +5,10 @@ from pages.profile_page import ProfilePage
 from utils.errors import ValidationErrors
 from marks import TestData
 from utils.allure_data import Epic, Feature, Story
-import time
 
 pytestmark = [pytest.mark.allure_label(label_type="epic", value=Epic.app_name)]
 
 @pytest.mark.usefixtures(
-    "auth_front_token",
     "profile_page",
     "all_categories"
 )
@@ -113,7 +111,6 @@ class TestProfileCategories:
         profile_page.should_be_archived_categories(new_archived_categories)
 
 @pytest.mark.usefixtures(
-    "auth_front_token",
     "profile_page",
 )
 @pytest.mark.profile

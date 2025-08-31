@@ -19,7 +19,7 @@ class LoginPage(BasePage):
     
     @allure.step("Авторизация в сервис")
     def log_in(self, username: str, password: str):
-        self.open()
+        self.open(set_localstorage=False)
         self.should_be_login_page()
         logging.info(f"Logging in as {username}")
         self.browser.find_element(*self.USERNAME_INPUT).send_keys(username)

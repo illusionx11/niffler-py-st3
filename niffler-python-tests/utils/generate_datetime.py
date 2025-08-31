@@ -28,3 +28,9 @@ def generate_random_datetime() -> str:
     
     # Форматируем в нужный формат
     return random_dt.strftime("%Y-%m-%dT%H:%M:%S.000Z")
+
+def format_date(date: str) -> str:
+    """
+    Форматирует дату в формате '2025-08-31T00:00:00.000Z' в формат 'Aug 31, 2025'.
+    """
+    return datetime.fromisoformat(date).strftime("%b %d, %Y")

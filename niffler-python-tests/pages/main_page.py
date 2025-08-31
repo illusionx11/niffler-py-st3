@@ -2,7 +2,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from models.spend import Spend, SpendAdd
 from utils.errors import ValidationErrors
-from pages.base_page import BasePage
+from utils.generate_datetime import format_date
+from pages.base_page import BasePage    
 import allure
 
 class MainPage(BasePage):
@@ -67,12 +68,10 @@ class MainPage(BasePage):
     @allure.step("Проверка на наличие добавленной траты в таблице")
     def should_be_new_spending_in_table(self, data: SpendAdd):
         
-        def check_spending_added(table_rows: list) -> bool:
+        def is_spending_added() -> bool:
+            table_rows = self.get_all_elements_presence_safe(self.SPENDINGS_TABLE_ROWS)
             for row in table_rows:
-                row_data = row.find_elements(By.CSS_SELECTOR, "td")[1:] # пропускаем первый столбец с чекбоксом
-                category = row_data[0].text
-                amount, currency = row_data[1].text.split(" ")
-                description = row_data[2].text
+                category, amount, currency, description, date = self.get_row_cells_text(row)
                 data_amount = data.amount if not data.amount.is_integer() else int(data.amount)
                 if data.category.name == category and str(data_amount) == amount \
                 and self.CURRENCIES_MAPS[data.currency] == currency \
@@ -80,9 +79,7 @@ class MainPage(BasePage):
                     return True
             return False
         
-        table_rows = self.get_all_elements_presence_safe(self.SPENDINGS_TABLE_ROWS)
-        is_spending_added = check_spending_added(table_rows)
-        assert is_spending_added, f"Новый расход {data} не добавлен на странице {self.browser.current_url}"
+        assert is_spending_added(), f"Новый расход {data} не добавлен на странице {self.browser.current_url}"
     
     @allure.step("Удаление трат")
     def remove_spendings(self, indexes: list[int]):
@@ -91,30 +88,35 @@ class MainPage(BasePage):
         for index in indexes:
             row_to_delete = table_rows[index]
             row_to_delete.find_element(*self.SPENDING_CHECKBOX).click()
+        
+
         self.get_element_clickable_safe(self.DELETE_SPENDING_BTN).click()
         self.get_element_presence_safe(self.DELETE_MODAL_DIV)
-        self.get_element_clickable_safe(self.DELETE_SPENDING_CONFIRM_BTN).click()
+        confirm_btn = self.get_element_clickable_safe(self.DELETE_SPENDING_CONFIRM_BTN)
+        self.wait_for_animations_finish(confirm_btn)
+        confirm_btn.click()
     
     @allure.step("Проверка на исчезновение трат из таблицы")
     def should_not_be_deleted_spendings(self, spendings: list[Spend], indexes: list[int]):
-        
-        def check_spendings_deleted(new_table_rows: list) -> bool:
-            self.get_all_elements_presence_safe((By.CSS_SELECTOR, "td"))
-            for row in new_table_rows:
-                row_data = row.find_elements(By.CSS_SELECTOR, "td")[1:] # пропускаем первый столбец с чекбоксом
-                category = row_data[0].text
-                amount, currency = row_data[1].text.split(" ")
-                description = row_data[2].text
-                for i in indexes:
-                    if spendings[i].category.name == category and spendings[i].amount == float(amount) \
-                    and self.CURRENCIES_MAPS[spendings[i].currency] == currency \
-                    and spendings[i].description == description:
-                        return False
-            return True
-        
+        page_spendings = []
+        deleted_spendings = [spendings[i] for i in indexes]
         new_table_rows = self.get_all_elements_presence_safe(self.SPENDINGS_TABLE_ROWS)
-        is_spendings_deleted = check_spendings_deleted(new_table_rows)
-        assert is_spendings_deleted, f"Расходы не удалены на странице {self.browser.current_url}"
+        for row in new_table_rows:
+            page_spendings.append(self.get_row_cells_text(row))
+        for spending_data in page_spendings:
+            category, amount, currency, description, date = spending_data
+            existing_spending = next(
+                (
+                    s for s in deleted_spendings 
+                    if s.category.name == category and s.amount == float(amount) \
+                    and self.CURRENCIES_MAPS[s.currency] == currency \
+                    and s.description == description
+                ),
+                None
+            )
+            if existing_spending:
+                assert False, f"Расход {existing_spending} найден на странице"
+        assert True
     
     @allure.step("Проверка на наличие ошибок валидации")
     def should_be_errors_in_validation(self, errors: dict[str, list[ValidationErrors]]):
@@ -151,10 +153,7 @@ class MainPage(BasePage):
         assert len(table_rows) == len(valid_spendings), f"Количество расходов в таблице {len(table_rows)} не равно количеству расходов в списке {len(valid_spendings)}"
         for row in table_rows:
             is_spending_present = False
-            row_data = row.find_elements(By.CSS_SELECTOR, "td")[1:] # пропускаем первый столбец с чекбоксом
-            category = row_data[0].text
-            amount, currency = row_data[1].text.split(" ")
-            description = row_data[2].text
+            category, amount, currency, description, date = self.get_row_cells_text(row)
             for spending in valid_spendings:
                 if spending.category.name == category and spending.amount == float(amount) \
                 and self.CURRENCIES_MAPS[spending.currency] == currency \

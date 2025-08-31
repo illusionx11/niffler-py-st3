@@ -21,7 +21,7 @@ class TestRegistration:
     
     @TestData.username(["a", LONG_USERNAME])
     def test_incorrect_username(self, register_page: RegisterPage, username: str, faker: Faker):
-        register_page.open()
+        register_page.open(set_localstorage=False)
         register_page.should_be_register_page()
         password = faker.password(length=8)
         register_page.register_user(username, password)
@@ -32,7 +32,7 @@ class TestRegistration:
     
     @TestData.password(["a", LONG_PASSWORD])
     def test_incorrect_password(self, register_page: RegisterPage, password: str, faker: Faker):
-        register_page.open()
+        register_page.open(set_localstorage=False)
         register_page.should_be_register_page()
         username = faker.first_name()
         register_page.register_user(username, password)
@@ -44,7 +44,7 @@ class TestRegistration:
     
     @pytest.mark.repeat(2)
     def test_wrong_passwords(self, register_page: RegisterPage, faker: Faker):
-        register_page.open()
+        register_page.open(set_localstorage=False)
         register_page.should_be_register_page()
         username = faker.first_name()
         password = faker.password(length=8)
@@ -68,7 +68,7 @@ class TestRegistration:
         UserData(username=LONG_USERNAME, password="a", password_repeat="a")
     ])
     def test_registration_mixed_errors(self, register_page: RegisterPage, register_data: UserData):
-        register_page.open()
+        register_page.open(set_localstorage=False)
         register_page.should_be_register_page()
         username = register_data.username
         password = register_data.password
@@ -91,7 +91,7 @@ class TestRegistration:
     
     @TestData.new_user([UserData(username="NifflerUser", password="PassWordGo0d")])
     def test_correct_registration(self, register_page: RegisterPage, new_user: UserData):
-        register_page.open()
+        register_page.open(set_localstorage=False)
         register_page.should_be_register_page()
         register_page.register_user(new_user.username, new_user.password)
         register_page.should_be_successful_registration()
