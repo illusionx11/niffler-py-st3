@@ -15,8 +15,7 @@ pytestmark = [pytest.mark.allure_label(label_type="epic", value=Epic.app_name)]
 
 @pytest.mark.usefixtures(
     "main_page", 
-    "add_spendings",
-    "spendings_list"
+    "add_spendings"
 )
 @pytest.mark.spendings
 @pytest.mark.ui

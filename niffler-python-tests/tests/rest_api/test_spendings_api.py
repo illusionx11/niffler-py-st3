@@ -1,6 +1,7 @@
 import pytest
 import random
 import allure
+import uuid
 from utils.mock_data import MockData
 from utils.allure_data import Epic, Feature, Story
 from models.spend import SpendGet, SpendAdd
@@ -13,8 +14,7 @@ pytestmark = [pytest.mark.allure_label(label_type="epic", value=Epic.app_name)]
 @pytest.mark.usefixtures(
     "token_data",
     "spends_client",
-    "add_spendings",
-    "spendings_list"
+    "add_spendings"
 )
 @pytest.mark.api
 @pytest.mark.spendings
@@ -89,6 +89,7 @@ class TestSpendingsAPI:
             assert added_spending_data.spendDate.split("T")[0] == spending_data.spendDate.split("T")[0]
     
     @allure.story(Story.update_spending)
+    @pytest.mark.xdist_group("05_spendings")
     def test_update_spending_amount(
         self, spends_client: SpendsClient, spendings_list: list[SpendGet], delete_spendings_lock
     ):
@@ -116,6 +117,7 @@ class TestSpendingsAPI:
             assert updated_spend.spendDate == spend.spendDate
             
     @pytest.mark.repeat(2)
+    @pytest.mark.xdist_group("05_spendings")
     @allure.story(Story.update_spending)
     def test_update_spending_currency(
         self, spends_client: SpendsClient, spendings_list: list[SpendGet], delete_spendings_lock
@@ -144,6 +146,7 @@ class TestSpendingsAPI:
             assert updated_spend.spendDate == spend.spendDate
             
     @pytest.mark.repeat(2)
+    @pytest.mark.xdist_group("05_spendings")
     @allure.story(Story.update_spending)
     def test_update_spending_description(
         self, spends_client: SpendsClient, spendings_list: list[SpendGet], delete_spendings_lock
@@ -169,6 +172,7 @@ class TestSpendingsAPI:
             assert updated_spend.spendDate == spend.spendDate
             
     @pytest.mark.repeat(2)
+    @pytest.mark.xdist_group("05_spendings")
     @allure.story(Story.update_spending)
     def test_update_spending_category(
         self, spends_client: SpendsClient, spendings_list: list[SpendGet], delete_spendings_lock
@@ -197,6 +201,7 @@ class TestSpendingsAPI:
             assert updated_spend.spendDate == spend.spendDate
     
     @pytest.mark.repeat(2)
+    @pytest.mark.xdist_group("05_spendings")
     @allure.story(Story.update_spending)
     def test_update_spending_date(
         self, spends_client: SpendsClient, spendings_list: list[SpendGet], delete_spendings_lock
@@ -222,6 +227,7 @@ class TestSpendingsAPI:
             assert updated_spend.spendDate.split("T")[0] == new_date.split("T")[0]
         
     @allure.story(Story.update_spending)
+    @pytest.mark.xdist_group("05_spendings")
     def test_update_spending_multiple_fields(
         self, spends_client: SpendsClient, spendings_list: list[SpendGet], delete_spendings_lock
     ):
@@ -254,12 +260,13 @@ class TestSpendingsAPI:
     
     @allure.story(Story.get_spending)
     @pytest.mark.xfail(reason="Добавляется один день к дате")
+    @pytest.mark.xdist_group("05_spendings")
     def test_get_spending_after_update(
         self, spends_client: SpendsClient, spendings_list: list[SpendGet], delete_spendings_lock
     ):
         spend = random.choice(spendings_list)
         new_amount = 9999.99
-        new_description = "Multiple fields updated"
+        new_description = "Multiple fields updated" + "_" + str(uuid.uuid4())
         new_date = "2024-06-15T12:00:00.000Z"
         updated_spend = spends_client.update_spending(
             data=SpendAdd(
@@ -281,7 +288,7 @@ class TestSpendingsAPI:
             assert received_spend.spendDate.split("T")[0] == new_date.split("T")[0]
 
     @allure.story(Story.delete_spending)
-    @pytest.mark.xdist_group("05_spendings_api_delete_1")
+    @pytest.mark.xdist_group("05_spendings")
     def test_delete_single_spending(
         self, spends_client: SpendsClient, spendings_list: list[SpendGet], delete_spendings_lock
     ):
@@ -293,7 +300,7 @@ class TestSpendingsAPI:
             assert spend_id not in all_spends_ids
             
     @allure.story(Story.delete_spending)
-    @pytest.mark.xdist_group("05_spendings_api_delete_2")
+    @pytest.mark.xdist_group("05_spendings")
     def test_delete_multiple_spendings_api(
         self, spends_client: SpendsClient, spendings_list: list[SpendGet], delete_spendings_lock
     ):

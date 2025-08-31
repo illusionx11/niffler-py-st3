@@ -8,6 +8,8 @@ from models.config import ClientEnvs
 from clients.lock_client import LockManager
 from clients.oauth_client import OAuthClient
 from models.auth_user import TokenData
+from models.spend import SpendGet
+from clients.spends_client import SpendsClient
 
 @pytest.fixture(scope="session")
 def lock_manager() -> LockManager:
@@ -71,6 +73,23 @@ def token_data(
             id_token=token_data["id_token"],
             cookies=token_data["cookies"]
         )
+
+@pytest.fixture
+def spendings_list(
+    spends_client: SpendsClient, lock_manager: LockManager
+):
+    # Без блокировки иногда падает ui тест для удаления трат, потому что выбирает не тот индекс
+    def get_spendings():
+        return [s.model_dump() for s in spends_client.get_all_spendings()]
+    
+    for spendings_list in lock_manager.acquire_lock(
+        lock_file_path="spendings_list.lock",
+        lock_data_path="spendings_list.json",
+        lock_count_path="spendings_list.count",
+        name="spendings_list",
+        create_func=get_spendings
+    ):
+        yield [SpendGet.model_validate(s) for s in spendings_list]
 
 @pytest.fixture(scope="function")
 def delete_spendings_lock(lock_manager: LockManager):

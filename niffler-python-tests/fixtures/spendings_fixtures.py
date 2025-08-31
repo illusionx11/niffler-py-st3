@@ -52,7 +52,3 @@ def add_spendings(spends_client: SpendsClient, spendings_data: list[SpendAdd]):
             continue
         spends_client.add_spending(data)
     yield
-    
-@pytest.fixture
-def spendings_list(spends_client: SpendsClient) -> list[SpendGet]:
-    return spends_client.get_all_spendings()
