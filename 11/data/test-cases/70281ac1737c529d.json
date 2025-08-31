@@ -1,0 +1,427 @@
+{
+  "uid" : "70281ac1737c529d",
+  "name" : "Added Spending In Database[1000.26 Rub Id=None Name='\\U0423\\U043D\\U0438\\U043A\\U0430\\U043B\\U044C\\U043D\\U043E\\U0435' Username=None Archived=False \\U0423\\U043D\\U0438\\U043A\\U0430\\U043B\\U044C\\U043D\\U044B\\U0435 \\U0448\\U043B\\U044F\\U043F\\U044B]",
+  "fullName" : "tests.database.test_spendings_db.TestSpendingsDatabase#test_added_spending_in_database",
+  "historyId" : "0b8ce161e16c610d697bb5b17c68ef2a",
+  "time" : {
+    "start" : 1756634818745,
+    "stop" : 1756634818925,
+    "duration" : 180
+  },
+  "status" : "skipped",
+  "statusMessage" : "XFAIL spendDate записывается в БД с ошибкой, добавляется +1 день\n\nAssertionError: assert datetime.date(2009, 10, 14) == datetime.date(2009, 10, 13)\n +  where datetime.date(2009, 10, 14) = Spend(description='Уникальные шляпы', id=UUID('909ac284-e006-4aa2-a61e-5e123135f013'), spend_date=datetime.date(2009, 10, 14), amount=1000.26, username='niffler_qa', category_id=UUID('9bdc3861-d589-4694-9068-da62c35ae32d'), currency='RUB').spend_date\n +  and   datetime.date(2009, 10, 13) = <built-in method date of datetime.datetime object at 0x7fae0e125e00>()\n +    where <built-in method date of datetime.datetime object at 0x7fae0e125e00> = datetime.datetime(2009, 10, 13, 22, 5, 31, tzinfo=datetime.timezone.utc).date\n +      where datetime.datetime(2009, 10, 13, 22, 5, 31, tzinfo=datetime.timezone.utc) = <built-in method fromisoformat of type object at 0x7fae16548020>('2009-10-13T22:05:31.000+00:00')\n +        where <built-in method fromisoformat of type object at 0x7fae16548020> = datetime.fromisoformat\n +        and   '2009-10-13T22:05:31.000+00:00' = SpendAdd(id=None, amount=1000.26, description='Уникальные шляпы', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2009-10-13T22:05:31.000+00:00', currency='RUB', username='niffler_qa').spendDate",
+  "statusTrace" : "self = <tests.database.test_spendings_db.TestSpendingsDatabase object at 0x7fae0e5aa850>\nspends_client = <clients.spends_client.SpendsClient object at 0x7fae0e1b9010>\nspending_data = SpendAdd(id=None, amount=1000.26, description='Уникальные шляпы', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2009-10-13T22:05:31.000+00:00', currency='RUB', username='niffler_qa')\nspends_db = <databases.spends_db.SpendsDb object at 0x7fae0e2574d0>\n\n    @TestData.spending_data([\n        SpendAdd(\n            amount=1000.26,\n            category=CategoryAdd(name=\"Уникальное\"),\n            currency=\"RUB\",\n            description=\"Уникальные шляпы\",\n            spendDate=\"2009-10-13T22:05:31.000+00:00\"\n        )\n    ])\n    @pytest.mark.xfail(reason=\"spendDate записывается в БД с ошибкой, добавляется +1 день\")\n    @allure.story(Story.add_spending)\n    def test_added_spending_in_database(\n        self,\n        spends_client: SpendsClient,\n        spending_data: SpendAdd,\n        spends_db: SpendsDb\n    ):\n        added_spending = spends_client.add_spending(data=spending_data)\n        user_spending = spends_db.get_spending_by_id(id=added_spending.id)\n        with allure.step(f\"Проверка, что расход есть в базе данных\"):\n            assert user_spending is not None\n            assert user_spending.amount == spending_data.amount\n            assert user_spending.currency == spending_data.currency\n            assert user_spending.description == spending_data.description\n>           assert user_spending.spend_date == datetime.fromisoformat(spending_data.spendDate).date()\nE           AssertionError: assert datetime.date(2009, 10, 14) == datetime.date(2009, 10, 13)\nE            +  where datetime.date(2009, 10, 14) = Spend(description='Уникальные шляпы', id=UUID('909ac284-e006-4aa2-a61e-5e123135f013'), spend_date=datetime.date(2009, 10, 14), amount=1000.26, username='niffler_qa', category_id=UUID('9bdc3861-d589-4694-9068-da62c35ae32d'), currency='RUB').spend_date\nE            +  and   datetime.date(2009, 10, 13) = <built-in method date of datetime.datetime object at 0x7fae0e125e00>()\nE            +    where <built-in method date of datetime.datetime object at 0x7fae0e125e00> = datetime.datetime(2009, 10, 13, 22, 5, 31, tzinfo=datetime.timezone.utc).date\nE            +      where datetime.datetime(2009, 10, 13, 22, 5, 31, tzinfo=datetime.timezone.utc) = <built-in method fromisoformat of type object at 0x7fae16548020>('2009-10-13T22:05:31.000+00:00')\nE            +        where <built-in method fromisoformat of type object at 0x7fae16548020> = datetime.fromisoformat\nE            +        and   '2009-10-13T22:05:31.000+00:00' = SpendAdd(id=None, amount=1000.26, description='Уникальные шляпы', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2009-10-13T22:05:31.000+00:00', currency='RUB', username='niffler_qa').spendDate\n\ntests/database/test_spendings_db.py:50: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "[S] Token Data",
+    "time" : {
+      "start" : 1756634816753,
+      "stop" : 1756634817754,
+      "duration" : 1001
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Spends Db",
+    "time" : {
+      "start" : 1756634816194,
+      "stop" : 1756634816249,
+      "duration" : 55
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Cleanup",
+    "time" : {
+      "start" : 1756634816251,
+      "stop" : 1756634816752,
+      "duration" : 501
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Userdata Db",
+    "time" : {
+      "start" : 1756634816250,
+      "stop" : 1756634816250,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Client Envs",
+    "time" : {
+      "start" : 1756634816250,
+      "stop" : 1756634816251,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "d61d9fd16cca7c76",
+      "name" : "client_envs.json",
+      "source" : "d61d9fd16cca7c76.json",
+      "type" : "application/json",
+      "size" : 66
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Server Envs",
+    "time" : {
+      "start" : 1756634816191,
+      "stop" : 1756634816193,
+      "duration" : 2
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "79aae2973057e5f8",
+      "name" : "server_envs.json",
+      "source" : "79aae2973057e5f8.json",
+      "type" : "application/json",
+      "size" : 582
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Lock Manager",
+    "time" : {
+      "start" : 1756634816190,
+      "stop" : 1756634816191,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Auth Client",
+    "time" : {
+      "start" : 1756634816752,
+      "stop" : 1756634816753,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Spends Client",
+    "time" : {
+      "start" : 1756634817754,
+      "stop" : 1756634817754,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S]  Session Faker",
+    "time" : {
+      "start" : 1756634816089,
+      "stop" : 1756634816190,
+      "duration" : 101
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Auth Db",
+    "time" : {
+      "start" : 1756634816249,
+      "stop" : 1756634816250,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "testStage" : {
+    "status" : "skipped",
+    "statusMessage" : "XFAIL spendDate записывается в БД с ошибкой, добавляется +1 день\n\nAssertionError: assert datetime.date(2009, 10, 14) == datetime.date(2009, 10, 13)\n +  where datetime.date(2009, 10, 14) = Spend(description='Уникальные шляпы', id=UUID('909ac284-e006-4aa2-a61e-5e123135f013'), spend_date=datetime.date(2009, 10, 14), amount=1000.26, username='niffler_qa', category_id=UUID('9bdc3861-d589-4694-9068-da62c35ae32d'), currency='RUB').spend_date\n +  and   datetime.date(2009, 10, 13) = <built-in method date of datetime.datetime object at 0x7fae0e125e00>()\n +    where <built-in method date of datetime.datetime object at 0x7fae0e125e00> = datetime.datetime(2009, 10, 13, 22, 5, 31, tzinfo=datetime.timezone.utc).date\n +      where datetime.datetime(2009, 10, 13, 22, 5, 31, tzinfo=datetime.timezone.utc) = <built-in method fromisoformat of type object at 0x7fae16548020>('2009-10-13T22:05:31.000+00:00')\n +        where <built-in method fromisoformat of type object at 0x7fae16548020> = datetime.fromisoformat\n +        and   '2009-10-13T22:05:31.000+00:00' = SpendAdd(id=None, amount=1000.26, description='Уникальные шляпы', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2009-10-13T22:05:31.000+00:00', currency='RUB', username='niffler_qa').spendDate",
+    "statusTrace" : "self = <tests.database.test_spendings_db.TestSpendingsDatabase object at 0x7fae0e5aa850>\nspends_client = <clients.spends_client.SpendsClient object at 0x7fae0e1b9010>\nspending_data = SpendAdd(id=None, amount=1000.26, description='Уникальные шляпы', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2009-10-13T22:05:31.000+00:00', currency='RUB', username='niffler_qa')\nspends_db = <databases.spends_db.SpendsDb object at 0x7fae0e2574d0>\n\n    @TestData.spending_data([\n        SpendAdd(\n            amount=1000.26,\n            category=CategoryAdd(name=\"Уникальное\"),\n            currency=\"RUB\",\n            description=\"Уникальные шляпы\",\n            spendDate=\"2009-10-13T22:05:31.000+00:00\"\n        )\n    ])\n    @pytest.mark.xfail(reason=\"spendDate записывается в БД с ошибкой, добавляется +1 день\")\n    @allure.story(Story.add_spending)\n    def test_added_spending_in_database(\n        self,\n        spends_client: SpendsClient,\n        spending_data: SpendAdd,\n        spends_db: SpendsDb\n    ):\n        added_spending = spends_client.add_spending(data=spending_data)\n        user_spending = spends_db.get_spending_by_id(id=added_spending.id)\n        with allure.step(f\"Проверка, что расход есть в базе данных\"):\n            assert user_spending is not None\n            assert user_spending.amount == spending_data.amount\n            assert user_spending.currency == spending_data.currency\n            assert user_spending.description == spending_data.description\n>           assert user_spending.spend_date == datetime.fromisoformat(spending_data.spendDate).date()\nE           AssertionError: assert datetime.date(2009, 10, 14) == datetime.date(2009, 10, 13)\nE            +  where datetime.date(2009, 10, 14) = Spend(description='Уникальные шляпы', id=UUID('909ac284-e006-4aa2-a61e-5e123135f013'), spend_date=datetime.date(2009, 10, 14), amount=1000.26, username='niffler_qa', category_id=UUID('9bdc3861-d589-4694-9068-da62c35ae32d'), currency='RUB').spend_date\nE            +  and   datetime.date(2009, 10, 13) = <built-in method date of datetime.datetime object at 0x7fae0e125e00>()\nE            +    where <built-in method date of datetime.datetime object at 0x7fae0e125e00> = datetime.datetime(2009, 10, 13, 22, 5, 31, tzinfo=datetime.timezone.utc).date\nE            +      where datetime.datetime(2009, 10, 13, 22, 5, 31, tzinfo=datetime.timezone.utc) = <built-in method fromisoformat of type object at 0x7fae16548020>('2009-10-13T22:05:31.000+00:00')\nE            +        where <built-in method fromisoformat of type object at 0x7fae16548020> = datetime.fromisoformat\nE            +        and   '2009-10-13T22:05:31.000+00:00' = SpendAdd(id=None, amount=1000.26, description='Уникальные шляпы', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2009-10-13T22:05:31.000+00:00', currency='RUB', username='niffler_qa').spendDate\n\ntests/database/test_spendings_db.py:50: AssertionError",
+    "steps" : [ {
+      "name" : "API Добавление траты",
+      "time" : {
+        "start" : 1756634818745,
+        "stop" : 1756634818916,
+        "duration" : 171
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "POST /api/spends/add",
+        "time" : {
+          "start" : 1756634818752,
+          "stop" : 1756634818916,
+          "duration" : 164
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "6f7ccdba28d14a5d",
+          "name" : "Request",
+          "source" : "6f7ccdba28d14a5d.html",
+          "type" : "text/html",
+          "size" : 4556
+        }, {
+          "uid" : "acd8a934c129561c",
+          "name" : "Response json 201",
+          "source" : "acd8a934c129561c.json",
+          "type" : "application/json",
+          "size" : 511
+        }, {
+          "uid" : "611145a5a1ba808e",
+          "name" : "Response headers 201",
+          "source" : "611145a5a1ba808e.json",
+          "type" : "application/json",
+          "size" : 490
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "data",
+        "value" : "SpendAdd(id=None, amount=1000.26, description='Уникальные шляпы', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2009-10-13T22:05:31.000+00:00', currency='RUB', username=None)"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Проверка, что расход есть в базе данных",
+      "time" : {
+        "start" : 1756634818923,
+        "stop" : 1756634818924,
+        "duration" : 1
+      },
+      "status" : "failed",
+      "statusMessage" : "AssertionError: assert datetime.date(2009, 10, 14) == datetime.date(2009, 10, 13)\n +  where datetime.date(2009, 10, 14) = Spend(description='Уникальные шляпы', id=UUID('909ac284-e006-4aa2-a61e-5e123135f013'), spend_date=datetime.date(2009, 10, 14), amount=1000.26, username='niffler_qa', category_id=UUID('9bdc3861-d589-4694-9068-da62c35ae32d'), currency='RUB').spend_date\n +  and   datetime.date(2009, 10, 13) = <built-in method date of datetime.datetime object at 0x7fae0e125e00>()\n +    where <built-in method date of datetime.datetime object at 0x7fae0e125e00> = datetime.datetime(2009, 10, 13, 22, 5, 31, tzinfo=datetime.timezone.utc).date\n +      where datetime.datetime(2009, 10, 13, 22, 5, 31, tzinfo=datetime.timezone.utc) = <built-in method fromisoformat of type object at 0x7fae16548020>('2009-10-13T22:05:31.000+00:00')\n +        where <built-in method fromisoformat of type object at 0x7fae16548020> = datetime.fromisoformat\n +        and   '2009-10-13T22:05:31.000+00:00' = SpendAdd(id=None, amount=1000.26, description='Уникальные шляпы', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2009-10-13T22:05:31.000+00:00', currency='RUB', username='niffler_qa').spendDate\n",
+      "statusTrace" : "  File \"/home/runner/work/niffler-py-st3/niffler-py-st3/niffler-python-tests/tests/database/test_spendings_db.py\", line 50, in test_added_spending_in_database\n    assert user_spending.spend_date == datetime.fromisoformat(spending_data.spendDate).date()\n",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : true,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "2b89db258c945cd3",
+      "name" : "SELECT niffler-spend",
+      "source" : "2b89db258c945cd3.txt",
+      "type" : "text/plain",
+      "size" : 184
+    }, {
+      "uid" : "7c2a936aef3c13a",
+      "name" : "log",
+      "source" : "7c2a936aef3c13a.txt",
+      "type" : "text/plain",
+      "size" : 243
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 3,
+    "attachmentsCount" : 5,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ {
+    "name" : "token_data::0",
+    "time" : {
+      "start" : 1756634892216,
+      "stop" : 1756634892217,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "cleanup::0",
+    "time" : {
+      "start" : 1756634892218,
+      "stop" : 1756634892218,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "auth_client::0",
+    "time" : {
+      "start" : 1756634892217,
+      "stop" : 1756634892217,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "spends_client::0",
+    "time" : {
+      "start" : 1756634892216,
+      "stop" : 1756634892216,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Spendings"
+  }, {
+    "name" : "story",
+    "value" : "Add spendings"
+  }, {
+    "name" : "tag",
+    "value" : "@pytest.mark.xfail(reason='spendDate записывается в БД с ошибкой, добавляется +1 день')"
+  }, {
+    "name" : "tag",
+    "value" : "database"
+  }, {
+    "name" : "tag",
+    "value" : "spendings"
+  }, {
+    "name" : "host",
+    "value" : "pkrvmccyg1gnepe"
+  }, {
+    "name" : "thread",
+    "value" : "6966-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.database.test_spendings_db"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "spending_data",
+    "value" : "SpendAdd(id=None, amount=1000.26, description='Уникальные шляпы', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2009-10-13T22:05:31.000+00:00', currency='RUB', username=None)"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 3,
+        "passed" : 0,
+        "unknown" : 0,
+        "total" : 3
+      },
+      "items" : [ {
+        "uid" : "f65ced23275cdd80",
+        "reportUrl" : "https://illusionx11.github.io/niffler-py-st3/10/#testresult/f65ced23275cdd80",
+        "status" : "skipped",
+        "statusDetails" : "XFAIL spendDate записывается в БД с ошибкой, добавляется +1 день\n\nAssertionError: assert datetime.date(2009, 10, 14) == datetime.date(2009, 10, 13)\n +  where datetime.date(2009, 10, 14) = Spend(id=UUID('6ddf810c-f660-4cb1-b052-8d387d4ad011'), description='Уникальные шляпы', spend_date=datetime.date(2009, 10, 14), amount=1000.26, username='niffler_qa', category_id=UUID('11fea4a0-f4a8-4a68-bfbb-d582108a4bee'), currency='RUB').spend_date\n +  and   datetime.date(2009, 10, 13) = <built-in method date of datetime.datetime object at 0x7f0470659500>()\n +    where <built-in method date of datetime.datetime object at 0x7f0470659500> = datetime.datetime(2009, 10, 13, 22, 5, 31, tzinfo=datetime.timezone.utc).date\n +      where datetime.datetime(2009, 10, 13, 22, 5, 31, tzinfo=datetime.timezone.utc) = <built-in method fromisoformat of type object at 0x7f047533b020>('2009-10-13T22:05:31.000+00:00')\n +        where <built-in method fromisoformat of type object at 0x7f047533b020> = datetime.fromisoformat\n +        and   '2009-10-13T22:05:31.000+00:00' = SpendAdd(id=None, amount=1000.26, description='Уникальные шляпы', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2009-10-13T22:05:31.000+00:00', currency='RUB', username='niffler_qa').spendDate",
+        "time" : {
+          "start" : 1756580102548,
+          "stop" : 1756580102693,
+          "duration" : 145
+        }
+      }, {
+        "uid" : "d2b6cc597a7ce14",
+        "reportUrl" : "https://illusionx11.github.io/niffler-py-st3/9/#testresult/d2b6cc597a7ce14",
+        "status" : "skipped",
+        "statusDetails" : "XFAIL spendDate записывается в БД с ошибкой, добавляется +1 день\n\nAssertionError: assert datetime.date(2009, 10, 14) == datetime.date(2009, 10, 13)\n +  where datetime.date(2009, 10, 14) = Spend(amount=1000.26, username='niffler_qa', category_id=UUID('b91f24c6-d4a0-4a19-9c91-89b941fff6f5'), currency='RUB', description='Уникальные шляпы', id=UUID('9a535dbd-7df0-4df2-86a0-7a208c4719b1'), spend_date=datetime.date(2009, 10, 14)).spend_date\n +  and   datetime.date(2009, 10, 13) = <built-in method date of datetime.datetime object at 0x7f441b9e1f80>()\n +    where <built-in method date of datetime.datetime object at 0x7f441b9e1f80> = datetime.datetime(2009, 10, 13, 22, 5, 31, tzinfo=datetime.timezone.utc).date\n +      where datetime.datetime(2009, 10, 13, 22, 5, 31, tzinfo=datetime.timezone.utc) = <built-in method fromisoformat of type object at 0x7f4424034020>('2009-10-13T22:05:31.000+00:00')\n +        where <built-in method fromisoformat of type object at 0x7f4424034020> = datetime.fromisoformat\n +        and   '2009-10-13T22:05:31.000+00:00' = SpendAdd(id=None, amount=1000.26, description='Уникальные шляпы', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2009-10-13T22:05:31.000+00:00', currency='RUB', username='niffler_qa').spendDate",
+        "time" : {
+          "start" : 1755396901709,
+          "stop" : 1755396901968,
+          "duration" : 259
+        }
+      } ]
+    },
+    "tags" : [ "spendings", "database", "@pytest.mark.xfail(reason='spendDate записывается в БД с ошибкой, добавляется +1 день')" ]
+  },
+  "source" : "70281ac1737c529d.json",
+  "parameterValues" : [ "SpendAdd(id=None, amount=1000.26, description='Уникальные шляпы', category=CategoryAdd(id=None, name='Уникальное', username=None, archived=False), spendDate='2009-10-13T22:05:31.000+00:00', currency='RUB', username=None)" ]
+}

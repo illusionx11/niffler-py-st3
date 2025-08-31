@@ -1,0 +1,6338 @@
+{
+  "uid" : "3b9673b4169a7f64",
+  "name" : "Get Friends Page Invalid Parameters[Page -1, Size 1]",
+  "fullName" : "tests.soap.test_userdata_soap.TestSoapUsers#test_get_friends_page_invalid_parameters",
+  "historyId" : "cae9a56329ef869f433060b721cc5b98",
+  "time" : {
+    "start" : 1756634886286,
+    "stop" : 1756634886292,
+    "duration" : 6
+  },
+  "description" : "Тест получения друзей с пагинацией через SOAP с некорректными параметрами",
+  "descriptionHtml" : "<p>Тест получения друзей с пагинацией через SOAP с некорректными параметрами</p>\n",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "[S]  Session Faker",
+    "time" : {
+      "start" : 1756634816091,
+      "stop" : 1756634816191,
+      "duration" : 100
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Client Envs",
+    "time" : {
+      "start" : 1756634816250,
+      "stop" : 1756634816251,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "9cb2bccafac80ade",
+      "name" : "client_envs.json",
+      "source" : "9cb2bccafac80ade.json",
+      "type" : "application/json",
+      "size" : 66
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Lock Manager",
+    "time" : {
+      "start" : 1756634816191,
+      "stop" : 1756634816191,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Faker",
+    "time" : {
+      "start" : 1756634819250,
+      "stop" : 1756634819254,
+      "duration" : 4
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[F] Mock Users",
+    "time" : {
+      "start" : 1756634881483,
+      "stop" : 1756634883256,
+      "duration" : 1773
+    },
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634881484,
+        "stop" : 1756634881600,
+        "duration" : 116
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634881491,
+          "stop" : 1756634881495,
+          "duration" : 4
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "76fc208e5db60303",
+          "name" : "Request",
+          "source" : "76fc208e5db60303.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "ab786c11df90a574",
+          "name" : "Response text 200",
+          "source" : "ab786c11df90a574.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "59d3ea1885cba9d0",
+          "name" : "Response headers 200",
+          "source" : "59d3ea1885cba9d0.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634881501,
+          "stop" : 1756634881600,
+          "duration" : 99
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "eb0535d453e84776",
+          "name" : "Request",
+          "source" : "eb0535d453e84776.html",
+          "type" : "text/html",
+          "size" : 2220
+        }, {
+          "uid" : "ae40c7ef71efa70c",
+          "name" : "Response text 201",
+          "source" : "ae40c7ef71efa70c.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "7f3659ec50373fd9",
+          "name" : "Response headers 201",
+          "source" : "7f3659ec50373fd9.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Chloe_travel_79147_0'"
+      }, {
+        "name" : "password",
+        "value" : "'pC@3Scg9IP'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634881600,
+        "stop" : 1756634881718,
+        "duration" : 118
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634881606,
+          "stop" : 1756634881610,
+          "duration" : 4
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "2409f2f3bfa117fa",
+          "name" : "Request",
+          "source" : "2409f2f3bfa117fa.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "d95dc1073148cf77",
+          "name" : "Response text 200",
+          "source" : "d95dc1073148cf77.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "2ac271c09f3208da",
+          "name" : "Response headers 200",
+          "source" : "2ac271c09f3208da.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634881617,
+          "stop" : 1756634881718,
+          "duration" : 101
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "3a0db01dffc3ab24",
+          "name" : "Request",
+          "source" : "3a0db01dffc3ab24.html",
+          "type" : "text/html",
+          "size" : 2230
+        }, {
+          "uid" : "598995c53dc6b6ed",
+          "name" : "Response text 201",
+          "source" : "598995c53dc6b6ed.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "e3bed718ff3aa389",
+          "name" : "Response headers 201",
+          "source" : "e3bed718ff3aa389.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Nancy_film_3966_1'"
+      }, {
+        "name" : "password",
+        "value" : "'TbF3YQw$()'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634881719,
+        "stop" : 1756634881846,
+        "duration" : 127
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634881727,
+          "stop" : 1756634881730,
+          "duration" : 3
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "a327425a7dd14fca",
+          "name" : "Request",
+          "source" : "a327425a7dd14fca.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "383766f71f294e69",
+          "name" : "Response text 200",
+          "source" : "383766f71f294e69.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "1bbedffe3fd6ffd5",
+          "name" : "Response headers 200",
+          "source" : "1bbedffe3fd6ffd5.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634881738,
+          "stop" : 1756634881846,
+          "duration" : 108
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "7c782923dc446aa1",
+          "name" : "Request",
+          "source" : "7c782923dc446aa1.html",
+          "type" : "text/html",
+          "size" : 2232
+        }, {
+          "uid" : "bff0af1b49ad9f42",
+          "name" : "Response text 201",
+          "source" : "bff0af1b49ad9f42.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "460fd43c12b12b0e",
+          "name" : "Response headers 201",
+          "source" : "460fd43c12b12b0e.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Taylor_red_69836_2'"
+      }, {
+        "name" : "password",
+        "value" : "'B5!@LHo8%Z'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634881847,
+        "stop" : 1756634882051,
+        "duration" : 204
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634881861,
+          "stop" : 1756634881870,
+          "duration" : 9
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "c1839d5bd99c22b2",
+          "name" : "Request",
+          "source" : "c1839d5bd99c22b2.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "15a6fab704fda03f",
+          "name" : "Response text 200",
+          "source" : "15a6fab704fda03f.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "8630576bbdb863ee",
+          "name" : "Response headers 200",
+          "source" : "8630576bbdb863ee.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634881897,
+          "stop" : 1756634882045,
+          "duration" : 148
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "1cca24feb95f306c",
+          "name" : "Request",
+          "source" : "1cca24feb95f306c.html",
+          "type" : "text/html",
+          "size" : 2238
+        }, {
+          "uid" : "6c80f40b1024817",
+          "name" : "Response text 201",
+          "source" : "6c80f40b1024817.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "7931dcabdf544fdc",
+          "name" : "Response headers 201",
+          "source" : "7931dcabdf544fdc.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Michael_great_49552_3'"
+      }, {
+        "name" : "password",
+        "value" : "'@d6TLeGK+!'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634882051,
+        "stop" : 1756634882342,
+        "duration" : 291
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634882070,
+          "stop" : 1756634882076,
+          "duration" : 6
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "80fa5f707615e642",
+          "name" : "Request",
+          "source" : "80fa5f707615e642.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "8713a388685b5fd7",
+          "name" : "Response text 200",
+          "source" : "8713a388685b5fd7.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "f35fc70f5c65b6fe",
+          "name" : "Response headers 200",
+          "source" : "f35fc70f5c65b6fe.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634882082,
+          "stop" : 1756634882340,
+          "duration" : 258
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "22b6d68db646c746",
+          "name" : "Request",
+          "source" : "22b6d68db646c746.html",
+          "type" : "text/html",
+          "size" : 2224
+        }, {
+          "uid" : "a3e481049d2ea973",
+          "name" : "Response text 201",
+          "source" : "a3e481049d2ea973.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "f600ec82318b8675",
+          "name" : "Response headers 201",
+          "source" : "f600ec82318b8675.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Bradley_animal_55516_4'"
+      }, {
+        "name" : "password",
+        "value" : "'%piwK4Bv8Q'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634882343,
+        "stop" : 1756634882541,
+        "duration" : 198
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634882362,
+          "stop" : 1756634882372,
+          "duration" : 10
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "fef178f99f44a4d7",
+          "name" : "Request",
+          "source" : "fef178f99f44a4d7.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "4ac29ff1b5d29b13",
+          "name" : "Response text 200",
+          "source" : "4ac29ff1b5d29b13.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "e7426054bb4f8757",
+          "name" : "Response headers 200",
+          "source" : "e7426054bb4f8757.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634882396,
+          "stop" : 1756634882541,
+          "duration" : 145
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "f87e629a34414032",
+          "name" : "Request",
+          "source" : "f87e629a34414032.html",
+          "type" : "text/html",
+          "size" : 2228
+        }, {
+          "uid" : "2d62e46854af336a",
+          "name" : "Response text 201",
+          "source" : "2d62e46854af336a.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "311adcca70806cb5",
+          "name" : "Response headers 201",
+          "source" : "311adcca70806cb5.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Daniel_still_79763_5'"
+      }, {
+        "name" : "password",
+        "value" : "'kv70Q1%yk*'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634882556,
+        "stop" : 1756634882747,
+        "duration" : 191
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634882578,
+          "stop" : 1756634882584,
+          "duration" : 6
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "ad7f061df944603b",
+          "name" : "Request",
+          "source" : "ad7f061df944603b.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "22f17376acd41f9b",
+          "name" : "Response text 200",
+          "source" : "22f17376acd41f9b.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "663b44ac0027965e",
+          "name" : "Response headers 200",
+          "source" : "663b44ac0027965e.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634882597,
+          "stop" : 1756634882747,
+          "duration" : 150
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "a8ed15f702ff8f21",
+          "name" : "Request",
+          "source" : "a8ed15f702ff8f21.html",
+          "type" : "text/html",
+          "size" : 2236
+        }, {
+          "uid" : "db0dbd37518886a5",
+          "name" : "Response text 201",
+          "source" : "db0dbd37518886a5.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "f2e9c13cf6989a15",
+          "name" : "Response headers 201",
+          "source" : "f2e9c13cf6989a15.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'William_sell_10287_6'"
+      }, {
+        "name" : "password",
+        "value" : "')9+aSr4oS!'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634882749,
+        "stop" : 1756634883000,
+        "duration" : 251
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634882792,
+          "stop" : 1756634882801,
+          "duration" : 9
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "a8494f0431b7d3f9",
+          "name" : "Request",
+          "source" : "a8494f0431b7d3f9.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "ed7e153a4b372270",
+          "name" : "Response text 200",
+          "source" : "ed7e153a4b372270.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "d8856272ea4862ee",
+          "name" : "Response headers 200",
+          "source" : "d8856272ea4862ee.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634882866,
+          "stop" : 1756634882999,
+          "duration" : 133
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "ceed6dcc48c04d93",
+          "name" : "Request",
+          "source" : "ceed6dcc48c04d93.html",
+          "type" : "text/html",
+          "size" : 2236
+        }, {
+          "uid" : "d42f3f4843a1e48c",
+          "name" : "Response text 201",
+          "source" : "d42f3f4843a1e48c.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "a873d4c362c91d7a",
+          "name" : "Response headers 201",
+          "source" : "a873d4c362c91d7a.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Jeremy_early_93526_7'"
+      }, {
+        "name" : "password",
+        "value" : "'&9U5f)wh&R'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634883003,
+        "stop" : 1756634883128,
+        "duration" : 125
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634883009,
+          "stop" : 1756634883012,
+          "duration" : 3
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "fd643b53a1d146ea",
+          "name" : "Request",
+          "source" : "fd643b53a1d146ea.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "468a436ac564ca45",
+          "name" : "Response text 200",
+          "source" : "468a436ac564ca45.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "b1581edd2aa7b59d",
+          "name" : "Response headers 200",
+          "source" : "b1581edd2aa7b59d.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634883019,
+          "stop" : 1756634883128,
+          "duration" : 109
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "4293e3da438e800d",
+          "name" : "Request",
+          "source" : "4293e3da438e800d.html",
+          "type" : "text/html",
+          "size" : 2216
+        }, {
+          "uid" : "197afa8a9629cfbd",
+          "name" : "Response text 201",
+          "source" : "197afa8a9629cfbd.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "469ad160cf97fbed",
+          "name" : "Response headers 201",
+          "source" : "469ad160cf97fbed.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Adam_occur_69996_8'"
+      }, {
+        "name" : "password",
+        "value" : "'(1c1sMhIwk'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634883129,
+        "stop" : 1756634883256,
+        "duration" : 127
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634883143,
+          "stop" : 1756634883147,
+          "duration" : 4
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "5b383d860912a0ca",
+          "name" : "Request",
+          "source" : "5b383d860912a0ca.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "51b975e07380f053",
+          "name" : "Response text 200",
+          "source" : "51b975e07380f053.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "78531a1e301e2027",
+          "name" : "Response headers 200",
+          "source" : "78531a1e301e2027.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634883159,
+          "stop" : 1756634883256,
+          "duration" : 97
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "f924e6be8ba7b15c",
+          "name" : "Request",
+          "source" : "f924e6be8ba7b15c.html",
+          "type" : "text/html",
+          "size" : 2216
+        }, {
+          "uid" : "ce1e45f2b1baa8f7",
+          "name" : "Response text 201",
+          "source" : "ce1e45f2b1baa8f7.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "14e0aecbf0ed4250",
+          "name" : "Response headers 201",
+          "source" : "14e0aecbf0ed4250.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Nicole_present_75289_9'"
+      }, {
+        "name" : "password",
+        "value" : "'A_Q4ZYEvbe'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 30,
+    "attachmentsCount" : 60,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Userdata Db",
+    "time" : {
+      "start" : 1756634816250,
+      "stop" : 1756634816250,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[F] Mock Friends",
+    "time" : {
+      "start" : 1756634883405,
+      "stop" : 1756634884860,
+      "duration" : 1455
+    },
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634883406,
+        "stop" : 1756634883548,
+        "duration" : 142
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634883415,
+          "stop" : 1756634883419,
+          "duration" : 4
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "d2432b32c7f1a8fa",
+          "name" : "Request",
+          "source" : "d2432b32c7f1a8fa.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "1ae9ed1c90467251",
+          "name" : "Response text 200",
+          "source" : "1ae9ed1c90467251.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "904c3dd12f351da8",
+          "name" : "Response headers 200",
+          "source" : "904c3dd12f351da8.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634883429,
+          "stop" : 1756634883546,
+          "duration" : 117
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "f95115c533b2122",
+          "name" : "Request",
+          "source" : "f95115c533b2122.html",
+          "type" : "text/html",
+          "size" : 2240
+        }, {
+          "uid" : "d2c8ab489c1afb1d",
+          "name" : "Response text 201",
+          "source" : "d2c8ab489c1afb1d.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "f5549b7d4470f17a",
+          "name" : "Response headers 201",
+          "source" : "f5549b7d4470f17a.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Andrew_stay_Friend_58074_0'"
+      }, {
+        "name" : "password",
+        "value" : "'#T#D0RuuC4'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634883549,
+        "stop" : 1756634883702,
+        "duration" : 153
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634883558,
+          "stop" : 1756634883568,
+          "duration" : 10
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "134f6a11056e524c",
+          "name" : "Request",
+          "source" : "134f6a11056e524c.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "c8d1dfdc86be7cac",
+          "name" : "Response text 200",
+          "source" : "c8d1dfdc86be7cac.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "5453283f05a179a6",
+          "name" : "Response headers 200",
+          "source" : "5453283f05a179a6.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634883575,
+          "stop" : 1756634883702,
+          "duration" : 127
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "fc3a0287b1c23ee2",
+          "name" : "Request",
+          "source" : "fc3a0287b1c23ee2.html",
+          "type" : "text/html",
+          "size" : 2236
+        }, {
+          "uid" : "dba316cfbf53563",
+          "name" : "Response text 201",
+          "source" : "dba316cfbf53563.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "4de842f8afb41cb1",
+          "name" : "Response headers 201",
+          "source" : "4de842f8afb41cb1.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Brenda_charge_Friend_95663_1'"
+      }, {
+        "name" : "password",
+        "value" : "'QU7RA8aVI!'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634883703,
+        "stop" : 1756634883854,
+        "duration" : 151
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634883721,
+          "stop" : 1756634883726,
+          "duration" : 5
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "5ebfb83a5eec3ba0",
+          "name" : "Request",
+          "source" : "5ebfb83a5eec3ba0.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "5ea39bf5ba93b252",
+          "name" : "Response text 200",
+          "source" : "5ea39bf5ba93b252.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "c75cc6110cbed805",
+          "name" : "Response headers 200",
+          "source" : "c75cc6110cbed805.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634883732,
+          "stop" : 1756634883853,
+          "duration" : 121
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "ac371f872f94ab28",
+          "name" : "Request",
+          "source" : "ac371f872f94ab28.html",
+          "type" : "text/html",
+          "size" : 2234
+        }, {
+          "uid" : "48578038a22c3279",
+          "name" : "Response text 201",
+          "source" : "48578038a22c3279.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "262d60633f31d49a",
+          "name" : "Response headers 201",
+          "source" : "262d60633f31d49a.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Suzanne_tree_Friend_75327_2'"
+      }, {
+        "name" : "password",
+        "value" : "'L8FU!9UzYw'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634883854,
+        "stop" : 1756634884007,
+        "duration" : 153
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634883865,
+          "stop" : 1756634883869,
+          "duration" : 4
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "9dfc234f488dfdf2",
+          "name" : "Request",
+          "source" : "9dfc234f488dfdf2.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "e1a83d87e834a213",
+          "name" : "Response text 200",
+          "source" : "e1a83d87e834a213.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "32fb771684114902",
+          "name" : "Response headers 200",
+          "source" : "32fb771684114902.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634883881,
+          "stop" : 1756634884007,
+          "duration" : 126
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "9bb7a85b02cec797",
+          "name" : "Request",
+          "source" : "9bb7a85b02cec797.html",
+          "type" : "text/html",
+          "size" : 2242
+        }, {
+          "uid" : "6a97e169b7c294ad",
+          "name" : "Response text 201",
+          "source" : "6a97e169b7c294ad.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "ea8eb33c012d1f52",
+          "name" : "Response headers 201",
+          "source" : "ea8eb33c012d1f52.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Alexander_themselves_Friend_66670_3'"
+      }, {
+        "name" : "password",
+        "value" : "'SH9HMzdzC_'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634884008,
+        "stop" : 1756634884157,
+        "duration" : 149
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634884031,
+          "stop" : 1756634884039,
+          "duration" : 8
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "ad5590ea29574bcd",
+          "name" : "Request",
+          "source" : "ad5590ea29574bcd.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "ff1e850e9e2d21d3",
+          "name" : "Response text 200",
+          "source" : "ff1e850e9e2d21d3.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "836bca101cfe30d9",
+          "name" : "Response headers 200",
+          "source" : "836bca101cfe30d9.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634884059,
+          "stop" : 1756634884157,
+          "duration" : 98
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "371fcf11c55fc4da",
+          "name" : "Request",
+          "source" : "371fcf11c55fc4da.html",
+          "type" : "text/html",
+          "size" : 2238
+        }, {
+          "uid" : "45571c80e66b4882",
+          "name" : "Response text 201",
+          "source" : "45571c80e66b4882.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "9f99cda562fd414f",
+          "name" : "Response headers 201",
+          "source" : "9f99cda562fd414f.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Angela_risk_Friend_7482_4'"
+      }, {
+        "name" : "password",
+        "value" : "'N*5F9a_h&N'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634884157,
+        "stop" : 1756634884264,
+        "duration" : 107
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634884163,
+          "stop" : 1756634884169,
+          "duration" : 6
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "434f323c9b7a3818",
+          "name" : "Request",
+          "source" : "434f323c9b7a3818.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "34920de4d5bd80a1",
+          "name" : "Response text 200",
+          "source" : "34920de4d5bd80a1.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "b60134699a4bd3d0",
+          "name" : "Response headers 200",
+          "source" : "b60134699a4bd3d0.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634884175,
+          "stop" : 1756634884264,
+          "duration" : 89
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "a3576e169d1c8386",
+          "name" : "Request",
+          "source" : "a3576e169d1c8386.html",
+          "type" : "text/html",
+          "size" : 2254
+        }, {
+          "uid" : "27307d0bfcf88a53",
+          "name" : "Response text 201",
+          "source" : "27307d0bfcf88a53.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "99f30cc55caaff60",
+          "name" : "Response headers 201",
+          "source" : "99f30cc55caaff60.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Jesus_professional_Friend_68944_5'"
+      }, {
+        "name" : "password",
+        "value" : "'p*a9Z1t8P('"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634884264,
+        "stop" : 1756634884374,
+        "duration" : 110
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634884270,
+          "stop" : 1756634884274,
+          "duration" : 4
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "1d4e137659ca2b4f",
+          "name" : "Request",
+          "source" : "1d4e137659ca2b4f.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "82e3d89dd315faf7",
+          "name" : "Response text 200",
+          "source" : "82e3d89dd315faf7.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "9a71e1fc38e06afe",
+          "name" : "Response headers 200",
+          "source" : "9a71e1fc38e06afe.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634884280,
+          "stop" : 1756634884374,
+          "duration" : 94
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "484d4680b94e6d2a",
+          "name" : "Request",
+          "source" : "484d4680b94e6d2a.html",
+          "type" : "text/html",
+          "size" : 2240
+        }, {
+          "uid" : "9b237b6386a67b0a",
+          "name" : "Response text 201",
+          "source" : "9b237b6386a67b0a.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "6f63e66fcf9b72d6",
+          "name" : "Response headers 201",
+          "source" : "6f63e66fcf9b72d6.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Cynthia_for_Friend_42259_6'"
+      }, {
+        "name" : "password",
+        "value" : "'6_Q2%EpBg)'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634884375,
+        "stop" : 1756634884497,
+        "duration" : 122
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634884383,
+          "stop" : 1756634884387,
+          "duration" : 4
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "f8702bb6ec21104",
+          "name" : "Request",
+          "source" : "f8702bb6ec21104.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "84f997daa2323afc",
+          "name" : "Response text 200",
+          "source" : "84f997daa2323afc.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "1a9ae469e1130f3",
+          "name" : "Response headers 200",
+          "source" : "1a9ae469e1130f3.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634884397,
+          "stop" : 1756634884497,
+          "duration" : 100
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "c2f5810b1f483dd5",
+          "name" : "Request",
+          "source" : "c2f5810b1f483dd5.html",
+          "type" : "text/html",
+          "size" : 2236
+        }, {
+          "uid" : "a76062fc329610",
+          "name" : "Response text 201",
+          "source" : "a76062fc329610.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "d3b9c579657c5776",
+          "name" : "Response headers 201",
+          "source" : "d3b9c579657c5776.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Jill_role_Friend_27816_7'"
+      }, {
+        "name" : "password",
+        "value" : "'T9&xVQkn!9'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634884498,
+        "stop" : 1756634884598,
+        "duration" : 100
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634884503,
+          "stop" : 1756634884506,
+          "duration" : 3
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "39ec0092d3a05efa",
+          "name" : "Request",
+          "source" : "39ec0092d3a05efa.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "ce194ea6a514dcd8",
+          "name" : "Response text 200",
+          "source" : "ce194ea6a514dcd8.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "8ad06c2a2a94e792",
+          "name" : "Response headers 200",
+          "source" : "8ad06c2a2a94e792.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634884512,
+          "stop" : 1756634884597,
+          "duration" : 85
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "b993dc12ac3a48b3",
+          "name" : "Request",
+          "source" : "b993dc12ac3a48b3.html",
+          "type" : "text/html",
+          "size" : 2226
+        }, {
+          "uid" : "c4424a01adfc25df",
+          "name" : "Response text 201",
+          "source" : "c4424a01adfc25df.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "25e8105ee20f043c",
+          "name" : "Response headers 201",
+          "source" : "25e8105ee20f043c.json",
+          "type" : "application/json",
+          "size" : 553
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Eric_bag_Friend_68032_8'"
+      }, {
+        "name" : "password",
+        "value" : "'+HaJWjulF4'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634884598,
+        "stop" : 1756634884699,
+        "duration" : 101
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634884605,
+          "stop" : 1756634884610,
+          "duration" : 5
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "7fea30ad34ddcca2",
+          "name" : "Request",
+          "source" : "7fea30ad34ddcca2.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "30519c856c67f80d",
+          "name" : "Response text 200",
+          "source" : "30519c856c67f80d.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "a0e4781432c0933e",
+          "name" : "Response headers 200",
+          "source" : "a0e4781432c0933e.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634884615,
+          "stop" : 1756634884699,
+          "duration" : 84
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "ae570f603c75dd52",
+          "name" : "Request",
+          "source" : "ae570f603c75dd52.html",
+          "type" : "text/html",
+          "size" : 2256
+        }, {
+          "uid" : "e1660aaa2130c62f",
+          "name" : "Response text 201",
+          "source" : "e1660aaa2130c62f.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "802fc121ece4595e",
+          "name" : "Response headers 201",
+          "source" : "802fc121ece4595e.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Ryan_toward_Friend_32889_9'"
+      }, {
+        "name" : "password",
+        "value" : "'OT3V*y^T@@'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Отправка приглашения в друзья",
+      "time" : {
+        "start" : 1756634884700,
+        "stop" : 1756634884711,
+        "duration" : 11
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884700,
+          "stop" : 1756634884710,
+          "duration" : 10
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "4c32417331b555b8",
+          "name" : "SOAP Request XML",
+          "source" : "4c32417331b555b8.xml",
+          "type" : "application/xml",
+          "size" : 440
+        }, {
+          "uid" : "c70d0090f093e3d",
+          "name" : "SOAP Response 200",
+          "source" : "c70d0090f093e3d.xml",
+          "type" : "application/xml",
+          "size" : 453
+        }, {
+          "uid" : "8e253bfcc26f9194",
+          "name" : "Response headers 200",
+          "source" : "8e253bfcc26f9194.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Andrew_stay_Friend_58074_0'"
+      }, {
+        "name" : "friend_to_be_requested",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Принятие приглашения в друзья",
+      "time" : {
+        "start" : 1756634884711,
+        "stop" : 1756634884718,
+        "duration" : 7
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884711,
+          "stop" : 1756634884718,
+          "duration" : 7
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "2a77fb8b983ce029",
+          "name" : "SOAP Request XML",
+          "source" : "2a77fb8b983ce029.xml",
+          "type" : "application/xml",
+          "size" : 436
+        }, {
+          "uid" : "75a082d2503c22f2",
+          "name" : "SOAP Response 200",
+          "source" : "75a082d2503c22f2.xml",
+          "type" : "application/xml",
+          "size" : 425
+        }, {
+          "uid" : "4799352e812c0407",
+          "name" : "Response headers 200",
+          "source" : "4799352e812c0407.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      }, {
+        "name" : "friend_to_be_added",
+        "value" : "'Andrew_stay_Friend_58074_0'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Отправка приглашения в друзья",
+      "time" : {
+        "start" : 1756634884718,
+        "stop" : 1756634884725,
+        "duration" : 7
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884718,
+          "stop" : 1756634884724,
+          "duration" : 6
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "e69c45dacb47bf8f",
+          "name" : "SOAP Request XML",
+          "source" : "e69c45dacb47bf8f.xml",
+          "type" : "application/xml",
+          "size" : 442
+        }, {
+          "uid" : "cb23f6f6d3cd4fa6",
+          "name" : "SOAP Response 200",
+          "source" : "cb23f6f6d3cd4fa6.xml",
+          "type" : "application/xml",
+          "size" : 453
+        }, {
+          "uid" : "e8ec3e54afcab80",
+          "name" : "Response headers 200",
+          "source" : "e8ec3e54afcab80.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Brenda_charge_Friend_95663_1'"
+      }, {
+        "name" : "friend_to_be_requested",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Принятие приглашения в друзья",
+      "time" : {
+        "start" : 1756634884725,
+        "stop" : 1756634884733,
+        "duration" : 8
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884725,
+          "stop" : 1756634884733,
+          "duration" : 8
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "c9f61c12513b9436",
+          "name" : "SOAP Request XML",
+          "source" : "c9f61c12513b9436.xml",
+          "type" : "application/xml",
+          "size" : 438
+        }, {
+          "uid" : "417ac7e843189abe",
+          "name" : "SOAP Response 200",
+          "source" : "417ac7e843189abe.xml",
+          "type" : "application/xml",
+          "size" : 427
+        }, {
+          "uid" : "2162527d7b767e76",
+          "name" : "Response headers 200",
+          "source" : "2162527d7b767e76.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      }, {
+        "name" : "friend_to_be_added",
+        "value" : "'Brenda_charge_Friend_95663_1'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Отправка приглашения в друзья",
+      "time" : {
+        "start" : 1756634884733,
+        "stop" : 1756634884739,
+        "duration" : 6
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884734,
+          "stop" : 1756634884739,
+          "duration" : 5
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "2e6301220facb48f",
+          "name" : "SOAP Request XML",
+          "source" : "2e6301220facb48f.xml",
+          "type" : "application/xml",
+          "size" : 441
+        }, {
+          "uid" : "6815b7a082a2ed58",
+          "name" : "SOAP Response 200",
+          "source" : "6815b7a082a2ed58.xml",
+          "type" : "application/xml",
+          "size" : 453
+        }, {
+          "uid" : "de5ccbf6556663b",
+          "name" : "Response headers 200",
+          "source" : "de5ccbf6556663b.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Suzanne_tree_Friend_75327_2'"
+      }, {
+        "name" : "friend_to_be_requested",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Принятие приглашения в друзья",
+      "time" : {
+        "start" : 1756634884739,
+        "stop" : 1756634884747,
+        "duration" : 8
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884739,
+          "stop" : 1756634884747,
+          "duration" : 8
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "2fd5c50d8271eb6b",
+          "name" : "SOAP Request XML",
+          "source" : "2fd5c50d8271eb6b.xml",
+          "type" : "application/xml",
+          "size" : 437
+        }, {
+          "uid" : "5893bc422ef63b3c",
+          "name" : "SOAP Response 200",
+          "source" : "5893bc422ef63b3c.xml",
+          "type" : "application/xml",
+          "size" : 426
+        }, {
+          "uid" : "34aef94c88b03229",
+          "name" : "Response headers 200",
+          "source" : "34aef94c88b03229.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      }, {
+        "name" : "friend_to_be_added",
+        "value" : "'Suzanne_tree_Friend_75327_2'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Отправка приглашения в друзья",
+      "time" : {
+        "start" : 1756634884747,
+        "stop" : 1756634884753,
+        "duration" : 6
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884747,
+          "stop" : 1756634884752,
+          "duration" : 5
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "b0bc96d3c4f16f6e",
+          "name" : "SOAP Request XML",
+          "source" : "b0bc96d3c4f16f6e.xml",
+          "type" : "application/xml",
+          "size" : 449
+        }, {
+          "uid" : "13837316c2746160",
+          "name" : "SOAP Response 200",
+          "source" : "13837316c2746160.xml",
+          "type" : "application/xml",
+          "size" : 453
+        }, {
+          "uid" : "4e374018901757d6",
+          "name" : "Response headers 200",
+          "source" : "4e374018901757d6.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Alexander_themselves_Friend_66670_3'"
+      }, {
+        "name" : "friend_to_be_requested",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Принятие приглашения в друзья",
+      "time" : {
+        "start" : 1756634884753,
+        "stop" : 1756634884762,
+        "duration" : 9
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884753,
+          "stop" : 1756634884762,
+          "duration" : 9
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "a7fead343a2f312d",
+          "name" : "SOAP Request XML",
+          "source" : "a7fead343a2f312d.xml",
+          "type" : "application/xml",
+          "size" : 445
+        }, {
+          "uid" : "4ae238ca08e0d6fc",
+          "name" : "SOAP Response 200",
+          "source" : "4ae238ca08e0d6fc.xml",
+          "type" : "application/xml",
+          "size" : 434
+        }, {
+          "uid" : "6e8ec97197c805ac",
+          "name" : "Response headers 200",
+          "source" : "6e8ec97197c805ac.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      }, {
+        "name" : "friend_to_be_added",
+        "value" : "'Alexander_themselves_Friend_66670_3'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Отправка приглашения в друзья",
+      "time" : {
+        "start" : 1756634884762,
+        "stop" : 1756634884769,
+        "duration" : 7
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884762,
+          "stop" : 1756634884769,
+          "duration" : 7
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "31a509536fa81fd7",
+          "name" : "SOAP Request XML",
+          "source" : "31a509536fa81fd7.xml",
+          "type" : "application/xml",
+          "size" : 439
+        }, {
+          "uid" : "845d94d94d5c9a4b",
+          "name" : "SOAP Response 200",
+          "source" : "845d94d94d5c9a4b.xml",
+          "type" : "application/xml",
+          "size" : 453
+        }, {
+          "uid" : "1aa7d2a6b487e2d8",
+          "name" : "Response headers 200",
+          "source" : "1aa7d2a6b487e2d8.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Angela_risk_Friend_7482_4'"
+      }, {
+        "name" : "friend_to_be_requested",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Принятие приглашения в друзья",
+      "time" : {
+        "start" : 1756634884769,
+        "stop" : 1756634884777,
+        "duration" : 8
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884769,
+          "stop" : 1756634884777,
+          "duration" : 8
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "aea8a20bf2b9d15c",
+          "name" : "SOAP Request XML",
+          "source" : "aea8a20bf2b9d15c.xml",
+          "type" : "application/xml",
+          "size" : 435
+        }, {
+          "uid" : "a22a9fa17f897937",
+          "name" : "SOAP Response 200",
+          "source" : "a22a9fa17f897937.xml",
+          "type" : "application/xml",
+          "size" : 424
+        }, {
+          "uid" : "db61d67c610ab32a",
+          "name" : "Response headers 200",
+          "source" : "db61d67c610ab32a.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      }, {
+        "name" : "friend_to_be_added",
+        "value" : "'Angela_risk_Friend_7482_4'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Отправка приглашения в друзья",
+      "time" : {
+        "start" : 1756634884777,
+        "stop" : 1756634884784,
+        "duration" : 7
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884777,
+          "stop" : 1756634884784,
+          "duration" : 7
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "8e561cf50ae963aa",
+          "name" : "SOAP Request XML",
+          "source" : "8e561cf50ae963aa.xml",
+          "type" : "application/xml",
+          "size" : 447
+        }, {
+          "uid" : "2154bf4a27a58e8a",
+          "name" : "SOAP Response 200",
+          "source" : "2154bf4a27a58e8a.xml",
+          "type" : "application/xml",
+          "size" : 453
+        }, {
+          "uid" : "a2f39b714a3d7eef",
+          "name" : "Response headers 200",
+          "source" : "a2f39b714a3d7eef.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Jesus_professional_Friend_68944_5'"
+      }, {
+        "name" : "friend_to_be_requested",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Принятие приглашения в друзья",
+      "time" : {
+        "start" : 1756634884784,
+        "stop" : 1756634884791,
+        "duration" : 7
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884784,
+          "stop" : 1756634884790,
+          "duration" : 6
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "7ac81b9b216eefe1",
+          "name" : "SOAP Request XML",
+          "source" : "7ac81b9b216eefe1.xml",
+          "type" : "application/xml",
+          "size" : 443
+        }, {
+          "uid" : "88f8ca7d99a0bfaa",
+          "name" : "SOAP Response 200",
+          "source" : "88f8ca7d99a0bfaa.xml",
+          "type" : "application/xml",
+          "size" : 432
+        }, {
+          "uid" : "def08b7278fa9314",
+          "name" : "Response headers 200",
+          "source" : "def08b7278fa9314.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      }, {
+        "name" : "friend_to_be_added",
+        "value" : "'Jesus_professional_Friend_68944_5'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Отправка приглашения в друзья",
+      "time" : {
+        "start" : 1756634884791,
+        "stop" : 1756634884799,
+        "duration" : 8
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884791,
+          "stop" : 1756634884798,
+          "duration" : 7
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "8fad81738acf6d4d",
+          "name" : "SOAP Request XML",
+          "source" : "8fad81738acf6d4d.xml",
+          "type" : "application/xml",
+          "size" : 440
+        }, {
+          "uid" : "d712e59ec0b70136",
+          "name" : "SOAP Response 200",
+          "source" : "d712e59ec0b70136.xml",
+          "type" : "application/xml",
+          "size" : 453
+        }, {
+          "uid" : "e96aab735fbd8a7e",
+          "name" : "Response headers 200",
+          "source" : "e96aab735fbd8a7e.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Cynthia_for_Friend_42259_6'"
+      }, {
+        "name" : "friend_to_be_requested",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Принятие приглашения в друзья",
+      "time" : {
+        "start" : 1756634884799,
+        "stop" : 1756634884805,
+        "duration" : 6
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884799,
+          "stop" : 1756634884805,
+          "duration" : 6
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "f9357878bf707580",
+          "name" : "SOAP Request XML",
+          "source" : "f9357878bf707580.xml",
+          "type" : "application/xml",
+          "size" : 436
+        }, {
+          "uid" : "d65d1308b5d39229",
+          "name" : "SOAP Response 200",
+          "source" : "d65d1308b5d39229.xml",
+          "type" : "application/xml",
+          "size" : 425
+        }, {
+          "uid" : "cb2c248ffea673e2",
+          "name" : "Response headers 200",
+          "source" : "cb2c248ffea673e2.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      }, {
+        "name" : "friend_to_be_added",
+        "value" : "'Cynthia_for_Friend_42259_6'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Отправка приглашения в друзья",
+      "time" : {
+        "start" : 1756634884805,
+        "stop" : 1756634884815,
+        "duration" : 10
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884805,
+          "stop" : 1756634884815,
+          "duration" : 10
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "1ab3bd536193e2ea",
+          "name" : "SOAP Request XML",
+          "source" : "1ab3bd536193e2ea.xml",
+          "type" : "application/xml",
+          "size" : 438
+        }, {
+          "uid" : "38de3d0e22126557",
+          "name" : "SOAP Response 200",
+          "source" : "38de3d0e22126557.xml",
+          "type" : "application/xml",
+          "size" : 453
+        }, {
+          "uid" : "a4b555b2f13ecd20",
+          "name" : "Response headers 200",
+          "source" : "a4b555b2f13ecd20.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Jill_role_Friend_27816_7'"
+      }, {
+        "name" : "friend_to_be_requested",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Принятие приглашения в друзья",
+      "time" : {
+        "start" : 1756634884815,
+        "stop" : 1756634884830,
+        "duration" : 15
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884815,
+          "stop" : 1756634884829,
+          "duration" : 14
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "36e499d4f7b1b0f8",
+          "name" : "SOAP Request XML",
+          "source" : "36e499d4f7b1b0f8.xml",
+          "type" : "application/xml",
+          "size" : 434
+        }, {
+          "uid" : "ec3104a6559a6665",
+          "name" : "SOAP Response 200",
+          "source" : "ec3104a6559a6665.xml",
+          "type" : "application/xml",
+          "size" : 423
+        }, {
+          "uid" : "68ec750b2ec9f203",
+          "name" : "Response headers 200",
+          "source" : "68ec750b2ec9f203.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      }, {
+        "name" : "friend_to_be_added",
+        "value" : "'Jill_role_Friend_27816_7'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Отправка приглашения в друзья",
+      "time" : {
+        "start" : 1756634884830,
+        "stop" : 1756634884837,
+        "duration" : 7
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884830,
+          "stop" : 1756634884836,
+          "duration" : 6
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "a9241713e60f5a47",
+          "name" : "SOAP Request XML",
+          "source" : "a9241713e60f5a47.xml",
+          "type" : "application/xml",
+          "size" : 437
+        }, {
+          "uid" : "53d752b05fd98fad",
+          "name" : "SOAP Response 200",
+          "source" : "53d752b05fd98fad.xml",
+          "type" : "application/xml",
+          "size" : 453
+        }, {
+          "uid" : "709c6857c534c1a0",
+          "name" : "Response headers 200",
+          "source" : "709c6857c534c1a0.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Eric_bag_Friend_68032_8'"
+      }, {
+        "name" : "friend_to_be_requested",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Принятие приглашения в друзья",
+      "time" : {
+        "start" : 1756634884837,
+        "stop" : 1756634884848,
+        "duration" : 11
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884837,
+          "stop" : 1756634884847,
+          "duration" : 10
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "a97fe86cbb7e68ac",
+          "name" : "SOAP Request XML",
+          "source" : "a97fe86cbb7e68ac.xml",
+          "type" : "application/xml",
+          "size" : 433
+        }, {
+          "uid" : "58c6493d4819bb82",
+          "name" : "SOAP Response 200",
+          "source" : "58c6493d4819bb82.xml",
+          "type" : "application/xml",
+          "size" : 422
+        }, {
+          "uid" : "a81f3f67dce9136f",
+          "name" : "Response headers 200",
+          "source" : "a81f3f67dce9136f.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      }, {
+        "name" : "friend_to_be_added",
+        "value" : "'Eric_bag_Friend_68032_8'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Отправка приглашения в друзья",
+      "time" : {
+        "start" : 1756634884848,
+        "stop" : 1756634884854,
+        "duration" : 6
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884848,
+          "stop" : 1756634884854,
+          "duration" : 6
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "7fcf0366de700507",
+          "name" : "SOAP Request XML",
+          "source" : "7fcf0366de700507.xml",
+          "type" : "application/xml",
+          "size" : 440
+        }, {
+          "uid" : "bca2f9413a7dc4a6",
+          "name" : "SOAP Response 200",
+          "source" : "bca2f9413a7dc4a6.xml",
+          "type" : "application/xml",
+          "size" : 453
+        }, {
+          "uid" : "8c8a1b607e575f01",
+          "name" : "Response headers 200",
+          "source" : "8c8a1b607e575f01.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Ryan_toward_Friend_32889_9'"
+      }, {
+        "name" : "friend_to_be_requested",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Принятие приглашения в друзья",
+      "time" : {
+        "start" : 1756634884854,
+        "stop" : 1756634884860,
+        "duration" : 6
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634884854,
+          "stop" : 1756634884860,
+          "duration" : 6
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "84d8a762c2b23b50",
+          "name" : "SOAP Request XML",
+          "source" : "84d8a762c2b23b50.xml",
+          "type" : "application/xml",
+          "size" : 436
+        }, {
+          "uid" : "f770df489910324",
+          "name" : "SOAP Response 200",
+          "source" : "f770df489910324.xml",
+          "type" : "application/xml",
+          "size" : 425
+        }, {
+          "uid" : "48529cac46cc54fd",
+          "name" : "Response headers 200",
+          "source" : "48529cac46cc54fd.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      }, {
+        "name" : "friend_to_be_added",
+        "value" : "'Ryan_toward_Friend_32889_9'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 70,
+    "attachmentsCount" : 120,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Soap User Creator",
+    "time" : {
+      "start" : 1756634821813,
+      "stop" : 1756634821813,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[F] Soap Friends User",
+    "time" : {
+      "start" : 1756634883257,
+      "stop" : 1756634883405,
+      "duration" : 148
+    },
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634883257,
+        "stop" : 1756634883405,
+        "duration" : 148
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634883264,
+          "stop" : 1756634883271,
+          "duration" : 7
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "550e8df7beb4092b",
+          "name" : "Request",
+          "source" : "550e8df7beb4092b.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "43d6805115a040d5",
+          "name" : "Response text 200",
+          "source" : "43d6805115a040d5.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "eefe3c24fb22728b",
+          "name" : "Response headers 200",
+          "source" : "eefe3c24fb22728b.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634883298,
+          "stop" : 1756634883405,
+          "duration" : 107
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "511abbf4e209fa94",
+          "name" : "Request",
+          "source" : "511abbf4e209fa94.html",
+          "type" : "text/html",
+          "size" : 2270
+        }, {
+          "uid" : "4bf9a0997bfde4f8",
+          "name" : "Response text 201",
+          "source" : "4bf9a0997bfde4f8.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "642fe0149bb9955b",
+          "name" : "Response headers 201",
+          "source" : "642fe0149bb9955b.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      }, {
+        "name" : "password",
+        "value" : "'P@ssW0rd'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 3,
+    "attachmentsCount" : 6,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[F] Mock Friends Actions",
+    "time" : {
+      "start" : 1756634884971,
+      "stop" : 1756634886168,
+      "duration" : 1197
+    },
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634884972,
+        "stop" : 1756634885092,
+        "duration" : 120
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634884980,
+          "stop" : 1756634884984,
+          "duration" : 4
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "7ce3c06fbe399731",
+          "name" : "Request",
+          "source" : "7ce3c06fbe399731.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "9ba05adfd897f44f",
+          "name" : "Response text 200",
+          "source" : "9ba05adfd897f44f.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "6e94c3b208f021fa",
+          "name" : "Response headers 200",
+          "source" : "6e94c3b208f021fa.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634884990,
+          "stop" : 1756634885088,
+          "duration" : 98
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "6804a7785615537a",
+          "name" : "Request",
+          "source" : "6804a7785615537a.html",
+          "type" : "text/html",
+          "size" : 2234
+        }, {
+          "uid" : "3a14e158d4a64da4",
+          "name" : "Response text 201",
+          "source" : "3a14e158d4a64da4.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "964e205688338284",
+          "name" : "Response headers 201",
+          "source" : "964e205688338284.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Sandra_full_Actions_75086_0'"
+      }, {
+        "name" : "password",
+        "value" : "'_E#7EeaJ50'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634885093,
+        "stop" : 1756634885263,
+        "duration" : 170
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634885112,
+          "stop" : 1756634885129,
+          "duration" : 17
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "75fa180605efb2ac",
+          "name" : "Request",
+          "source" : "75fa180605efb2ac.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "3e90eb390407594b",
+          "name" : "Response text 200",
+          "source" : "3e90eb390407594b.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "d2d76ad33eb5c60b",
+          "name" : "Response headers 200",
+          "source" : "d2d76ad33eb5c60b.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634885155,
+          "stop" : 1756634885262,
+          "duration" : 107
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "9cd6e07fc07be7f5",
+          "name" : "Request",
+          "source" : "9cd6e07fc07be7f5.html",
+          "type" : "text/html",
+          "size" : 2234
+        }, {
+          "uid" : "c609b355b002f187",
+          "name" : "Response text 201",
+          "source" : "c609b355b002f187.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "b53acf3321e08d25",
+          "name" : "Response headers 201",
+          "source" : "b53acf3321e08d25.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Emily_reduce_Actions_9711_1'"
+      }, {
+        "name" : "password",
+        "value" : "'x2J2uA8D@x'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634885263,
+        "stop" : 1756634885384,
+        "duration" : 121
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634885271,
+          "stop" : 1756634885277,
+          "duration" : 6
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "702437cf2fc0ec40",
+          "name" : "Request",
+          "source" : "702437cf2fc0ec40.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "f6083a7bfee6c1a1",
+          "name" : "Response text 200",
+          "source" : "f6083a7bfee6c1a1.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "98e1e24d5cab9653",
+          "name" : "Response headers 200",
+          "source" : "98e1e24d5cab9653.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634885291,
+          "stop" : 1756634885384,
+          "duration" : 93
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "418d6843c61cb50c",
+          "name" : "Request",
+          "source" : "418d6843c61cb50c.html",
+          "type" : "text/html",
+          "size" : 2262
+        }, {
+          "uid" : "ef155cf885f20c3c",
+          "name" : "Response text 201",
+          "source" : "ef155cf885f20c3c.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "2bfcb58f503f1e8b",
+          "name" : "Response headers 201",
+          "source" : "2bfcb58f503f1e8b.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Christine_six_Actions_53839_2'"
+      }, {
+        "name" : "password",
+        "value" : "'#4x*%ZO*y5'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634885385,
+        "stop" : 1756634885488,
+        "duration" : 103
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634885392,
+          "stop" : 1756634885396,
+          "duration" : 4
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "2863f5e2819dac1c",
+          "name" : "Request",
+          "source" : "2863f5e2819dac1c.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "191904a31faa5656",
+          "name" : "Response text 200",
+          "source" : "191904a31faa5656.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "9f959cdfc210e9c",
+          "name" : "Response headers 200",
+          "source" : "9f959cdfc210e9c.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634885401,
+          "stop" : 1756634885488,
+          "duration" : 87
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "5fe91aed95e663fc",
+          "name" : "Request",
+          "source" : "5fe91aed95e663fc.html",
+          "type" : "text/html",
+          "size" : 2232
+        }, {
+          "uid" : "7ccdf5267fee58c6",
+          "name" : "Response text 201",
+          "source" : "7ccdf5267fee58c6.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "8c12b4344d74280",
+          "name" : "Response headers 201",
+          "source" : "8c12b4344d74280.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Amy_arrive_Actions_44109_3'"
+      }, {
+        "name" : "password",
+        "value" : "'#f6S0loCC7'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634885489,
+        "stop" : 1756634885586,
+        "duration" : 97
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634885495,
+          "stop" : 1756634885497,
+          "duration" : 2
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "25708f5367076b73",
+          "name" : "Request",
+          "source" : "25708f5367076b73.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "2b12d93df3f28efd",
+          "name" : "Response text 200",
+          "source" : "2b12d93df3f28efd.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "6778f599f9adee7b",
+          "name" : "Response headers 200",
+          "source" : "6778f599f9adee7b.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634885502,
+          "stop" : 1756634885585,
+          "duration" : 83
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "b1a8732838bdb1d7",
+          "name" : "Request",
+          "source" : "b1a8732838bdb1d7.html",
+          "type" : "text/html",
+          "size" : 2242
+        }, {
+          "uid" : "3bfe6a3aab514136",
+          "name" : "Response text 201",
+          "source" : "3bfe6a3aab514136.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "49726f27afc93d0b",
+          "name" : "Response headers 201",
+          "source" : "49726f27afc93d0b.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Susan_challenge_Actions_28199_4'"
+      }, {
+        "name" : "password",
+        "value" : "'VO2lAy33$2'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634885586,
+        "stop" : 1756634885690,
+        "duration" : 104
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634885594,
+          "stop" : 1756634885598,
+          "duration" : 4
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "3810386bf979cd2e",
+          "name" : "Request",
+          "source" : "3810386bf979cd2e.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "a6ad2f1a956ff90f",
+          "name" : "Response text 200",
+          "source" : "a6ad2f1a956ff90f.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "c274660c41ac0bd1",
+          "name" : "Response headers 200",
+          "source" : "c274660c41ac0bd1.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634885605,
+          "stop" : 1756634885690,
+          "duration" : 85
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "bcce3255df70b24f",
+          "name" : "Request",
+          "source" : "bcce3255df70b24f.html",
+          "type" : "text/html",
+          "size" : 2252
+        }, {
+          "uid" : "e3ee4340d074911f",
+          "name" : "Response text 201",
+          "source" : "e3ee4340d074911f.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "af3b62bba44ed5ed",
+          "name" : "Response headers 201",
+          "source" : "af3b62bba44ed5ed.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Adrienne_old_Actions_29622_5'"
+      }, {
+        "name" : "password",
+        "value" : "'A53D*gv%+l'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634885691,
+        "stop" : 1756634885804,
+        "duration" : 113
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634885696,
+          "stop" : 1756634885699,
+          "duration" : 3
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "a2ab2fda50350007",
+          "name" : "Request",
+          "source" : "a2ab2fda50350007.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "507d35372154ee6e",
+          "name" : "Response text 200",
+          "source" : "507d35372154ee6e.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "f54834773fe8b873",
+          "name" : "Response headers 200",
+          "source" : "f54834773fe8b873.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634885703,
+          "stop" : 1756634885804,
+          "duration" : 101
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "cb0268147f571c47",
+          "name" : "Request",
+          "source" : "cb0268147f571c47.html",
+          "type" : "text/html",
+          "size" : 2240
+        }, {
+          "uid" : "ce5a3b8640d7095e",
+          "name" : "Response text 201",
+          "source" : "ce5a3b8640d7095e.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "55d7c1e38b763fee",
+          "name" : "Response headers 201",
+          "source" : "55d7c1e38b763fee.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Shane_term_Actions_91617_6'"
+      }, {
+        "name" : "password",
+        "value" : "'8Y_8#NPc*_'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634885805,
+        "stop" : 1756634885903,
+        "duration" : 98
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634885810,
+          "stop" : 1756634885813,
+          "duration" : 3
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "244b9a73d568bb8c",
+          "name" : "Request",
+          "source" : "244b9a73d568bb8c.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "895dec32b0950fa",
+          "name" : "Response text 200",
+          "source" : "895dec32b0950fa.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "95dfa65a5538ba66",
+          "name" : "Response headers 200",
+          "source" : "95dfa65a5538ba66.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634885817,
+          "stop" : 1756634885903,
+          "duration" : 86
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "52ae8ecdc11daeb4",
+          "name" : "Request",
+          "source" : "52ae8ecdc11daeb4.html",
+          "type" : "text/html",
+          "size" : 2248
+        }, {
+          "uid" : "1d01f58d6aada802",
+          "name" : "Response text 201",
+          "source" : "1d01f58d6aada802.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "15d56be1922111f7",
+          "name" : "Response headers 201",
+          "source" : "15d56be1922111f7.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Anthony_toward_Actions_26402_7'"
+      }, {
+        "name" : "password",
+        "value" : "'#ZJD%ZWZb2'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634885904,
+        "stop" : 1756634886002,
+        "duration" : 98
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634885909,
+          "stop" : 1756634885912,
+          "duration" : 3
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "70395ae938308a0",
+          "name" : "Request",
+          "source" : "70395ae938308a0.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "39a34a5efbdf8e",
+          "name" : "Response text 200",
+          "source" : "39a34a5efbdf8e.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "70cfb6eab0e69a9a",
+          "name" : "Response headers 200",
+          "source" : "70cfb6eab0e69a9a.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634885916,
+          "stop" : 1756634886001,
+          "duration" : 85
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "e28f4b7cfa666de5",
+          "name" : "Request",
+          "source" : "e28f4b7cfa666de5.html",
+          "type" : "text/html",
+          "size" : 2244
+        }, {
+          "uid" : "173f6ba0b1e90745",
+          "name" : "Response text 201",
+          "source" : "173f6ba0b1e90745.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "43cc00f7a0879d8d",
+          "name" : "Response headers 201",
+          "source" : "43cc00f7a0879d8d.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Melissa_director_Actions_96117_8'"
+      }, {
+        "name" : "password",
+        "value" : "'ogEZ83T8z$'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634886002,
+        "stop" : 1756634886101,
+        "duration" : 99
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634886009,
+          "stop" : 1756634886012,
+          "duration" : 3
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "9d82628dbde84c96",
+          "name" : "Request",
+          "source" : "9d82628dbde84c96.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "fda1807e40879a56",
+          "name" : "Response text 200",
+          "source" : "fda1807e40879a56.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "f48cf46c4aa80095",
+          "name" : "Response headers 200",
+          "source" : "f48cf46c4aa80095.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634886018,
+          "stop" : 1756634886100,
+          "duration" : 82
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "3157c95407d3b13d",
+          "name" : "Request",
+          "source" : "3157c95407d3b13d.html",
+          "type" : "text/html",
+          "size" : 2236
+        }, {
+          "uid" : "769ce35d367161af",
+          "name" : "Response text 201",
+          "source" : "769ce35d367161af.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "7b50dea06a28cccd",
+          "name" : "Response headers 201",
+          "source" : "7b50dea06a28cccd.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Alyssa_often_Actions_85386_9'"
+      }, {
+        "name" : "password",
+        "value" : "'1U_5TECdc*'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Отправка приглашения в друзья",
+      "time" : {
+        "start" : 1756634886101,
+        "stop" : 1756634886107,
+        "duration" : 6
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634886101,
+          "stop" : 1756634886107,
+          "duration" : 6
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "63e687dacb46f17",
+          "name" : "SOAP Request XML",
+          "source" : "63e687dacb46f17.xml",
+          "type" : "application/xml",
+          "size" : 441
+        }, {
+          "uid" : "8c5caadd0d0b0cc9",
+          "name" : "SOAP Response 200",
+          "source" : "8c5caadd0d0b0cc9.xml",
+          "type" : "application/xml",
+          "size" : 453
+        }, {
+          "uid" : "ec80d7dda4253c23",
+          "name" : "Response headers 200",
+          "source" : "ec80d7dda4253c23.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Sandra_full_Actions_75086_0'"
+      }, {
+        "name" : "friend_to_be_requested",
+        "value" : "'soap_actions_aa6f6c0b-dc0b-41a5-8b8c-44da0f82a2d9'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Принятие приглашения в друзья",
+      "time" : {
+        "start" : 1756634886107,
+        "stop" : 1756634886113,
+        "duration" : 6
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634886108,
+          "stop" : 1756634886113,
+          "duration" : 5
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "f68f3de19b048d5e",
+          "name" : "SOAP Request XML",
+          "source" : "f68f3de19b048d5e.xml",
+          "type" : "application/xml",
+          "size" : 437
+        }, {
+          "uid" : "a868e4520d35c894",
+          "name" : "SOAP Response 200",
+          "source" : "a868e4520d35c894.xml",
+          "type" : "application/xml",
+          "size" : 426
+        }, {
+          "uid" : "da7cf024a0f10c71",
+          "name" : "Response headers 200",
+          "source" : "da7cf024a0f10c71.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'soap_actions_aa6f6c0b-dc0b-41a5-8b8c-44da0f82a2d9'"
+      }, {
+        "name" : "friend_to_be_added",
+        "value" : "'Sandra_full_Actions_75086_0'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Отправка приглашения в друзья",
+      "time" : {
+        "start" : 1756634886113,
+        "stop" : 1756634886119,
+        "duration" : 6
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634886113,
+          "stop" : 1756634886119,
+          "duration" : 6
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "8d2a330fc4b23384",
+          "name" : "SOAP Request XML",
+          "source" : "8d2a330fc4b23384.xml",
+          "type" : "application/xml",
+          "size" : 441
+        }, {
+          "uid" : "4c6e3c373598d22e",
+          "name" : "SOAP Response 200",
+          "source" : "4c6e3c373598d22e.xml",
+          "type" : "application/xml",
+          "size" : 453
+        }, {
+          "uid" : "6182b371d2e16427",
+          "name" : "Response headers 200",
+          "source" : "6182b371d2e16427.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Emily_reduce_Actions_9711_1'"
+      }, {
+        "name" : "friend_to_be_requested",
+        "value" : "'soap_actions_aa6f6c0b-dc0b-41a5-8b8c-44da0f82a2d9'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Принятие приглашения в друзья",
+      "time" : {
+        "start" : 1756634886119,
+        "stop" : 1756634886134,
+        "duration" : 15
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634886119,
+          "stop" : 1756634886134,
+          "duration" : 15
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "baab675f4ad8ab3f",
+          "name" : "SOAP Request XML",
+          "source" : "baab675f4ad8ab3f.xml",
+          "type" : "application/xml",
+          "size" : 437
+        }, {
+          "uid" : "76f40d28ab82e7d7",
+          "name" : "SOAP Response 200",
+          "source" : "76f40d28ab82e7d7.xml",
+          "type" : "application/xml",
+          "size" : 426
+        }, {
+          "uid" : "40850f968b220ee7",
+          "name" : "Response headers 200",
+          "source" : "40850f968b220ee7.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'soap_actions_aa6f6c0b-dc0b-41a5-8b8c-44da0f82a2d9'"
+      }, {
+        "name" : "friend_to_be_added",
+        "value" : "'Emily_reduce_Actions_9711_1'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Отправка приглашения в друзья",
+      "time" : {
+        "start" : 1756634886134,
+        "stop" : 1756634886140,
+        "duration" : 6
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634886135,
+          "stop" : 1756634886139,
+          "duration" : 4
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "5194dd3b4a2081bc",
+          "name" : "SOAP Request XML",
+          "source" : "5194dd3b4a2081bc.xml",
+          "type" : "application/xml",
+          "size" : 443
+        }, {
+          "uid" : "1557d439d0acdba",
+          "name" : "SOAP Response 200",
+          "source" : "1557d439d0acdba.xml",
+          "type" : "application/xml",
+          "size" : 453
+        }, {
+          "uid" : "82ec0a91ecf651f",
+          "name" : "Response headers 200",
+          "source" : "82ec0a91ecf651f.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Christine_six_Actions_53839_2'"
+      }, {
+        "name" : "friend_to_be_requested",
+        "value" : "'soap_actions_aa6f6c0b-dc0b-41a5-8b8c-44da0f82a2d9'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Принятие приглашения в друзья",
+      "time" : {
+        "start" : 1756634886140,
+        "stop" : 1756634886144,
+        "duration" : 4
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634886140,
+          "stop" : 1756634886144,
+          "duration" : 4
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "d261cb82b92f4266",
+          "name" : "SOAP Request XML",
+          "source" : "d261cb82b92f4266.xml",
+          "type" : "application/xml",
+          "size" : 439
+        }, {
+          "uid" : "c4f9cc9831963723",
+          "name" : "SOAP Response 200",
+          "source" : "c4f9cc9831963723.xml",
+          "type" : "application/xml",
+          "size" : 428
+        }, {
+          "uid" : "da6c733df431ebe9",
+          "name" : "Response headers 200",
+          "source" : "da6c733df431ebe9.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'soap_actions_aa6f6c0b-dc0b-41a5-8b8c-44da0f82a2d9'"
+      }, {
+        "name" : "friend_to_be_added",
+        "value" : "'Christine_six_Actions_53839_2'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Отправка приглашения в друзья",
+      "time" : {
+        "start" : 1756634886145,
+        "stop" : 1756634886149,
+        "duration" : 4
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634886145,
+          "stop" : 1756634886149,
+          "duration" : 4
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "c54ef3f77eaf6df5",
+          "name" : "SOAP Request XML",
+          "source" : "c54ef3f77eaf6df5.xml",
+          "type" : "application/xml",
+          "size" : 440
+        }, {
+          "uid" : "51e251130000d5a5",
+          "name" : "SOAP Response 200",
+          "source" : "51e251130000d5a5.xml",
+          "type" : "application/xml",
+          "size" : 453
+        }, {
+          "uid" : "5ff460c325545a4d",
+          "name" : "Response headers 200",
+          "source" : "5ff460c325545a4d.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Amy_arrive_Actions_44109_3'"
+      }, {
+        "name" : "friend_to_be_requested",
+        "value" : "'soap_actions_aa6f6c0b-dc0b-41a5-8b8c-44da0f82a2d9'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Принятие приглашения в друзья",
+      "time" : {
+        "start" : 1756634886150,
+        "stop" : 1756634886156,
+        "duration" : 6
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634886150,
+          "stop" : 1756634886155,
+          "duration" : 5
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "101944bed573276f",
+          "name" : "SOAP Request XML",
+          "source" : "101944bed573276f.xml",
+          "type" : "application/xml",
+          "size" : 436
+        }, {
+          "uid" : "b69ea04290d47f69",
+          "name" : "SOAP Response 200",
+          "source" : "b69ea04290d47f69.xml",
+          "type" : "application/xml",
+          "size" : 425
+        }, {
+          "uid" : "fcc77245fb6b1061",
+          "name" : "Response headers 200",
+          "source" : "fcc77245fb6b1061.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'soap_actions_aa6f6c0b-dc0b-41a5-8b8c-44da0f82a2d9'"
+      }, {
+        "name" : "friend_to_be_added",
+        "value" : "'Amy_arrive_Actions_44109_3'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Отправка приглашения в друзья",
+      "time" : {
+        "start" : 1756634886156,
+        "stop" : 1756634886162,
+        "duration" : 6
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634886156,
+          "stop" : 1756634886161,
+          "duration" : 5
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "490a34f1dd5b9902",
+          "name" : "SOAP Request XML",
+          "source" : "490a34f1dd5b9902.xml",
+          "type" : "application/xml",
+          "size" : 445
+        }, {
+          "uid" : "a0a8d787e1526782",
+          "name" : "SOAP Response 200",
+          "source" : "a0a8d787e1526782.xml",
+          "type" : "application/xml",
+          "size" : 453
+        }, {
+          "uid" : "5927e2464ff8484c",
+          "name" : "Response headers 200",
+          "source" : "5927e2464ff8484c.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'Susan_challenge_Actions_28199_4'"
+      }, {
+        "name" : "friend_to_be_requested",
+        "value" : "'soap_actions_aa6f6c0b-dc0b-41a5-8b8c-44da0f82a2d9'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "SOAP Принятие приглашения в друзья",
+      "time" : {
+        "start" : 1756634886162,
+        "stop" : 1756634886168,
+        "duration" : 6
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634886162,
+          "stop" : 1756634886167,
+          "duration" : 5
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "7fcfa8a60c0691f4",
+          "name" : "SOAP Request XML",
+          "source" : "7fcfa8a60c0691f4.xml",
+          "type" : "application/xml",
+          "size" : 441
+        }, {
+          "uid" : "cf84be3609f3fc92",
+          "name" : "SOAP Response 200",
+          "source" : "cf84be3609f3fc92.xml",
+          "type" : "application/xml",
+          "size" : 430
+        }, {
+          "uid" : "1f99617e39d8ee58",
+          "name" : "Response headers 200",
+          "source" : "1f99617e39d8ee58.json",
+          "type" : "application/json",
+          "size" : 292
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'soap_actions_aa6f6c0b-dc0b-41a5-8b8c-44da0f82a2d9'"
+      }, {
+        "name" : "friend_to_be_added",
+        "value" : "'Susan_challenge_Actions_28199_4'"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 50,
+    "attachmentsCount" : 90,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Auth Client",
+    "time" : {
+      "start" : 1756634816752,
+      "stop" : 1756634816753,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Token Data",
+    "time" : {
+      "start" : 1756634816753,
+      "stop" : 1756634817754,
+      "duration" : 1001
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Cleanup",
+    "time" : {
+      "start" : 1756634816251,
+      "stop" : 1756634816752,
+      "duration" : 501
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[F] Soap User",
+    "time" : {
+      "start" : 1756634886168,
+      "stop" : 1756634886285,
+      "duration" : 117
+    },
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634886168,
+        "stop" : 1756634886285,
+        "duration" : 117
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634886175,
+          "stop" : 1756634886178,
+          "duration" : 3
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "9a7614aa1c6752b3",
+          "name" : "Request",
+          "source" : "9a7614aa1c6752b3.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "7fbc8c6a57ae7ea4",
+          "name" : "Response text 200",
+          "source" : "7fbc8c6a57ae7ea4.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "e8c77e5e605a377e",
+          "name" : "Response headers 200",
+          "source" : "e8c77e5e605a377e.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634886184,
+          "stop" : 1756634886285,
+          "duration" : 101
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "82f0b8e2788cb636",
+          "name" : "Request",
+          "source" : "82f0b8e2788cb636.html",
+          "type" : "text/html",
+          "size" : 2264
+        }, {
+          "uid" : "2184b6ff5743f252",
+          "name" : "Response text 201",
+          "source" : "2184b6ff5743f252.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "136e6982fc2aab41",
+          "name" : "Response headers 201",
+          "source" : "136e6982fc2aab41.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'soap_user_242e4d4d-ef86-4446-aee4-2109f4bf9842'"
+      }, {
+        "name" : "password",
+        "value" : "'P@ssW0rd'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 3,
+    "attachmentsCount" : 6,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Auth Db",
+    "time" : {
+      "start" : 1756634816249,
+      "stop" : 1756634816250,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Soap Client",
+    "time" : {
+      "start" : 1756634821812,
+      "stop" : 1756634821813,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Spends Db",
+    "time" : {
+      "start" : 1756634816194,
+      "stop" : 1756634816249,
+      "duration" : 55
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Server Envs",
+    "time" : {
+      "start" : 1756634816191,
+      "stop" : 1756634816194,
+      "duration" : 3
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "761583c96e86037",
+      "name" : "server_envs.json",
+      "source" : "761583c96e86037.json",
+      "type" : "application/json",
+      "size" : 582
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[F] Soap Actions User",
+    "time" : {
+      "start" : 1756634884861,
+      "stop" : 1756634884971,
+      "duration" : 110
+    },
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634884861,
+        "stop" : 1756634884971,
+        "duration" : 110
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634884868,
+          "stop" : 1756634884871,
+          "duration" : 3
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "8eb8641db5f8610c",
+          "name" : "Request",
+          "source" : "8eb8641db5f8610c.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "49e1275985372349",
+          "name" : "Response text 200",
+          "source" : "49e1275985372349.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "b31d0719eb071606",
+          "name" : "Response headers 200",
+          "source" : "b31d0719eb071606.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634884878,
+          "stop" : 1756634884971,
+          "duration" : 93
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "1e83daf0ae3c8d7d",
+          "name" : "Request",
+          "source" : "1e83daf0ae3c8d7d.html",
+          "type" : "text/html",
+          "size" : 2270
+        }, {
+          "uid" : "4465f04c13f4f356",
+          "name" : "Response text 201",
+          "source" : "4465f04c13f4f356.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "20c9534083ec179c",
+          "name" : "Response headers 201",
+          "source" : "20c9534083ec179c.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'soap_actions_aa6f6c0b-dc0b-41a5-8b8c-44da0f82a2d9'"
+      }, {
+        "name" : "password",
+        "value" : "'P@ssW0rd'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 3,
+    "attachmentsCount" : 6,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  } ],
+  "testStage" : {
+    "description" : "Тест получения друзей с пагинацией через SOAP с некорректными параметрами",
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "SOAP Получение друзей с пагинацией",
+      "time" : {
+        "start" : 1756634886287,
+        "stop" : 1756634886292,
+        "duration" : 5
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "SOAP Request",
+        "time" : {
+          "start" : 1756634886287,
+          "stop" : 1756634886291,
+          "duration" : 4
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "d1b1d6c473fddb0b",
+          "name" : "SOAP Request XML",
+          "source" : "d1b1d6c473fddb0b.xml",
+          "type" : "application/xml",
+          "size" : 508
+        }, {
+          "uid" : "3679ca8a3765ea12",
+          "name" : "SOAP Response 500",
+          "source" : "3679ca8a3765ea12.xml",
+          "type" : "application/xml",
+          "size" : 296
+        }, {
+          "uid" : "5526973ce493739c",
+          "name" : "Response headers 500",
+          "source" : "5526973ce493739c.json",
+          "type" : "application/json",
+          "size" : 255
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'soap_friends_2fb8ea95-c8c2-4314-b1df-62c33b5d3430'"
+      }, {
+        "name" : "page_info",
+        "value" : "PageInfo(page=-1, size=1, sort=None)"
+      }, {
+        "name" : "search_query",
+        "value" : "None"
+      } ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Проверка корректности ответа",
+      "time" : {
+        "start" : 1756634886292,
+        "stop" : 1756634886292,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    } ],
+    "attachments" : [ {
+      "uid" : "f86eef4d17e06f1c",
+      "name" : "log",
+      "source" : "f86eef4d17e06f1c.txt",
+      "type" : "text/plain",
+      "size" : 26120
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 3,
+    "attachmentsCount" : 4,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ {
+    "name" : "mock_users::0",
+    "time" : {
+      "start" : 1756634886486,
+      "stop" : 1756634886556,
+      "duration" : 70
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "1a8043677bdfaf7b",
+      "name" : "SELECT niffler-userdata",
+      "source" : "1a8043677bdfaf7b.txt",
+      "type" : "text/plain",
+      "size" : 195
+    }, {
+      "uid" : "c1b283360d0ebcdf",
+      "name" : "DELETE niffler-userdata",
+      "source" : "c1b283360d0ebcdf.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "adce37b4643a217a",
+      "name" : "SELECT niffler-userdata",
+      "source" : "adce37b4643a217a.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "ad7bfd40c00302d4",
+      "name" : "DELETE niffler-userdata",
+      "source" : "ad7bfd40c00302d4.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "ab0ff08895f68761",
+      "name" : "SELECT niffler-auth",
+      "source" : "ab0ff08895f68761.txt",
+      "type" : "text/plain",
+      "size" : 212
+    }, {
+      "uid" : "374ed7ef35c7df72",
+      "name" : "DELETE niffler-auth",
+      "source" : "374ed7ef35c7df72.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "99a3ec7b2a1fe89d",
+      "name" : "DELETE niffler-auth",
+      "source" : "99a3ec7b2a1fe89d.txt",
+      "type" : "text/plain",
+      "size" : 63
+    }, {
+      "uid" : "6da6c96851093dd7",
+      "name" : "SELECT niffler-userdata",
+      "source" : "6da6c96851093dd7.txt",
+      "type" : "text/plain",
+      "size" : 192
+    }, {
+      "uid" : "81d6ffa82dc0fd1",
+      "name" : "DELETE niffler-userdata",
+      "source" : "81d6ffa82dc0fd1.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "3f563842d747dd2c",
+      "name" : "SELECT niffler-userdata",
+      "source" : "3f563842d747dd2c.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "96fbea560500bae",
+      "name" : "DELETE niffler-userdata",
+      "source" : "96fbea560500bae.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "1abdf6db432a1f29",
+      "name" : "SELECT niffler-auth",
+      "source" : "1abdf6db432a1f29.txt",
+      "type" : "text/plain",
+      "size" : 209
+    }, {
+      "uid" : "616ed6cdc52e6001",
+      "name" : "DELETE niffler-auth",
+      "source" : "616ed6cdc52e6001.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "3e9dfa46539921ee",
+      "name" : "DELETE niffler-auth",
+      "source" : "3e9dfa46539921ee.txt",
+      "type" : "text/plain",
+      "size" : 60
+    }, {
+      "uid" : "ffe755bbf1adab84",
+      "name" : "SELECT niffler-userdata",
+      "source" : "ffe755bbf1adab84.txt",
+      "type" : "text/plain",
+      "size" : 193
+    }, {
+      "uid" : "5d9beabdabd61e65",
+      "name" : "DELETE niffler-userdata",
+      "source" : "5d9beabdabd61e65.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "fd7cf814b1af41de",
+      "name" : "SELECT niffler-userdata",
+      "source" : "fd7cf814b1af41de.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "5f4c8097d6ca2450",
+      "name" : "DELETE niffler-userdata",
+      "source" : "5f4c8097d6ca2450.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "ff8ab3ffdfc32a05",
+      "name" : "SELECT niffler-auth",
+      "source" : "ff8ab3ffdfc32a05.txt",
+      "type" : "text/plain",
+      "size" : 210
+    }, {
+      "uid" : "7e831fab0b5b3bcf",
+      "name" : "DELETE niffler-auth",
+      "source" : "7e831fab0b5b3bcf.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "5efe34b4a3c8be0b",
+      "name" : "DELETE niffler-auth",
+      "source" : "5efe34b4a3c8be0b.txt",
+      "type" : "text/plain",
+      "size" : 61
+    }, {
+      "uid" : "98f6f906ffd66cf2",
+      "name" : "SELECT niffler-userdata",
+      "source" : "98f6f906ffd66cf2.txt",
+      "type" : "text/plain",
+      "size" : 196
+    }, {
+      "uid" : "64e6e18a75dbf9f2",
+      "name" : "DELETE niffler-userdata",
+      "source" : "64e6e18a75dbf9f2.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "308883d936c44197",
+      "name" : "SELECT niffler-userdata",
+      "source" : "308883d936c44197.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "ca042ec27804e6a8",
+      "name" : "DELETE niffler-userdata",
+      "source" : "ca042ec27804e6a8.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "ebb41c745028fd06",
+      "name" : "SELECT niffler-auth",
+      "source" : "ebb41c745028fd06.txt",
+      "type" : "text/plain",
+      "size" : 213
+    }, {
+      "uid" : "aa3edd7991380192",
+      "name" : "DELETE niffler-auth",
+      "source" : "aa3edd7991380192.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "a111259a345cf1c6",
+      "name" : "DELETE niffler-auth",
+      "source" : "a111259a345cf1c6.txt",
+      "type" : "text/plain",
+      "size" : 64
+    }, {
+      "uid" : "726b881925c576e4",
+      "name" : "SELECT niffler-userdata",
+      "source" : "726b881925c576e4.txt",
+      "type" : "text/plain",
+      "size" : 197
+    }, {
+      "uid" : "5330659fadfa692d",
+      "name" : "DELETE niffler-userdata",
+      "source" : "5330659fadfa692d.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "ba76cb057a489174",
+      "name" : "SELECT niffler-userdata",
+      "source" : "ba76cb057a489174.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "c191dd97f6e6ba37",
+      "name" : "DELETE niffler-userdata",
+      "source" : "c191dd97f6e6ba37.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "3012e1e096effc5",
+      "name" : "SELECT niffler-auth",
+      "source" : "3012e1e096effc5.txt",
+      "type" : "text/plain",
+      "size" : 214
+    }, {
+      "uid" : "139da25ad5f78719",
+      "name" : "DELETE niffler-auth",
+      "source" : "139da25ad5f78719.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "5d761f49f89861e1",
+      "name" : "DELETE niffler-auth",
+      "source" : "5d761f49f89861e1.txt",
+      "type" : "text/plain",
+      "size" : 65
+    }, {
+      "uid" : "4d27383d4b819c90",
+      "name" : "SELECT niffler-userdata",
+      "source" : "4d27383d4b819c90.txt",
+      "type" : "text/plain",
+      "size" : 195
+    }, {
+      "uid" : "4e3cd9a6b94432d0",
+      "name" : "DELETE niffler-userdata",
+      "source" : "4e3cd9a6b94432d0.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "583fbac98a2d0ba8",
+      "name" : "SELECT niffler-userdata",
+      "source" : "583fbac98a2d0ba8.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "d15007cb68626332",
+      "name" : "DELETE niffler-userdata",
+      "source" : "d15007cb68626332.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "bae5d975c19d083c",
+      "name" : "SELECT niffler-auth",
+      "source" : "bae5d975c19d083c.txt",
+      "type" : "text/plain",
+      "size" : 212
+    }, {
+      "uid" : "9e51dd24c127dcb3",
+      "name" : "DELETE niffler-auth",
+      "source" : "9e51dd24c127dcb3.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "7556c63538b544b8",
+      "name" : "DELETE niffler-auth",
+      "source" : "7556c63538b544b8.txt",
+      "type" : "text/plain",
+      "size" : 63
+    }, {
+      "uid" : "b1c398755c5629c9",
+      "name" : "SELECT niffler-userdata",
+      "source" : "b1c398755c5629c9.txt",
+      "type" : "text/plain",
+      "size" : 195
+    }, {
+      "uid" : "1e37090dff0a3b4d",
+      "name" : "DELETE niffler-userdata",
+      "source" : "1e37090dff0a3b4d.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "867d132f296c07e7",
+      "name" : "SELECT niffler-userdata",
+      "source" : "867d132f296c07e7.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "20156bfe15bc9ed",
+      "name" : "DELETE niffler-userdata",
+      "source" : "20156bfe15bc9ed.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "edf6ea2e4df8080f",
+      "name" : "SELECT niffler-auth",
+      "source" : "edf6ea2e4df8080f.txt",
+      "type" : "text/plain",
+      "size" : 212
+    }, {
+      "uid" : "b3e0dfe35a7de01b",
+      "name" : "DELETE niffler-auth",
+      "source" : "b3e0dfe35a7de01b.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "4541500c4f80a6dc",
+      "name" : "DELETE niffler-auth",
+      "source" : "4541500c4f80a6dc.txt",
+      "type" : "text/plain",
+      "size" : 63
+    }, {
+      "uid" : "904eedfc9b128583",
+      "name" : "SELECT niffler-userdata",
+      "source" : "904eedfc9b128583.txt",
+      "type" : "text/plain",
+      "size" : 195
+    }, {
+      "uid" : "ec100bff3ea86c0a",
+      "name" : "DELETE niffler-userdata",
+      "source" : "ec100bff3ea86c0a.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "bf554b38989c6b23",
+      "name" : "SELECT niffler-userdata",
+      "source" : "bf554b38989c6b23.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "85a40bdedcef581",
+      "name" : "DELETE niffler-userdata",
+      "source" : "85a40bdedcef581.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "12732d7a94ca889e",
+      "name" : "SELECT niffler-auth",
+      "source" : "12732d7a94ca889e.txt",
+      "type" : "text/plain",
+      "size" : 212
+    }, {
+      "uid" : "90f26a1e6efa8731",
+      "name" : "DELETE niffler-auth",
+      "source" : "90f26a1e6efa8731.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "da9ef43980d36b3",
+      "name" : "DELETE niffler-auth",
+      "source" : "da9ef43980d36b3.txt",
+      "type" : "text/plain",
+      "size" : 63
+    }, {
+      "uid" : "551b34907f979910",
+      "name" : "SELECT niffler-userdata",
+      "source" : "551b34907f979910.txt",
+      "type" : "text/plain",
+      "size" : 193
+    }, {
+      "uid" : "1c882c05ca4278b6",
+      "name" : "DELETE niffler-userdata",
+      "source" : "1c882c05ca4278b6.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "87c9bcb141847f95",
+      "name" : "SELECT niffler-userdata",
+      "source" : "87c9bcb141847f95.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "c55a4fbfa4b05bc0",
+      "name" : "DELETE niffler-userdata",
+      "source" : "c55a4fbfa4b05bc0.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "a937c97e986bfaee",
+      "name" : "SELECT niffler-auth",
+      "source" : "a937c97e986bfaee.txt",
+      "type" : "text/plain",
+      "size" : 210
+    }, {
+      "uid" : "1dd004fc45f1b693",
+      "name" : "DELETE niffler-auth",
+      "source" : "1dd004fc45f1b693.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "a5b12610455f0cc",
+      "name" : "DELETE niffler-auth",
+      "source" : "a5b12610455f0cc.txt",
+      "type" : "text/plain",
+      "size" : 61
+    }, {
+      "uid" : "7dd3d79c33b62b79",
+      "name" : "SELECT niffler-userdata",
+      "source" : "7dd3d79c33b62b79.txt",
+      "type" : "text/plain",
+      "size" : 197
+    }, {
+      "uid" : "32f64a0aad1f3f53",
+      "name" : "DELETE niffler-userdata",
+      "source" : "32f64a0aad1f3f53.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "f3bc672c4d3c61b6",
+      "name" : "SELECT niffler-userdata",
+      "source" : "f3bc672c4d3c61b6.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "ae91b8e15b2aefe0",
+      "name" : "DELETE niffler-userdata",
+      "source" : "ae91b8e15b2aefe0.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "f23f1fe82636040b",
+      "name" : "SELECT niffler-auth",
+      "source" : "f23f1fe82636040b.txt",
+      "type" : "text/plain",
+      "size" : 214
+    }, {
+      "uid" : "f7926406221ebdb1",
+      "name" : "DELETE niffler-auth",
+      "source" : "f7926406221ebdb1.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "ed1bb2ec9b52117b",
+      "name" : "DELETE niffler-auth",
+      "source" : "ed1bb2ec9b52117b.txt",
+      "type" : "text/plain",
+      "size" : 65
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 70,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "mock_friends::0",
+    "time" : {
+      "start" : 1756634886395,
+      "stop" : 1756634886481,
+      "duration" : 86
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "1cb81ae016e5399b",
+      "name" : "SELECT niffler-userdata",
+      "source" : "1cb81ae016e5399b.txt",
+      "type" : "text/plain",
+      "size" : 201
+    }, {
+      "uid" : "5e45b62184cd67a5",
+      "name" : "DELETE niffler-userdata",
+      "source" : "5e45b62184cd67a5.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "6a1658d1fa1a3ca4",
+      "name" : "SELECT niffler-userdata",
+      "source" : "6a1658d1fa1a3ca4.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "4c6c0d12e4f13215",
+      "name" : "DELETE niffler-userdata",
+      "source" : "4c6c0d12e4f13215.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "d2a614ae688c695d",
+      "name" : "SELECT niffler-auth",
+      "source" : "d2a614ae688c695d.txt",
+      "type" : "text/plain",
+      "size" : 218
+    }, {
+      "uid" : "52eb6258ac2163e4",
+      "name" : "DELETE niffler-auth",
+      "source" : "52eb6258ac2163e4.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "a355ab8dcd03f7ef",
+      "name" : "DELETE niffler-auth",
+      "source" : "a355ab8dcd03f7ef.txt",
+      "type" : "text/plain",
+      "size" : 69
+    }, {
+      "uid" : "b78ef0254bfd4aee",
+      "name" : "SELECT niffler-userdata",
+      "source" : "b78ef0254bfd4aee.txt",
+      "type" : "text/plain",
+      "size" : 203
+    }, {
+      "uid" : "da03b59d2eb476b2",
+      "name" : "DELETE niffler-userdata",
+      "source" : "da03b59d2eb476b2.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "4dd94ccaeb82edc",
+      "name" : "SELECT niffler-userdata",
+      "source" : "4dd94ccaeb82edc.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "888b9d0450e26d1c",
+      "name" : "DELETE niffler-userdata",
+      "source" : "888b9d0450e26d1c.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "d7c0fd221c126825",
+      "name" : "SELECT niffler-auth",
+      "source" : "d7c0fd221c126825.txt",
+      "type" : "text/plain",
+      "size" : 220
+    }, {
+      "uid" : "cca7207eb90a8b28",
+      "name" : "DELETE niffler-auth",
+      "source" : "cca7207eb90a8b28.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "da37f2a164c642cd",
+      "name" : "DELETE niffler-auth",
+      "source" : "da37f2a164c642cd.txt",
+      "type" : "text/plain",
+      "size" : 71
+    }, {
+      "uid" : "b09d76b46bbc382e",
+      "name" : "SELECT niffler-userdata",
+      "source" : "b09d76b46bbc382e.txt",
+      "type" : "text/plain",
+      "size" : 202
+    }, {
+      "uid" : "a942bf297776c8e3",
+      "name" : "DELETE niffler-userdata",
+      "source" : "a942bf297776c8e3.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "ab221af2f7bd66b6",
+      "name" : "SELECT niffler-userdata",
+      "source" : "ab221af2f7bd66b6.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "f7a8bd3f30d5aec1",
+      "name" : "DELETE niffler-userdata",
+      "source" : "f7a8bd3f30d5aec1.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "a06f5e59406b224b",
+      "name" : "SELECT niffler-auth",
+      "source" : "a06f5e59406b224b.txt",
+      "type" : "text/plain",
+      "size" : 219
+    }, {
+      "uid" : "c690c52208976a02",
+      "name" : "DELETE niffler-auth",
+      "source" : "c690c52208976a02.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "319b419eb2588150",
+      "name" : "DELETE niffler-auth",
+      "source" : "319b419eb2588150.txt",
+      "type" : "text/plain",
+      "size" : 70
+    }, {
+      "uid" : "434aab1461be435c",
+      "name" : "SELECT niffler-userdata",
+      "source" : "434aab1461be435c.txt",
+      "type" : "text/plain",
+      "size" : 210
+    }, {
+      "uid" : "96b7bf6b35db51b6",
+      "name" : "DELETE niffler-userdata",
+      "source" : "96b7bf6b35db51b6.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "624664bb87bac0ec",
+      "name" : "SELECT niffler-userdata",
+      "source" : "624664bb87bac0ec.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "1c225c6e3a3d7ed3",
+      "name" : "DELETE niffler-userdata",
+      "source" : "1c225c6e3a3d7ed3.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "18d4c9d3fd62aaf3",
+      "name" : "SELECT niffler-auth",
+      "source" : "18d4c9d3fd62aaf3.txt",
+      "type" : "text/plain",
+      "size" : 227
+    }, {
+      "uid" : "44015c811fd23471",
+      "name" : "DELETE niffler-auth",
+      "source" : "44015c811fd23471.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "42ff736a49cb26d4",
+      "name" : "DELETE niffler-auth",
+      "source" : "42ff736a49cb26d4.txt",
+      "type" : "text/plain",
+      "size" : 78
+    }, {
+      "uid" : "903888bf5747de70",
+      "name" : "SELECT niffler-userdata",
+      "source" : "903888bf5747de70.txt",
+      "type" : "text/plain",
+      "size" : 200
+    }, {
+      "uid" : "29c264ec997c6945",
+      "name" : "DELETE niffler-userdata",
+      "source" : "29c264ec997c6945.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "a5ace0f11c6717a3",
+      "name" : "SELECT niffler-userdata",
+      "source" : "a5ace0f11c6717a3.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "b314c1b41f863f54",
+      "name" : "DELETE niffler-userdata",
+      "source" : "b314c1b41f863f54.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "4333456df4ee3db5",
+      "name" : "SELECT niffler-auth",
+      "source" : "4333456df4ee3db5.txt",
+      "type" : "text/plain",
+      "size" : 217
+    }, {
+      "uid" : "a973e2291a089b0a",
+      "name" : "DELETE niffler-auth",
+      "source" : "a973e2291a089b0a.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "464e84049e58cc06",
+      "name" : "DELETE niffler-auth",
+      "source" : "464e84049e58cc06.txt",
+      "type" : "text/plain",
+      "size" : 68
+    }, {
+      "uid" : "a0703471c0ef5162",
+      "name" : "SELECT niffler-userdata",
+      "source" : "a0703471c0ef5162.txt",
+      "type" : "text/plain",
+      "size" : 208
+    }, {
+      "uid" : "b933b90951b89564",
+      "name" : "DELETE niffler-userdata",
+      "source" : "b933b90951b89564.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "2f60ab0eba5761db",
+      "name" : "SELECT niffler-userdata",
+      "source" : "2f60ab0eba5761db.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "24b0f46a5f60ec0e",
+      "name" : "DELETE niffler-userdata",
+      "source" : "24b0f46a5f60ec0e.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "2572b741197fcd9c",
+      "name" : "SELECT niffler-auth",
+      "source" : "2572b741197fcd9c.txt",
+      "type" : "text/plain",
+      "size" : 225
+    }, {
+      "uid" : "e1597ea12a674164",
+      "name" : "DELETE niffler-auth",
+      "source" : "e1597ea12a674164.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "c936ab1349920852",
+      "name" : "DELETE niffler-auth",
+      "source" : "c936ab1349920852.txt",
+      "type" : "text/plain",
+      "size" : 76
+    }, {
+      "uid" : "927725dc0f5c2b5a",
+      "name" : "SELECT niffler-userdata",
+      "source" : "927725dc0f5c2b5a.txt",
+      "type" : "text/plain",
+      "size" : 201
+    }, {
+      "uid" : "11c8baec6bc6a4cc",
+      "name" : "DELETE niffler-userdata",
+      "source" : "11c8baec6bc6a4cc.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "45be8769eee6f083",
+      "name" : "SELECT niffler-userdata",
+      "source" : "45be8769eee6f083.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "b355dc517e290de",
+      "name" : "DELETE niffler-userdata",
+      "source" : "b355dc517e290de.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "fef722c1ae279c21",
+      "name" : "SELECT niffler-auth",
+      "source" : "fef722c1ae279c21.txt",
+      "type" : "text/plain",
+      "size" : 218
+    }, {
+      "uid" : "a40996efef84d565",
+      "name" : "DELETE niffler-auth",
+      "source" : "a40996efef84d565.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "b7f9b727b8095734",
+      "name" : "DELETE niffler-auth",
+      "source" : "b7f9b727b8095734.txt",
+      "type" : "text/plain",
+      "size" : 69
+    }, {
+      "uid" : "4bae1184463706a8",
+      "name" : "SELECT niffler-userdata",
+      "source" : "4bae1184463706a8.txt",
+      "type" : "text/plain",
+      "size" : 199
+    }, {
+      "uid" : "974f7e73275c8c27",
+      "name" : "DELETE niffler-userdata",
+      "source" : "974f7e73275c8c27.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "22a2ca05681d3dd7",
+      "name" : "SELECT niffler-userdata",
+      "source" : "22a2ca05681d3dd7.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "ec01a71101e76e52",
+      "name" : "DELETE niffler-userdata",
+      "source" : "ec01a71101e76e52.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "aefcef4a96f61e04",
+      "name" : "SELECT niffler-auth",
+      "source" : "aefcef4a96f61e04.txt",
+      "type" : "text/plain",
+      "size" : 216
+    }, {
+      "uid" : "e4eb24ccae31181d",
+      "name" : "DELETE niffler-auth",
+      "source" : "e4eb24ccae31181d.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "d4326760456906f6",
+      "name" : "DELETE niffler-auth",
+      "source" : "d4326760456906f6.txt",
+      "type" : "text/plain",
+      "size" : 67
+    }, {
+      "uid" : "e1a9caadf2033914",
+      "name" : "SELECT niffler-userdata",
+      "source" : "e1a9caadf2033914.txt",
+      "type" : "text/plain",
+      "size" : 198
+    }, {
+      "uid" : "49c4d8dc5412ec6f",
+      "name" : "DELETE niffler-userdata",
+      "source" : "49c4d8dc5412ec6f.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "70d6947fb2492cbb",
+      "name" : "SELECT niffler-userdata",
+      "source" : "70d6947fb2492cbb.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "ee903587e0d8757b",
+      "name" : "DELETE niffler-userdata",
+      "source" : "ee903587e0d8757b.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "bdc269919b47602b",
+      "name" : "SELECT niffler-auth",
+      "source" : "bdc269919b47602b.txt",
+      "type" : "text/plain",
+      "size" : 215
+    }, {
+      "uid" : "3b9bfa10d1fbc017",
+      "name" : "DELETE niffler-auth",
+      "source" : "3b9bfa10d1fbc017.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "3bafb90404d0c1c9",
+      "name" : "DELETE niffler-auth",
+      "source" : "3bafb90404d0c1c9.txt",
+      "type" : "text/plain",
+      "size" : 66
+    }, {
+      "uid" : "2b8e7f8af3350e18",
+      "name" : "SELECT niffler-userdata",
+      "source" : "2b8e7f8af3350e18.txt",
+      "type" : "text/plain",
+      "size" : 201
+    }, {
+      "uid" : "4eb70dd657ff170d",
+      "name" : "DELETE niffler-userdata",
+      "source" : "4eb70dd657ff170d.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "f03f135344c5c6b0",
+      "name" : "SELECT niffler-userdata",
+      "source" : "f03f135344c5c6b0.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "c6ef69c3b5b13882",
+      "name" : "DELETE niffler-userdata",
+      "source" : "c6ef69c3b5b13882.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "191f36bb1207e99e",
+      "name" : "SELECT niffler-auth",
+      "source" : "191f36bb1207e99e.txt",
+      "type" : "text/plain",
+      "size" : 218
+    }, {
+      "uid" : "57ecf479f041843f",
+      "name" : "DELETE niffler-auth",
+      "source" : "57ecf479f041843f.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "ec4a4adc7a287586",
+      "name" : "DELETE niffler-auth",
+      "source" : "ec4a4adc7a287586.txt",
+      "type" : "text/plain",
+      "size" : 69
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 70,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "mock_friends_actions::0",
+    "time" : {
+      "start" : 1756634886293,
+      "stop" : 1756634886392,
+      "duration" : 99
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "5fdeaca96f9bbd8c",
+      "name" : "SELECT niffler-userdata",
+      "source" : "5fdeaca96f9bbd8c.txt",
+      "type" : "text/plain",
+      "size" : 202
+    }, {
+      "uid" : "6ca95edf4548ad8c",
+      "name" : "DELETE niffler-userdata",
+      "source" : "6ca95edf4548ad8c.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "1d4978b0af0a3b13",
+      "name" : "SELECT niffler-userdata",
+      "source" : "1d4978b0af0a3b13.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "4ad69698e0bde19c",
+      "name" : "DELETE niffler-userdata",
+      "source" : "4ad69698e0bde19c.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "82d8f94f243401d6",
+      "name" : "SELECT niffler-auth",
+      "source" : "82d8f94f243401d6.txt",
+      "type" : "text/plain",
+      "size" : 219
+    }, {
+      "uid" : "b1c8e3e56626960f",
+      "name" : "DELETE niffler-auth",
+      "source" : "b1c8e3e56626960f.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "87c58d1f1040f1d5",
+      "name" : "DELETE niffler-auth",
+      "source" : "87c58d1f1040f1d5.txt",
+      "type" : "text/plain",
+      "size" : 70
+    }, {
+      "uid" : "c272cb85bc6e1877",
+      "name" : "SELECT niffler-userdata",
+      "source" : "c272cb85bc6e1877.txt",
+      "type" : "text/plain",
+      "size" : 202
+    }, {
+      "uid" : "4fe0395c4a26242a",
+      "name" : "DELETE niffler-userdata",
+      "source" : "4fe0395c4a26242a.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "5b046cccd3d3c2",
+      "name" : "SELECT niffler-userdata",
+      "source" : "5b046cccd3d3c2.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "6bb89528381af0ba",
+      "name" : "DELETE niffler-userdata",
+      "source" : "6bb89528381af0ba.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "791f2a82137668a3",
+      "name" : "SELECT niffler-auth",
+      "source" : "791f2a82137668a3.txt",
+      "type" : "text/plain",
+      "size" : 219
+    }, {
+      "uid" : "99b870e97fde687d",
+      "name" : "DELETE niffler-auth",
+      "source" : "99b870e97fde687d.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "dc6b13ecab22db68",
+      "name" : "DELETE niffler-auth",
+      "source" : "dc6b13ecab22db68.txt",
+      "type" : "text/plain",
+      "size" : 70
+    }, {
+      "uid" : "4c64f8ba8f884e94",
+      "name" : "SELECT niffler-userdata",
+      "source" : "4c64f8ba8f884e94.txt",
+      "type" : "text/plain",
+      "size" : 204
+    }, {
+      "uid" : "99824aacb691f777",
+      "name" : "DELETE niffler-userdata",
+      "source" : "99824aacb691f777.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "10da8605ac662ae7",
+      "name" : "SELECT niffler-userdata",
+      "source" : "10da8605ac662ae7.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "f9cf61f38e53fdac",
+      "name" : "DELETE niffler-userdata",
+      "source" : "f9cf61f38e53fdac.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "edc7d20ffbfa42e2",
+      "name" : "SELECT niffler-auth",
+      "source" : "edc7d20ffbfa42e2.txt",
+      "type" : "text/plain",
+      "size" : 221
+    }, {
+      "uid" : "53fd3e952be39260",
+      "name" : "DELETE niffler-auth",
+      "source" : "53fd3e952be39260.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "d5e23fb24ca02205",
+      "name" : "DELETE niffler-auth",
+      "source" : "d5e23fb24ca02205.txt",
+      "type" : "text/plain",
+      "size" : 72
+    }, {
+      "uid" : "eefbde038598e014",
+      "name" : "SELECT niffler-userdata",
+      "source" : "eefbde038598e014.txt",
+      "type" : "text/plain",
+      "size" : 201
+    }, {
+      "uid" : "860374d774dd5b7f",
+      "name" : "DELETE niffler-userdata",
+      "source" : "860374d774dd5b7f.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "fc1328a7aa34769",
+      "name" : "SELECT niffler-userdata",
+      "source" : "fc1328a7aa34769.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "ce216f70a9bb0cdf",
+      "name" : "DELETE niffler-userdata",
+      "source" : "ce216f70a9bb0cdf.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "dc05f07d8b8f343b",
+      "name" : "SELECT niffler-auth",
+      "source" : "dc05f07d8b8f343b.txt",
+      "type" : "text/plain",
+      "size" : 218
+    }, {
+      "uid" : "e73489eb2b0741f1",
+      "name" : "DELETE niffler-auth",
+      "source" : "e73489eb2b0741f1.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "935e19620fc37257",
+      "name" : "DELETE niffler-auth",
+      "source" : "935e19620fc37257.txt",
+      "type" : "text/plain",
+      "size" : 69
+    }, {
+      "uid" : "7a74921113c83c84",
+      "name" : "SELECT niffler-userdata",
+      "source" : "7a74921113c83c84.txt",
+      "type" : "text/plain",
+      "size" : 206
+    }, {
+      "uid" : "97589b6433497551",
+      "name" : "DELETE niffler-userdata",
+      "source" : "97589b6433497551.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "3c6d84157f1316f0",
+      "name" : "SELECT niffler-userdata",
+      "source" : "3c6d84157f1316f0.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "8649763175fe2df8",
+      "name" : "DELETE niffler-userdata",
+      "source" : "8649763175fe2df8.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "96f673eee9d6f8b0",
+      "name" : "SELECT niffler-auth",
+      "source" : "96f673eee9d6f8b0.txt",
+      "type" : "text/plain",
+      "size" : 223
+    }, {
+      "uid" : "76a52382d7dfb11e",
+      "name" : "DELETE niffler-auth",
+      "source" : "76a52382d7dfb11e.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "3ff73208b567719a",
+      "name" : "DELETE niffler-auth",
+      "source" : "3ff73208b567719a.txt",
+      "type" : "text/plain",
+      "size" : 74
+    }, {
+      "uid" : "4d19bfc8ec9d5ce3",
+      "name" : "SELECT niffler-userdata",
+      "source" : "4d19bfc8ec9d5ce3.txt",
+      "type" : "text/plain",
+      "size" : 203
+    }, {
+      "uid" : "6d821769f58bed30",
+      "name" : "DELETE niffler-userdata",
+      "source" : "6d821769f58bed30.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "d78c4d9959fba6b",
+      "name" : "SELECT niffler-userdata",
+      "source" : "d78c4d9959fba6b.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "a8dd3142bfd0a6a3",
+      "name" : "DELETE niffler-userdata",
+      "source" : "a8dd3142bfd0a6a3.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "5a80b986bc43049a",
+      "name" : "SELECT niffler-auth",
+      "source" : "5a80b986bc43049a.txt",
+      "type" : "text/plain",
+      "size" : 220
+    }, {
+      "uid" : "e45650a24f24ab95",
+      "name" : "DELETE niffler-auth",
+      "source" : "e45650a24f24ab95.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "fdd308122e492723",
+      "name" : "DELETE niffler-auth",
+      "source" : "fdd308122e492723.txt",
+      "type" : "text/plain",
+      "size" : 71
+    }, {
+      "uid" : "f9ae70caae4d1fbc",
+      "name" : "SELECT niffler-userdata",
+      "source" : "f9ae70caae4d1fbc.txt",
+      "type" : "text/plain",
+      "size" : 201
+    }, {
+      "uid" : "9dd3756b18defa91",
+      "name" : "DELETE niffler-userdata",
+      "source" : "9dd3756b18defa91.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "70c051cafdb4e217",
+      "name" : "SELECT niffler-userdata",
+      "source" : "70c051cafdb4e217.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "7a4ffe3fbdbbe9a0",
+      "name" : "DELETE niffler-userdata",
+      "source" : "7a4ffe3fbdbbe9a0.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "b4cafc6eced3511",
+      "name" : "SELECT niffler-auth",
+      "source" : "b4cafc6eced3511.txt",
+      "type" : "text/plain",
+      "size" : 218
+    }, {
+      "uid" : "41dcbe93dfdc430",
+      "name" : "DELETE niffler-auth",
+      "source" : "41dcbe93dfdc430.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "9b2eec5e310a141c",
+      "name" : "DELETE niffler-auth",
+      "source" : "9b2eec5e310a141c.txt",
+      "type" : "text/plain",
+      "size" : 69
+    }, {
+      "uid" : "f9a5ae1f020c4008",
+      "name" : "SELECT niffler-userdata",
+      "source" : "f9a5ae1f020c4008.txt",
+      "type" : "text/plain",
+      "size" : 205
+    }, {
+      "uid" : "239ae5f7db8b071e",
+      "name" : "DELETE niffler-userdata",
+      "source" : "239ae5f7db8b071e.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "fe8bc73c81945096",
+      "name" : "SELECT niffler-userdata",
+      "source" : "fe8bc73c81945096.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "4ed29429299ae5b2",
+      "name" : "DELETE niffler-userdata",
+      "source" : "4ed29429299ae5b2.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "1a7127fc431a22a2",
+      "name" : "SELECT niffler-auth",
+      "source" : "1a7127fc431a22a2.txt",
+      "type" : "text/plain",
+      "size" : 222
+    }, {
+      "uid" : "760f38622adea97f",
+      "name" : "DELETE niffler-auth",
+      "source" : "760f38622adea97f.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "ef7a86eb432846b3",
+      "name" : "DELETE niffler-auth",
+      "source" : "ef7a86eb432846b3.txt",
+      "type" : "text/plain",
+      "size" : 73
+    }, {
+      "uid" : "d4488be99db1a717",
+      "name" : "SELECT niffler-userdata",
+      "source" : "d4488be99db1a717.txt",
+      "type" : "text/plain",
+      "size" : 207
+    }, {
+      "uid" : "62161d19b6bbae3",
+      "name" : "DELETE niffler-userdata",
+      "source" : "62161d19b6bbae3.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "6a0d2adb27cefb59",
+      "name" : "SELECT niffler-userdata",
+      "source" : "6a0d2adb27cefb59.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "dc22b1365b0fe191",
+      "name" : "DELETE niffler-userdata",
+      "source" : "dc22b1365b0fe191.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "a2a8d18c9d4f543c",
+      "name" : "SELECT niffler-auth",
+      "source" : "a2a8d18c9d4f543c.txt",
+      "type" : "text/plain",
+      "size" : 224
+    }, {
+      "uid" : "cb2437a59fc1ba76",
+      "name" : "DELETE niffler-auth",
+      "source" : "cb2437a59fc1ba76.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "b5c12af23cf462b6",
+      "name" : "DELETE niffler-auth",
+      "source" : "b5c12af23cf462b6.txt",
+      "type" : "text/plain",
+      "size" : 75
+    }, {
+      "uid" : "748e1090ab9be11c",
+      "name" : "SELECT niffler-userdata",
+      "source" : "748e1090ab9be11c.txt",
+      "type" : "text/plain",
+      "size" : 203
+    }, {
+      "uid" : "6b13709e2867e9b2",
+      "name" : "DELETE niffler-userdata",
+      "source" : "6b13709e2867e9b2.txt",
+      "type" : "text/plain",
+      "size" : 157
+    }, {
+      "uid" : "3ef9c8cd2e6dbd1c",
+      "name" : "SELECT niffler-userdata",
+      "source" : "3ef9c8cd2e6dbd1c.txt",
+      "type" : "text/plain",
+      "size" : 211
+    }, {
+      "uid" : "35ee30a6188b9d5a",
+      "name" : "DELETE niffler-userdata",
+      "source" : "35ee30a6188b9d5a.txt",
+      "type" : "text/plain",
+      "size" : 79
+    }, {
+      "uid" : "778bde66874c4214",
+      "name" : "SELECT niffler-auth",
+      "source" : "778bde66874c4214.txt",
+      "type" : "text/plain",
+      "size" : 220
+    }, {
+      "uid" : "6427661a9230abc8",
+      "name" : "DELETE niffler-auth",
+      "source" : "6427661a9230abc8.txt",
+      "type" : "text/plain",
+      "size" : 84
+    }, {
+      "uid" : "4bdc7b26b256d0e5",
+      "name" : "DELETE niffler-auth",
+      "source" : "4bdc7b26b256d0e5.txt",
+      "type" : "text/plain",
+      "size" : 71
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 70,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "auth_client::0",
+    "time" : {
+      "start" : 1756634891543,
+      "stop" : 1756634891543,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token_data::0",
+    "time" : {
+      "start" : 1756634891541,
+      "stop" : 1756634891542,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "cleanup::0",
+    "time" : {
+      "start" : 1756634891544,
+      "stop" : 1756634891544,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "soap_client::0",
+    "time" : {
+      "start" : 1756634891539,
+      "stop" : 1756634891539,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "story",
+    "value" : "Friends management"
+  }, {
+    "name" : "feature",
+    "value" : "User data management"
+  }, {
+    "name" : "tag",
+    "value" : "friends_management"
+  }, {
+    "name" : "tag",
+    "value" : "user_management"
+  }, {
+    "name" : "tag",
+    "value" : "soap"
+  }, {
+    "name" : "host",
+    "value" : "pkrvmccyg1gnepe"
+  }, {
+    "name" : "thread",
+    "value" : "6969-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.soap.test_userdata_soap"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "page_info",
+    "value" : "PageInfo(page=-1, size=1, sort=None)"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 3,
+        "unknown" : 0,
+        "total" : 3
+      },
+      "items" : [ {
+        "uid" : "22506423536a6c",
+        "reportUrl" : "https://illusionx11.github.io/niffler-py-st3/10/#testresult/22506423536a6c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580168793,
+          "stop" : 1756580168800,
+          "duration" : 7
+        }
+      }, {
+        "uid" : "de3eba5f4ec7becb",
+        "reportUrl" : "https://illusionx11.github.io/niffler-py-st3/9/#testresult/de3eba5f4ec7becb",
+        "status" : "passed",
+        "time" : {
+          "start" : 1755396966650,
+          "stop" : 1755396966656,
+          "duration" : 6
+        }
+      } ]
+    },
+    "tags" : [ "friends_management", "user_management", "soap" ]
+  },
+  "source" : "3b9673b4169a7f64.json",
+  "parameterValues" : [ "PageInfo(page=-1, size=1, sort=None)" ]
+}

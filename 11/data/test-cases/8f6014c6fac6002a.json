@@ -1,0 +1,1238 @@
+{
+  "uid" : "8f6014c6fac6002a",
+  "name" : "Delete Single Spending Ui",
+  "fullName" : "tests.ui.test_spendings.TestSpendings#test_delete_single_spending_ui",
+  "historyId" : "84795b9ff7dd9940484b958189666c0c",
+  "time" : {
+    "start" : 1756634883364,
+    "stop" : 1756634888859,
+    "duration" : 5495
+  },
+  "status" : "broken",
+  "statusMessage" : "selenium.common.exceptions.StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame\n  (Session info: chrome=139.0.7258.138); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception\nStacktrace:\n#0 0x56333760b02a <unknown>\n#1 0x5633370aaa70 <unknown>\n#2 0x5633370b16bf <unknown>\n#3 0x5633370b3f58 <unknown>\n#4 0x5633370b3fe3 <unknown>\n#5 0x5633370fc335 <unknown>\n#6 0x5633370fcb01 <unknown>\n#7 0x5633370f0a03 <unknown>\n#8 0x56333712240d <unknown>\n#9 0x5633370f049a <unknown>\n#10 0x5633371225ae <unknown>\n#11 0x56333714814f <unknown>\n#12 0x5633371221b3 <unknown>\n#13 0x5633370ee59b <unknown>\n#14 0x5633370ef971 <unknown>\n#15 0x5633375d01fb <unknown>\n#16 0x5633375d3f49 <unknown>\n#17 0x5633375b72d9 <unknown>\n#18 0x5633375d4af8 <unknown>\n#19 0x56333759bbbf <unknown>\n#20 0x5633375f80b8 <unknown>\n#21 0x5633375f8296 <unknown>\n#22 0x56333760a006 <unknown>\n#23 0x7f42db29caa4 <unknown>\n#24 0x7f42db329c3c <unknown>",
+  "statusTrace" : "self = <tests.ui.test_spendings.TestSpendings object at 0x7f3cf0d48e50>\nmain_page = <pages.main_page.MainPage object at 0x7f3cf0d2e250>\nspendings_list = [SpendGet(id='76cbd392-0b1d-4abb-bff0-bd0d766dc9d7', amount=235.35, description='Билеты на самолёт', category=Category...='niffler_qa', archived=False), spendDate='2024-02-19T21:00:00.000+00:00', currency='RUB', username='niffler_qa'), ...]\ndelete_spendings_lock = None\n\n    @allure.story(Story.delete_spending)\n    @pytest.mark.xdist_group(\"05_spendings\")\n    def test_delete_single_spending_ui(\n        self,\n        main_page: MainPage,\n        spendings_list: list[SpendGet],\n        delete_spendings_lock\n    ):\n        main_page.open(add_domain=True)\n        main_page.should_be_mainpage()\n        max_index = len(spendings_list) - 1 if len(spendings_list) <= 10 else 9\n        index = random.randint(0, max_index)\n        logging.info(f\"Удаляем расход {spendings_list[index]}\")\n        main_page.remove_spendings(indexes=[index])\n>       main_page.should_not_be_deleted_spendings(spendings_list, indexes=[index])\n\ntests/ui/test_spendings.py:156: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \npages/main_page.py:105: in should_not_be_deleted_spendings\n    page_spendings.append(self.get_row_cells_text(row))\npages/base_page.py:288: in get_row_cells_text\n    row_data = row.find_elements(By.CSS_SELECTOR, \"td\")\n/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/selenium/webdriver/remote/webelement.py:630: in find_elements\n    return self._execute(Command.FIND_CHILD_ELEMENTS, {\"using\": by, \"value\": value})[\"value\"]\n/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/selenium/webdriver/remote/webelement.py:572: in _execute\n    return self._parent.execute(command, params)\n/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py:429: in execute\n    self.error_handler.check_response(response)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x7f3cf096f4d0>\nresponse = {'status': 404, 'value': '{\"value\":{\"error\":\"stale element reference\",\"message\":\"stale element reference: stale elemen...\\\\n#22 0x56333760a006 \\\\u003Cunknown>\\\\n#23 0x7f42db29caa4 \\\\u003Cunknown>\\\\n#24 0x7f42db329c3c \\\\u003Cunknown>\\\\n\"}}'}\n\n    def check_response(self, response: Dict[str, Any]) -> None:\n        \"\"\"Checks that a JSON response from the WebDriver does not have an\n        error.\n    \n        :Args:\n         - response - The JSON response from the WebDriver server as a dictionary\n           object.\n    \n        :Raises: If the response contains an error message.\n        \"\"\"\n        status = response.get(\"status\", None)\n        if not status or status == ErrorCode.SUCCESS:\n            return\n        value = None\n        message = response.get(\"message\", \"\")\n        screen: str = response.get(\"screen\", \"\")\n        stacktrace = None\n        if isinstance(status, int):\n            value_json = response.get(\"value\", None)\n            if value_json and isinstance(value_json, str):\n                import json\n    \n                try:\n                    value = json.loads(value_json)\n                    if len(value) == 1:\n                        value = value[\"value\"]\n                    status = value.get(\"error\", None)\n                    if not status:\n                        status = value.get(\"status\", ErrorCode.UNKNOWN_ERROR)\n                        message = value.get(\"value\") or value.get(\"message\")\n                        if not isinstance(message, str):\n                            value = message\n                            message = message.get(\"message\")\n                    else:\n                        message = value.get(\"message\", None)\n                except ValueError:\n                    pass\n    \n        exception_class: Type[WebDriverException]\n        e = ErrorCode()\n        error_codes = [item for item in dir(e) if not item.startswith(\"__\")]\n        for error_code in error_codes:\n            error_info = getattr(ErrorCode, error_code)\n            if isinstance(error_info, list) and status in error_info:\n                exception_class = getattr(ExceptionMapping, error_code, WebDriverException)\n                break\n        else:\n            exception_class = WebDriverException\n    \n        if not value:\n            value = response[\"value\"]\n        if isinstance(value, str):\n            raise exception_class(value)\n        if message == \"\" and \"message\" in value:\n            message = value[\"message\"]\n    \n        screen = None  # type: ignore[assignment]\n        if \"screen\" in value:\n            screen = value[\"screen\"]\n    \n        stacktrace = None\n        st_value = value.get(\"stackTrace\") or value.get(\"stacktrace\")\n        if st_value:\n            if isinstance(st_value, str):\n                stacktrace = st_value.split(\"\\n\")\n            else:\n                stacktrace = []\n                try:\n                    for frame in st_value:\n                        line = frame.get(\"lineNumber\", \"\")\n                        file = frame.get(\"fileName\", \"<anonymous>\")\n                        if line:\n                            file = f\"{file}:{line}\"\n                        meth = frame.get(\"methodName\", \"<anonymous>\")\n                        if \"className\" in frame:\n                            meth = f\"{frame['className']}.{meth}\"\n                        msg = \"    at %s (%s)\"\n                        msg = msg % (meth, file)\n                        stacktrace.append(msg)\n                except TypeError:\n                    pass\n        if exception_class == UnexpectedAlertPresentException:\n            alert_text = None\n            if \"data\" in value:\n                alert_text = value[\"data\"].get(\"text\")\n            elif \"alert\" in value:\n                alert_text = value[\"alert\"].get(\"text\")\n            raise exception_class(message, screen, stacktrace, alert_text)  # type: ignore[call-arg]  # mypy is not smart enough here\n>       raise exception_class(message, screen, stacktrace)\nE       selenium.common.exceptions.StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame\nE         (Session info: chrome=139.0.7258.138); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception\nE       Stacktrace:\nE       #0 0x56333760b02a <unknown>\nE       #1 0x5633370aaa70 <unknown>\nE       #2 0x5633370b16bf <unknown>\nE       #3 0x5633370b3f58 <unknown>\nE       #4 0x5633370b3fe3 <unknown>\nE       #5 0x5633370fc335 <unknown>\nE       #6 0x5633370fcb01 <unknown>\nE       #7 0x5633370f0a03 <unknown>\nE       #8 0x56333712240d <unknown>\nE       #9 0x5633370f049a <unknown>\nE       #10 0x5633371225ae <unknown>\nE       #11 0x56333714814f <unknown>\nE       #12 0x5633371221b3 <unknown>\nE       #13 0x5633370ee59b <unknown>\nE       #14 0x5633370ef971 <unknown>\nE       #15 0x5633375d01fb <unknown>\nE       #16 0x5633375d3f49 <unknown>\nE       #17 0x5633375b72d9 <unknown>\nE       #18 0x5633375d4af8 <unknown>\nE       #19 0x56333759bbbf <unknown>\nE       #20 0x5633375f80b8 <unknown>\nE       #21 0x5633375f8296 <unknown>\nE       #22 0x56333760a006 <unknown>\nE       #23 0x7f42db29caa4 <unknown>\nE       #24 0x7f42db329c3c <unknown>\n\n/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/selenium/webdriver/remote/errorhandler.py:232: StaleElementReferenceException",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "[S] Lock Manager",
+    "time" : {
+      "start" : 1756634816191,
+      "stop" : 1756634816191,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Server Envs",
+    "time" : {
+      "start" : 1756634816191,
+      "stop" : 1756634816194,
+      "duration" : 3
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "21380546ea166910",
+      "name" : "server_envs.json",
+      "source" : "21380546ea166910.json",
+      "type" : "application/json",
+      "size" : 582
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Auth Db",
+    "time" : {
+      "start" : 1756634816249,
+      "stop" : 1756634816250,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Headless",
+    "time" : {
+      "start" : 1756634817610,
+      "stop" : 1756634817610,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[F] Main Page",
+    "time" : {
+      "start" : 1756634883327,
+      "stop" : 1756634883328,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Spends Client",
+    "time" : {
+      "start" : 1756634827365,
+      "stop" : 1756634827366,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Browser",
+    "time" : {
+      "start" : 1756634817610,
+      "stop" : 1756634827365,
+      "duration" : 9755
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[F] Spendings List",
+    "time" : {
+      "start" : 1756634883329,
+      "stop" : 1756634883363,
+      "duration" : 34
+    },
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "API Получение списка трат",
+      "time" : {
+        "start" : 1756634883329,
+        "stop" : 1756634883363,
+        "duration" : 34
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /api/v2/spends/all",
+        "time" : {
+          "start" : 1756634883335,
+          "stop" : 1756634883363,
+          "duration" : 28
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "7100633f2b451891",
+          "name" : "Request",
+          "source" : "7100633f2b451891.html",
+          "type" : "text/html",
+          "size" : 3619
+        }, {
+          "uid" : "ff85154e7817cd4c",
+          "name" : "Response json 200",
+          "source" : "ff85154e7817cd4c.json",
+          "type" : "application/json",
+          "size" : 8222
+        }, {
+          "uid" : "ca44cf384734b528",
+          "name" : "Response headers 200",
+          "source" : "ca44cf384734b528.json",
+          "type" : "application/json",
+          "size" : 490
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 2,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Cleanup",
+    "time" : {
+      "start" : 1756634816251,
+      "stop" : 1756634816295,
+      "duration" : 44
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "c4596ea9e7bae210",
+      "name" : "select niffler-spend",
+      "source" : "c4596ea9e7bae210.txt",
+      "type" : "text/plain",
+      "size" : 27
+    }, {
+      "uid" : "285ea2ce91982afb",
+      "name" : "select niffler-spend",
+      "source" : "285ea2ce91982afb.txt",
+      "type" : "text/plain",
+      "size" : 23
+    }, {
+      "uid" : "6d4aa54eb6a987dc",
+      "name" : "show niffler-spend",
+      "source" : "6d4aa54eb6a987dc.txt",
+      "type" : "text/plain",
+      "size" : 32
+    }, {
+      "uid" : "cd93f9ed9161c47a",
+      "name" : "DELETE niffler-spend",
+      "source" : "cd93f9ed9161c47a.txt",
+      "type" : "text/plain",
+      "size" : 17
+    }, {
+      "uid" : "a9fe8191ff20303b",
+      "name" : "DELETE niffler-spend",
+      "source" : "a9fe8191ff20303b.txt",
+      "type" : "text/plain",
+      "size" : 20
+    }, {
+      "uid" : "d8587fb214498d40",
+      "name" : "select niffler-userdata",
+      "source" : "d8587fb214498d40.txt",
+      "type" : "text/plain",
+      "size" : 27
+    }, {
+      "uid" : "1b9ef13003b1546",
+      "name" : "select niffler-userdata",
+      "source" : "1b9ef13003b1546.txt",
+      "type" : "text/plain",
+      "size" : 23
+    }, {
+      "uid" : "289283d67339bbf8",
+      "name" : "show niffler-userdata",
+      "source" : "289283d67339bbf8.txt",
+      "type" : "text/plain",
+      "size" : 32
+    }, {
+      "uid" : "347b71df560e5a36",
+      "name" : "DELETE niffler-userdata",
+      "source" : "347b71df560e5a36.txt",
+      "type" : "text/plain",
+      "size" : 22
+    }, {
+      "uid" : "1c6deaa7784e6e6c",
+      "name" : "DELETE niffler-userdata",
+      "source" : "1c6deaa7784e6e6c.txt",
+      "type" : "text/plain",
+      "size" : 62
+    }, {
+      "uid" : "3d18b670defcd7a6",
+      "name" : "select niffler-auth",
+      "source" : "3d18b670defcd7a6.txt",
+      "type" : "text/plain",
+      "size" : 27
+    }, {
+      "uid" : "5186f59fae5ea76b",
+      "name" : "select niffler-auth",
+      "source" : "5186f59fae5ea76b.txt",
+      "type" : "text/plain",
+      "size" : 23
+    }, {
+      "uid" : "eec7e8c43fad5d3e",
+      "name" : "show niffler-auth",
+      "source" : "eec7e8c43fad5d3e.txt",
+      "type" : "text/plain",
+      "size" : 32
+    }, {
+      "uid" : "2f9ed94f3f7cf96b",
+      "name" : "DELETE niffler-auth",
+      "source" : "2f9ed94f3f7cf96b.txt",
+      "type" : "text/plain",
+      "size" : 21
+    }, {
+      "uid" : "c2f77246e00ad2fb",
+      "name" : "DELETE niffler-auth",
+      "source" : "c2f77246e00ad2fb.txt",
+      "type" : "text/plain",
+      "size" : 62
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 15,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Auth Client",
+    "time" : {
+      "start" : 1756634816295,
+      "stop" : 1756634816295,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Client Envs",
+    "time" : {
+      "start" : 1756634816250,
+      "stop" : 1756634816251,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "98e77f23f0da8a40",
+      "name" : "client_envs.json",
+      "source" : "98e77f23f0da8a40.json",
+      "type" : "application/json",
+      "size" : 66
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Spends Db",
+    "time" : {
+      "start" : 1756634816194,
+      "stop" : 1756634816249,
+      "duration" : 55
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[C] Add Spendings",
+    "time" : {
+      "start" : 1756634865660,
+      "stop" : 1756634865710,
+      "duration" : 50
+    },
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "API Получение списка трат",
+      "time" : {
+        "start" : 1756634865660,
+        "stop" : 1756634865710,
+        "duration" : 50
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /api/v2/spends/all",
+        "time" : {
+          "start" : 1756634865666,
+          "stop" : 1756634865710,
+          "duration" : 44
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "35b0a2fd9480186",
+          "name" : "Request",
+          "source" : "35b0a2fd9480186.html",
+          "type" : "text/html",
+          "size" : 3619
+        }, {
+          "uid" : "41a2fa7060996d3d",
+          "name" : "Response json 200",
+          "source" : "41a2fa7060996d3d.json",
+          "type" : "application/json",
+          "size" : 6321
+        }, {
+          "uid" : "f682c3894e6a0792",
+          "name" : "Response headers 200",
+          "source" : "f682c3894e6a0792.json",
+          "type" : "application/json",
+          "size" : 490
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 1,
+      "attachmentsCount" : 3,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 2,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Faker",
+    "time" : {
+      "start" : 1756634852167,
+      "stop" : 1756634852169,
+      "duration" : 2
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Token Data",
+    "time" : {
+      "start" : 1756634816295,
+      "stop" : 1756634817610,
+      "duration" : 1315
+    },
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "API Регистрация пользователя",
+      "time" : {
+        "start" : 1756634816295,
+        "stop" : 1756634816956,
+        "duration" : 661
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /register",
+        "time" : {
+          "start" : 1756634816301,
+          "stop" : 1756634816662,
+          "duration" : 361
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "49e25ebeb6939745",
+          "name" : "Request",
+          "source" : "49e25ebeb6939745.html",
+          "type" : "text/html",
+          "size" : 1353
+        }, {
+          "uid" : "94a5708231629041",
+          "name" : "Response text 200",
+          "source" : "94a5708231629041.txt",
+          "type" : "text/plain",
+          "size" : 3731
+        }, {
+          "uid" : "6f8d57723391a962",
+          "name" : "Response headers 200",
+          "source" : "6f8d57723391a962.json",
+          "type" : "application/json",
+          "size" : 603
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /register",
+        "time" : {
+          "start" : 1756634816667,
+          "stop" : 1756634816955,
+          "duration" : 288
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "17251de4107384d5",
+          "name" : "Request",
+          "source" : "17251de4107384d5.html",
+          "type" : "text/html",
+          "size" : 2184
+        }, {
+          "uid" : "577c5ade774d2193",
+          "name" : "Response text 201",
+          "source" : "577c5ade774d2193.txt",
+          "type" : "text/plain",
+          "size" : 2279
+        }, {
+          "uid" : "f3cff28ef9e868cf",
+          "name" : "Response headers 201",
+          "source" : "f3cff28ef9e868cf.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'niffler_qa'"
+      }, {
+        "name" : "password",
+        "value" : "'password'"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 6,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "API Авторизация и получение токена",
+      "time" : {
+        "start" : 1756634816956,
+        "stop" : 1756634817609,
+        "duration" : 653
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "GET /oauth2/authorize",
+        "time" : {
+          "start" : 1756634816962,
+          "stop" : 1756634817136,
+          "duration" : 174
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "c6af4c218a8f8b95",
+          "name" : "Request",
+          "source" : "c6af4c218a8f8b95.html",
+          "type" : "text/html",
+          "size" : 1687
+        }, {
+          "uid" : "b5ce16b198611134",
+          "name" : "Response text 200",
+          "source" : "b5ce16b198611134.txt",
+          "type" : "text/plain",
+          "size" : 2897
+        }, {
+          "uid" : "ab3bb81befa1f635",
+          "name" : "Response headers 200",
+          "source" : "ab3bb81befa1f635.json",
+          "type" : "application/json",
+          "size" : 526
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /login",
+        "time" : {
+          "start" : 1756634817151,
+          "stop" : 1756634817493,
+          "duration" : 342
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "4ab48e26f06336fd",
+          "name" : "Request",
+          "source" : "4ab48e26f06336fd.html",
+          "type" : "text/html",
+          "size" : 1867
+        }, {
+          "uid" : "9d3c2dc88d33cf5e",
+          "name" : "Response text 200",
+          "source" : "9d3c2dc88d33cf5e.txt",
+          "type" : "text/plain",
+          "size" : 417
+        }, {
+          "uid" : "42bc10c3ffb447f4",
+          "name" : "Response headers 200",
+          "source" : "42bc10c3ffb447f4.json",
+          "type" : "application/json",
+          "size" : 287
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "POST /oauth2/token",
+        "time" : {
+          "start" : 1756634817500,
+          "stop" : 1756634817609,
+          "duration" : 109
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "12efe6f0eea79f1f",
+          "name" : "Request",
+          "source" : "12efe6f0eea79f1f.html",
+          "type" : "text/html",
+          "size" : 2846
+        }, {
+          "uid" : "ea478cab5c9aa3d7",
+          "name" : "Response json 200",
+          "source" : "ea478cab5c9aa3d7.json",
+          "type" : "application/json",
+          "size" : 1537
+        }, {
+          "uid" : "4802677274509765",
+          "name" : "Response headers 200",
+          "source" : "4802677274509765.json",
+          "type" : "application/json",
+          "size" : 440
+        } ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 3,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "username",
+        "value" : "'niffler_qa'"
+      }, {
+        "name" : "password",
+        "value" : "'password'"
+      } ],
+      "stepsCount" : 3,
+      "attachmentsCount" : 9,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 7,
+    "attachmentsCount" : 15,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  }, {
+    "name" : "[S] Userdata Db",
+    "time" : {
+      "start" : 1756634816250,
+      "stop" : 1756634816250,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S]  Session Faker",
+    "time" : {
+      "start" : 1756634816089,
+      "stop" : 1756634816191,
+      "duration" : 102
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[S] Spendings Data",
+    "time" : {
+      "start" : 1756634865659,
+      "stop" : 1756634865660,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "[F] Delete Spendings Lock",
+    "time" : {
+      "start" : 1756634883363,
+      "stop" : 1756634883363,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "testStage" : {
+    "status" : "broken",
+    "statusMessage" : "selenium.common.exceptions.StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame\n  (Session info: chrome=139.0.7258.138); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception\nStacktrace:\n#0 0x56333760b02a <unknown>\n#1 0x5633370aaa70 <unknown>\n#2 0x5633370b16bf <unknown>\n#3 0x5633370b3f58 <unknown>\n#4 0x5633370b3fe3 <unknown>\n#5 0x5633370fc335 <unknown>\n#6 0x5633370fcb01 <unknown>\n#7 0x5633370f0a03 <unknown>\n#8 0x56333712240d <unknown>\n#9 0x5633370f049a <unknown>\n#10 0x5633371225ae <unknown>\n#11 0x56333714814f <unknown>\n#12 0x5633371221b3 <unknown>\n#13 0x5633370ee59b <unknown>\n#14 0x5633370ef971 <unknown>\n#15 0x5633375d01fb <unknown>\n#16 0x5633375d3f49 <unknown>\n#17 0x5633375b72d9 <unknown>\n#18 0x5633375d4af8 <unknown>\n#19 0x56333759bbbf <unknown>\n#20 0x5633375f80b8 <unknown>\n#21 0x5633375f8296 <unknown>\n#22 0x56333760a006 <unknown>\n#23 0x7f42db29caa4 <unknown>\n#24 0x7f42db329c3c <unknown>",
+    "statusTrace" : "self = <tests.ui.test_spendings.TestSpendings object at 0x7f3cf0d48e50>\nmain_page = <pages.main_page.MainPage object at 0x7f3cf0d2e250>\nspendings_list = [SpendGet(id='76cbd392-0b1d-4abb-bff0-bd0d766dc9d7', amount=235.35, description='Билеты на самолёт', category=Category...='niffler_qa', archived=False), spendDate='2024-02-19T21:00:00.000+00:00', currency='RUB', username='niffler_qa'), ...]\ndelete_spendings_lock = None\n\n    @allure.story(Story.delete_spending)\n    @pytest.mark.xdist_group(\"05_spendings\")\n    def test_delete_single_spending_ui(\n        self,\n        main_page: MainPage,\n        spendings_list: list[SpendGet],\n        delete_spendings_lock\n    ):\n        main_page.open(add_domain=True)\n        main_page.should_be_mainpage()\n        max_index = len(spendings_list) - 1 if len(spendings_list) <= 10 else 9\n        index = random.randint(0, max_index)\n        logging.info(f\"Удаляем расход {spendings_list[index]}\")\n        main_page.remove_spendings(indexes=[index])\n>       main_page.should_not_be_deleted_spendings(spendings_list, indexes=[index])\n\ntests/ui/test_spendings.py:156: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \npages/main_page.py:105: in should_not_be_deleted_spendings\n    page_spendings.append(self.get_row_cells_text(row))\npages/base_page.py:288: in get_row_cells_text\n    row_data = row.find_elements(By.CSS_SELECTOR, \"td\")\n/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/selenium/webdriver/remote/webelement.py:630: in find_elements\n    return self._execute(Command.FIND_CHILD_ELEMENTS, {\"using\": by, \"value\": value})[\"value\"]\n/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/selenium/webdriver/remote/webelement.py:572: in _execute\n    return self._parent.execute(command, params)\n/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py:429: in execute\n    self.error_handler.check_response(response)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x7f3cf096f4d0>\nresponse = {'status': 404, 'value': '{\"value\":{\"error\":\"stale element reference\",\"message\":\"stale element reference: stale elemen...\\\\n#22 0x56333760a006 \\\\u003Cunknown>\\\\n#23 0x7f42db29caa4 \\\\u003Cunknown>\\\\n#24 0x7f42db329c3c \\\\u003Cunknown>\\\\n\"}}'}\n\n    def check_response(self, response: Dict[str, Any]) -> None:\n        \"\"\"Checks that a JSON response from the WebDriver does not have an\n        error.\n    \n        :Args:\n         - response - The JSON response from the WebDriver server as a dictionary\n           object.\n    \n        :Raises: If the response contains an error message.\n        \"\"\"\n        status = response.get(\"status\", None)\n        if not status or status == ErrorCode.SUCCESS:\n            return\n        value = None\n        message = response.get(\"message\", \"\")\n        screen: str = response.get(\"screen\", \"\")\n        stacktrace = None\n        if isinstance(status, int):\n            value_json = response.get(\"value\", None)\n            if value_json and isinstance(value_json, str):\n                import json\n    \n                try:\n                    value = json.loads(value_json)\n                    if len(value) == 1:\n                        value = value[\"value\"]\n                    status = value.get(\"error\", None)\n                    if not status:\n                        status = value.get(\"status\", ErrorCode.UNKNOWN_ERROR)\n                        message = value.get(\"value\") or value.get(\"message\")\n                        if not isinstance(message, str):\n                            value = message\n                            message = message.get(\"message\")\n                    else:\n                        message = value.get(\"message\", None)\n                except ValueError:\n                    pass\n    \n        exception_class: Type[WebDriverException]\n        e = ErrorCode()\n        error_codes = [item for item in dir(e) if not item.startswith(\"__\")]\n        for error_code in error_codes:\n            error_info = getattr(ErrorCode, error_code)\n            if isinstance(error_info, list) and status in error_info:\n                exception_class = getattr(ExceptionMapping, error_code, WebDriverException)\n                break\n        else:\n            exception_class = WebDriverException\n    \n        if not value:\n            value = response[\"value\"]\n        if isinstance(value, str):\n            raise exception_class(value)\n        if message == \"\" and \"message\" in value:\n            message = value[\"message\"]\n    \n        screen = None  # type: ignore[assignment]\n        if \"screen\" in value:\n            screen = value[\"screen\"]\n    \n        stacktrace = None\n        st_value = value.get(\"stackTrace\") or value.get(\"stacktrace\")\n        if st_value:\n            if isinstance(st_value, str):\n                stacktrace = st_value.split(\"\\n\")\n            else:\n                stacktrace = []\n                try:\n                    for frame in st_value:\n                        line = frame.get(\"lineNumber\", \"\")\n                        file = frame.get(\"fileName\", \"<anonymous>\")\n                        if line:\n                            file = f\"{file}:{line}\"\n                        meth = frame.get(\"methodName\", \"<anonymous>\")\n                        if \"className\" in frame:\n                            meth = f\"{frame['className']}.{meth}\"\n                        msg = \"    at %s (%s)\"\n                        msg = msg % (meth, file)\n                        stacktrace.append(msg)\n                except TypeError:\n                    pass\n        if exception_class == UnexpectedAlertPresentException:\n            alert_text = None\n            if \"data\" in value:\n                alert_text = value[\"data\"].get(\"text\")\n            elif \"alert\" in value:\n                alert_text = value[\"alert\"].get(\"text\")\n            raise exception_class(message, screen, stacktrace, alert_text)  # type: ignore[call-arg]  # mypy is not smart enough here\n>       raise exception_class(message, screen, stacktrace)\nE       selenium.common.exceptions.StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame\nE         (Session info: chrome=139.0.7258.138); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception\nE       Stacktrace:\nE       #0 0x56333760b02a <unknown>\nE       #1 0x5633370aaa70 <unknown>\nE       #2 0x5633370b16bf <unknown>\nE       #3 0x5633370b3f58 <unknown>\nE       #4 0x5633370b3fe3 <unknown>\nE       #5 0x5633370fc335 <unknown>\nE       #6 0x5633370fcb01 <unknown>\nE       #7 0x5633370f0a03 <unknown>\nE       #8 0x56333712240d <unknown>\nE       #9 0x5633370f049a <unknown>\nE       #10 0x5633371225ae <unknown>\nE       #11 0x56333714814f <unknown>\nE       #12 0x5633371221b3 <unknown>\nE       #13 0x5633370ee59b <unknown>\nE       #14 0x5633370ef971 <unknown>\nE       #15 0x5633375d01fb <unknown>\nE       #16 0x5633375d3f49 <unknown>\nE       #17 0x5633375b72d9 <unknown>\nE       #18 0x5633375d4af8 <unknown>\nE       #19 0x56333759bbbf <unknown>\nE       #20 0x5633375f80b8 <unknown>\nE       #21 0x5633375f8296 <unknown>\nE       #22 0x56333760a006 <unknown>\nE       #23 0x7f42db29caa4 <unknown>\nE       #24 0x7f42db329c3c <unknown>\n\n/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/selenium/webdriver/remote/errorhandler.py:232: StaleElementReferenceException",
+    "steps" : [ {
+      "name" : "Открыть страницу",
+      "time" : {
+        "start" : 1756634883364,
+        "stop" : 1756634884154,
+        "duration" : 790
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "set_localstorage",
+        "value" : "True"
+      }, {
+        "name" : "add_domain",
+        "value" : "True"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Проверка на валидность главной страницы",
+      "time" : {
+        "start" : 1756634884155,
+        "stop" : 1756634884177,
+        "duration" : 22
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "Проврека на присутствие элемента",
+        "time" : {
+          "start" : 1756634884155,
+          "stop" : 1756634884168,
+          "duration" : 13
+        },
+        "status" : "passed",
+        "steps" : [ {
+          "name" : "Получение Web элемента",
+          "time" : {
+            "start" : 1756634884155,
+            "stop" : 1756634884168,
+            "duration" : 13
+          },
+          "status" : "passed",
+          "steps" : [ ],
+          "attachments" : [ ],
+          "parameters" : [ {
+            "name" : "locator",
+            "value" : "('css selector', 'div#spendings')"
+          }, {
+            "name" : "timeout",
+            "value" : "10"
+          } ],
+          "stepsCount" : 0,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false,
+          "hasContent" : true
+        } ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "locator",
+          "value" : "('css selector', 'div#spendings')"
+        } ],
+        "stepsCount" : 1,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Проврека на присутствие элемента",
+        "time" : {
+          "start" : 1756634884168,
+          "stop" : 1756634884174,
+          "duration" : 6
+        },
+        "status" : "passed",
+        "steps" : [ {
+          "name" : "Получение Web элемента",
+          "time" : {
+            "start" : 1756634884168,
+            "stop" : 1756634884174,
+            "duration" : 6
+          },
+          "status" : "passed",
+          "steps" : [ ],
+          "attachments" : [ ],
+          "parameters" : [ {
+            "name" : "locator",
+            "value" : "('css selector', 'div#stat')"
+          }, {
+            "name" : "timeout",
+            "value" : "10"
+          } ],
+          "stepsCount" : 0,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false,
+          "hasContent" : true
+        } ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "locator",
+          "value" : "('css selector', 'div#stat')"
+        } ],
+        "stepsCount" : 1,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Проверка на наличие строки в URL",
+        "time" : {
+          "start" : 1756634884174,
+          "stop" : 1756634884177,
+          "duration" : 3
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "arg",
+          "value" : "'main'"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 5,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Удаление трат",
+      "time" : {
+        "start" : 1756634884178,
+        "stop" : 1756634885069,
+        "duration" : 891
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "Получение выбранных Web элементов",
+        "time" : {
+          "start" : 1756634884178,
+          "stop" : 1756634884184,
+          "duration" : 6
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "locator",
+          "value" : "('css selector', 'table tbody tr')"
+        }, {
+          "name" : "timeout",
+          "value" : "10"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Получение кликабельного Web элемента",
+        "time" : {
+          "start" : 1756634884292,
+          "stop" : 1756634884321,
+          "duration" : 29
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "locator",
+          "value" : "('css selector', 'button#delete')"
+        }, {
+          "name" : "timeout",
+          "value" : "10"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Получение Web элемента",
+        "time" : {
+          "start" : 1756634884410,
+          "stop" : 1756634884427,
+          "duration" : 17
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "locator",
+          "value" : "('css selector', \"div[role='dialog']\")"
+        }, {
+          "name" : "timeout",
+          "value" : "10"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Получение кликабельного Web элемента",
+        "time" : {
+          "start" : 1756634884427,
+          "stop" : 1756634884980,
+          "duration" : 553
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "locator",
+          "value" : "('xpath', '/html/body/div[2]/div[3]/div/div[2]/button[2]')"
+        }, {
+          "name" : "timeout",
+          "value" : "10"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Ожидание завершения анимации",
+        "time" : {
+          "start" : 1756634884980,
+          "stop" : 1756634884987,
+          "duration" : 7
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "element",
+          "value" : "<selenium.webdriver.remote.webelement.WebElement (session=\"9c44d5c3b3507e5fddc374fff9f7864b\", element=\"f.4E7A096726CFADE947B93D5991EC5C33.d.B05A3609F5CD4BBE4840C231374A4A96.e.1639\")>"
+        }, {
+          "name" : "timeout",
+          "value" : "10"
+        }, {
+          "name" : "include_subtree",
+          "value" : "True"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "indexes",
+        "value" : "[7]"
+      } ],
+      "stepsCount" : 5,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Проверка на исчезновение трат из таблицы",
+      "time" : {
+        "start" : 1756634885070,
+        "stop" : 1756634888856,
+        "duration" : 3786
+      },
+      "status" : "broken",
+      "statusMessage" : "selenium.common.exceptions.StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame\n  (Session info: chrome=139.0.7258.138); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception\nStacktrace:\n#0 0x56333760b02a <unknown>\n#1 0x5633370aaa70 <unknown>\n#2 0x5633370b16bf <unknown>\n#3 0x5633370b3f58 <unknown>\n#4 0x5633370b3fe3 <unknown>\n#5 0x5633370fc335 <unknown>\n#6 0x5633370fcb01 <unknown>\n#7 0x5633370f0a03 <unknown>\n#8 0x56333712240d <unknown>\n#9 0x5633370f049a <unknown>\n#10 0x5633371225ae <unknown>\n#11 0x56333714814f <unknown>\n#12 0x5633371221b3 <unknown>\n#13 0x5633370ee59b <unknown>\n#14 0x5633370ef971 <unknown>\n#15 0x5633375d01fb <unknown>\n#16 0x5633375d3f49 <unknown>\n#17 0x5633375b72d9 <unknown>\n#18 0x5633375d4af8 <unknown>\n#19 0x56333759bbbf <unknown>\n#20 0x5633375f80b8 <unknown>\n#21 0x5633375f8296 <unknown>\n#22 0x56333760a006 <unknown>\n#23 0x7f42db29caa4 <unknown>\n#24 0x7f42db329c3c <unknown>\n\n",
+      "statusTrace" : "  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/allure_commons/_allure.py\", line 202, in impl\n    return func(*a, **kw)\n  File \"/home/runner/work/niffler-py-st3/niffler-py-st3/niffler-python-tests/pages/main_page.py\", line 105, in should_not_be_deleted_spendings\n    page_spendings.append(self.get_row_cells_text(row))\n                          ~~~~~~~~~~~~~~~~~~~~~~~^^^^^\n  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/allure_commons/_allure.py\", line 202, in impl\n    return func(*a, **kw)\n  File \"/home/runner/work/niffler-py-st3/niffler-py-st3/niffler-python-tests/pages/base_page.py\", line 288, in get_row_cells_text\n    row_data = row.find_elements(By.CSS_SELECTOR, \"td\")\n  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/selenium/webdriver/remote/webelement.py\", line 630, in find_elements\n    return self._execute(Command.FIND_CHILD_ELEMENTS, {\"using\": by, \"value\": value})[\"value\"]\n           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/selenium/webdriver/remote/webelement.py\", line 572, in _execute\n    return self._parent.execute(command, params)\n           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py\", line 429, in execute\n    self.error_handler.check_response(response)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/selenium/webdriver/remote/errorhandler.py\", line 232, in check_response\n    raise exception_class(message, screen, stacktrace)\n",
+      "steps" : [ {
+        "name" : "Получение выбранных Web элементов",
+        "time" : {
+          "start" : 1756634885070,
+          "stop" : 1756634885090,
+          "duration" : 20
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "locator",
+          "value" : "('css selector', 'table tbody tr')"
+        }, {
+          "name" : "timeout",
+          "value" : "10"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "hasContent" : true
+      }, {
+        "name" : "Получение текста из ячейки таблицы",
+        "time" : {
+          "start" : 1756634885091,
+          "stop" : 1756634888854,
+          "duration" : 3763
+        },
+        "status" : "broken",
+        "statusMessage" : "selenium.common.exceptions.StaleElementReferenceException: Message: stale element reference: stale element not found in the current frame\n  (Session info: chrome=139.0.7258.138); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception\nStacktrace:\n#0 0x56333760b02a <unknown>\n#1 0x5633370aaa70 <unknown>\n#2 0x5633370b16bf <unknown>\n#3 0x5633370b3f58 <unknown>\n#4 0x5633370b3fe3 <unknown>\n#5 0x5633370fc335 <unknown>\n#6 0x5633370fcb01 <unknown>\n#7 0x5633370f0a03 <unknown>\n#8 0x56333712240d <unknown>\n#9 0x5633370f049a <unknown>\n#10 0x5633371225ae <unknown>\n#11 0x56333714814f <unknown>\n#12 0x5633371221b3 <unknown>\n#13 0x5633370ee59b <unknown>\n#14 0x5633370ef971 <unknown>\n#15 0x5633375d01fb <unknown>\n#16 0x5633375d3f49 <unknown>\n#17 0x5633375b72d9 <unknown>\n#18 0x5633375d4af8 <unknown>\n#19 0x56333759bbbf <unknown>\n#20 0x5633375f80b8 <unknown>\n#21 0x5633375f8296 <unknown>\n#22 0x56333760a006 <unknown>\n#23 0x7f42db29caa4 <unknown>\n#24 0x7f42db329c3c <unknown>\n\n",
+        "statusTrace" : "  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/allure_commons/_allure.py\", line 202, in impl\n    return func(*a, **kw)\n  File \"/home/runner/work/niffler-py-st3/niffler-py-st3/niffler-python-tests/pages/base_page.py\", line 288, in get_row_cells_text\n    row_data = row.find_elements(By.CSS_SELECTOR, \"td\")\n  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/selenium/webdriver/remote/webelement.py\", line 630, in find_elements\n    return self._execute(Command.FIND_CHILD_ELEMENTS, {\"using\": by, \"value\": value})[\"value\"]\n           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/selenium/webdriver/remote/webelement.py\", line 572, in _execute\n    return self._parent.execute(command, params)\n           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py\", line 429, in execute\n    self.error_handler.check_response(response)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.13.7/x64/lib/python3.13/site-packages/selenium/webdriver/remote/errorhandler.py\", line 232, in check_response\n    raise exception_class(message, screen, stacktrace)\n",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "row",
+          "value" : "<selenium.webdriver.remote.webelement.WebElement (session=\"9c44d5c3b3507e5fddc374fff9f7864b\", element=\"f.4E7A096726CFADE947B93D5991EC5C33.d.B05A3609F5CD4BBE4840C231374A4A96.e.1617\")>"
+        } ],
+        "stepsCount" : 0,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : true,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "spendings",
+        "value" : "[SpendGet(id='76cbd392-0b1d-4abb-bff0-bd0d766dc9d7', amount=235.35, description='Билеты на самолёт', category=CategoryGet(id='28370b48-2f12-4a72-8ca4-7bd11e6657e9', name='Путешествия', username='niffler_qa', archived=False), spendDate='2025-08-30T21:00:00.000+00:00', currency='KZT', username='niffler_qa'), SpendGet(id='f1530c83-0f6c-4eef-acef-2a4950e45bdb', amount=200.0, description='Уникальные тапочки', category=CategoryGet(id='9bdc3861-d589-4694-9068-da62c35ae32d', name='Уникальное', username='niffler_qa', archived=False), spendDate='2025-08-30T21:00:00.000+00:00', currency='RUB', username='niffler_qa'), SpendGet(id='5fe7e668-52f8-4454-ab28-812fa0ec1d6c', amount=100.5, description='Уникальные ботинки', category=CategoryGet(id='9bdc3861-d589-4694-9068-da62c35ae32d', name='Уникальное', username='niffler_qa', archived=False), spendDate='2025-08-30T21:00:00.000+00:00', currency='USD', username='niffler_qa'), SpendGet(id='28b8e4af-0b3f-4663-a8e0-071ed1c53861', amount=3200.75, description='Уникальная вещь3', category=CategoryGet(id='c69c574b-7e47-4b18-b761-d1c6b4494f98', name='Развлечения', username='niffler_qa', archived=False), spendDate='2024-12-31T21:00:00.000+00:00', currency='RUB', username='niffler_qa'), SpendGet(id='3ec818a4-e8f0-4f74-a615-bd85ae2f6b7a', amount=9999.99, description='Multiple fields updated', category=CategoryGet(id='35e8bab6-75ec-497d-a9eb-089d755456af', name='Спорт', username='niffler_qa', archived=False), spendDate='2024-06-14T21:00:00.000+00:00', currency='USD', username='niffler_qa'), SpendGet(id='dcdeac38-a963-4cf2-bbe1-3e00e0b9f605', amount=2750.5, description='Уникальная вещь2', category=CategoryGet(id='9bdc3861-d589-4694-9068-da62c35ae32d', name='Уникальное', username='niffler_qa', archived=False), spendDate='2024-02-19T21:00:00.000+00:00', currency='RUB', username='niffler_qa'), SpendGet(id='a184a317-7aa1-4f12-a43e-8a4204e13947', amount=506.0, description='Updated test description', category=CategoryGet(id='35e8bab6-75ec-497d-a9eb-089d755456af', name='Спорт', username='niffler_qa', archived=False), spendDate='2023-12-10T21:00:00.000+00:00', currency='RUB', username='niffler_qa'), SpendGet(id='ffabfdc1-3ad9-4c5c-821a-fadc31233a62', amount=600.0, description='Wind remain._148e784e-259f-4ca6-98f3-61371f86055c', category=CategoryGet(id='6291b962-931f-4b57-9264-8d98c8594269', name='Продукты', username='niffler_qa', archived=False), spendDate='2023-01-11T21:00:00.000+00:00', currency='KZT', username='niffler_qa'), SpendGet(id='0f8f5d4f-9658-4907-8785-6db04563e1c7', amount=868.0, description='Challenge._e176b4e0-b280-4cd0-aba5-9b2d759a51a1', category=CategoryGet(id='35e8bab6-75ec-497d-a9eb-089d755456af', name='Спорт', username='niffler_qa', archived=False), spendDate='2022-06-20T21:00:00.000+00:00', currency='EUR', username='niffler_qa'), SpendGet(id='15030d4a-13f6-4d2c-8778-33b2d9b3b296', amount=954.0, description='Thus five._b01c95eb-d405-4c86-9d8f-58316d1e1344', category=CategoryGet(id='6291b962-931f-4b57-9264-8d98c8594269', name='Продукты', username='niffler_qa', archived=False), spendDate='2016-05-14T21:00:00.000+00:00', currency='EUR', username='niffler_qa'), SpendGet(id='d087cb60-47c9-4060-99c0-27bdc34d856d', amount=15.0, description='Listen protect._0ae0d197-9c1f-4b1c-88af-835f31dae456', category=CategoryGet(id='c69c574b-7e47-4b18-b761-d1c6b4494f98', name='Развлечения', username='niffler_qa', archived=False), spendDate='2016-02-18T21:00:00.000+00:00', currency='KZT', username='niffler_qa'), SpendGet(id='909ac284-e006-4aa2-a61e-5e123135f013', amount=1000.26, description='Уникальные шляпы', category=CategoryGet(id='9bdc3861-d589-4694-9068-da62c35ae32d', name='Уникальное', username='niffler_qa', archived=False), spendDate='2009-10-13T20:00:00.000+00:00', currency='RUB', username='niffler_qa'), SpendGet(id='20247bfb-c4cc-4535-9f63-a70d81de3d09', amount=140.0, description='Name._49260486-8dfc-4d87-911f-5d339b909408', category=CategoryGet(id='c69c574b-7e47-4b18-b761-d1c6b4494f98', name='Развлечения', username='niffler_qa', archived=False), spendDate='2006-07-26T20:00:00.000+00:00', currency='KZT', username='niffler_qa')]"
+      }, {
+        "name" : "indexes",
+        "value" : "[7]"
+      } ],
+      "stepsCount" : 2,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "33ca0bae1a200734",
+      "name" : "Screenshot_FAILED_test_delete_single_spending_ui",
+      "source" : "33ca0bae1a200734.png",
+      "type" : "image/png",
+      "size" : 136587
+    }, {
+      "uid" : "2dd1723f0eb94867",
+      "name" : "log",
+      "source" : "2dd1723f0eb94867.txt",
+      "type" : "text/plain",
+      "size" : 1623
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 16,
+    "attachmentsCount" : 2,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ {
+    "name" : "spends_client::0",
+    "time" : {
+      "start" : 1756634891798,
+      "stop" : 1756634891798,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "browser::0",
+    "time" : {
+      "start" : 1756634891799,
+      "stop" : 1756634891915,
+      "duration" : 116
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "cleanup::0",
+    "time" : {
+      "start" : 1756634891918,
+      "stop" : 1756634891918,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "auth_client::0",
+    "time" : {
+      "start" : 1756634891917,
+      "stop" : 1756634891918,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "add_spendings::0",
+    "time" : {
+      "start" : 1756634891797,
+      "stop" : 1756634891797,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token_data::0",
+    "time" : {
+      "start" : 1756634891916,
+      "stop" : 1756634891917,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "delete_spendings_lock::0",
+    "time" : {
+      "start" : 1756634888943,
+      "stop" : 1756634888943,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Spendings"
+  }, {
+    "name" : "story",
+    "value" : "Delete spendings"
+  }, {
+    "name" : "tag",
+    "value" : "xdist_group('05_spendings')"
+  }, {
+    "name" : "tag",
+    "value" : "ui"
+  }, {
+    "name" : "tag",
+    "value" : "spendings"
+  }, {
+    "name" : "host",
+    "value" : "pkrvmccyg1gnepe"
+  }, {
+    "name" : "thread",
+    "value" : "6975-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.ui.test_spendings"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 1,
+        "skipped" : 0,
+        "passed" : 2,
+        "unknown" : 0,
+        "total" : 3
+      },
+      "items" : [ {
+        "uid" : "6dfc2678ff7ac985",
+        "reportUrl" : "https://illusionx11.github.io/niffler-py-st3/10/#testresult/6dfc2678ff7ac985",
+        "status" : "passed",
+        "time" : {
+          "start" : 1756580154158,
+          "stop" : 1756580155944,
+          "duration" : 1786
+        }
+      }, {
+        "uid" : "12e38e9697152bbe",
+        "reportUrl" : "https://illusionx11.github.io/niffler-py-st3/9/#testresult/12e38e9697152bbe",
+        "status" : "passed",
+        "time" : {
+          "start" : 1755396954185,
+          "stop" : 1755396956328,
+          "duration" : 2143
+        }
+      } ]
+    },
+    "tags" : [ "spendings", "ui", "xdist_group('05_spendings')" ]
+  },
+  "source" : "8f6014c6fac6002a.json",
+  "parameterValues" : [ ]
+}
